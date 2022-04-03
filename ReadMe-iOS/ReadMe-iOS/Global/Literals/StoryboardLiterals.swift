@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+enum Storyboards: String {
+  case base = "Base"
+}
+
+extension UIStoryboard{
+  static func list(_ name : Storyboards) -> UIStoryboard{
+    return UIStoryboard(name: name.rawValue, bundle: nil)
+  }
+}

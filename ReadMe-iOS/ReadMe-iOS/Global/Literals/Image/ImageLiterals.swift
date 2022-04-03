@@ -7,48 +7,61 @@
 
 import UIKit
 
-extension UIColor {
+import UIKit
 
-  @nonobjc class var black: UIColor {
-    return UIColor(red: 26.0 / 255.0, green: 30.0 / 255.0, blue: 35.0 / 255.0, alpha: 1.0)
+struct ImageLiterals{
+  
+  struct TabBar{
+    static let homeIcon = UIImage(named: "icon_home")!
+    static let homeIconSelected = UIImage(named: "icon_home_selected")!
+    
+    static let travelSpotIcon = UIImage(named: "icon_list")!
+    static let travelSpotIconSelected = UIImage(named: "icon_list_selected")!
+    
+    static let scrapIcon = UIImage(named: "icon_scrab")!
+    static let scrapIconSelected = UIImage(named: "icon_scrab_selected")!
+    
+    static let myPlanIcon = UIImage(named: "icon_myplan")!
+    static let myPlanIconSelected = UIImage(named: "icon_myplan_selected")!
   }
-
-  @nonobjc class var grey04: UIColor {
-    return UIColor(red: 203.0 / 255.0, green: 208.0 / 255.0, blue: 215.0 / 255.0, alpha: 1.0)
+  
+  struct Onboarding {
+    static let previewImage1 = UIImage(named: "img_onboarding_01")!
+    static let previewImage2 = UIImage(named: "img_onboarding_02")!
+    static let previewImage3 = UIImage(named: "img_onboarding_03")!
+    
+    static let pageControlDot1 = UIImage(named: "dots_1")!
+    static let pageControlDot2 = UIImage(named: "dots_2")!
+    static let pageControlDot3 = UIImage(named: "dots_3")!
   }
-
-  @nonobjc class var grey05: UIColor {
-    return UIColor(red: 232.0 / 255.0, green: 234.0 / 255.0, blue: 237.0 / 255.0, alpha: 1.0)
+  
+  struct Preview{
+    static let scrabIcon = UIImage(named: "icon_scrab")!
+    static let scrabIconSelected = UIImage(named: "icon_scrab_selected")!
   }
-
-  @nonobjc class var grey03: UIColor {
-    return UIColor(red: 145.0 / 255.0, green: 155.0 / 255.0, blue: 171.0 / 255.0, alpha: 1.0)
+  
+  struct PlanDetail{
+    static let walkIcon = UIImage(named: "icn_walk")!
+    static let busIcon = UIImage(named: "icn_commute")!
+    static let carIcon = UIImage(named: "icn_car")!
+    static let foldIcon = UIImage(named : "icn_more")!
+    static let moreIcon = UIImage(named: "icn_fold")!
+    static let mapSelectIcon = UIImage(named: "icn_mainpin_select")!
+    static let mapUnselectIcon = UIImage(named: "icn_subpin_unselect")!
+    static let mapSelectIconClicked = UIImage(named: "icn_mainpin_clicked")!
+    static let foldDetailIcon = UIImage(named: "ic_detail_fold")!
+    static let unfoldDetailIocn = UIImage(named: "ic_detail_unfold")!
   }
-
-  @nonobjc class var bemyBlue: UIColor {
-    return UIColor(red: 0.0, green: 119.0 / 255.0, blue: 176.0 / 255.0, alpha: 1.0)
+  struct Components{
+    static let applogo = UIImage(named: "applogo")!
   }
-
-  @nonobjc class var subBlue: UIColor {
-    return UIColor(red: 0.0, green: 85.0 / 255.0, blue: 128.0 / 255.0, alpha: 1.0)
+  struct SignUp{
+    static let checkoffIcon = UIImage(named: "check_off_silver")
+    static let checkonIcon = UIImage(named: "check_on_blue")
   }
-
-  @nonobjc class var grey02: UIColor {
-    return UIColor(red: 93.0 / 255.0, green: 104.0 / 255.0, blue: 122.0 / 255.0, alpha: 1.0)
+  
+  struct Scrap{
+    static let scrapIconNotFilled = UIImage(named: "icnNotScrapWhite")!
+    static let scrapFIconFilled = UIImage(named: "icnScrapWhite")!
   }
-
-  @nonobjc class var grey01: UIColor {
-    return UIColor(red: 49.0 / 255.0, green: 55.0 / 255.0, blue: 64.0 / 255.0, alpha: 1.0)
-  }
-
-  @nonobjc class var grey06: UIColor {
-    return UIColor(red: 244.0 / 255.0, green: 245.0 / 255.0, blue: 247.0 / 255.0, alpha: 1.0)
-  }
-  @nonobjc class var grey07: UIColor {
-    return UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
-  }
-  @nonobjc class var alertRed: UIColor {
-    return UIColor(red: 200.0 / 255.0, green: 9.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0)
-  }
-
 }
