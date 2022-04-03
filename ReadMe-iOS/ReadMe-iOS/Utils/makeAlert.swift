@@ -19,17 +19,7 @@ import UIKit
     - okAction: 확인버튼을 눌렀을 때 동작하는 부분입니다.
     - cancelAction: 취소버튼을 눌렀을 때 동작하는 부분입니다.
     - completion: 해당 UIAlertController가 띄워졌을 때, 동작하는 부분입니다.
- 
-*/
 
-
-    - Description:
-   
-              간단하게 OK버튼 하나만 있는 UIAlertController를 간편하게 만들기 위한 extension입니다.
-
-    - parameters:
- 
-        위와 동일함.
   
  */
 extension UIViewController {
@@ -39,7 +29,6 @@ extension UIViewController {
                    completion : (() -> Void)? = nil)
     {
         makeVibrate()
-        generator.impactOccurred()
         let alertViewController = UIAlertController(title: title, message: message,
                                                     preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default, handler: okAction)

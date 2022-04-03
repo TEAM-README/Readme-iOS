@@ -43,7 +43,6 @@
 		FDD9D2B627F9E0630024DFB2 /* SampleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2B027F9E0630024DFB2 /* SampleViewModel.swift */; };
 		FDD9D2B727F9E0630024DFB2 /* SampleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2B127F9E0630024DFB2 /* SampleEntity.swift */; };
 		FDD9D2C627F9E1DB0024DFB2 /* UINavigation + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2BF27F9E1DB0024DFB2 /* UINavigation + Extension.swift */; };
-		FDD9D2C727F9E1DB0024DFB2 /* showNetworkErr + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2C027F9E1DB0024DFB2 /* showNetworkErr + UIViewController.swift */; };
 		FDD9D2C827F9E1DB0024DFB2 /* drawDashedLine + UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2C127F9E1DB0024DFB2 /* drawDashedLine + UIView.swift */; };
 		FDD9D2C927F9E1DB0024DFB2 /* successCatch + Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2C227F9E1DB0024DFB2 /* successCatch + Result.swift */; };
 		FDD9D2CA27F9E1DB0024DFB2 /* addSubViewFromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2C327F9E1DB0024DFB2 /* addSubViewFromNib.swift */; };
@@ -68,6 +67,7 @@
 		FDD9D2FD27F9E3870024DFB2 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2F327F9E3870024DFB2 /* BaseCoordinator.swift */; };
 		FDD9D2FE27F9E3870024DFB2 /* ModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2F527F9E3870024DFB2 /* ModuleFactory.swift */; };
 		FDD9D2FF27F9E3870024DFB2 /* CoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2F627F9E3870024DFB2 /* CoordinatorFactory.swift */; };
+		FDD9D30227F9E5320024DFB2 /* BaseNotiList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D30127F9E5320024DFB2 /* BaseNotiList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,7 +111,6 @@
 		FDD9D2B027F9E0630024DFB2 /* SampleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewModel.swift; sourceTree = "<group>"; };
 		FDD9D2B127F9E0630024DFB2 /* SampleEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleEntity.swift; sourceTree = "<group>"; };
 		FDD9D2BF27F9E1DB0024DFB2 /* UINavigation + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigation + Extension.swift"; sourceTree = "<group>"; };
-		FDD9D2C027F9E1DB0024DFB2 /* showNetworkErr + UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "showNetworkErr + UIViewController.swift"; sourceTree = "<group>"; };
 		FDD9D2C127F9E1DB0024DFB2 /* drawDashedLine + UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "drawDashedLine + UIView.swift"; sourceTree = "<group>"; };
 		FDD9D2C227F9E1DB0024DFB2 /* successCatch + Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "successCatch + Result.swift"; sourceTree = "<group>"; };
 		FDD9D2C327F9E1DB0024DFB2 /* addSubViewFromNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addSubViewFromNib.swift; sourceTree = "<group>"; };
@@ -136,6 +135,7 @@
 		FDD9D2F327F9E3870024DFB2 /* BaseCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		FDD9D2F527F9E3870024DFB2 /* ModuleFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleFactory.swift; sourceTree = "<group>"; };
 		FDD9D2F627F9E3870024DFB2 /* CoordinatorFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatorFactory.swift; sourceTree = "<group>"; };
+		FDD9D30127F9E5320024DFB2 /* BaseNotiList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNotiList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,7 +270,6 @@
 				FDD9D2C527F9E1DB0024DFB2 /* controllerFromStoryboard + UIViewController.swift */,
 				FDD9D2C127F9E1DB0024DFB2 /* drawDashedLine + UIView.swift */,
 				FDD9D2C427F9E1DB0024DFB2 /* setTextLineHeight + UILabel.swift */,
-				FDD9D2C027F9E1DB0024DFB2 /* showNetworkErr + UIViewController.swift */,
 				FDD9D2C227F9E1DB0024DFB2 /* successCatch + Result.swift */,
 				FDD9D2BF27F9E1DB0024DFB2 /* UINavigation + Extension.swift */,
 			);
@@ -443,6 +442,7 @@
 		FDD9D2D727F9E3040024DFB2 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				FDD9D30027F9E5250024DFB2 /* Notification */,
 				FDD9D2D927F9E3180024DFB2 /* Analytics */,
 			);
 			path = Manager;
@@ -531,6 +531,14 @@
 				FDD9D2F627F9E3870024DFB2 /* CoordinatorFactory.swift */,
 			);
 			path = Factory;
+			sourceTree = "<group>";
+		};
+		FDD9D30027F9E5250024DFB2 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				FDD9D30127F9E5320024DFB2 /* BaseNotiList.swift */,
+			);
+			path = Notification;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -653,6 +661,7 @@
 				FDD9D2FB27F9E3870024DFB2 /* LaunchInstructor.swift in Sources */,
 				FDD9D2B227F9E0630024DFB2 /* SampleUsecase.swift in Sources */,
 				FDD9D2FC27F9E3870024DFB2 /* Router.swift in Sources */,
+				FDD9D30227F9E5320024DFB2 /* BaseNotiList.swift in Sources */,
 				FDD9D24D27F9CB270024DFB2 /* ViewController.swift in Sources */,
 				FDD9D2FF27F9E3870024DFB2 /* CoordinatorFactory.swift in Sources */,
 				FDD9D28C27F9DFAF0024DFB2 /* pressAction.swift in Sources */,
@@ -690,7 +699,6 @@
 				FDD9D2B527F9E0630024DFB2 /* SampleModel.swift in Sources */,
 				FDD9D2B427F9E0630024DFB2 /* SampleRepository.swift in Sources */,
 				FDD9D2E427F9E32C0024DFB2 /* LogEventType.swift in Sources */,
-				FDD9D2C727F9E1DB0024DFB2 /* showNetworkErr + UIViewController.swift in Sources */,
 				FDD9D2C927F9E1DB0024DFB2 /* successCatch + Result.swift in Sources */,
 				FDD9D2E727F9E32C0024DFB2 /* RuntimeProviderType.swift in Sources */,
 				FDD9D2CA27F9E1DB0024DFB2 /* addSubViewFromNib.swift in Sources */,

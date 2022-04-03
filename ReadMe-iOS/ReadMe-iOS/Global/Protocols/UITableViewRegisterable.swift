@@ -5,7 +5,7 @@
 //  Created by 송지훈 on 2022/01/05.
 //
 
-import Foundation
+import UIKit
 
 protocol UITableViewRegisterable {
     static var isFromNib: Bool { get }
