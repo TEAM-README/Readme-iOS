@@ -20,7 +20,6 @@ import UIKit
           따라서 파라미터 기본값을 . medium으로 정의했습니다.
  
 */
-
 extension UIViewController{
     
   public func makeVibrate(degree : UIImpactFeedbackGenerator.FeedbackStyle = .medium)
