@@ -28,6 +28,7 @@
 		FD0619852805579F00F647D7 /* XibView + UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0619842805579F00F647D7 /* XibView + UIView.swift */; };
 		FD0619872805586200F647D7 /* TabbarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0619862805586200F647D7 /* TabbarIcon.swift */; };
 		FD06198928055C2200F647D7 /* makeKernValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06198828055C2200F647D7 /* makeKernValue.swift */; };
+		FD06198C28055CC700F647D7 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06198B28055CC700F647D7 /* Tabbar.swift */; };
 		FDD9D24927F9CB270024DFB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */; };
 		FDD9D24B27F9CB270024DFB2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24A27F9CB270024DFB2 /* SceneDelegate.swift */; };
 		FDD9D24D27F9CB270024DFB2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24C27F9CB270024DFB2 /* ViewController.swift */; };
@@ -113,6 +114,7 @@
 		FD0619842805579F00F647D7 /* XibView + UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XibView + UIView.swift"; sourceTree = "<group>"; };
 		FD0619862805586200F647D7 /* TabbarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarIcon.swift; sourceTree = "<group>"; };
 		FD06198828055C2200F647D7 /* makeKernValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = makeKernValue.swift; sourceTree = "<group>"; };
+		FD06198B28055CC700F647D7 /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
 		FDD9D24527F9CB270024DFB2 /* ReadMe-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReadMe-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDD9D24A27F9CB270024DFB2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -266,9 +268,9 @@
 		FD0619782805519E00F647D7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FD06198A28055CB500F647D7 /* Tabbar */,
 				FD0619802805573200F647D7 /* TabbarIcon */,
 				FD06197A2805523E00F647D7 /* Base.storyboard */,
-				FD06197C2805525B00F647D7 /* Tabbar.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -280,6 +282,15 @@
 				FD0619862805586200F647D7 /* TabbarIcon.swift */,
 			);
 			path = TabbarIcon;
+			sourceTree = "<group>";
+		};
+		FD06198A28055CB500F647D7 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				FD06197C2805525B00F647D7 /* Tabbar.xib */,
+				FD06198B28055CC700F647D7 /* Tabbar.swift */,
+			);
+			path = Tabbar;
 			sourceTree = "<group>";
 		};
 		FDD9D23C27F9CB270024DFB2 = {
@@ -841,6 +852,7 @@
 				FDD9D2C927F9E1DB0024DFB2 /* successCatch + Result.swift in Sources */,
 				FDD9D2E727F9E32C0024DFB2 /* RuntimeProviderType.swift in Sources */,
 				FDD9D28F27F9DFAF0024DFB2 /* downloadImage.swift in Sources */,
+				FD06198C28055CC700F647D7 /* Tabbar.swift in Sources */,
 				FDD9D2D427F9E2400024DFB2 /* ResponseObject.swift in Sources */,
 				FDD9D29827F9DFAF0024DFB2 /* setDefaultFonts.swift in Sources */,
 				FDD9D2F827F9E3870024DFB2 /* Presentable.swift in Sources */,
