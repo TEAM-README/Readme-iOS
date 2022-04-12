@@ -7,7 +7,12 @@
 
 import UIKit
 
+protocol MainTabbarDelegate{
+  func tabbarClicked(_ type: TabbarIconType)
+}
+
 final class TabbarView: XibView{
+  var delegate: MainTabbarDelegate?
   private var currentTab: TabbarIconType = .home {
     didSet{ setTabbarViewModel() }
   }
@@ -21,11 +26,18 @@ final class TabbarView: XibView{
   }
   
   @IBAction func homeButtonClicked(_ sender: Any) {
-    currentTab = .home
+    if currentTab != .home{
+      delegate?.tabbarClicked(.home)
+      currentTab = .home
+    }
+    
   }
   
   @IBAction func myPageClicked(_ sender: Any) {
-    currentTab = .mypage
+    if currentTab != .mypage{
+      delegate?.tabbarClicked(.mypage)
+      currentTab = .mypage
+    }
   }
   
   private func setTabbarViewModel() {

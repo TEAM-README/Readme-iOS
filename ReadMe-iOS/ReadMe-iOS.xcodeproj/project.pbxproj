@@ -93,7 +93,7 @@
 		FDDB0B73280585740055B208 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDB0B6D280585740055B208 /* MyPageViewModel.swift */; };
 		FDDB0B74280585740055B208 /* MyPageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDB0B6E280585740055B208 /* MyPageEntity.swift */; };
 		FDDB0B76280585AF0055B208 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDDB0B75280585AF0055B208 /* MyPage.storyboard */; };
-		FDDB0B78280585BE0055B208 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDDB0B77280585BE0055B208 /* MyPage.storyboard */; };
+		FDDB0B7A280587000055B208 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDDB0B79280587000055B208 /* Home.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -187,7 +187,7 @@
 		FDDB0B6D280585740055B208 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		FDDB0B6E280585740055B208 /* MyPageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageEntity.swift; sourceTree = "<group>"; };
 		FDDB0B75280585AF0055B208 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
-		FDDB0B77280585BE0055B208 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
+		FDDB0B79280587000055B208 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,9 +373,9 @@
 		FDD9D25E27F9DAE80024DFB2 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				FDDB0B652805855A0055B208 /* MyPageScene */,
 				FD0619672805515700F647D7 /* BaseScene */,
 				FDD9D26427F9DE370024DFB2 /* HomeScene */,
+				FDDB0B652805855A0055B208 /* MyPageScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -692,7 +692,7 @@
 		FDDB0B5F2805852B0055B208 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FDDB0B77280585BE0055B208 /* MyPage.storyboard */,
+				FDDB0B79280587000055B208 /* Home.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -833,9 +833,9 @@
 			files = (
 				FD0619612805457600F647D7 /* Pretendard-ExtraLight.otf in Resources */,
 				FD0619662805484200F647D7 /* ColorAssets.xcassets in Resources */,
-				FDDB0B78280585BE0055B208 /* MyPage.storyboard in Resources */,
 				FD0619622805457600F647D7 /* Pretendard-Medium.otf in Resources */,
 				FDD9D25527F9CB290024DFB2 /* LaunchScreen.storyboard in Resources */,
+				FDDB0B7A280587000055B208 /* Home.storyboard in Resources */,
 				FD06197F2805526800F647D7 /* TabbarIcon.xib in Resources */,
 				FD0619642805457600F647D7 /* Pretendard-SemiBold.otf in Resources */,
 				FD0619602805457600F647D7 /* Pretendard-Light.otf in Resources */,

@@ -6,26 +6,37 @@
 //
 
 import UIKit
-import RxSwift
 
 class BaseVC: UIViewController {
   // MARK: - Vars & Lets Part
-  private let disposeBag = DisposeBag()
-  var viewModel: BaseViewModel!
-  
+
   // MARK: - UI Component Part
+  @IBOutlet weak var sceneContainerView: UIView!
+  @IBOutlet weak var tabbar: TabbarView!
   
   // MARK: - Life Cycle Part
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.bindViewModels()
+    configureTabbarDelegate()
   }
 }
 
-extension BaseVC {
-  
-  // MARK: - Custom Method Part
-  private func bindViewModels() {
-    let input = SampleViewModel.Input()
+// MARK: - 탭바를 제외한 Scene 세팅하는 부분
+
+extension BaseVC: MainTabbarDelegate{
+  private func configureTabbarDelegate(){
+    tabbar.delegate = self
   }
+  
+  func tabbarClicked(_ type: TabbarIconType) {
+    
+  }
+  
+  private func setScene(_ type: TabbarIconType) {
+    
+  }
+  
+  private func makeViewControllers(
 }
+
+
