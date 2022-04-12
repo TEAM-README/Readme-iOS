@@ -8,7 +8,6 @@
 import UIKit
 
 final class TabbarView: XibView{
-  
   private var currentTab: TabbarIconType = .home {
     didSet{ setTabbarViewModel() }
   }
