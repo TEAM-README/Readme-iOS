@@ -18,7 +18,6 @@ class MyPageVC: UIViewController {
   // MARK: - Life Cycle Part
   override func viewDidLoad() {
     super.viewDidLoad()
-    print("MyPageVC")
     self.bindViewModels()
   }
 }

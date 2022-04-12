@@ -18,7 +18,6 @@ class HomeVC: UIViewController {
   // MARK: - Life Cycle Part
   override func viewDidLoad() {
     super.viewDidLoad()
-    print("HOMEVC VIEWDIDLAOD")
     self.bindViewModels()
   }
 }
