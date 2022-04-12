@@ -31,7 +31,10 @@ final class TabbarIcon: XibView{
   private func configureUI() {
     guard let viewModel = viewModel else { return }
     iconTitleLabel.font = .readMeFont(size: 12, type: .medium)
-    iconTitleLabel.setCharacterSpacing(kernValue: -0.6)
+    iconTitleLabel.setCharacterSpacing(kernValue: -0.06)
+    iconTitleLabel.textColor =
+    viewModel.clicked ? UIColor.enabledTabbarColor : UIColor.disabledTabbarColor
+    
     switch(viewModel.type){
       case .home:
         iconImageView.image =

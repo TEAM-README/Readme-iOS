@@ -25,10 +25,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZV-3g-Btn">
-                    <rect key="frame" x="67" y="43" width="31" height="12"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="12" id="NgS-Kg-k9p"/>
-                    </constraints>
+                    <rect key="frame" x="67" y="41" width="31" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -36,7 +33,7 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="dZV-3g-Btn" firstAttribute="top" secondItem="Ieh-uw-7Oa" secondAttribute="bottom" constant="5" id="Buy-3B-OWq"/>
+                <constraint firstItem="dZV-3g-Btn" firstAttribute="top" secondItem="Ieh-uw-7Oa" secondAttribute="bottom" constant="3" id="Buy-3B-OWq"/>
                 <constraint firstItem="Ieh-uw-7Oa" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="28/59" id="Nx9-ga-auJ"/>
                 <constraint firstItem="Ieh-uw-7Oa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="VYe-sa-lur"/>
                 <constraint firstItem="dZV-3g-Btn" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ztb-mc-BnI"/>

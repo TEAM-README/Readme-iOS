@@ -15,6 +15,11 @@ final class TabbarView: XibView{
   @IBOutlet weak var homeIcon: TabbarIcon!
   @IBOutlet weak var mypageIcon: TabbarIcon!
   
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    setTabbarViewModel()
+  }
+  
   @IBAction func homeButtonClicked(_ sender: Any) {
     currentTab = .home
   }
@@ -25,7 +30,6 @@ final class TabbarView: XibView{
   
   private func setTabbarViewModel() {
     homeIcon.viewModel = TabbarIconViewModel(type: .home, clicked: currentTab == .home)
-    
     mypageIcon.viewModel = TabbarIconViewModel(type: .mypage, clicked: currentTab == .mypage)
   }
 }

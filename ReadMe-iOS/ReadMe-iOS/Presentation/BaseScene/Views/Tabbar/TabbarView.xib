@@ -18,6 +18,10 @@
             <rect key="frame" x="0.0" y="0.0" width="390" height="75"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N6g-Pf-hWv">
+                    <rect key="frame" x="0.0" y="16" width="390" height="59"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0oC-oe-4op" customClass="TabbarIcon" customModule="ReadMe_iOS" customModuleProvider="target">
                     <rect key="frame" x="225" y="16" width="165" height="59"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -56,7 +60,6 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="z34-5L-x8o" secondAttribute="bottom" id="1Yj-pT-vrE"/>
                 <constraint firstAttribute="bottom" secondItem="PTe-pp-0fJ" secondAttribute="bottom" id="2ti-1o-4KM"/>
@@ -66,6 +69,7 @@
                 <constraint firstAttribute="bottom" secondItem="0oC-oe-4op" secondAttribute="bottom" id="BKa-7L-bFB"/>
                 <constraint firstItem="Arl-wG-BVi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Cef-DT-OZv"/>
                 <constraint firstItem="0oC-oe-4op" firstAttribute="leading" secondItem="Inz-Ak-X5A" secondAttribute="trailing" id="F1f-e1-6Ip"/>
+                <constraint firstAttribute="bottom" secondItem="N6g-Pf-hWv" secondAttribute="bottom" id="IMU-gc-ZYT"/>
                 <constraint firstItem="Inz-Ak-X5A" firstAttribute="leading" secondItem="z34-5L-x8o" secondAttribute="trailing" id="IPM-My-Eco"/>
                 <constraint firstAttribute="trailing" secondItem="0oC-oe-4op" secondAttribute="trailing" id="KUs-9R-Pnw"/>
                 <constraint firstAttribute="bottom" secondItem="yqC-tV-Gct" secondAttribute="bottom" id="NYt-0s-9Z8"/>
@@ -76,10 +80,13 @@
                 <constraint firstItem="yqC-tV-Gct" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bhw-YT-oBP"/>
                 <constraint firstItem="z34-5L-x8o" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="c3D-1j-0AI"/>
                 <constraint firstItem="Inz-Ak-X5A" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="60/390" id="dWx-zw-R60"/>
+                <constraint firstAttribute="trailing" secondItem="N6g-Pf-hWv" secondAttribute="trailing" id="fg1-gA-4xB"/>
                 <constraint firstItem="Inz-Ak-X5A" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jay-X4-xXJ"/>
                 <constraint firstItem="yqC-tV-Gct" firstAttribute="top" secondItem="Arl-wG-BVi" secondAttribute="bottom" id="rAu-W8-VER"/>
                 <constraint firstItem="PTe-pp-0fJ" firstAttribute="leading" secondItem="Inz-Ak-X5A" secondAttribute="trailing" id="rsh-vD-JB5"/>
                 <constraint firstAttribute="trailing" secondItem="Arl-wG-BVi" secondAttribute="trailing" id="uiS-9l-dAo"/>
+                <constraint firstItem="N6g-Pf-hWv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xjs-7G-cL1"/>
+                <constraint firstItem="N6g-Pf-hWv" firstAttribute="top" secondItem="Arl-wG-BVi" secondAttribute="bottom" id="zDl-OJ-yQi"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="143.47826086956522" y="-125.55803571428571"/>

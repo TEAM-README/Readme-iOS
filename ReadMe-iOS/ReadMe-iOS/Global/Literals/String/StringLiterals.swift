@@ -10,6 +10,6 @@ import Foundation
 struct I18N {
   struct Tabbar {
     static let home = "Home"
-    static let mypage = "MyPage"
+    static let mypage = "My Page"
   }
 }

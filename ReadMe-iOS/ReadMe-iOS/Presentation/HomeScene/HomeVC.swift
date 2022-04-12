@@ -1,17 +1,17 @@
 //
-//  SampleViewController.swift
+//  HomeVC.swift
 //  ReadMe-iOS
 //
-//  Created by 송지훈 on 2022/04/03.
+//  Created by 송지훈 on 2022/04/12.
 //
 
 import UIKit
 import RxSwift
 
-class SampleVC: UIViewController {
+class HomeVC: UIViewController {
   // MARK: - Vars & Lets Part
   private let disposeBag = DisposeBag()
-  var viewModel: SampleViewModel!
+  var viewModel: HomeViewModel!
   
   // MARK: - UI Component Part
   
@@ -22,11 +22,11 @@ class SampleVC: UIViewController {
   }
 }
 
-extension SampleVC {
+extension HomeVC {
   
   // MARK: - Custom Method Part
   private func bindViewModels() {
-    let input = SampleViewModel.Input()
+    let input = HomeViewModel.Input()
     let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
   }
 }
