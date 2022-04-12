@@ -18,6 +18,7 @@ class HomeVC: UIViewController {
   // MARK: - Life Cycle Part
   override func viewDidLoad() {
     super.viewDidLoad()
+    print("HOMEVC VIEWDIDLAOD")
     self.bindViewModels()
   }
 }
@@ -26,7 +27,7 @@ extension HomeVC {
   
   // MARK: - Custom Method Part
   private func bindViewModels() {
-    let input = HomeViewModel.Input()
-    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+//    let input = HomeViewModel.Input()
+//    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
   }
 }

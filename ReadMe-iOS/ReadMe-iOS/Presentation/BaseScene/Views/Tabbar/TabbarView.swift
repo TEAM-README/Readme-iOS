@@ -26,14 +26,15 @@ final class TabbarView: XibView{
   }
   
   @IBAction func homeButtonClicked(_ sender: Any) {
+    makeVibrate()
     if currentTab != .home{
       delegate?.tabbarClicked(.home)
       currentTab = .home
     }
-    
   }
   
   @IBAction func myPageClicked(_ sender: Any) {
+    makeVibrate()
     if currentTab != .mypage{
       delegate?.tabbarClicked(.mypage)
       currentTab = .mypage

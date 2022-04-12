@@ -18,6 +18,7 @@ class MyPageVC: UIViewController {
   // MARK: - Life Cycle Part
   override func viewDidLoad() {
     super.viewDidLoad()
+    print("MyPageVC")
     self.bindViewModels()
   }
 }
@@ -26,7 +27,7 @@ extension MyPageVC {
   
   // MARK: - Custom Method Part
   private func bindViewModels() {
-    let input = MyPageViewModel.Input()
-    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+//    let input = MyPageViewModel.Input()
+//    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
   }
 }

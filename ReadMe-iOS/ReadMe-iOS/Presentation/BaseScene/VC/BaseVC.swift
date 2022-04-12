@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import SnapKit
 
 class BaseVC: UIViewController {
   // MARK: - Vars & Lets Part
+  private let moduleFactory = ModuleFactory.shared
+  private var tabList: [TabbarIconType] = []
 
   // MARK: - UI Component Part
   @IBOutlet weak var sceneContainerView: UIView!
@@ -18,6 +21,7 @@ class BaseVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     configureTabbarDelegate()
+    tabbarClicked(.home)
   }
 }
 
@@ -29,14 +33,26 @@ extension BaseVC: MainTabbarDelegate{
   }
   
   func tabbarClicked(_ type: TabbarIconType) {
-    
+    if !tabList.contains(type){
+      let vc = makeScene(type)
+      vc.view.translatesAutoresizingMaskIntoConstraints = false
+      self.addChild(vc)
+      sceneContainerView.addSubview(vc.view)
+      vc.view.snp.makeConstraints{ $0.edges.equalToSuperview() }
+      vc.didMove(toParent: self)
+      tabList.append(type)
+    }else {
+      let vc = sceneContainerView.subviews.first!
+      sceneContainerView.bringSubviewToFront(vc)
+    }
   }
   
-  private func setScene(_ type: TabbarIconType) {
-    
+  private func makeScene(_ type: TabbarIconType) -> UIViewController{
+    switch(type) {
+      case .home: return moduleFactory.makeHomeVC()
+      case .mypage: return moduleFactory.makeMyPageVC()
+    }
   }
-  
-  private func makeViewControllers(
 }
 
 
