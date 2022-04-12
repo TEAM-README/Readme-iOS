@@ -28,7 +28,7 @@ extension UIViewController{
     let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
     let btnDoneBar = UIBarButtonItem(title: "닫기", style: .done, target: self, action: #selector(self.dismissKeyBoard))
     toolBarKeyboard.items = [flexSpace,btnDoneBar]
-    toolBarKeyboard.tintColor = .bemyBlue
+    toolBarKeyboard.tintColor = .mainBlue
     textView.inputAccessoryView = toolBarKeyboard
   }
   
