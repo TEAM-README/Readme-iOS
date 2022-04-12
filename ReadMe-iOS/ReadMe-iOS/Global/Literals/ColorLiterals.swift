@@ -39,4 +39,12 @@ extension UIColor {
   @nonobjc class var alertRed: UIColor {
     return UIColor(red: 210.0 / 255.0, green: 57.0 / 255.0, blue: 57.0 / 255.0, alpha: 1.0)
   }
+  
+  @nonobjc class var enabledTabbarColor: UIColor {
+    return UIColor(red: 111.0/255.0, green: 116.0/255.0, blue: 135.0/255.0, alpha: 1)
+  }
+  
+  @nonobjc class var disabledTabbarColor: UIColor {
+    return UIColor(red: 214.0/255.0, green: 217.0/255.0, blue: 225.0/255.0, alpha: 1)
+  }
 }
