@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		089A15844E71E5427C657C2E /* Pods_ReadMe_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4FF1E97852EC9369B8FC64D /* Pods_ReadMe_iOS.framework */; };
+		48DD3798A7387D615B01CCF9 /* Pods_ReadMe_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDEAB949A3007921A9DA799 /* Pods_ReadMe_iOS.framework */; };
 		FD06195C2805457600F647D7 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD0619532805457600F647D7 /* Pretendard-ExtraBold.otf */; };
 		FD06195D2805457600F647D7 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD0619542805457600F647D7 /* Pretendard-Black.otf */; };
 		FD06195E2805457600F647D7 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD0619552805457600F647D7 /* Pretendard-Bold.otf */; };
@@ -81,9 +81,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		29F3DAD7E36D10E70A139F72 /* Pods-ReadMe-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		69DFB096DD4F9BD0F0A27E07 /* Pods-ReadMe-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.release.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		D4FF1E97852EC9369B8FC64D /* Pods_ReadMe_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadMe_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA209110609425843DFDE109 /* Pods-ReadMe-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		BDC606173607FC03ED959B5E /* Pods-ReadMe-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.release.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		FCDEAB949A3007921A9DA799 /* Pods_ReadMe_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadMe_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD0619532805457600F647D7 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		FD0619542805457600F647D7 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		FD0619552805457600F647D7 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -163,28 +163,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				089A15844E71E5427C657C2E /* Pods_ReadMe_iOS.framework in Frameworks */,
+				48DD3798A7387D615B01CCF9 /* Pods_ReadMe_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		865A469A98FFDD434162191A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D4FF1E97852EC9369B8FC64D /* Pods_ReadMe_iOS.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		96BEEFE36BD7FC57BABEEC21 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				29F3DAD7E36D10E70A139F72 /* Pods-ReadMe-iOS.debug.xcconfig */,
-				69DFB096DD4F9BD0F0A27E07 /* Pods-ReadMe-iOS.release.xcconfig */,
+				AA209110609425843DFDE109 /* Pods-ReadMe-iOS.debug.xcconfig */,
+				BDC606173607FC03ED959B5E /* Pods-ReadMe-iOS.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		D98242BC2628DC6DA53AE513 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCDEAB949A3007921A9DA799 /* Pods_ReadMe_iOS.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		FD0619522805453300F647D7 /* Fonts */ = {
@@ -209,7 +209,7 @@
 				FDD9D24727F9CB270024DFB2 /* ReadMe-iOS */,
 				FDD9D24627F9CB270024DFB2 /* Products */,
 				96BEEFE36BD7FC57BABEEC21 /* Pods */,
-				865A469A98FFDD434162191A /* Frameworks */,
+				D98242BC2628DC6DA53AE513 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -586,11 +586,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FDD9D25927F9CB290024DFB2 /* Build configuration list for PBXNativeTarget "ReadMe-iOS" */;
 			buildPhases = (
-				6C01EFC4FF85A8B9D52725FE /* [CP] Check Pods Manifest.lock */,
+				E173D0DA5012294851658180 /* [CP] Check Pods Manifest.lock */,
 				FDD9D24127F9CB270024DFB2 /* Sources */,
 				FDD9D24227F9CB270024DFB2 /* Frameworks */,
 				FDD9D24327F9CB270024DFB2 /* Resources */,
-				4862C6389561BBA83877B4E6 /* [CP] Embed Pods Frameworks */,
+				AEE90AB79E55238314426966 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -658,7 +658,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4862C6389561BBA83877B4E6 /* [CP] Embed Pods Frameworks */ = {
+		AEE90AB79E55238314426966 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -675,7 +675,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6C01EFC4FF85A8B9D52725FE /* [CP] Check Pods Manifest.lock */ = {
+		E173D0DA5012294851658180 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -904,7 +904,7 @@
 		};
 		FDD9D25A27F9CB290024DFB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29F3DAD7E36D10E70A139F72 /* Pods-ReadMe-iOS.debug.xcconfig */;
+			baseConfigurationReference = AA209110609425843DFDE109 /* Pods-ReadMe-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -934,7 +934,7 @@
 		};
 		FDD9D25B27F9CB290024DFB2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69DFB096DD4F9BD0F0A27E07 /* Pods-ReadMe-iOS.release.xcconfig */;
+			baseConfigurationReference = BDC606173607FC03ED959B5E /* Pods-ReadMe-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
