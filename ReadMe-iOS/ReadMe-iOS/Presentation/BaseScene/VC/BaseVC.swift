@@ -27,6 +27,5 @@ extension BaseVC {
   // MARK: - Custom Method Part
   private func bindViewModels() {
     let input = SampleViewModel.Input()
-    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
   }
 }
