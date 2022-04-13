@@ -30,6 +30,8 @@
 		FD06198928055C2200F647D7 /* makeKernValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06198828055C2200F647D7 /* makeKernValue.swift */; };
 		FD06198C28055CC700F647D7 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06198B28055CC700F647D7 /* TabbarView.swift */; };
 		FD99D5802806F89600BB7FDA /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD99D57F2806F89600BB7FDA /* Splash.storyboard */; };
+		FD99D5822806FDC900BB7FDA /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D5812806FDC900BB7FDA /* SplashVC.swift */; };
+		FD99D584280702F400BB7FDA /* delayWithSeconds.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D583280702F400BB7FDA /* delayWithSeconds.swift */; };
 		FDD9D24927F9CB270024DFB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */; };
 		FDD9D24B27F9CB270024DFB2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24A27F9CB270024DFB2 /* SceneDelegate.swift */; };
 		FDD9D25227F9CB290024DFB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDD9D25127F9CB290024DFB2 /* Assets.xcassets */; };
@@ -130,6 +132,8 @@
 		FD06198828055C2200F647D7 /* makeKernValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = makeKernValue.swift; sourceTree = "<group>"; };
 		FD06198B28055CC700F647D7 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
 		FD99D57F2806F89600BB7FDA /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
+		FD99D5812806FDC900BB7FDA /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
+		FD99D583280702F400BB7FDA /* delayWithSeconds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = delayWithSeconds.swift; sourceTree = "<group>"; };
 		FDD9D24527F9CB270024DFB2 /* ReadMe-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReadMe-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDD9D24A27F9CB270024DFB2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -334,6 +338,7 @@
 		FD99D57D2806F88800BB7FDA /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				FD99D5812806FDC900BB7FDA /* SplashVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -408,6 +413,7 @@
 				FDD9D28027F9DFAE0024DFB2 /* showToastMessage.swift */,
 				FDD9D27827F9DF5E0024DFB2 /* makeVibrate.swift */,
 				FD06198828055C2200F647D7 /* makeKernValue.swift */,
+				FD99D583280702F400BB7FDA /* delayWithSeconds.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1056,11 +1062,13 @@
 				FDD9D29927F9DFAF0024DFB2 /* makeAlert.swift in Sources */,
 				FDD9D27927F9DF5E0024DFB2 /* makeVibrate.swift in Sources */,
 				FDD9D2E327F9E32C0024DFB2 /* FirebaseServiceProtocol.swift in Sources */,
+				FD99D584280702F400BB7FDA /* delayWithSeconds.swift in Sources */,
 				FDDB0B56280583EE0055B208 /* HomeModel.swift in Sources */,
 				FDE1A2AB2805BF8D000DDBE2 /* LoginUseCase.swift in Sources */,
 				FD0619712805516500F647D7 /* BaseVC.swift in Sources */,
 				FDDB0B59280583EE0055B208 /* HomeEntity.swift in Sources */,
 				FDD9D2FA27F9E3870024DFB2 /* Coordinator.swift in Sources */,
+				FD99D5822806FDC900BB7FDA /* SplashVC.swift in Sources */,
 				FDD9D29327F9DFAF0024DFB2 /* setImage.swift in Sources */,
 				FDD9D2CC27F9E1DB0024DFB2 /* controllerFromStoryboard + UIViewController.swift in Sources */,
 				FDD9D26C27F9DEC10024DFB2 /* UICollectionViewRegisterable.swift in Sources */,

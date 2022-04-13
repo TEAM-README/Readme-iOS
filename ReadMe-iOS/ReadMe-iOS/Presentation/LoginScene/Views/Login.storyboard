@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_logo" translatesAutoresizingMaskIntoConstraints="NO" id="LpH-65-VEe">
-                                <rect key="frame" x="111.5" y="264.5" width="191" height="191"/>
+                                <rect key="frame" x="111.5" y="360.5" width="191" height="191"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LpH-65-VEe" secondAttribute="height" id="VN6-7Y-ePL"/>
                                 </constraints>
@@ -59,9 +59,15 @@
                             <constraint firstItem="LpH-65-VEe" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="sf1-Hj-dxy"/>
                             <constraint firstItem="baE-5c-SGH" firstAttribute="top" secondItem="u1n-Cn-QE9" secondAttribute="bottom" constant="36" id="syT-bt-JJw"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ZIc-BE-FyI" secondAttribute="trailing" constant="30" id="tsy-PQ-NO2"/>
-                            <constraint firstItem="LpH-65-VEe" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" constant="-88" id="xZZ-is-t7N"/>
+                            <constraint firstItem="LpH-65-VEe" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" constant="8" id="xZZ-is-t7N"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="appleLoginButton" destination="ZIc-BE-FyI" id="rhs-sk-BZg"/>
+                        <outlet property="guideLabel" destination="u1n-Cn-QE9" id="dyC-2v-Bgf"/>
+                        <outlet property="kakaoLoginButton" destination="baE-5c-SGH" id="qid-Za-WrU"/>
+                        <outlet property="logoCenterYConstraint" destination="xZZ-is-t7N" id="JXE-BF-4H0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
