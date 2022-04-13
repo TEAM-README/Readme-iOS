@@ -37,6 +37,13 @@
 		FD99D58B28071DDC00BB7FDA /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D58A28071DDC00BB7FDA /* AuthService.swift */; };
 		FD99D58D2807211A00BB7FDA /* LoginVC + Kakao.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D58C2807211A00BB7FDA /* LoginVC + Kakao.swift */; };
 		FD99D58F2807225E00BB7FDA /* LoginVC + Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D58E2807225E00BB7FDA /* LoginVC + Apple.swift */; };
+		FD99D59728073C4900BB7FDA /* SignupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59128073C4900BB7FDA /* SignupUseCase.swift */; };
+		FD99D59828073C4900BB7FDA /* SignupRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59228073C4900BB7FDA /* SignupRepository.swift */; };
+		FD99D59928073C4900BB7FDA /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59328073C4900BB7FDA /* SignupModel.swift */; };
+		FD99D59A28073C4900BB7FDA /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59428073C4900BB7FDA /* SignupVC.swift */; };
+		FD99D59B28073C4900BB7FDA /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59528073C4900BB7FDA /* SignupViewModel.swift */; };
+		FD99D59C28073C4900BB7FDA /* SignupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59628073C4900BB7FDA /* SignupEntity.swift */; };
+		FD99D5A628073CD400BB7FDA /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD99D5A528073CD400BB7FDA /* Signup.storyboard */; };
 		FDD9D24927F9CB270024DFB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */; };
 		FDD9D24B27F9CB270024DFB2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24A27F9CB270024DFB2 /* SceneDelegate.swift */; };
 		FDD9D25227F9CB290024DFB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDD9D25127F9CB290024DFB2 /* Assets.xcassets */; };
@@ -144,6 +151,13 @@
 		FD99D58A28071DDC00BB7FDA /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		FD99D58C2807211A00BB7FDA /* LoginVC + Kakao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginVC + Kakao.swift"; sourceTree = "<group>"; };
 		FD99D58E2807225E00BB7FDA /* LoginVC + Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginVC + Apple.swift"; sourceTree = "<group>"; };
+		FD99D59128073C4900BB7FDA /* SignupUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupUseCase.swift; sourceTree = "<group>"; };
+		FD99D59228073C4900BB7FDA /* SignupRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRepository.swift; sourceTree = "<group>"; };
+		FD99D59328073C4900BB7FDA /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
+		FD99D59428073C4900BB7FDA /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		FD99D59528073C4900BB7FDA /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		FD99D59628073C4900BB7FDA /* SignupEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupEntity.swift; sourceTree = "<group>"; };
+		FD99D5A528073CD400BB7FDA /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		FDD9D24527F9CB270024DFB2 /* ReadMe-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReadMe-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDD9D24A27F9CB270024DFB2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -361,6 +375,56 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		FD99D59028073C3300BB7FDA /* SignupScene */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D59D28073C4E00BB7FDA /* Views */,
+				FD99D59F28073C5A00BB7FDA /* ViewModel */,
+				FD99D59E28073C5200BB7FDA /* VC */,
+			);
+			path = SignupScene;
+			sourceTree = "<group>";
+		};
+		FD99D59D28073C4E00BB7FDA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D5A528073CD400BB7FDA /* Signup.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FD99D59E28073C5200BB7FDA /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D59428073C4900BB7FDA /* SignupVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		FD99D59F28073C5A00BB7FDA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D59528073C4900BB7FDA /* SignupViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FD99D5A128073C9A00BB7FDA /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D59328073C4900BB7FDA /* SignupModel.swift */,
+			);
+			path = Signup;
+			sourceTree = "<group>";
+		};
+		FD99D5A228073CA000BB7FDA /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D59128073C4900BB7FDA /* SignupUseCase.swift */,
+			);
+			path = Signup;
+			sourceTree = "<group>";
+		};
 		FDD9D23C27F9CB270024DFB2 = {
 			isa = PBXGroup;
 			children = (
@@ -432,6 +496,7 @@
 		FDD9D25E27F9DAE80024DFB2 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				FD99D59028073C3300BB7FDA /* SignupScene */,
 				FD99D57C2806F87800BB7FDA /* SplashScene */,
 				FDE1A2A12805BF70000DDBE2 /* LoginScene */,
 				FD0619672805515700F647D7 /* BaseScene */,
@@ -538,6 +603,7 @@
 		FDD9D29A27F9DFE00024DFB2 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				FD99D59228073C4900BB7FDA /* SignupRepository.swift */,
 				FDE1A2B12805BF92000DDBE2 /* Login */,
 				FDDB0B64280585530055B208 /* MyPage */,
 				FDDB0B5D280584A10055B208 /* Home */,
@@ -559,6 +625,7 @@
 		FDD9D29C27F9DFFA0024DFB2 /* Usecase */ = {
 			isa = PBXGroup;
 			children = (
+				FD99D5A228073CA000BB7FDA /* Signup */,
 				FDE1A2B42805BFB3000DDBE2 /* Login */,
 				FDDB0B62280585490055B208 /* MyPage */,
 				FDDB0B5C280584650055B208 /* Home */,
@@ -570,6 +637,7 @@
 		FDD9D29D27F9E00A0024DFB2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FD99D5A128073C9A00BB7FDA /* Signup */,
 				FDE1A2B32805BFAB000DDBE2 /* Login */,
 				FDDB0B61280585410055B208 /* MyPage */,
 				FDDB0B5B2805845A0055B208 /* Home */,
@@ -581,6 +649,7 @@
 		FDD9D29E27F9E0120024DFB2 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				FD99D59628073C4900BB7FDA /* SignupEntity.swift */,
 				FDE1A2B22805BF96000DDBE2 /* Login */,
 				FDDB0B63280585500055B208 /* MyPage */,
 				FDDB0B5A280583FC0055B208 /* Home */,
@@ -984,6 +1053,7 @@
 				FD06195C2805457600F647D7 /* Pretendard-ExtraBold.otf in Resources */,
 				FD0619632805457600F647D7 /* Pretendard-Regular.otf in Resources */,
 				FD06195D2805457600F647D7 /* Pretendard-Black.otf in Resources */,
+				FD99D5A628073CD400BB7FDA /* Signup.storyboard in Resources */,
 				FD06197B2805523E00F647D7 /* Base.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1039,9 +1109,11 @@
 			files = (
 				FDD9D2E527F9E32C0024DFB2 /* AppLog.swift in Sources */,
 				FDDB0B58280583EE0055B208 /* HomeViewModel.swift in Sources */,
+				FD99D59A28073C4900BB7FDA /* SignupVC.swift in Sources */,
 				FDD9D29027F9DFAF0024DFB2 /* showToastMessage.swift in Sources */,
 				FD0619872805586200F647D7 /* TabbarIcon.swift in Sources */,
 				FDD9D2FB27F9E3870024DFB2 /* LaunchInstructor.swift in Sources */,
+				FD99D59B28073C4900BB7FDA /* SignupViewModel.swift in Sources */,
 				FDD9D2FC27F9E3870024DFB2 /* Router.swift in Sources */,
 				FDD9D30227F9E5320024DFB2 /* BaseNotiList.swift in Sources */,
 				FDD9D2FF27F9E3870024DFB2 /* CoordinatorFactory.swift in Sources */,
@@ -1067,12 +1139,14 @@
 				FDD9D2FD27F9E3870024DFB2 /* BaseCoordinator.swift in Sources */,
 				FDD9D2C627F9E1DB0024DFB2 /* UINavigation + Extension.swift in Sources */,
 				FDDB0B6F280585740055B208 /* MyPageUseCase.swift in Sources */,
+				FD99D59C28073C4900BB7FDA /* SignupEntity.swift in Sources */,
 				FDD9D29127F9DFAF0024DFB2 /* addToolBar.swift in Sources */,
 				FDD9D2E627F9E32C0024DFB2 /* FirebaseAnalyticsProvider.swift in Sources */,
 				FDE1A2AC2805BF8D000DDBE2 /* LoginRepository.swift in Sources */,
 				FDD9D27727F9DF190024DFB2 /* ImageLiterals.swift in Sources */,
 				FD06196E2805516500F647D7 /* BaseUseCase.swift in Sources */,
 				FDD9D29727F9DFAF0024DFB2 /* PanDirectionGesture.swift in Sources */,
+				FD99D59928073C4900BB7FDA /* SignupModel.swift in Sources */,
 				FDD9D2D027F9E2240024DFB2 /* BaseService.swift in Sources */,
 				FDD9D29927F9DFAF0024DFB2 /* makeAlert.swift in Sources */,
 				FDD9D27927F9DF5E0024DFB2 /* makeVibrate.swift in Sources */,
@@ -1096,9 +1170,11 @@
 				FD99D586280717FB00BB7FDA /* setAttributedText.swift in Sources */,
 				FDD9D2C927F9E1DB0024DFB2 /* successCatch + Result.swift in Sources */,
 				FDD9D2E727F9E32C0024DFB2 /* RuntimeProviderType.swift in Sources */,
+				FD99D59828073C4900BB7FDA /* SignupRepository.swift in Sources */,
 				FDDB0B54280583EE0055B208 /* HomeUseCase.swift in Sources */,
 				FDD9D28F27F9DFAF0024DFB2 /* downloadImage.swift in Sources */,
 				FD06198C28055CC700F647D7 /* TabbarView.swift in Sources */,
+				FD99D59728073C4900BB7FDA /* SignupUseCase.swift in Sources */,
 				FDD9D2D427F9E2400024DFB2 /* ResponseObject.swift in Sources */,
 				FDDB0B72280585740055B208 /* MyPageVC.swift in Sources */,
 				FDD9D29827F9DFAF0024DFB2 /* setDefaultFonts.swift in Sources */,
