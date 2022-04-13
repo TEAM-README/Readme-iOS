@@ -44,6 +44,8 @@
 		FD99D59B28073C4900BB7FDA /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59528073C4900BB7FDA /* SignupViewModel.swift */; };
 		FD99D59C28073C4900BB7FDA /* SignupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59628073C4900BB7FDA /* SignupEntity.swift */; };
 		FD99D5A628073CD400BB7FDA /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD99D5A528073CD400BB7FDA /* Signup.storyboard */; };
+		FD99D5AA28073DB200BB7FDA /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D5A928073DB200BB7FDA /* BottomButton.swift */; };
+		FD99D5AC2807407800BB7FDA /* addPadding + UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D5AB2807407800BB7FDA /* addPadding + UITextField.swift */; };
 		FDD9D24927F9CB270024DFB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */; };
 		FDD9D24B27F9CB270024DFB2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24A27F9CB270024DFB2 /* SceneDelegate.swift */; };
 		FDD9D25227F9CB290024DFB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDD9D25127F9CB290024DFB2 /* Assets.xcassets */; };
@@ -158,6 +160,8 @@
 		FD99D59528073C4900BB7FDA /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		FD99D59628073C4900BB7FDA /* SignupEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupEntity.swift; sourceTree = "<group>"; };
 		FD99D5A528073CD400BB7FDA /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
+		FD99D5A928073DB200BB7FDA /* BottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButton.swift; sourceTree = "<group>"; };
+		FD99D5AB2807407800BB7FDA /* addPadding + UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "addPadding + UITextField.swift"; sourceTree = "<group>"; };
 		FDD9D24527F9CB270024DFB2 /* ReadMe-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReadMe-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDD9D24A27F9CB270024DFB2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -425,6 +429,22 @@
 			path = Signup;
 			sourceTree = "<group>";
 		};
+		FD99D5A728073D8E00BB7FDA /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D5A828073DA100BB7FDA /* Button */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		FD99D5A828073DA100BB7FDA /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D5A928073DB200BB7FDA /* BottomButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
 		FDD9D23C27F9CB270024DFB2 = {
 			isa = PBXGroup;
 			children = (
@@ -496,6 +516,7 @@
 		FDD9D25E27F9DAE80024DFB2 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				FD99D5A728073D8E00BB7FDA /* Component */,
 				FD99D59028073C3300BB7FDA /* SignupScene */,
 				FD99D57C2806F87800BB7FDA /* SplashScene */,
 				FDE1A2A12805BF70000DDBE2 /* LoginScene */,
@@ -538,6 +559,7 @@
 				FDD9D2C227F9E1DB0024DFB2 /* successCatch + Result.swift */,
 				FDD9D2BF27F9E1DB0024DFB2 /* UINavigation + Extension.swift */,
 				FD0619842805579F00F647D7 /* XibView + UIView.swift */,
+				FD99D5AB2807407800BB7FDA /* addPadding + UITextField.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1110,6 +1132,7 @@
 				FDD9D2E527F9E32C0024DFB2 /* AppLog.swift in Sources */,
 				FDDB0B58280583EE0055B208 /* HomeViewModel.swift in Sources */,
 				FD99D59A28073C4900BB7FDA /* SignupVC.swift in Sources */,
+				FD99D5AA28073DB200BB7FDA /* BottomButton.swift in Sources */,
 				FDD9D29027F9DFAF0024DFB2 /* showToastMessage.swift in Sources */,
 				FD0619872805586200F647D7 /* TabbarIcon.swift in Sources */,
 				FDD9D2FB27F9E3870024DFB2 /* LaunchInstructor.swift in Sources */,
@@ -1187,6 +1210,7 @@
 				FD99D58F2807225E00BB7FDA /* LoginVC + Apple.swift in Sources */,
 				FD0619852805579F00F647D7 /* XibView + UIView.swift in Sources */,
 				FD99D58828071AC600BB7FDA /* UserDefaultKeyList.swift in Sources */,
+				FD99D5AC2807407800BB7FDA /* addPadding + UITextField.swift in Sources */,
 				FDE1A2AF2805BF8D000DDBE2 /* LoginViewModel.swift in Sources */,
 				FDD9D28B27F9DFAF0024DFB2 /* showNetworkAlert.swift in Sources */,
 				FDD9D2CB27F9E1DB0024DFB2 /* setTextLineHeight + UILabel.swift in Sources */,
