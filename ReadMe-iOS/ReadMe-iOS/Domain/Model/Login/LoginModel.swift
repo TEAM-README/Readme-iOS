@@ -20,11 +20,11 @@ enum AuthSignInCase: String {
 }
 
 struct LoginModel {
-  var platform: AuthSignInCase
+  let platform: AuthSignInCase
   let accessToken: String
 }
 
 struct LoginRequestModel {
-  var platform: AuthSignInCase
-  var platformAccessToken: String
+  let platform: AuthSignInCase
+  let platformAccessToken: String
 }
