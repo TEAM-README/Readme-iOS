@@ -23,7 +23,7 @@ import UIKit
   
  */
 extension UIViewController {
-    func makeAlert(title : String,
+    func makeAlert(title : String = "알림",
                    message : String,
                    okAction : ((UIAlertAction) -> Void)? = nil,
                    completion : (() -> Void)? = nil)

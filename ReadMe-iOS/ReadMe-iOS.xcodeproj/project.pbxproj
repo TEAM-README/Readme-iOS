@@ -32,6 +32,11 @@
 		FD99D5802806F89600BB7FDA /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD99D57F2806F89600BB7FDA /* Splash.storyboard */; };
 		FD99D5822806FDC900BB7FDA /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D5812806FDC900BB7FDA /* SplashVC.swift */; };
 		FD99D584280702F400BB7FDA /* delayWithSeconds.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D583280702F400BB7FDA /* delayWithSeconds.swift */; };
+		FD99D586280717FB00BB7FDA /* setAttributedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D585280717FB00BB7FDA /* setAttributedText.swift */; };
+		FD99D58828071AC600BB7FDA /* UserDefaultKeyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D58728071AC600BB7FDA /* UserDefaultKeyList.swift */; };
+		FD99D58B28071DDC00BB7FDA /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D58A28071DDC00BB7FDA /* AuthService.swift */; };
+		FD99D58D2807211A00BB7FDA /* LoginVC + Kakao.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D58C2807211A00BB7FDA /* LoginVC + Kakao.swift */; };
+		FD99D58F2807225E00BB7FDA /* LoginVC + Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D58E2807225E00BB7FDA /* LoginVC + Apple.swift */; };
 		FDD9D24927F9CB270024DFB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */; };
 		FDD9D24B27F9CB270024DFB2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24A27F9CB270024DFB2 /* SceneDelegate.swift */; };
 		FDD9D25227F9CB290024DFB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDD9D25127F9CB290024DFB2 /* Assets.xcassets */; };
@@ -134,6 +139,11 @@
 		FD99D57F2806F89600BB7FDA /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		FD99D5812806FDC900BB7FDA /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		FD99D583280702F400BB7FDA /* delayWithSeconds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = delayWithSeconds.swift; sourceTree = "<group>"; };
+		FD99D585280717FB00BB7FDA /* setAttributedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setAttributedText.swift; sourceTree = "<group>"; };
+		FD99D58728071AC600BB7FDA /* UserDefaultKeyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeyList.swift; sourceTree = "<group>"; };
+		FD99D58A28071DDC00BB7FDA /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		FD99D58C2807211A00BB7FDA /* LoginVC + Kakao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginVC + Kakao.swift"; sourceTree = "<group>"; };
+		FD99D58E2807225E00BB7FDA /* LoginVC + Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginVC + Apple.swift"; sourceTree = "<group>"; };
 		FDD9D24527F9CB270024DFB2 /* ReadMe-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReadMe-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDD9D24A27F9CB270024DFB2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -414,6 +424,7 @@
 				FDD9D27827F9DF5E0024DFB2 /* makeVibrate.swift */,
 				FD06198828055C2200F647D7 /* makeKernValue.swift */,
 				FD99D583280702F400BB7FDA /* delayWithSeconds.swift */,
+				FD99D585280717FB00BB7FDA /* setAttributedText.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -589,6 +600,7 @@
 			isa = PBXGroup;
 			children = (
 				FDD9D27427F9DF130024DFB2 /* StringLiterals.swift */,
+				FD99D58728071AC600BB7FDA /* UserDefaultKeyList.swift */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -597,6 +609,7 @@
 			isa = PBXGroup;
 			children = (
 				FDD9D2CF27F9E2240024DFB2 /* BaseService.swift */,
+				FD99D58A28071DDC00BB7FDA /* AuthService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -847,6 +860,8 @@
 			isa = PBXGroup;
 			children = (
 				FDE1A2A82805BF8D000DDBE2 /* LoginVC.swift */,
+				FD99D58C2807211A00BB7FDA /* LoginVC + Kakao.swift */,
+				FD99D58E2807225E00BB7FDA /* LoginVC + Apple.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1069,6 +1084,7 @@
 				FDDB0B59280583EE0055B208 /* HomeEntity.swift in Sources */,
 				FDD9D2FA27F9E3870024DFB2 /* Coordinator.swift in Sources */,
 				FD99D5822806FDC900BB7FDA /* SplashVC.swift in Sources */,
+				FD99D58B28071DDC00BB7FDA /* AuthService.swift in Sources */,
 				FDD9D29327F9DFAF0024DFB2 /* setImage.swift in Sources */,
 				FDD9D2CC27F9E1DB0024DFB2 /* controllerFromStoryboard + UIViewController.swift in Sources */,
 				FDD9D26C27F9DEC10024DFB2 /* UICollectionViewRegisterable.swift in Sources */,
@@ -1077,6 +1093,7 @@
 				FDDB0B55280583EE0055B208 /* HomeRepository.swift in Sources */,
 				FD06198928055C2200F647D7 /* makeKernValue.swift in Sources */,
 				FDD9D2E427F9E32C0024DFB2 /* LogEventType.swift in Sources */,
+				FD99D586280717FB00BB7FDA /* setAttributedText.swift in Sources */,
 				FDD9D2C927F9E1DB0024DFB2 /* successCatch + Result.swift in Sources */,
 				FDD9D2E727F9E32C0024DFB2 /* RuntimeProviderType.swift in Sources */,
 				FDDB0B54280583EE0055B208 /* HomeUseCase.swift in Sources */,
@@ -1088,9 +1105,12 @@
 				FDD9D2F827F9E3870024DFB2 /* Presentable.swift in Sources */,
 				FDE1A2AE2805BF8D000DDBE2 /* LoginVC.swift in Sources */,
 				FDDB0B57280583EE0055B208 /* HomeVC.swift in Sources */,
+				FD99D58D2807211A00BB7FDA /* LoginVC + Kakao.swift in Sources */,
 				FDDB0B74280585740055B208 /* MyPageEntity.swift in Sources */,
 				FDE1A2B02805BF8D000DDBE2 /* LoginEntity.swift in Sources */,
+				FD99D58F2807225E00BB7FDA /* LoginVC + Apple.swift in Sources */,
 				FD0619852805579F00F647D7 /* XibView + UIView.swift in Sources */,
+				FD99D58828071AC600BB7FDA /* UserDefaultKeyList.swift in Sources */,
 				FDE1A2AF2805BF8D000DDBE2 /* LoginViewModel.swift in Sources */,
 				FDD9D28B27F9DFAF0024DFB2 /* showNetworkAlert.swift in Sources */,
 				FDD9D2CB27F9E1DB0024DFB2 /* setTextLineHeight + UILabel.swift in Sources */,

@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import RxRelay
 
 final class LoginViewModel: ViewModelType {
 
@@ -14,12 +15,17 @@ final class LoginViewModel: ViewModelType {
   
   // MARK: - Inputs
   struct Input {
-    
+    let loginButtonClicked: Observable<AuthSignInCase>
+    let platformLoginRequestFail: Observable<AuthSignInCase>
+    let platformLoginRequestSuccess: Observable<LoginRequestModel>
   }
   
   // MARK: - Outputs
   struct Output {
-    
+    var loginRequestStart = PublishRelay<AuthSignInCase>()
+    var loginRequestSuccess = PublishRelay<AuthSignInCase>()
+    var showLoginFailError = PublishRelay<AuthSignInCase>()
+    var showNetworkError = PublishRelay<Void>()
   }
   
   init(useCase: LoginUseCase) {
@@ -31,12 +37,38 @@ extension LoginViewModel {
   func transform(from input: Input, disposeBag: DisposeBag) -> Output {
     let output = Output()
     self.bindOutput(output: output, disposeBag: disposeBag)
-    // input,output 상관관계 작성
+
+    input.loginButtonClicked
+      .subscribe(onNext: { platform in
+        output.loginRequestStart.accept(platform)
+      }).disposed(by: self.disposeBag)
+    
+    input.platformLoginRequestSuccess
+      .subscribe(onNext: { [weak self] loginRequest in
+        guard let self = self else { return }
+        self.useCase.userSignIn(platform: loginRequest.platform, token: loginRequest.platformAccessToken)
+      }).disposed(by: self.disposeBag)
+    
+    input.platformLoginRequestFail
+      .subscribe(onNext: { platform in
+        output.showLoginFailError.accept(platform)
+
+      }).disposed(by: self.disposeBag)
     
     return output
   }
   
   private func bindOutput(output: Output, disposeBag: DisposeBag) {
+    let loginRelay = useCase.loginData
+    let loginError = useCase.loginFail
+    
+    loginRelay.subscribe(onNext: { loginData in
+      output.loginRequestSuccess.accept(loginData.platform)
+    }).disposed(by: self.disposeBag)
+    
+    loginError.subscribe(onNext: { _ in
+      output.showNetworkError.accept(())
+    }).disposed(by: self.disposeBag)
     
   }
 }

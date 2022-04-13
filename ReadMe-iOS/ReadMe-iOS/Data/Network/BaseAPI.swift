@@ -10,6 +10,7 @@ import Alamofire
 
 enum BaseAPI{
   case sampleAPI(sample : String)
+  case login(provider: String,token : String)
 
 }
 
@@ -32,9 +33,11 @@ extension BaseAPI: TargetType {
       switch self{
       case .sampleAPI:
         base += ""
+        case .login:
+          base += ""
       }
     guard let url = URL(string: base) else {
-      fatalError("baseURL could not be configured")
+       fatalError("baseURL could not be configured")
     }
     return url
   }
@@ -60,7 +63,7 @@ extension BaseAPI: TargetType {
   ///  각 case 별로 get,post,delete,put 인지 정의합니다.
   var method: Moya.Method {
     switch self{
-    case .sampleAPI:
+      case .sampleAPI,.login:
       return .post
     default :
       return .get
@@ -83,12 +86,15 @@ extension BaseAPI: TargetType {
   private var bodyParameters: Parameters? {
     var params: Parameters = [:]
     switch self{
-    case .sampleAPI(let email):
-      params["email"] = email
-      params["password"] = "여기에 필요한 Value값 넣기"
-    default:
-      break
-      
+      case .sampleAPI(let email):
+        params["email"] = email
+        params["password"] = "여기에 필요한 Value값 넣기"
+      case .login(let provider,let token):
+        params["provider"] = provider
+        params["token"] = token
+      default:
+        break
+        
     }
     return params
   }
@@ -128,7 +134,7 @@ extension BaseAPI: TargetType {
   ///
   var task: Task {
     switch self{
-    case .sampleAPI:
+      case .sampleAPI,.login:
       return .requestParameters(parameters: bodyParameters ?? [:], encoding: parameterEncoding)
     default:
       return .requestPlain

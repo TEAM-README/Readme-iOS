@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct LoginEntity {
-
+struct LoginEntity: Codable {
+  let accessToken,refreshToken : String
 }

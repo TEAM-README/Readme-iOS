@@ -11,7 +11,7 @@ class SplashVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    delayWithSeconds(2) {
+    delayWithSeconds(1) {
       self.pushLoginView()
     }
   }
