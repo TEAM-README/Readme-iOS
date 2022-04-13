@@ -27,6 +27,6 @@ extension LoginVC {
   // MARK: - Custom Method Part
   private func bindViewModels() {
     let input = LoginViewModel.Input()
-    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+//    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
   }
 }

@@ -29,6 +29,7 @@
 		FD0619872805586200F647D7 /* TabbarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0619862805586200F647D7 /* TabbarIcon.swift */; };
 		FD06198928055C2200F647D7 /* makeKernValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06198828055C2200F647D7 /* makeKernValue.swift */; };
 		FD06198C28055CC700F647D7 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06198B28055CC700F647D7 /* TabbarView.swift */; };
+		FD99D5802806F89600BB7FDA /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD99D57F2806F89600BB7FDA /* Splash.storyboard */; };
 		FDD9D24927F9CB270024DFB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */; };
 		FDD9D24B27F9CB270024DFB2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24A27F9CB270024DFB2 /* SceneDelegate.swift */; };
 		FDD9D25227F9CB290024DFB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDD9D25127F9CB290024DFB2 /* Assets.xcassets */; };
@@ -128,6 +129,7 @@
 		FD0619862805586200F647D7 /* TabbarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarIcon.swift; sourceTree = "<group>"; };
 		FD06198828055C2200F647D7 /* makeKernValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = makeKernValue.swift; sourceTree = "<group>"; };
 		FD06198B28055CC700F647D7 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
+		FD99D57F2806F89600BB7FDA /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		FDD9D24527F9CB270024DFB2 /* ReadMe-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReadMe-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDD9D24A27F9CB270024DFB2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -320,6 +322,30 @@
 			path = Tabbar;
 			sourceTree = "<group>";
 		};
+		FD99D57C2806F87800BB7FDA /* SplashScene */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D57E2806F88D00BB7FDA /* Views */,
+				FD99D57D2806F88800BB7FDA /* VC */,
+			);
+			path = SplashScene;
+			sourceTree = "<group>";
+		};
+		FD99D57D2806F88800BB7FDA /* VC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		FD99D57E2806F88D00BB7FDA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D57F2806F89600BB7FDA /* Splash.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FDD9D23C27F9CB270024DFB2 = {
 			isa = PBXGroup;
 			children = (
@@ -389,6 +415,7 @@
 		FDD9D25E27F9DAE80024DFB2 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				FD99D57C2806F87800BB7FDA /* SplashScene */,
 				FDE1A2A12805BF70000DDBE2 /* LoginScene */,
 				FD0619672805515700F647D7 /* BaseScene */,
 				FDD9D26427F9DE370024DFB2 /* HomeScene */,
@@ -920,6 +947,7 @@
 			files = (
 				FD0619612805457600F647D7 /* Pretendard-ExtraLight.otf in Resources */,
 				FD0619662805484200F647D7 /* ColorAssets.xcassets in Resources */,
+				FD99D5802806F89600BB7FDA /* Splash.storyboard in Resources */,
 				FD0619622805457600F647D7 /* Pretendard-Medium.otf in Resources */,
 				FDD9D25527F9CB290024DFB2 /* LaunchScreen.storyboard in Resources */,
 				FDDB0B7A280587000055B208 /* Home.storyboard in Resources */,
