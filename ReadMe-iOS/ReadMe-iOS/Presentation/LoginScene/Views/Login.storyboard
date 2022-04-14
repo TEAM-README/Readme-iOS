@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--LoginVC-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="LoginVC" id="Y6W-OH-hqX" customClass="LoginVC" customModule="ReadMe_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_logo" translatesAutoresizingMaskIntoConstraints="NO" id="LpH-65-VEe">
+                                <rect key="frame" x="111.5" y="360.5" width="191" height="191"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="LpH-65-VEe" secondAttribute="height" id="VN6-7Y-ePL"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="간단한 회원가입으로 리드미를 시작해볼까요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1n-Cn-QE9">
+                                <rect key="frame" x="74" y="577" width="266" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="UnX-l4-VKu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baE-5c-SGH">
+                                <rect key="frame" x="30" y="629" width="354" height="53.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="baE-5c-SGH" secondAttribute="height" multiplier="330:50" id="gqF-mn-x1v"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="btn_kakao"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZIc-BE-FyI">
+                                <rect key="frame" x="30" y="692.5" width="354" height="54"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="btn_apple"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="LpH-65-VEe" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="180/390" id="4Ug-Uc-5uQ"/>
+                            <constraint firstItem="u1n-Cn-QE9" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" constant="137" id="55b-X8-AmA"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="baE-5c-SGH" secondAttribute="trailing" constant="30" id="8Uq-SS-msk"/>
+                            <constraint firstItem="ZIc-BE-FyI" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="CwJ-IM-vbY"/>
+                            <constraint firstItem="ZIc-BE-FyI" firstAttribute="width" secondItem="ZIc-BE-FyI" secondAttribute="height" multiplier="330:50" id="Hnm-y2-LaF"/>
+                            <constraint firstItem="ZIc-BE-FyI" firstAttribute="top" secondItem="baE-5c-SGH" secondAttribute="bottom" constant="10" id="R92-cH-NZq"/>
+                            <constraint firstItem="baE-5c-SGH" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="TPu-ev-bI9"/>
+                            <constraint firstItem="u1n-Cn-QE9" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="dJW-S2-8vG"/>
+                            <constraint firstItem="LpH-65-VEe" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="sf1-Hj-dxy"/>
+                            <constraint firstItem="baE-5c-SGH" firstAttribute="top" secondItem="u1n-Cn-QE9" secondAttribute="bottom" constant="36" id="syT-bt-JJw"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ZIc-BE-FyI" secondAttribute="trailing" constant="30" id="tsy-PQ-NO2"/>
+                            <constraint firstItem="LpH-65-VEe" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" constant="8" id="xZZ-is-t7N"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="appleLoginButton" destination="ZIc-BE-FyI" id="rhs-sk-BZg"/>
+                        <outlet property="guideLabel" destination="u1n-Cn-QE9" id="dyC-2v-Bgf"/>
+                        <outlet property="kakaoLoginButton" destination="baE-5c-SGH" id="qid-Za-WrU"/>
+                        <outlet property="logoCenterYConstraint" destination="xZZ-is-t7N" id="JXE-BF-4H0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="132" y="116"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="btn_apple" width="330" height="50"/>
+        <image name="btn_kakao" width="330" height="50"/>
+        <image name="img_logo" width="180" height="180"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
