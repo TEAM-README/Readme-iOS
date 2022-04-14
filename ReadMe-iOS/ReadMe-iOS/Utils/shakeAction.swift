@@ -16,13 +16,13 @@ extension UIView {
 
       let shakeAnimator = UIViewPropertyAnimator(duration: time, dampingRatio: 0.3)
       shakeAnimator.addAnimations({
-          self.transform = CGAffineTransform(translationX: 20, y: 0)
+          self.transform = CGAffineTransform(translationX: 4, y: 0)
       })
       shakeAnimator.addAnimations({
-          self.transform = CGAffineTransform(translationX: -20, y: 0)
+          self.transform = CGAffineTransform(translationX: -3, y: 0)
       }, delayFactor: animationDelays[0])
       shakeAnimator.addAnimations({
-          self.transform = CGAffineTransform(translationX: 20, y: 0)
+          self.transform = CGAffineTransform(translationX: 2, y: 0)
       }, delayFactor: animationDelays[1])
       shakeAnimator.addAnimations({
           self.transform = CGAffineTransform(translationX: 0, y: 0)

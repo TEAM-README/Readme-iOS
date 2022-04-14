@@ -7,9 +7,10 @@
 
 import Foundation
 
-enum nicknameInvalidType {
+enum NicknameInvalidType {
   case nicknameDuplicated
   case hasCharacter
+  case exceedMaxCount
 }
 
 struct SignupModel {

@@ -6,13 +6,16 @@
 //
 
 import RxSwift
+import RxRelay
 
 protocol SignupUseCase {
   func checkNicknameHasCharacter(nickname: String)
+  func checkNicknameExceed(nickname: String)
   func checkNicknameDuplicated(nickname: String)
 
   var nicknameDuplicated: PublishSubject<Bool>{ get set }
   var nicknameHasCharacter: PublishSubject<Bool> { get set }
+  var nicknameExceeded: PublishSubject<Bool>{ get set }
 }
 
 final class DefaultSignupUseCase {
@@ -22,6 +25,7 @@ final class DefaultSignupUseCase {
   
   var nicknameDuplicated = PublishSubject<Bool>()
   var nicknameHasCharacter = PublishSubject<Bool>()
+  var nicknameExceeded = PublishSubject<Bool>()
   
   init(repository: SignupRepository) {
     self.repository = repository
@@ -30,23 +34,32 @@ final class DefaultSignupUseCase {
 
 extension DefaultSignupUseCase: SignupUseCase {
   func checkNicknameHasCharacter(nickname: String) {
-    let validState = isValid(nickname)
-    self.nicknameHasCharacter.onNext(!validState)
+    self.nicknameHasCharacter.onNext(hasCharacter(nickname))
+  }
+  
+  func checkNicknameExceed(nickname: String) {
+    self.nicknameExceeded.onNext(didExceedeMaxByte(nickname))
   }
   
   func checkNicknameDuplicated(nickname: String) {
-    repository.postNicknameValidCheck(nickname: nickname)
+    repository.postNicknameInValidCheck(nickname: nickname)
       .filter{ $0 != nil }
-      .subscribe(onNext: { [weak self] state in
+      .subscribe(onNext: { [weak self] duplicated in
       guard let self = self else { return }
-      self.nicknameDuplicated.onNext(state!)
+        print("USECASE 에서 중복 체크해줌")
+      self.nicknameDuplicated.onNext(duplicated!)
     }).disposed(by: self.disposeBag)
   }
   
-  private func isValid(_ nickname: String) -> Bool {
-    let nickRegEx = "[가-힣A-Za-z0-9]{20}"
+  private func hasCharacter(_ nickname: String) -> Bool {
+//    let nickRegEx = "[가-힣A-Za-z0-9]{20}"
+    let nickRegEx = "[ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]{0,20}"
+
     let pred = NSPredicate(format:"SELF MATCHES %@", nickRegEx)
-    return pred.evaluate(with: nickname)
-    
+    return !pred.evaluate(with: nickname)
+  }
+  
+  private func didExceedeMaxByte(_ nickname: String) -> Bool {
+    return nickname.count > 20
   }
 }

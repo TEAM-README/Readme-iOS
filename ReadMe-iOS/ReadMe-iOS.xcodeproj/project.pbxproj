@@ -10,6 +10,8 @@
 		48DD3798A7387D615B01CCF9 /* Pods_ReadMe_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDEAB949A3007921A9DA799 /* Pods_ReadMe_iOS.framework */; };
 		FD01F06F2807F8E7002F80D2 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD01F06E2807F8E7002F80D2 /* Pretendard-Bold.otf */; };
 		FD01F0712808062E002F80D2 /* shakeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01F0702808062E002F80D2 /* shakeAction.swift */; };
+		FD01F07428082237002F80D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD01F07328082237002F80D2 /* Main.storyboard */; };
+		FD01F07528082245002F80D2 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD99D5A528073CD400BB7FDA /* Signup.storyboard */; };
 		FD06195C2805457600F647D7 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD0619532805457600F647D7 /* Pretendard-ExtraBold.otf */; };
 		FD06195D2805457600F647D7 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD0619542805457600F647D7 /* Pretendard-Black.otf */; };
 		FD06195F2805457600F647D7 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD0619562805457600F647D7 /* Pretendard-Thin.otf */; };
@@ -44,7 +46,6 @@
 		FD99D59A28073C4900BB7FDA /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59428073C4900BB7FDA /* SignupVC.swift */; };
 		FD99D59B28073C4900BB7FDA /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59528073C4900BB7FDA /* SignupViewModel.swift */; };
 		FD99D59C28073C4900BB7FDA /* SignupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59628073C4900BB7FDA /* SignupEntity.swift */; };
-		FD99D5A628073CD400BB7FDA /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD99D5A528073CD400BB7FDA /* Signup.storyboard */; };
 		FD99D5AA28073DB200BB7FDA /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D5A928073DB200BB7FDA /* BottomButton.swift */; };
 		FD99D5AC2807407800BB7FDA /* addPadding + UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D5AB2807407800BB7FDA /* addPadding + UITextField.swift */; };
 		FDD9D24927F9CB270024DFB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */; };
@@ -127,6 +128,7 @@
 		FCDEAB949A3007921A9DA799 /* Pods_ReadMe_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadMe_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD01F06E2807F8E7002F80D2 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		FD01F0702808062E002F80D2 /* shakeAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shakeAction.swift; sourceTree = "<group>"; };
+		FD01F07328082237002F80D2 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FD0619532805457600F647D7 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		FD0619542805457600F647D7 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		FD0619562805457600F647D7 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				FD99D5A528073CD400BB7FDA /* Signup.storyboard */,
+				FD01F07328082237002F80D2 /* Main.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1068,12 +1071,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD01F07428082237002F80D2 /* Main.storyboard in Resources */,
 				FD0619612805457600F647D7 /* Pretendard-ExtraLight.otf in Resources */,
 				FD01F06F2807F8E7002F80D2 /* Pretendard-Bold.otf in Resources */,
 				FD0619662805484200F647D7 /* ColorAssets.xcassets in Resources */,
 				FD99D5802806F89600BB7FDA /* Splash.storyboard in Resources */,
 				FD0619622805457600F647D7 /* Pretendard-Medium.otf in Resources */,
 				FDD9D25527F9CB290024DFB2 /* LaunchScreen.storyboard in Resources */,
+				FD01F07528082245002F80D2 /* Signup.storyboard in Resources */,
 				FDDB0B7A280587000055B208 /* Home.storyboard in Resources */,
 				FD06197F2805526800F647D7 /* TabbarIcon.xib in Resources */,
 				FD0619642805457600F647D7 /* Pretendard-SemiBold.otf in Resources */,
@@ -1086,7 +1091,6 @@
 				FD06195C2805457600F647D7 /* Pretendard-ExtraBold.otf in Resources */,
 				FD0619632805457600F647D7 /* Pretendard-Regular.otf in Resources */,
 				FD06195D2805457600F647D7 /* Pretendard-Black.otf in Resources */,
-				FD99D5A628073CD400BB7FDA /* Signup.storyboard in Resources */,
 				FD06197B2805523E00F647D7 /* Base.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

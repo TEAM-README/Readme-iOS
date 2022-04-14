@@ -9,6 +9,7 @@ import Foundation
 
 protocol ModuleFactoryProtocol {
   func makeLoginVC() -> LoginVC
+  func makeSignupVC() -> SignupVC
   func makeBaseVC() -> BaseVC
   func makeHomeVC() -> HomeVC
   func makeMyPageVC() -> MyPageVC
@@ -24,9 +25,17 @@ final class ModuleFactory: ModuleFactoryProtocol{
     let viewModel = LoginViewModel(useCase: useCase)
     let loginVC = LoginVC.controllerFromStoryboard(.login)
     loginVC.viewModel = viewModel
-    
     return loginVC
-    }
+  }
+  
+  func makeSignupVC() -> SignupVC {
+    let repository = DefaultSignupRepository(service: BaseService.default)
+    let useCase = DefaultSignupUseCase(repository: repository)
+    let viewModel = SignupViewModel(useCase: useCase)
+    let loginVC = SignupVC.controllerFromStoryboard(.signup)
+    loginVC.viewModel = viewModel
+    return loginVC
+  }
   
   func makeBaseVC() -> BaseVC { BaseVC.controllerFromStoryboard(.base) }
   func makeHomeVC() -> HomeVC { HomeVC.controllerFromStoryboard(.home) }

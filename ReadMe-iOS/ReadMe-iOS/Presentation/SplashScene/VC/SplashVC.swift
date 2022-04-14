@@ -12,15 +12,7 @@ class SplashVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     delayWithSeconds(1) {
-      self.pushLoginView()
-    }
-    
-    
-    for family in UIFont.familyNames {
-      print("\(family)");
-      for names in UIFont.fontNames(forFamilyName: family) {
-        print("== \(names)");
-      }
+      self.pushSignupView()
     }
     
     
@@ -29,5 +21,10 @@ class SplashVC: UIViewController {
   private func pushLoginView() {
     let loginVC = ModuleFactory.shared.makeLoginVC()
     navigationController?.pushViewController(loginVC, animated: false)
+  }
+  
+  private func pushSignupView() {
+    let signupVC = ModuleFactory.shared.makeSignupVC()
+    navigationController?.pushViewController(signupVC, animated: false)
   }
 }

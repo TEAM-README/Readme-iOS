@@ -28,8 +28,9 @@ class SignupVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.registerForKeyboardNotifications()
-//    self.bindViewModels()
+    self.bindViewModels()
     self.configureUI()
+    self.configureButtonAction()
     self.addTapGesture()
   }
   
@@ -43,7 +44,9 @@ extension SignupVC {
   // MARK: - Custom Method Part
   private func bindViewModels() {
     let input = SignupViewModel.Input(
-      nicknameText: nicknameTextField.rx.text.asObservable(),
+      nicknameText: nicknameTextField.rx.text
+        .distinctUntilChanged()
+        .asObservable(),
       textEditFinished: editEventFinished)
     let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
     
@@ -62,20 +65,19 @@ extension SignupVC {
       .disposed(by: self.disposeBag)
     
     output.countingLabelText.asSignal()
-      .emit(onNext: { [weak self] viewModel in
+      .emit(onNext: { [weak self] count in
         guard let self = self else { return }
-        self.textCountLabel.text = viewModel.text
-        self.textCountLabel.textColor = viewModel.textColor
+        self.textCountLabel.text = count
       })
       .disposed(by: self.disposeBag)
     
-    output.stateLabelText.asSignal()
-      .emit(onNext: { [weak self] viewModel in
-        guard let self = self else { return }
-        self.stateLabel.text = viewModel.text
-        self.stateLabel.textColor = viewModel.textColor
-      })
-      .disposed(by: self.disposeBag)
+  }
+  
+  private func configureButtonAction() {
+    completeButton.rx.tap
+      .bind{
+        self.editEventFinished.onNext(self.nicknameTextField.text)
+      }.disposed(by: self.disposeBag)
   }
 }
 
@@ -114,21 +116,38 @@ extension SignupVC {
     nicknameTextField.layer.borderColor = UIColor.mainBlue.cgColor
     stateLabel.text = I18N.Signup.availableNickname
     stateLabel.textColor = UIColor.mainBlue
+    textCountLabel.textColor = .grey02
     completeButton.isEnabled = true
   }
   
-  private func setNicknameInvalidState(errorType: nicknameInvalidType) {
-    makeVibrate(degree: .heavy)
+  private func setNicknameInvalidState(errorType: NicknameInvalidType) {
+    makeVibrate(degree: .light)
     nicknameTextField.shake()
     nicknameTextField.layer.borderColor = UIColor.alertRed.cgColor
     stateLabel.textColor = UIColor.alertRed
     switch(errorType) {
       case .hasCharacter:
         stateLabel.text = I18N.Signup.characterErr
+        textCountLabel.textColor = .grey02
       case .nicknameDuplicated:
         stateLabel.text = I18N.Signup.nicknameDuplicatedErr
+        textCountLabel.textColor = .grey02
+      case .exceedMaxCount:
+        stateLabel.text = I18N.Signup.byteExceedErr
+        textCountLabel.textColor = .alertRed
+        cutMaxLabel()
     }
     completeButton.isEnabled = false
+  }
+  
+  private func cutMaxLabel() {
+    if let text = nicknameTextField.text {
+      if text.count > maxNicknameLength{
+        let maxIndex = text.index(text.startIndex, offsetBy: maxNicknameLength)
+        let newString = String(text[text.startIndex..<maxIndex])
+        nicknameTextField.text = newString
+      }
+    }
   }
 }
 
@@ -162,6 +181,7 @@ extension SignupVC {
     let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
     let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
     completeButtonBottomConstraint.constant = 34
+    editEventFinished.onNext(nicknameTextField.text)
     UIView.animate(withDuration: duration, delay: 0, options: .init(rawValue: curve)) {
       self.view.layoutIfNeeded()
     }
