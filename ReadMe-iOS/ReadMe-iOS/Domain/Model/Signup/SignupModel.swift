@@ -7,6 +7,11 @@
 
 import Foundation
 
-struct SignupModel {
+enum nicknameInvalidType {
+  case nicknameDuplicated
+  case hasCharacter
+}
 
+struct SignupModel {
+  
 }

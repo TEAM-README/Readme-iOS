@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -17,19 +17,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임을 알려주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkX-Wf-LAU">
-                                <rect key="frame" x="28" y="124" width="168.5" height="25.5"/>
+                                <rect key="frame" x="28" y="124" width="168.5" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="di9-lX-iCb"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQc-5z-ne4">
-                                <rect key="frame" x="28" y="165.5" width="42" height="21"/>
+                                <rect key="frame" x="28" y="161" width="42" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="Shg-Ys-ekc"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SjI-au-Nb7">
-                                <rect key="frame" x="28" y="224.5" width="358" height="50.5"/>
+                                <rect key="frame" x="28" y="215" width="358" height="50.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="SjI-au-Nb7" secondAttribute="height" multiplier="334:47" id="HAQ-PE-8cb"/>
                                 </constraints>
@@ -37,13 +43,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s7A-OE-MXd">
-                                <rect key="frame" x="30" y="291" width="35.5" height="17"/>
+                                <rect key="frame" x="30" y="281.5" width="35.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="foA-Xq-Huo">
-                                <rect key="frame" x="350.5" y="291" width="35.5" height="17"/>
+                                <rect key="frame" x="350.5" y="281.5" width="35.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -71,10 +77,19 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Pdl-eH-FVg" secondAttribute="bottom" constant="34" id="iVu-L9-S5p"/>
                             <constraint firstItem="foA-Xq-Huo" firstAttribute="centerY" secondItem="s7A-OE-MXd" secondAttribute="centerY" id="nAx-l7-rce"/>
                             <constraint firstItem="SjI-au-Nb7" firstAttribute="top" secondItem="WQc-5z-ne4" secondAttribute="bottom" constant="38" id="nHs-ru-IPq"/>
-                            <constraint firstItem="WQc-5z-ne4" firstAttribute="top" secondItem="dkX-Wf-LAU" secondAttribute="bottom" constant="16" id="nxW-kT-a8G"/>
+                            <constraint firstItem="WQc-5z-ne4" firstAttribute="top" secondItem="dkX-Wf-LAU" secondAttribute="bottom" constant="15" id="nxW-kT-a8G"/>
                             <constraint firstItem="WQc-5z-ne4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="28" id="sU2-KE-EN7"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="completeButton" destination="Pdl-eH-FVg" id="e2x-Ft-q7S"/>
+                        <outlet property="completeButtonBottomConstraint" destination="iVu-L9-S5p" id="CCj-ik-Edm"/>
+                        <outlet property="nicknameTextField" destination="SjI-au-Nb7" id="Y1Y-XO-ar1"/>
+                        <outlet property="stateLabel" destination="s7A-OE-MXd" id="YEl-yo-dgo"/>
+                        <outlet property="subtitleLabel" destination="WQc-5z-ne4" id="ijZ-ZO-0lC"/>
+                        <outlet property="textCountLabel" destination="foA-Xq-Huo" id="IfJ-Fw-YEB"/>
+                        <outlet property="titleLabel" destination="dkX-Wf-LAU" id="O2o-N1-Rg3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

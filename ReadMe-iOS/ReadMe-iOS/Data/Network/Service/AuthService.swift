@@ -9,10 +9,15 @@ import RxSwift
 
 protocol AuthServiceType {
   func login(provider: String, token: String) -> Observable<LoginEntity?>
+  func checkNicknameDuplicated(nickname: String) -> Observable<Bool?>
 }
 
 extension BaseService: AuthServiceType {
   func login(provider: String, token: String) -> Observable<LoginEntity?> {
     requestObjectInRx(.login(provider: provider, token: token))
   }
+  func checkNicknameDuplicated(nickname: String) -> Observable<Bool?> {
+    requestObjectInRx(.checkNicknameDuplicated(nickname: nickname))
+  }
+
 }

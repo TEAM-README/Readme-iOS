@@ -19,7 +19,7 @@ final class BottomButton: UIButton {
   }
   
   private func configureTitle() {
-    self.titleLabel?.text = title
+    self.setTitle(title, for: .normal)
   }
 }
 
