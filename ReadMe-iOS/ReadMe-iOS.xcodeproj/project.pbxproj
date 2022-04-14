@@ -149,7 +149,7 @@
 		FD0619842805579F00F647D7 /* XibView + UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XibView + UIView.swift"; sourceTree = "<group>"; };
 		FD0619862805586200F647D7 /* TabbarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarIcon.swift; sourceTree = "<group>"; };
 		FD06198828055C2200F647D7 /* makeKernValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = makeKernValue.swift; sourceTree = "<group>"; };
-		FD06198B28055CC700F647D7 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
+		FD06198B28055CC700F647D7 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; usesTabs = 1; };
 		FD99D57F2806F89600BB7FDA /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		FD99D5812806FDC900BB7FDA /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		FD99D583280702F400BB7FDA /* delayWithSeconds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = delayWithSeconds.swift; sourceTree = "<group>"; };

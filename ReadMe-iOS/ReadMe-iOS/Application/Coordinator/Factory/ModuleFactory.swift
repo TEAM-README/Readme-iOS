@@ -12,6 +12,7 @@ protocol ModuleFactoryProtocol {
   func makeBaseVC() -> BaseVC
   func makeHomeVC() -> HomeVC
   func makeMyPageVC() -> MyPageVC
+  func makeSearchVC() -> SearchVC
 }
 
 final class ModuleFactory: ModuleFactoryProtocol{
@@ -26,7 +27,17 @@ final class ModuleFactory: ModuleFactoryProtocol{
     loginVC.viewModel = viewModel
     
     return loginVC
-    }
+  }
+  
+  func makeSearchVC() -> SearchVC {
+    let repository = DefaultSearchRepository()
+    let useCase = DefaultSearchUseCase(repository: repository)
+    let viewModel = SearchViewModel(useCase: useCase)
+    let searchVC = SearchVC.controllerFromStoryboard(.search)
+    searchVC.viewModel = viewModel
+    
+    return searchVC
+  }
   
   func makeBaseVC() -> BaseVC { BaseVC.controllerFromStoryboard(.base) }
   func makeHomeVC() -> HomeVC { HomeVC.controllerFromStoryboard(.home) }

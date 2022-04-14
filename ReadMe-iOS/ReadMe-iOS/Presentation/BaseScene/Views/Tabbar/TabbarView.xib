@@ -11,6 +11,7 @@
             <connections>
                 <outlet property="homeIcon" destination="z34-5L-x8o" id="spX-tT-jW7"/>
                 <outlet property="mypageIcon" destination="0oC-oe-4op" id="6yv-IZ-d7d"/>
+                <outlet property="plusButton" destination="Inz-Ak-X5A" id="6tc-96-Ko1"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -44,6 +45,9 @@
                     </constraints>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" backgroundImage="add_btn"/>
+                    <connections>
+                        <action selector="plusButtonClicked:" destination="-1" eventType="touchUpInside" id="VBW-eU-wx0"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqC-tV-Gct" userLabel="tabbarButton">
                     <rect key="frame" x="0.0" y="16" width="165" height="59"/>
