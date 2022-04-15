@@ -32,6 +32,13 @@
 		FD0619872805586200F647D7 /* TabbarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0619862805586200F647D7 /* TabbarIcon.swift */; };
 		FD06198928055C2200F647D7 /* makeKernValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06198828055C2200F647D7 /* makeKernValue.swift */; };
 		FD06198C28055CC700F647D7 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06198B28055CC700F647D7 /* TabbarView.swift */; };
+		FD85CEC82809C92F00E7BE7B /* FeedDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD85CEC22809C92F00E7BE7B /* FeedDetailUseCase.swift */; };
+		FD85CEC92809C92F00E7BE7B /* FeedRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD85CEC32809C92F00E7BE7B /* FeedRepository.swift */; };
+		FD85CECB2809C92F00E7BE7B /* FeedDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD85CEC52809C92F00E7BE7B /* FeedDetailVC.swift */; };
+		FD85CECC2809C92F00E7BE7B /* FeedDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD85CEC62809C92F00E7BE7B /* FeedDetailViewModel.swift */; };
+		FD85CECD2809C92F00E7BE7B /* FeedDetailEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD85CEC72809C92F00E7BE7B /* FeedDetailEntity.swift */; };
+		FD85CED32809C9E900E7BE7B /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD85CED22809C9E900E7BE7B /* FeedModel.swift */; };
+		FD85CED62809CA2A00E7BE7B /* FeedDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD85CED52809CA2A00E7BE7B /* FeedDetail.storyboard */; };
 		FD99D5802806F89600BB7FDA /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD99D57F2806F89600BB7FDA /* Splash.storyboard */; };
 		FD99D5822806FDC900BB7FDA /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D5812806FDC900BB7FDA /* SplashVC.swift */; };
 		FD99D584280702F400BB7FDA /* delayWithSeconds.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D583280702F400BB7FDA /* delayWithSeconds.swift */; };
@@ -149,6 +156,13 @@
 		FD0619862805586200F647D7 /* TabbarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarIcon.swift; sourceTree = "<group>"; };
 		FD06198828055C2200F647D7 /* makeKernValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = makeKernValue.swift; sourceTree = "<group>"; };
 		FD06198B28055CC700F647D7 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
+		FD85CEC22809C92F00E7BE7B /* FeedDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailUseCase.swift; sourceTree = "<group>"; };
+		FD85CEC32809C92F00E7BE7B /* FeedRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRepository.swift; sourceTree = "<group>"; };
+		FD85CEC52809C92F00E7BE7B /* FeedDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailVC.swift; sourceTree = "<group>"; };
+		FD85CEC62809C92F00E7BE7B /* FeedDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailViewModel.swift; sourceTree = "<group>"; };
+		FD85CEC72809C92F00E7BE7B /* FeedDetailEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailEntity.swift; sourceTree = "<group>"; };
+		FD85CED22809C9E900E7BE7B /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
+		FD85CED52809CA2A00E7BE7B /* FeedDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FeedDetail.storyboard; sourceTree = "<group>"; };
 		FD99D57F2806F89600BB7FDA /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		FD99D5812806FDC900BB7FDA /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		FD99D583280702F400BB7FDA /* delayWithSeconds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = delayWithSeconds.swift; sourceTree = "<group>"; };
@@ -366,6 +380,80 @@
 			path = Tabbar;
 			sourceTree = "<group>";
 		};
+		FD85CEBE2809C8EE00E7BE7B /* FeedDetailScene */ = {
+			isa = PBXGroup;
+			children = (
+				FD85CEC02809C91C00E7BE7B /* Views */,
+				FD85CEC12809C91F00E7BE7B /* ViewModel */,
+				FD85CEBF2809C91800E7BE7B /* VC */,
+			);
+			path = FeedDetailScene;
+			sourceTree = "<group>";
+		};
+		FD85CEBF2809C91800E7BE7B /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				FD85CEC52809C92F00E7BE7B /* FeedDetailVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		FD85CEC02809C91C00E7BE7B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FD85CED52809CA2A00E7BE7B /* FeedDetail.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FD85CEC12809C91F00E7BE7B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FD85CEC62809C92F00E7BE7B /* FeedDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FD85CECE2809C94300E7BE7B /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				FD85CED22809C9E900E7BE7B /* FeedModel.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		FD85CECF2809C97000E7BE7B /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D59628073C4900BB7FDA /* SignupEntity.swift */,
+			);
+			path = Signup;
+			sourceTree = "<group>";
+		};
+		FD85CED02809C97D00E7BE7B /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				FD85CEC32809C92F00E7BE7B /* FeedRepository.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		FD85CED12809C9BD00E7BE7B /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				FD85CEC22809C92F00E7BE7B /* FeedDetailUseCase.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		FD85CED42809CA0600E7BE7B /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				FD85CEC72809C92F00E7BE7B /* FeedDetailEntity.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
 		FD99D57C2806F87800BB7FDA /* SplashScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -530,6 +618,7 @@
 		FDD9D25E27F9DAE80024DFB2 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				FD85CEBE2809C8EE00E7BE7B /* FeedDetailScene */,
 				FD99D5A728073D8E00BB7FDA /* Component */,
 				FD99D59028073C3300BB7FDA /* SignupScene */,
 				FD99D57C2806F87800BB7FDA /* SplashScene */,
@@ -639,6 +728,7 @@
 		FDD9D29A27F9DFE00024DFB2 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				FD85CED02809C97D00E7BE7B /* Feed */,
 				FD01F07228080AAD002F80D2 /* SIgnup */,
 				FDE1A2B12805BF92000DDBE2 /* Login */,
 				FDDB0B64280585530055B208 /* MyPage */,
@@ -661,6 +751,7 @@
 		FDD9D29C27F9DFFA0024DFB2 /* Usecase */ = {
 			isa = PBXGroup;
 			children = (
+				FD85CED12809C9BD00E7BE7B /* Feed */,
 				FD99D5A228073CA000BB7FDA /* Signup */,
 				FDE1A2B42805BFB3000DDBE2 /* Login */,
 				FDDB0B62280585490055B208 /* MyPage */,
@@ -673,6 +764,7 @@
 		FDD9D29D27F9E00A0024DFB2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FD85CECE2809C94300E7BE7B /* Feed */,
 				FD99D5A128073C9A00BB7FDA /* Signup */,
 				FDE1A2B32805BFAB000DDBE2 /* Login */,
 				FDDB0B61280585410055B208 /* MyPage */,
@@ -685,7 +777,8 @@
 		FDD9D29E27F9E0120024DFB2 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				FD99D59628073C4900BB7FDA /* SignupEntity.swift */,
+				FD85CED42809CA0600E7BE7B /* Feed */,
+				FD85CECF2809C97000E7BE7B /* Signup */,
 				FDE1A2B22805BF96000DDBE2 /* Login */,
 				FDDB0B63280585500055B208 /* MyPage */,
 				FDDB0B5A280583FC0055B208 /* Home */,
@@ -1072,6 +1165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD01F07428082237002F80D2 /* Main.storyboard in Resources */,
+				FD85CED62809CA2A00E7BE7B /* FeedDetail.storyboard in Resources */,
 				FD0619612805457600F647D7 /* Pretendard-ExtraLight.otf in Resources */,
 				FD01F06F2807F8E7002F80D2 /* Pretendard-Bold.otf in Resources */,
 				FD0619662805484200F647D7 /* ColorAssets.xcassets in Resources */,
@@ -1145,6 +1239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDD9D2E527F9E32C0024DFB2 /* AppLog.swift in Sources */,
+				FD85CECD2809C92F00E7BE7B /* FeedDetailEntity.swift in Sources */,
 				FDDB0B58280583EE0055B208 /* HomeViewModel.swift in Sources */,
 				FD99D59A28073C4900BB7FDA /* SignupVC.swift in Sources */,
 				FD99D5AA28073DB200BB7FDA /* BottomButton.swift in Sources */,
@@ -1162,6 +1257,7 @@
 				FDD9D2F727F9E3870024DFB2 /* CoordinatorFinishOutput.swift in Sources */,
 				FDE1A2AD2805BF8D000DDBE2 /* LoginModel.swift in Sources */,
 				FD0619722805516500F647D7 /* BaseViewModel.swift in Sources */,
+				FD85CED32809C9E900E7BE7B /* FeedModel.swift in Sources */,
 				FDD9D28D27F9DFAF0024DFB2 /* calculateTopInset.swift in Sources */,
 				FDD9D24927F9CB270024DFB2 /* AppDelegate.swift in Sources */,
 				FDD9D28E27F9DFAF0024DFB2 /* manageObserverAction.swift in Sources */,
@@ -1199,6 +1295,7 @@
 				FD99D58B28071DDC00BB7FDA /* AuthService.swift in Sources */,
 				FDD9D29327F9DFAF0024DFB2 /* setImage.swift in Sources */,
 				FDD9D2CC27F9E1DB0024DFB2 /* controllerFromStoryboard + UIViewController.swift in Sources */,
+				FD85CEC92809C92F00E7BE7B /* FeedRepository.swift in Sources */,
 				FDD9D26C27F9DEC10024DFB2 /* UICollectionViewRegisterable.swift in Sources */,
 				FDDB0B71280585740055B208 /* MyPageModel.swift in Sources */,
 				FDD9D2D627F9E24D0024DFB2 /* BaseAPI.swift in Sources */,
@@ -1213,6 +1310,7 @@
 				FDD9D28F27F9DFAF0024DFB2 /* downloadImage.swift in Sources */,
 				FD06198C28055CC700F647D7 /* TabbarView.swift in Sources */,
 				FD99D59728073C4900BB7FDA /* SignupUseCase.swift in Sources */,
+				FD85CECC2809C92F00E7BE7B /* FeedDetailViewModel.swift in Sources */,
 				FDD9D2D427F9E2400024DFB2 /* ResponseObject.swift in Sources */,
 				FD01F0712808062E002F80D2 /* shakeAction.swift in Sources */,
 				FDDB0B72280585740055B208 /* MyPageVC.swift in Sources */,
@@ -1222,6 +1320,8 @@
 				FDDB0B57280583EE0055B208 /* HomeVC.swift in Sources */,
 				FD99D58D2807211A00BB7FDA /* LoginVC + Kakao.swift in Sources */,
 				FDDB0B74280585740055B208 /* MyPageEntity.swift in Sources */,
+				FD85CEC82809C92F00E7BE7B /* FeedDetailUseCase.swift in Sources */,
+				FD85CECB2809C92F00E7BE7B /* FeedDetailVC.swift in Sources */,
 				FDE1A2B02805BF8D000DDBE2 /* LoginEntity.swift in Sources */,
 				FD99D58F2807225E00BB7FDA /* LoginVC + Apple.swift in Sources */,
 				FD0619852805579F00F647D7 /* XibView + UIView.swift in Sources */,

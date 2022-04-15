@@ -7,11 +7,11 @@
 
 import RxSwift
 
-protocol FeedDetailRepository {
+protocol FeedRepository {
   
 }
 
-final class DefaultFeedDetailRepository {
+final class DefaultFeedRepository {
   
   private let disposeBag = DisposeBag()
 
@@ -20,6 +20,6 @@ final class DefaultFeedDetailRepository {
   }
 }
 
-extension DefaultFeedDetailRepository: FeedDetailRepository {
+extension DefaultFeedRepository: FeedRepository {
   
 }
