@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		48DD3798A7387D615B01CCF9 /* Pods_ReadMe_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDEAB949A3007921A9DA799 /* Pods_ReadMe_iOS.framework */; };
+		FD01F06F2807F8E7002F80D2 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD01F06E2807F8E7002F80D2 /* Pretendard-Bold.otf */; };
+		FD01F0712808062E002F80D2 /* shakeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01F0702808062E002F80D2 /* shakeAction.swift */; };
+		FD01F07428082237002F80D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD01F07328082237002F80D2 /* Main.storyboard */; };
+		FD01F07528082245002F80D2 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD99D5A528073CD400BB7FDA /* Signup.storyboard */; };
 		FD06195C2805457600F647D7 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD0619532805457600F647D7 /* Pretendard-ExtraBold.otf */; };
 		FD06195D2805457600F647D7 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD0619542805457600F647D7 /* Pretendard-Black.otf */; };
-		FD06195E2805457600F647D7 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD0619552805457600F647D7 /* Pretendard-Bold.otf */; };
 		FD06195F2805457600F647D7 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD0619562805457600F647D7 /* Pretendard-Thin.otf */; };
 		FD0619602805457600F647D7 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD0619572805457600F647D7 /* Pretendard-Light.otf */; };
 		FD0619612805457600F647D7 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD0619582805457600F647D7 /* Pretendard-ExtraLight.otf */; };
@@ -37,6 +40,14 @@
 		FD99D58B28071DDC00BB7FDA /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D58A28071DDC00BB7FDA /* AuthService.swift */; };
 		FD99D58D2807211A00BB7FDA /* LoginVC + Kakao.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D58C2807211A00BB7FDA /* LoginVC + Kakao.swift */; };
 		FD99D58F2807225E00BB7FDA /* LoginVC + Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D58E2807225E00BB7FDA /* LoginVC + Apple.swift */; };
+		FD99D59728073C4900BB7FDA /* SignupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59128073C4900BB7FDA /* SignupUseCase.swift */; };
+		FD99D59828073C4900BB7FDA /* SignupRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59228073C4900BB7FDA /* SignupRepository.swift */; };
+		FD99D59928073C4900BB7FDA /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59328073C4900BB7FDA /* SignupModel.swift */; };
+		FD99D59A28073C4900BB7FDA /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59428073C4900BB7FDA /* SignupVC.swift */; };
+		FD99D59B28073C4900BB7FDA /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59528073C4900BB7FDA /* SignupViewModel.swift */; };
+		FD99D59C28073C4900BB7FDA /* SignupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59628073C4900BB7FDA /* SignupEntity.swift */; };
+		FD99D5AA28073DB200BB7FDA /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D5A928073DB200BB7FDA /* BottomButton.swift */; };
+		FD99D5AC2807407800BB7FDA /* addPadding + UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D5AB2807407800BB7FDA /* addPadding + UITextField.swift */; };
 		FDD9D24927F9CB270024DFB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */; };
 		FDD9D24B27F9CB270024DFB2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24A27F9CB270024DFB2 /* SceneDelegate.swift */; };
 		FDD9D25227F9CB290024DFB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDD9D25127F9CB290024DFB2 /* Assets.xcassets */; };
@@ -115,9 +126,11 @@
 		AA209110609425843DFDE109 /* Pods-ReadMe-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BDC606173607FC03ED959B5E /* Pods-ReadMe-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.release.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		FCDEAB949A3007921A9DA799 /* Pods_ReadMe_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadMe_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD01F06E2807F8E7002F80D2 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		FD01F0702808062E002F80D2 /* shakeAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shakeAction.swift; sourceTree = "<group>"; };
+		FD01F07328082237002F80D2 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FD0619532805457600F647D7 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		FD0619542805457600F647D7 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
-		FD0619552805457600F647D7 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		FD0619562805457600F647D7 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		FD0619572805457600F647D7 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		FD0619582805457600F647D7 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
@@ -144,6 +157,15 @@
 		FD99D58A28071DDC00BB7FDA /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		FD99D58C2807211A00BB7FDA /* LoginVC + Kakao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginVC + Kakao.swift"; sourceTree = "<group>"; };
 		FD99D58E2807225E00BB7FDA /* LoginVC + Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginVC + Apple.swift"; sourceTree = "<group>"; };
+		FD99D59128073C4900BB7FDA /* SignupUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupUseCase.swift; sourceTree = "<group>"; };
+		FD99D59228073C4900BB7FDA /* SignupRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRepository.swift; sourceTree = "<group>"; };
+		FD99D59328073C4900BB7FDA /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
+		FD99D59428073C4900BB7FDA /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		FD99D59528073C4900BB7FDA /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		FD99D59628073C4900BB7FDA /* SignupEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupEntity.swift; sourceTree = "<group>"; };
+		FD99D5A528073CD400BB7FDA /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
+		FD99D5A928073DB200BB7FDA /* BottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButton.swift; sourceTree = "<group>"; };
+		FD99D5AB2807407800BB7FDA /* addPadding + UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "addPadding + UITextField.swift"; sourceTree = "<group>"; };
 		FDD9D24527F9CB270024DFB2 /* ReadMe-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReadMe-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDD9D24A27F9CB270024DFB2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -250,11 +272,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FD01F07228080AAD002F80D2 /* SIgnup */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D59228073C4900BB7FDA /* SignupRepository.swift */,
+			);
+			path = SIgnup;
+			sourceTree = "<group>";
+		};
 		FD0619522805453300F647D7 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				FD01F06E2807F8E7002F80D2 /* Pretendard-Bold.otf */,
 				FD0619542805457600F647D7 /* Pretendard-Black.otf */,
-				FD0619552805457600F647D7 /* Pretendard-Bold.otf */,
 				FD0619532805457600F647D7 /* Pretendard-ExtraBold.otf */,
 				FD0619582805457600F647D7 /* Pretendard-ExtraLight.otf */,
 				FD0619572805457600F647D7 /* Pretendard-Light.otf */,
@@ -361,6 +391,73 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		FD99D59028073C3300BB7FDA /* SignupScene */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D59D28073C4E00BB7FDA /* Views */,
+				FD99D59F28073C5A00BB7FDA /* ViewModel */,
+				FD99D59E28073C5200BB7FDA /* VC */,
+			);
+			path = SignupScene;
+			sourceTree = "<group>";
+		};
+		FD99D59D28073C4E00BB7FDA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D5A528073CD400BB7FDA /* Signup.storyboard */,
+				FD01F07328082237002F80D2 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FD99D59E28073C5200BB7FDA /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D59428073C4900BB7FDA /* SignupVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		FD99D59F28073C5A00BB7FDA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D59528073C4900BB7FDA /* SignupViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FD99D5A128073C9A00BB7FDA /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D59328073C4900BB7FDA /* SignupModel.swift */,
+			);
+			path = Signup;
+			sourceTree = "<group>";
+		};
+		FD99D5A228073CA000BB7FDA /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D59128073C4900BB7FDA /* SignupUseCase.swift */,
+			);
+			path = Signup;
+			sourceTree = "<group>";
+		};
+		FD99D5A728073D8E00BB7FDA /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D5A828073DA100BB7FDA /* Button */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		FD99D5A828073DA100BB7FDA /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				FD99D5A928073DB200BB7FDA /* BottomButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
 		FDD9D23C27F9CB270024DFB2 = {
 			isa = PBXGroup;
 			children = (
@@ -425,6 +522,7 @@
 				FD06198828055C2200F647D7 /* makeKernValue.swift */,
 				FD99D583280702F400BB7FDA /* delayWithSeconds.swift */,
 				FD99D585280717FB00BB7FDA /* setAttributedText.swift */,
+				FD01F0702808062E002F80D2 /* shakeAction.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -432,6 +530,8 @@
 		FDD9D25E27F9DAE80024DFB2 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				FD99D5A728073D8E00BB7FDA /* Component */,
+				FD99D59028073C3300BB7FDA /* SignupScene */,
 				FD99D57C2806F87800BB7FDA /* SplashScene */,
 				FDE1A2A12805BF70000DDBE2 /* LoginScene */,
 				FD0619672805515700F647D7 /* BaseScene */,
@@ -473,6 +573,7 @@
 				FDD9D2C227F9E1DB0024DFB2 /* successCatch + Result.swift */,
 				FDD9D2BF27F9E1DB0024DFB2 /* UINavigation + Extension.swift */,
 				FD0619842805579F00F647D7 /* XibView + UIView.swift */,
+				FD99D5AB2807407800BB7FDA /* addPadding + UITextField.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -538,6 +639,7 @@
 		FDD9D29A27F9DFE00024DFB2 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				FD01F07228080AAD002F80D2 /* SIgnup */,
 				FDE1A2B12805BF92000DDBE2 /* Login */,
 				FDDB0B64280585530055B208 /* MyPage */,
 				FDDB0B5D280584A10055B208 /* Home */,
@@ -559,6 +661,7 @@
 		FDD9D29C27F9DFFA0024DFB2 /* Usecase */ = {
 			isa = PBXGroup;
 			children = (
+				FD99D5A228073CA000BB7FDA /* Signup */,
 				FDE1A2B42805BFB3000DDBE2 /* Login */,
 				FDDB0B62280585490055B208 /* MyPage */,
 				FDDB0B5C280584650055B208 /* Home */,
@@ -570,6 +673,7 @@
 		FDD9D29D27F9E00A0024DFB2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FD99D5A128073C9A00BB7FDA /* Signup */,
 				FDE1A2B32805BFAB000DDBE2 /* Login */,
 				FDDB0B61280585410055B208 /* MyPage */,
 				FDDB0B5B2805845A0055B208 /* Home */,
@@ -581,6 +685,7 @@
 		FDD9D29E27F9E0120024DFB2 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				FD99D59628073C4900BB7FDA /* SignupEntity.swift */,
 				FDE1A2B22805BF96000DDBE2 /* Login */,
 				FDDB0B63280585500055B208 /* MyPage */,
 				FDDB0B5A280583FC0055B208 /* Home */,
@@ -966,17 +1071,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD01F07428082237002F80D2 /* Main.storyboard in Resources */,
 				FD0619612805457600F647D7 /* Pretendard-ExtraLight.otf in Resources */,
+				FD01F06F2807F8E7002F80D2 /* Pretendard-Bold.otf in Resources */,
 				FD0619662805484200F647D7 /* ColorAssets.xcassets in Resources */,
 				FD99D5802806F89600BB7FDA /* Splash.storyboard in Resources */,
 				FD0619622805457600F647D7 /* Pretendard-Medium.otf in Resources */,
 				FDD9D25527F9CB290024DFB2 /* LaunchScreen.storyboard in Resources */,
+				FD01F07528082245002F80D2 /* Signup.storyboard in Resources */,
 				FDDB0B7A280587000055B208 /* Home.storyboard in Resources */,
 				FD06197F2805526800F647D7 /* TabbarIcon.xib in Resources */,
 				FD0619642805457600F647D7 /* Pretendard-SemiBold.otf in Resources */,
 				FD0619602805457600F647D7 /* Pretendard-Light.otf in Resources */,
 				FDE1A2B62805BFC6000DDBE2 /* Login.storyboard in Resources */,
-				FD06195E2805457600F647D7 /* Pretendard-Bold.otf in Resources */,
 				FD06195F2805457600F647D7 /* Pretendard-Thin.otf in Resources */,
 				FD06197D2805525B00F647D7 /* TabbarView.xib in Resources */,
 				FDD9D25227F9CB290024DFB2 /* Assets.xcassets in Resources */,
@@ -1039,9 +1146,12 @@
 			files = (
 				FDD9D2E527F9E32C0024DFB2 /* AppLog.swift in Sources */,
 				FDDB0B58280583EE0055B208 /* HomeViewModel.swift in Sources */,
+				FD99D59A28073C4900BB7FDA /* SignupVC.swift in Sources */,
+				FD99D5AA28073DB200BB7FDA /* BottomButton.swift in Sources */,
 				FDD9D29027F9DFAF0024DFB2 /* showToastMessage.swift in Sources */,
 				FD0619872805586200F647D7 /* TabbarIcon.swift in Sources */,
 				FDD9D2FB27F9E3870024DFB2 /* LaunchInstructor.swift in Sources */,
+				FD99D59B28073C4900BB7FDA /* SignupViewModel.swift in Sources */,
 				FDD9D2FC27F9E3870024DFB2 /* Router.swift in Sources */,
 				FDD9D30227F9E5320024DFB2 /* BaseNotiList.swift in Sources */,
 				FDD9D2FF27F9E3870024DFB2 /* CoordinatorFactory.swift in Sources */,
@@ -1067,12 +1177,14 @@
 				FDD9D2FD27F9E3870024DFB2 /* BaseCoordinator.swift in Sources */,
 				FDD9D2C627F9E1DB0024DFB2 /* UINavigation + Extension.swift in Sources */,
 				FDDB0B6F280585740055B208 /* MyPageUseCase.swift in Sources */,
+				FD99D59C28073C4900BB7FDA /* SignupEntity.swift in Sources */,
 				FDD9D29127F9DFAF0024DFB2 /* addToolBar.swift in Sources */,
 				FDD9D2E627F9E32C0024DFB2 /* FirebaseAnalyticsProvider.swift in Sources */,
 				FDE1A2AC2805BF8D000DDBE2 /* LoginRepository.swift in Sources */,
 				FDD9D27727F9DF190024DFB2 /* ImageLiterals.swift in Sources */,
 				FD06196E2805516500F647D7 /* BaseUseCase.swift in Sources */,
 				FDD9D29727F9DFAF0024DFB2 /* PanDirectionGesture.swift in Sources */,
+				FD99D59928073C4900BB7FDA /* SignupModel.swift in Sources */,
 				FDD9D2D027F9E2240024DFB2 /* BaseService.swift in Sources */,
 				FDD9D29927F9DFAF0024DFB2 /* makeAlert.swift in Sources */,
 				FDD9D27927F9DF5E0024DFB2 /* makeVibrate.swift in Sources */,
@@ -1096,10 +1208,13 @@
 				FD99D586280717FB00BB7FDA /* setAttributedText.swift in Sources */,
 				FDD9D2C927F9E1DB0024DFB2 /* successCatch + Result.swift in Sources */,
 				FDD9D2E727F9E32C0024DFB2 /* RuntimeProviderType.swift in Sources */,
+				FD99D59828073C4900BB7FDA /* SignupRepository.swift in Sources */,
 				FDDB0B54280583EE0055B208 /* HomeUseCase.swift in Sources */,
 				FDD9D28F27F9DFAF0024DFB2 /* downloadImage.swift in Sources */,
 				FD06198C28055CC700F647D7 /* TabbarView.swift in Sources */,
+				FD99D59728073C4900BB7FDA /* SignupUseCase.swift in Sources */,
 				FDD9D2D427F9E2400024DFB2 /* ResponseObject.swift in Sources */,
+				FD01F0712808062E002F80D2 /* shakeAction.swift in Sources */,
 				FDDB0B72280585740055B208 /* MyPageVC.swift in Sources */,
 				FDD9D29827F9DFAF0024DFB2 /* setDefaultFonts.swift in Sources */,
 				FDD9D2F827F9E3870024DFB2 /* Presentable.swift in Sources */,
@@ -1111,6 +1226,7 @@
 				FD99D58F2807225E00BB7FDA /* LoginVC + Apple.swift in Sources */,
 				FD0619852805579F00F647D7 /* XibView + UIView.swift in Sources */,
 				FD99D58828071AC600BB7FDA /* UserDefaultKeyList.swift in Sources */,
+				FD99D5AC2807407800BB7FDA /* addPadding + UITextField.swift in Sources */,
 				FDE1A2AF2805BF8D000DDBE2 /* LoginViewModel.swift in Sources */,
 				FDD9D28B27F9DFAF0024DFB2 /* showNetworkAlert.swift in Sources */,
 				FDD9D2CB27F9E1DB0024DFB2 /* setTextLineHeight + UILabel.swift in Sources */,

@@ -20,9 +20,8 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Pretendard-Bold.otf</string>
 		<string>Pretendard-Black.otf</string>
-		<string>Pretendard-Bold.otf
-</string>
 		<string>Pretendard-ExtraBold.otf</string>
 		<string>Pretendard-ExtraLight.otf</string>
 		<string>Pretendard-Light.otf</string>

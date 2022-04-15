@@ -12,12 +12,19 @@ class SplashVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     delayWithSeconds(1) {
-      self.pushLoginView()
+      self.pushSignupView()
     }
+    
+    
   }
   
   private func pushLoginView() {
     let loginVC = ModuleFactory.shared.makeLoginVC()
     navigationController?.pushViewController(loginVC, animated: false)
+  }
+  
+  private func pushSignupView() {
+    let signupVC = ModuleFactory.shared.makeSignupVC()
+    navigationController?.pushViewController(signupVC, animated: false)
   }
 }
