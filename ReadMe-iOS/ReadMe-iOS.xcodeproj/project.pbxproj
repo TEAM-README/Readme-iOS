@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B0CFB3F2809D856007F3145 /* addSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0CFB3E2809D856007F3145 /* addSubviews.swift */; };
+		2B0CFB422809DFD5007F3145 /* SearchCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0CFB412809DFD4007F3145 /* SearchCVC.swift */; };
 		2B52A30628083CB300CFB1D0 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B52A30528083CB300CFB1D0 /* Search.storyboard */; };
 		2B52A30828083CC500CFB1D0 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52A30728083CC500CFB1D0 /* SearchVC.swift */; };
 		2B52A30A28083CD200CFB1D0 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52A30928083CD200CFB1D0 /* SearchModel.swift */; };
@@ -132,6 +133,7 @@
 
 /* Begin PBXFileReference section */
 		2B0CFB3E2809D856007F3145 /* addSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addSubviews.swift; sourceTree = "<group>"; };
+		2B0CFB412809DFD4007F3145 /* SearchCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCVC.swift; sourceTree = "<group>"; };
 		2B52A30528083CB300CFB1D0 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		2B52A30728083CC500CFB1D0 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		2B52A30928083CD200CFB1D0 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				2B52A30528083CB300CFB1D0 /* Search.storyboard */,
+				2B0CFB412809DFD4007F3145 /* SearchCVC.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1312,6 +1315,7 @@
 				FD06198C28055CC700F647D7 /* TabbarView.swift in Sources */,
 				FD99D59728073C4900BB7FDA /* SignupUseCase.swift in Sources */,
 				FDD9D2D427F9E2400024DFB2 /* ResponseObject.swift in Sources */,
+				2B0CFB422809DFD5007F3145 /* SearchCVC.swift in Sources */,
 				FD01F0712808062E002F80D2 /* shakeAction.swift in Sources */,
 				FDDB0B72280585740055B208 /* MyPageVC.swift in Sources */,
 				FDD9D29827F9DFAF0024DFB2 /* setDefaultFonts.swift in Sources */,

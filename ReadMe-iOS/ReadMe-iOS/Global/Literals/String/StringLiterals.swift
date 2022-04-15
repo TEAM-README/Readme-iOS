@@ -40,4 +40,9 @@ struct I18N {
     static let byteExceedErr = "닉네임은 20자를 초과할 수 없습니다."
     static let availableNickname = "사용 가능한 닉네임입니다."
   }
+  
+  struct Search {
+    static let textfieldPlaceholder = "책 제목을 검색하세요"
+    static let recentRead = "최근에 읽었어요"
+  }
 }
