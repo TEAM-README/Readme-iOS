@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B0CFB3F2809D856007F3145 /* addSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0CFB3E2809D856007F3145 /* addSubviews.swift */; };
 		2B52A30628083CB300CFB1D0 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B52A30528083CB300CFB1D0 /* Search.storyboard */; };
 		2B52A30828083CC500CFB1D0 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52A30728083CC500CFB1D0 /* SearchVC.swift */; };
 		2B52A30A28083CD200CFB1D0 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52A30928083CD200CFB1D0 /* SearchModel.swift */; };
@@ -130,6 +131,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B0CFB3E2809D856007F3145 /* addSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addSubviews.swift; sourceTree = "<group>"; };
 		2B52A30528083CB300CFB1D0 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		2B52A30728083CC500CFB1D0 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		2B52A30928083CD200CFB1D0 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
@@ -605,6 +607,7 @@
 				FD99D583280702F400BB7FDA /* delayWithSeconds.swift */,
 				FD99D585280717FB00BB7FDA /* setAttributedText.swift */,
 				FD01F0702808062E002F80D2 /* shakeAction.swift */,
+				2B0CFB3E2809D856007F3145 /* addSubviews.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1275,6 +1278,7 @@
 				FD06196E2805516500F647D7 /* BaseUseCase.swift in Sources */,
 				FDD9D29727F9DFAF0024DFB2 /* PanDirectionGesture.swift in Sources */,
 				FD99D59928073C4900BB7FDA /* SignupModel.swift in Sources */,
+				2B0CFB3F2809D856007F3145 /* addSubviews.swift in Sources */,
 				FDD9D2D027F9E2240024DFB2 /* BaseService.swift in Sources */,
 				FDD9D29927F9DFAF0024DFB2 /* makeAlert.swift in Sources */,
 				FDD9D27927F9DF5E0024DFB2 /* makeVibrate.swift in Sources */,
