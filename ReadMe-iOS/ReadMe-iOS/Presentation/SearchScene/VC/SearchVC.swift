@@ -21,7 +21,7 @@ class SearchVC: UIViewController {
   private let recentLabel = UILabel()
   private let collectionViewFlowLayout = UICollectionViewFlowLayout()
 
-  lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+  lazy var bookCV = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
   var viewModel: SearchViewModel!
   
   // MARK: - Life Cycle Part
@@ -45,6 +45,7 @@ extension SearchVC {
     searchTextField.addRightPadding(width: 44)
     searchTextField.backgroundColor = .grey00
     searchTextField.layer.cornerRadius = 22
+    searchTextField.delegate = self
     
     searchIconImageView.image = UIImage(named: "ic_ search")
     
@@ -54,7 +55,7 @@ extension SearchVC {
   }
   
   private func setLayout() {
-    view.addSubviews([searchTextField, recentLabel, collectionView])
+    view.addSubviews([searchTextField, recentLabel, bookCV])
     
     searchTextField.addSubview(searchIconImageView)
     
@@ -75,7 +76,7 @@ extension SearchVC {
       make.top.equalTo(searchTextField.snp.bottom).offset(30)
     }
     
-    collectionView.snp.makeConstraints { make in
+    bookCV.snp.makeConstraints { make in
       make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
       make.top.equalTo(recentLabel.snp.bottom).offset(16)
     }
@@ -85,21 +86,46 @@ extension SearchVC {
 // MARK: - Custom Method
 extension SearchVC {
   private func setCollectionView() {
-    collectionView.delegate = self
-    collectionView.dataSource = self
+    bookCV.delegate = self
+    bookCV.dataSource = self
     
-    collectionView.showsVerticalScrollIndicator = false
+    bookCV.showsVerticalScrollIndicator = false
+    bookCV.backgroundColor = .clear
     
     collectionViewFlowLayout.scrollDirection = .vertical
   }
   
   private func setRegister() {
-    SearchCVC.register(target: collectionView)
+    SearchCVC.register(target: bookCV)
+  }
+  
+  private func moveCollectionViewAnimation(_ collectionView: UICollectionView) {
+    UIView.animate(withDuration: 0.2,
+                   delay: 0,
+                   options: .curveEaseOut,
+                   animations: {
+      self.recentLabel.alpha = 0
+      let frame = CGAffineTransform(translationX: 0, y: -32)
+      self.bookCV.transform = frame
+    }, completion: nil)
+  }
+  
+  private func resetCollectionViewAnimation(_ collectionView: UICollectionView) {
+    UIView.animate(withDuration: 0.2,
+                   delay: 0,
+                   options: .curveEaseOut,
+                   animations: {
+      self.recentLabel.alpha = 1.0
+      let frame = CGAffineTransform(translationX: 0, y: 0)
+      self.bookCV.transform = frame
+    }, completion: nil)
   }
 }
 
 extension SearchVC: UICollectionViewDelegate {
-  
+  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    self.view.endEditing(true)
+  }
 }
 
 extension SearchVC: UICollectionViewDelegateFlowLayout {
@@ -120,5 +146,19 @@ extension SearchVC: UICollectionViewDataSource {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCVC.identifier, for: indexPath) as? SearchCVC else { return UICollectionViewCell() }
     cell.initCell(image: "-", category: "자기계발", title: "운명을 바꾸는 부동산 투자 수업 운명을 바꾸는 부동산 투자 수업이지롱가리아아아아하나두울셋", author: "부동산읽어주는남자(정태익) 저")
     return cell
+  }
+}
+
+extension SearchVC: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    self.view.endEditing(true)
+  }
+  
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    self.moveCollectionViewAnimation(bookCV)
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    self.resetCollectionViewAnimation(bookCV)
   }
 }
