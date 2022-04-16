@@ -83,8 +83,14 @@ extension SearchVC {
   }
 }
 
-// MARK: - Custom Method
+// MARK: - Custom Method Part
 extension SearchVC {
+  private func bindViewModels() {
+//    let input = SearchViewModel.Input(
+//      searchText: searchTextField.rx.text
+//    )
+  }
+  
   private func setCollectionView() {
     bookCV.delegate = self
     bookCV.dataSource = self

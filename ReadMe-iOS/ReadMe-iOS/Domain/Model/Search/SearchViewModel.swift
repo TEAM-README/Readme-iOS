@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import RxRelay
 
 final class SearchViewModel: ViewModelType {
   
@@ -14,7 +15,7 @@ final class SearchViewModel: ViewModelType {
   
   // MARK: - Inputs
   struct Input {
-    
+    let searchText: Observable<String?>
   }
   
   // MARK: - Outputs
@@ -32,6 +33,7 @@ extension SearchViewModel {
     let output = Output()
     self.bindOutput(output: output, disposeBag: disposeBag)
     
+    // TODO: - useCase.. 연결..
     
     return output
   }
