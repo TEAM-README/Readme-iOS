@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FeedDetailEntity {
+struct FeedDetailEntity: Codable {
   let imgURL: String
   let category: String
   let title: String
@@ -16,4 +16,15 @@ struct FeedDetailEntity {
   let comment: String
   let nickname: String
   let date: String
+  
+  func toDomain() -> FeedDetailModel {
+    FeedDetailModel.init(imgURL: self.imgURL,
+                         category: self.category,
+                         title: self.title,
+                         author: self.author,
+                         sentence: self.sentence,
+                         comment: self.comment,
+                         nickname: self.nickname,
+                         date: self.date)
+  }
 }

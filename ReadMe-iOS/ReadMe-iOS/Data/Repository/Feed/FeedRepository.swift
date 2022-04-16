@@ -8,18 +8,21 @@
 import RxSwift
 
 protocol FeedRepository {
-  func getBookDetailInformation(idx: Int) -> Observable<FeedDetailEntity>
+  func getBookDetailInformation(idx: Int) -> Observable<FeedDetailEntity?>
 }
 
 final class DefaultFeedRepository {
   
+  private let networkService: FeedServiceType
   private let disposeBag = DisposeBag()
 
-  init() {
-    
+  init(service: FeedServiceType) {
+    self.networkService = service
   }
 }
 
 extension DefaultFeedRepository: FeedRepository {
-  
+  func getBookDetailInformation(idx: Int) -> Observable<FeedDetailEntity?> {
+    return networkService.getBookDetailInformation(idx: idx)
+  }
 }
