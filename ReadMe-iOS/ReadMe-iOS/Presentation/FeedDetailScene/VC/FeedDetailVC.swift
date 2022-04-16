@@ -20,11 +20,16 @@ class FeedDetailVC: UIViewController {
   @IBOutlet weak var authorLabel: UILabel!
   
   @IBOutlet weak var sentenceTextView: UITextView!
+  @IBOutlet weak var seperatorLine: UIView!
   @IBOutlet weak var commentTextView: UITextView!
   
   @IBOutlet weak var nicknameLabel: UILabel!
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var detailButton: UIButton!
+  
+  @IBOutlet weak var sentenceHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var commentHeightConstraint: NSLayoutConstraint!
+  
   
   // MARK: - Life Cycle Part
   override func viewDidLoad() {
@@ -53,7 +58,8 @@ extension FeedDetailVC {
     categoryLabel.text = "경제/경영"
     
     bookTitleTextView.textContainerInset = .zero
-    bookTitleTextView.setTextWithLineHeight(text: "운명을 바꾸는 부동산 투자 수업 운명을 바꾸는 부동산 투자 수업 ...", lineHeight: 1.23)
+    bookTitleTextView.textContainer.lineFragmentPadding = 0
+    bookTitleTextView.setTextWithLineHeight(text: "운명을 바꾸는 부동산 투자 수업 운명을 바꾸는 부동산 투자 수업 ...", lineHeightMultiple: 1.23)
     bookTitleTextView.font = UIFont.readMeFont(size: 13, type: .medium)
     bookTitleTextView.textColor = UIColor.grey05
     
@@ -62,18 +68,22 @@ extension FeedDetailVC {
     authorLabel.text = "부동산읽어주는남자(정태익) 저 "
     
     sentenceTextView.textColor = UIColor.grey05
-    sentenceTextView.font = UIFont.readMeFont(size: 13, type: .regular)
-    sentenceTextView.setTextWithLineHeight(text: "스마트폰보다 재미있는게 있을까\n이것만큼 어려운주제가 없다는 것을 안다. 하지만 그래도\n답하고 싶었던 이유는, \n언제나 카톡 속ㅋㅋㅋ가 아닌,\n실제로 웃을 수 있는 상황을 바랐기 때문이 아닐까", lineHeight: 1.33)
+    sentenceTextView.textContainerInset = .zero
+    sentenceTextView.textContainer.lineFragmentPadding = 0
     
     commentTextView.textColor = UIColor.black
-    commentTextView.font = UIFont.readMeFont(size: 14, type: .extraLight)
-    commentTextView.setTextWithLineHeight(text: "스마트폰보다 재미있는게 있을까\n이것만큼 어려운주제가 없다는 것을 안다. \n하지만 그래도\n답하고 싶었던 이유는, \n언제나 카톡 속ㅋㅋㅋ가 아닌,\n실제로 웃을 수 있는 상황을 바랐기 때문이 아닐까\n하지만 그래도\n답하고 싶었던 이유는, \n언제나 카톡 속ㅋㅋㅋ가 아닌,\n실제로 웃을 수 있는 상황을 바랐기 때문이 아닐까\n하지만 그래도\n답하고 싶었던 이유는, \n언제나 카톡 속ㅋㅋㅋ가 아닌,\n실제로 웃을 수 있는 상황을 바랐기 때문이 아닐까", lineHeight: 1.33)
-    
+    commentTextView.textContainer.lineFragmentPadding = 0
+    commentTextView.textContainerInset = .zero
+
     nicknameLabel.textColor = UIColor.init(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
     nicknameLabel.font = UIFont.readMeFont(size: 12, type: .regular)
 
     dateLabel.textColor = UIColor.grey02
     dateLabel.font = UIFont.readMeFont(size: 12, type: .regular)
+    
+    sentenceHeightConstraint.constant = 300
+    commentHeightConstraint.constant = 1000
+    self.view.layoutIfNeeded()
     
   }
 }

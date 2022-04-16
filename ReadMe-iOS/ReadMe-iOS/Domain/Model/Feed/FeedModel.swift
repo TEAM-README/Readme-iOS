@@ -7,6 +7,14 @@
 
 import Foundation
 
-struct FeedModel {
+struct FeedDetailModel {
+  let imgURL: String
+  let category: String
+  let title: String
+  let author: String
+  let sentence: String
+  let comment: String
+  let nickname: String
+  let date: String
   
 }

@@ -16,19 +16,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bwP-82-v2D">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwP-82-v2D">
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DPo-gI-I5f">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="956"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="feed_bg" translatesAutoresizingMaskIntoConstraints="NO" id="21p-A8-kBw">
-                                                <rect key="frame" x="0.0" y="198" width="414" height="5000"/>
+                                                <rect key="frame" x="0.0" y="198" width="414" height="8000"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="5000" id="mxN-G4-R1a"/>
+                                                    <constraint firstAttribute="height" constant="8000" id="mxN-G4-R1a"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" image="img_ book" translatesAutoresizingMaskIntoConstraints="NO" id="26A-Gq-fhT">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_ book" translatesAutoresizingMaskIntoConstraints="NO" id="26A-Gq-fhT">
                                                 <rect key="frame" x="28" y="75" width="59.5" height="87"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="26A-Gq-fhT" secondAttribute="height" multiplier="56:82" id="Sdy-bI-Ms6"/>
@@ -52,35 +52,35 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDd-2Y-DBj" userLabel="qe">
-                                                <rect key="frame" x="28" y="229" width="358" height="90"/>
-                                                <string key="text">‘스마트폰보다 재미있는게 있을까'
-이것만큼 어려운주제가 없다는 것을 안다. 하지만 그래도
-답하고 싶었던 이유는, 언제나 카톡 속ㅋㅋㅋ가 아닌,
-실제로 웃을 수 있는 상황을 바랐기 때문이 아닐까</string>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="‘스마트폰보다 재미있는게 있을" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDd-2Y-DBj" userLabel="qe">
+                                                <rect key="frame" x="28" y="229" width="358" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="Ka6-XQ-DOw"/>
+                                                </constraints>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NqE-Fw-KVe" userLabel="asdf">
-                                                <rect key="frame" x="28" y="372" width="358" height="83"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NqE-Fw-KVe" userLabel="asdf">
+                                                <rect key="frame" x="28" y="382" width="358" height="300"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="300" id="G4b-U9-YLr"/>
+                                                </constraints>
                                                 <string key="text">‘스마트폰보다 재미있는게 있을까'
-이것만큼 어려운주제가 없다는 것을 안다. 하지만 그래도
-답하고 싶었던 이유는, 언제나 카톡 속ㅋㅋㅋ가 아닌,
-실제로 웃을 수 있는 상황을 바랐기 때문이 아닐까</string>
+</string>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <view contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="QeP-nT-lDs">
-                                                <rect key="frame" x="28" y="347" width="386" height="1"/>
+                                            <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QeP-nT-lDs">
+                                                <rect key="frame" x="28" y="357" width="386" height="1"/>
                                                 <color key="backgroundColor" red="0.47450980392156861" green="0.6470588235294118" blue="0.98431372549019602" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="JlF-ph-Hqs"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="가나다라마바사아자차카타파하가나다라마바" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3sr-RC-U8I">
-                                                <rect key="frame" x="28" y="499" width="225" height="14"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="가나다라마바사아자차카타파하가나다라마바" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3sr-RC-U8I">
+                                                <rect key="frame" x="28" y="726" width="225" height="14"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="14" id="tT9-cw-mLH"/>
                                                 </constraints>
@@ -89,14 +89,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="more_btn" translatesAutoresizingMaskIntoConstraints="NO" id="f0I-6c-fw0">
-                                                <rect key="frame" x="368" y="495" width="22" height="22"/>
+                                                <rect key="frame" x="368" y="722" width="22" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="22" id="4vp-ky-TIq"/>
                                                     <constraint firstAttribute="height" constant="22" id="TsI-dc-3iO"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KsK-gE-Gif">
-                                                <rect key="frame" x="365" y="495" width="25" height="25"/>
+                                                <rect key="frame" x="365" y="722" width="25" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="Zvk-iv-iXy"/>
                                                     <constraint firstAttribute="width" constant="25" id="rda-Ap-bwz"/>
@@ -104,8 +104,8 @@
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Button"/>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021/10/25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ns3-5L-hBk">
-                                                <rect key="frame" x="259" y="499" width="63" height="14"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="2021/10/25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ns3-5L-hBk">
+                                                <rect key="frame" x="259" y="726" width="63" height="14"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="14" id="TiI-py-l0V"/>
                                                 </constraints>
@@ -131,6 +131,7 @@
                                             <constraint firstItem="f0I-6c-fw0" firstAttribute="top" secondItem="NqE-Fw-KVe" secondAttribute="bottom" constant="40" id="UxD-Xy-ZPV"/>
                                             <constraint firstItem="QeP-nT-lDs" firstAttribute="leading" secondItem="DPo-gI-I5f" secondAttribute="leading" constant="28" id="V7o-44-13b"/>
                                             <constraint firstItem="uIF-eC-NCY" firstAttribute="top" secondItem="1Hr-dB-hQn" secondAttribute="bottom" constant="6" id="Y2I-fo-yPM"/>
+                                            <constraint firstAttribute="bottom" secondItem="3sr-RC-U8I" secondAttribute="bottom" constant="216" id="a0O-DS-jSN"/>
                                             <constraint firstItem="3sr-RC-U8I" firstAttribute="leading" secondItem="DPo-gI-I5f" secondAttribute="leading" constant="28" id="b4h-Bq-b0q"/>
                                             <constraint firstItem="1Hr-dB-hQn" firstAttribute="leading" secondItem="26A-Gq-fhT" secondAttribute="trailing" constant="24" id="buZ-vm-f35"/>
                                             <constraint firstAttribute="trailing" secondItem="NqE-Fw-KVe" secondAttribute="trailing" constant="28" id="cZU-5L-J6m"/>
@@ -144,7 +145,6 @@
                                             <constraint firstAttribute="trailing" secondItem="21p-A8-kBw" secondAttribute="trailing" id="rOV-ha-NYG"/>
                                             <constraint firstAttribute="trailing" secondItem="f0I-6c-fw0" secondAttribute="trailing" constant="24" id="rbF-rE-VAc"/>
                                             <constraint firstItem="eDd-2Y-DBj" firstAttribute="leading" secondItem="DPo-gI-I5f" secondAttribute="leading" constant="28" id="s19-YO-ib7"/>
-                                            <constraint firstAttribute="bottom" secondItem="3sr-RC-U8I" secondAttribute="bottom" constant="383" id="s4X-xE-ldM"/>
                                             <constraint firstItem="3sr-RC-U8I" firstAttribute="top" secondItem="NqE-Fw-KVe" secondAttribute="bottom" constant="44" id="vqI-QR-twc"/>
                                             <constraint firstAttribute="trailing" secondItem="KsK-gE-Gif" secondAttribute="trailing" constant="24" id="wdA-G5-95S"/>
                                             <constraint firstItem="1Hr-dB-hQn" firstAttribute="top" secondItem="26A-Gq-fhT" secondAttribute="top" id="zbw-Hx-RhB"/>
@@ -176,11 +176,14 @@
                         <outlet property="bookCoverImageView" destination="26A-Gq-fhT" id="QlG-Tp-Qfw"/>
                         <outlet property="bookTitleTextView" destination="uIF-eC-NCY" id="HAq-Io-5vK"/>
                         <outlet property="categoryLabel" destination="1Hr-dB-hQn" id="V4T-G8-7Nr"/>
+                        <outlet property="commentHeightConstraint" destination="G4b-U9-YLr" id="SWM-Ov-e8q"/>
                         <outlet property="commentTextView" destination="NqE-Fw-KVe" id="sRJ-Rm-iIo"/>
                         <outlet property="dateLabel" destination="Ns3-5L-hBk" id="MwL-TQ-SA1"/>
                         <outlet property="detailButton" destination="KsK-gE-Gif" id="Anm-Ur-dy6"/>
                         <outlet property="nicknameLabel" destination="3sr-RC-U8I" id="e0I-ct-UfU"/>
+                        <outlet property="sentenceHeightConstraint" destination="Ka6-XQ-DOw" id="7gA-1b-V8N"/>
                         <outlet property="sentenceTextView" destination="eDd-2Y-DBj" id="bnz-xD-4Nc"/>
+                        <outlet property="seperatorLine" destination="QeP-nT-lDs" id="igr-Ps-3rf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

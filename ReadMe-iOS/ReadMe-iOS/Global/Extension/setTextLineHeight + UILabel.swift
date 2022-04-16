@@ -8,11 +8,10 @@
 import UIKit
 
 extension UILabel {
-  func setTextWithLineHeight(text: String?, lineHeight: CGFloat) {
+  func setTextWithLineHeight(text: String?, lineHeightMultiple: CGFloat) {
     if let text = text {
       let style = NSMutableParagraphStyle()
-      style.maximumLineHeight = lineHeight
-      style.minimumLineHeight = lineHeight
+      style.lineHeightMultiple = lineHeightMultiple
       
       let attributes: [NSAttributedString.Key: Any] = [
         .paragraphStyle: style
@@ -26,11 +25,10 @@ extension UILabel {
 }
 
 extension UITextView {
-  func setTextWithLineHeight(text: String?, lineHeight: CGFloat) {
+  func setTextWithLineHeight(text: String?, lineHeightMultiple: CGFloat) {
     if let text = text {
       let style = NSMutableParagraphStyle()
-      style.maximumLineHeight = lineHeight
-      style.minimumLineHeight = lineHeight
+      style.lineHeightMultiple = lineHeightMultiple
       
       let attributes: [NSAttributedString.Key: Any] = [
         .paragraphStyle: style

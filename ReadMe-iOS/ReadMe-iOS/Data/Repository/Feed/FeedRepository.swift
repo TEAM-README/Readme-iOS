@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol FeedRepository {
-  
+  func getBookDetailInformation(idx: Int) -> Observable<FeedDetailEntity>
 }
 
 final class DefaultFeedRepository {

@@ -12,6 +12,7 @@ protocol ModuleFactoryProtocol {
   func makeSignupVC() -> SignupVC
   func makeBaseVC() -> BaseVC
   func makeHomeVC() -> HomeVC
+  func makeFeedDetailVC() -> FeedDetailVC
   func makeMyPageVC() -> MyPageVC
 }
 
@@ -39,6 +40,7 @@ final class ModuleFactory: ModuleFactoryProtocol{
   
   func makeBaseVC() -> BaseVC { BaseVC.controllerFromStoryboard(.base) }
   func makeHomeVC() -> HomeVC { HomeVC.controllerFromStoryboard(.home) }
+  func makeFeedDetailVC() -> FeedDetailVC { FeedDetailVC.controllerFromStoryboard(.feedDetail) }
   func makeMyPageVC() -> MyPageVC { MyPageVC.controllerFromStoryboard(.mypage) }
 
 }
