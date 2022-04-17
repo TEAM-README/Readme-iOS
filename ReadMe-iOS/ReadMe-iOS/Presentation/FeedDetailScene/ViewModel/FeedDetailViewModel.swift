@@ -54,6 +54,7 @@ extension FeedDetailViewModel {
     
     feedDetailRelay.subscribe(onNext: { [weak self] model in
       guard let self = self else { return }
+      output.thumnailURL.accept(model.imgURL)
       output.categoryName.accept(model.category)
       output.author.accept(model.author)
       output.bookTitle.accept(self.makeTextViewModel(type: .title, text: model.title))

@@ -52,6 +52,7 @@ extension FeedDetailVC {
 
     output.thumnailURL.asSignal().emit { [weak self] imgURL in
       guard let self = self else { return }
+      print("imgURL",imgURL)
       self.bookCoverImageView.setImage(with: imgURL)
     }.disposed(by: self.disposeBag)
     
