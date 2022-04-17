@@ -17,7 +17,9 @@ class SearchVC: UIViewController {
   private let disposeBag = DisposeBag()
   // 네비바 들어올 자리
   private let searchTextField = UITextField()
-  private let searchIconImageView = UIImageView()
+  private let searchButton = UIButton()
+  private let beforeSearchEmptyLabel = UILabel()
+  private let afterSearchEmptyLabel = UILabel()
   private let collectionViewFlowLayout = UICollectionViewFlowLayout()
 
   lazy var bookCV = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
@@ -31,6 +33,8 @@ class SearchVC: UIViewController {
     self.setLayout()
     self.setCollectionView()
     self.setRegister()
+    self.bindViewModels()
+    self.tapSearchButton()
   }
 }
 
@@ -46,13 +50,21 @@ extension SearchVC {
     searchTextField.layer.cornerRadius = 22
     searchTextField.delegate = self
     
-    searchIconImageView.image = UIImage(named: "ic_ search")
+    searchButton.setImage(UIImage(named: "ic_ search"), for: .normal)
+    
+    beforeSearchEmptyLabel.text = I18N.Search.emptyBeforeSearch
+    beforeSearchEmptyLabel.font = UIFont.readMeFont(size: 15, type: .medium)
+    beforeSearchEmptyLabel.textColor = UIColor.black.withAlphaComponent(0.3)
+    
+    afterSearchEmptyLabel.text = I18N.Search.emptyAfterSearch
+    afterSearchEmptyLabel.font = UIFont.readMeFont(size: 15, type: .medium)
+    afterSearchEmptyLabel.textColor = UIColor.black.withAlphaComponent(0.3)
   }
   
   private func setLayout() {
     view.addSubviews([searchTextField, bookCV])
     
-    searchTextField.addSubview(searchIconImageView)
+    searchTextField.addSubview(searchButton)
     
     searchTextField.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview().inset(22)
@@ -60,7 +72,7 @@ extension SearchVC {
       make.height.equalTo(44)
     }
     
-    searchIconImageView.snp.makeConstraints { make in
+    searchButton.snp.makeConstraints { make in
       make.centerY.equalToSuperview()
       make.trailing.equalToSuperview().inset(16)
       make.width.height.equalTo(24)
@@ -81,6 +93,14 @@ extension SearchVC {
 //    )
   }
   
+  private func tapSearchButton() {
+    searchButton.rx.tap
+      .subscribe(onNext: {
+        self.setEmptyViewAfterSearch()
+      })
+      .disposed(by: disposeBag)
+  }
+  
   private func setCollectionView() {
     bookCV.delegate = self
     bookCV.dataSource = self
@@ -95,6 +115,31 @@ extension SearchVC {
     SearchCVC.register(target: bookCV)
 //    SearchHeaderView.register(target: bookCV, isHeader: true)
     bookCV.register(SearchHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SearchHeaderView.className)
+  }
+  
+  private func setEmptyViewBeforeSearch() {
+    bookCV.isHidden = true
+    afterSearchEmptyLabel.isHidden = true
+    beforeSearchEmptyLabel.isHidden = false
+    
+    view.addSubview(beforeSearchEmptyLabel)
+    
+    beforeSearchEmptyLabel.snp.makeConstraints { make in
+      make.centerX.equalToSuperview()
+      make.top.equalTo(searchTextField.snp.bottom).offset(185)
+    }
+  }
+  
+  private func setEmptyViewAfterSearch() {
+    bookCV.isHidden = true
+    beforeSearchEmptyLabel.isHidden = true
+    afterSearchEmptyLabel.isHidden = false
+    
+    view.addSubview(afterSearchEmptyLabel)
+    
+    afterSearchEmptyLabel.snp.makeConstraints { make in
+      make.center.equalToSuperview()
+    }
   }
 }
 

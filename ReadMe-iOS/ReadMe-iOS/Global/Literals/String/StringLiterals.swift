@@ -44,5 +44,7 @@ struct I18N {
   struct Search {
     static let textfieldPlaceholder = "책 제목을 검색하세요"
     static let recentRead = "최근에 읽었어요"
+    static let emptyBeforeSearch = "책을 검색하고 읽은 책을 추가해보세요"
+    static let emptyAfterSearch = "책 검색 결과가 없습니다"
   }
 }
