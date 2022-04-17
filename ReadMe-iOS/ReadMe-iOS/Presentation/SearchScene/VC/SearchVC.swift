@@ -96,28 +96,6 @@ extension SearchVC {
 //    SearchHeaderView.register(target: bookCV, isHeader: true)
     bookCV.register(SearchHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SearchHeaderView.className)
   }
-  
-//  private func moveCollectionViewAnimation(_ collectionView: UICollectionView) {
-//    UIView.animate(withDuration: 0.2,
-//                   delay: 0,
-//                   options: .curveEaseOut,
-//                   animations: {
-//      self.recentLabel.alpha = 0
-//      let frame = CGAffineTransform(translationX: 0, y: -32)
-//      self.bookCV.transform = frame
-//    }, completion: nil)
-//  }
-//
-//  private func resetCollectionViewAnimation(_ collectionView: UICollectionView) {
-//    UIView.animate(withDuration: 0.2,
-//                   delay: 0,
-//                   options: .curveEaseOut,
-//                   animations: {
-//      self.recentLabel.alpha = 1.0
-//      let frame = CGAffineTransform(translationX: 0, y: 0)
-//      self.bookCV.transform = frame
-//    }, completion: nil)
-//  }
 }
 
 extension SearchVC: UICollectionViewDelegate {
@@ -164,12 +142,4 @@ extension SearchVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     self.view.endEditing(true)
   }
-  
-//  func textFieldDidBeginEditing(_ textField: UITextField) {
-//    self.moveCollectionViewAnimation(bookCV)
-//  }
-//
-//  func textFieldDidEndEditing(_ textField: UITextField) {
-//    self.resetCollectionViewAnimation(bookCV)
-//  }
 }

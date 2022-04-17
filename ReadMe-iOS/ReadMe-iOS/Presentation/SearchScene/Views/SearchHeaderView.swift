@@ -11,7 +11,6 @@ import SnapKit
 
 class SearchHeaderView: UICollectionReusableView {
   
-//  static let identifier = "SearchHeaderView"
   static var isFromNib: Bool = false
   
   // MARK: - Vars & Lets Part
