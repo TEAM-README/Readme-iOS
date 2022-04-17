@@ -11,7 +11,7 @@ import SnapKit
 
 class SearchCVC: UICollectionViewCell, UICollectionViewRegisterable {
   
-  static let identifier = "SearchCVC"
+//  static let identifier = "SearchCVC"
   static var isFromNib: Bool = false
   
   // MARK: - Vars & Lets Part

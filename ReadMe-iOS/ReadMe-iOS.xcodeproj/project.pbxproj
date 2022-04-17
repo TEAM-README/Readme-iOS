@@ -16,6 +16,7 @@
 		2B52A31228083D7F00CFB1D0 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52A31128083D7F00CFB1D0 /* SearchUseCase.swift */; };
 		2B52A31428083D8F00CFB1D0 /* SearchEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52A31328083D8F00CFB1D0 /* SearchEntity.swift */; };
 		2B52A31628083DAB00CFB1D0 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52A31528083DAB00CFB1D0 /* SearchRepository.swift */; };
+		2BABE36D280C881F00EFA45E /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABE36C280C881F00EFA45E /* SearchHeaderView.swift */; };
 		48DD3798A7387D615B01CCF9 /* Pods_ReadMe_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDEAB949A3007921A9DA799 /* Pods_ReadMe_iOS.framework */; };
 		FD01F06F2807F8E7002F80D2 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD01F06E2807F8E7002F80D2 /* Pretendard-Bold.otf */; };
 		FD01F0712808062E002F80D2 /* shakeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01F0702808062E002F80D2 /* shakeAction.swift */; };
@@ -141,6 +142,7 @@
 		2B52A31128083D7F00CFB1D0 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
 		2B52A31328083D8F00CFB1D0 /* SearchEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEntity.swift; sourceTree = "<group>"; };
 		2B52A31528083DAB00CFB1D0 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
+		2BABE36C280C881F00EFA45E /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 		AA209110609425843DFDE109 /* Pods-ReadMe-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BDC606173607FC03ED959B5E /* Pods-ReadMe-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.release.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		FCDEAB949A3007921A9DA799 /* Pods_ReadMe_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadMe_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -294,6 +296,7 @@
 			children = (
 				2B52A30528083CB300CFB1D0 /* Search.storyboard */,
 				2B0CFB412809DFD4007F3145 /* SearchCVC.swift */,
+				2BABE36C280C881F00EFA45E /* SearchHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1325,6 +1328,7 @@
 				FD99D58D2807211A00BB7FDA /* LoginVC + Kakao.swift in Sources */,
 				FDDB0B74280585740055B208 /* MyPageEntity.swift in Sources */,
 				FDE1A2B02805BF8D000DDBE2 /* LoginEntity.swift in Sources */,
+				2BABE36D280C881F00EFA45E /* SearchHeaderView.swift in Sources */,
 				FD99D58F2807225E00BB7FDA /* LoginVC + Apple.swift in Sources */,
 				FD0619852805579F00F647D7 /* XibView + UIView.swift in Sources */,
 				FD99D58828071AC600BB7FDA /* UserDefaultKeyList.swift in Sources */,
