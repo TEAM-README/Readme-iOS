@@ -40,6 +40,12 @@
 		FD85CED32809C9E900E7BE7B /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD85CED22809C9E900E7BE7B /* FeedModel.swift */; };
 		FD85CED62809CA2A00E7BE7B /* FeedDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD85CED52809CA2A00E7BE7B /* FeedDetail.storyboard */; };
 		FD929E5F280A62E1008F590C /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD929E5E280A62E1008F590C /* FeedService.swift */; };
+		FD929E7C280C7DDF008F590C /* FeedListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD929E76280C7DDF008F590C /* FeedListUseCase.swift */; };
+		FD929E7D280C7DDF008F590C /* FeedListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD929E77280C7DDF008F590C /* FeedListRepository.swift */; };
+		FD929E7E280C7DDF008F590C /* FeedListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD929E78280C7DDF008F590C /* FeedListModel.swift */; };
+		FD929E7F280C7DDF008F590C /* FeedListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD929E79280C7DDF008F590C /* FeedListVC.swift */; };
+		FD929E80280C7DDF008F590C /* FeedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD929E7A280C7DDF008F590C /* FeedListViewModel.swift */; };
+		FD929E81280C7DDF008F590C /* FeedListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD929E7B280C7DDF008F590C /* FeedListEntity.swift */; };
 		FD99D5802806F89600BB7FDA /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD99D57F2806F89600BB7FDA /* Splash.storyboard */; };
 		FD99D5822806FDC900BB7FDA /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D5812806FDC900BB7FDA /* SplashVC.swift */; };
 		FD99D584280702F400BB7FDA /* delayWithSeconds.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D583280702F400BB7FDA /* delayWithSeconds.swift */; };
@@ -165,6 +171,12 @@
 		FD85CED22809C9E900E7BE7B /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		FD85CED52809CA2A00E7BE7B /* FeedDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FeedDetail.storyboard; sourceTree = "<group>"; };
 		FD929E5E280A62E1008F590C /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
+		FD929E76280C7DDF008F590C /* FeedListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListUseCase.swift; sourceTree = "<group>"; };
+		FD929E77280C7DDF008F590C /* FeedListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListRepository.swift; sourceTree = "<group>"; };
+		FD929E78280C7DDF008F590C /* FeedListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListModel.swift; sourceTree = "<group>"; };
+		FD929E79280C7DDF008F590C /* FeedListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListVC.swift; sourceTree = "<group>"; };
+		FD929E7A280C7DDF008F590C /* FeedListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListViewModel.swift; sourceTree = "<group>"; };
+		FD929E7B280C7DDF008F590C /* FeedListEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListEntity.swift; sourceTree = "<group>"; };
 		FD99D57F2806F89600BB7FDA /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		FD99D5812806FDC900BB7FDA /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		FD99D583280702F400BB7FDA /* delayWithSeconds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = delayWithSeconds.swift; sourceTree = "<group>"; };
@@ -419,6 +431,7 @@
 		FD85CECE2809C94300E7BE7B /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				FD929E78280C7DDF008F590C /* FeedListModel.swift */,
 				FD85CED22809C9E900E7BE7B /* FeedModel.swift */,
 			);
 			path = Feed;
@@ -435,6 +448,7 @@
 		FD85CED02809C97D00E7BE7B /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				FD929E77280C7DDF008F590C /* FeedListRepository.swift */,
 				FD85CEC32809C92F00E7BE7B /* FeedRepository.swift */,
 			);
 			path = Feed;
@@ -443,6 +457,7 @@
 		FD85CED12809C9BD00E7BE7B /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				FD929E76280C7DDF008F590C /* FeedListUseCase.swift */,
 				FD85CEC22809C92F00E7BE7B /* FeedDetailUseCase.swift */,
 			);
 			path = Feed;
@@ -451,9 +466,43 @@
 		FD85CED42809CA0600E7BE7B /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				FD929E7B280C7DDF008F590C /* FeedListEntity.swift */,
 				FD85CEC72809C92F00E7BE7B /* FeedDetailEntity.swift */,
 			);
 			path = Feed;
+			sourceTree = "<group>";
+		};
+		FD929E75280C7DC9008F590C /* FeedListScene */ = {
+			isa = PBXGroup;
+			children = (
+				FD929E84280C7DF3008F590C /* ViewModel */,
+				FD929E82280C7DE8008F590C /* Views */,
+				FD929E83280C7DEC008F590C /* VC */,
+			);
+			path = FeedListScene;
+			sourceTree = "<group>";
+		};
+		FD929E82280C7DE8008F590C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FD929E83280C7DEC008F590C /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				FD929E79280C7DDF008F590C /* FeedListVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		FD929E84280C7DF3008F590C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FD929E7A280C7DDF008F590C /* FeedListViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		FD99D57C2806F87800BB7FDA /* SplashScene */ = {
@@ -620,6 +669,7 @@
 		FDD9D25E27F9DAE80024DFB2 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				FD929E75280C7DC9008F590C /* FeedListScene */,
 				FD85CEBE2809C8EE00E7BE7B /* FeedDetailScene */,
 				FD99D5A728073D8E00BB7FDA /* Component */,
 				FD99D59028073C3300BB7FDA /* SignupScene */,
@@ -1256,6 +1306,7 @@
 				FDD9D28C27F9DFAF0024DFB2 /* pressAction.swift in Sources */,
 				FDD9D29227F9DFAF0024DFB2 /* calculatePastTime.swift in Sources */,
 				FDD9D29627F9DFAF0024DFB2 /* getClassName.swift in Sources */,
+				FD929E7D280C7DDF008F590C /* FeedListRepository.swift in Sources */,
 				FDD9D2E227F9E32C0024DFB2 /* AnalyticsType.swift in Sources */,
 				FDD9D2F727F9E3870024DFB2 /* CoordinatorFinishOutput.swift in Sources */,
 				FDE1A2AD2805BF8D000DDBE2 /* LoginModel.swift in Sources */,
@@ -1276,6 +1327,7 @@
 				FDD9D2FD27F9E3870024DFB2 /* BaseCoordinator.swift in Sources */,
 				FDD9D2C627F9E1DB0024DFB2 /* UINavigation + Extension.swift in Sources */,
 				FDDB0B6F280585740055B208 /* MyPageUseCase.swift in Sources */,
+				FD929E81280C7DDF008F590C /* FeedListEntity.swift in Sources */,
 				FD99D59C28073C4900BB7FDA /* SignupEntity.swift in Sources */,
 				FDD9D29127F9DFAF0024DFB2 /* addToolBar.swift in Sources */,
 				FD929E5F280A62E1008F590C /* FeedService.swift in Sources */,
@@ -1318,6 +1370,7 @@
 				FDD9D2D427F9E2400024DFB2 /* ResponseObject.swift in Sources */,
 				FD01F0712808062E002F80D2 /* shakeAction.swift in Sources */,
 				FDDB0B72280585740055B208 /* MyPageVC.swift in Sources */,
+				FD929E7E280C7DDF008F590C /* FeedListModel.swift in Sources */,
 				FDD9D29827F9DFAF0024DFB2 /* setDefaultFonts.swift in Sources */,
 				FDD9D2F827F9E3870024DFB2 /* Presentable.swift in Sources */,
 				FDE1A2AE2805BF8D000DDBE2 /* LoginVC.swift in Sources */,
@@ -1328,14 +1381,17 @@
 				FD85CECB2809C92F00E7BE7B /* FeedDetailVC.swift in Sources */,
 				FDE1A2B02805BF8D000DDBE2 /* LoginEntity.swift in Sources */,
 				FD99D58F2807225E00BB7FDA /* LoginVC + Apple.swift in Sources */,
+				FD929E7C280C7DDF008F590C /* FeedListUseCase.swift in Sources */,
 				FD0619852805579F00F647D7 /* XibView + UIView.swift in Sources */,
 				FD99D58828071AC600BB7FDA /* UserDefaultKeyList.swift in Sources */,
 				FD99D5AC2807407800BB7FDA /* addPadding + UITextField.swift in Sources */,
+				FD929E80280C7DDF008F590C /* FeedListViewModel.swift in Sources */,
 				FDE1A2AF2805BF8D000DDBE2 /* LoginViewModel.swift in Sources */,
 				FDD9D28B27F9DFAF0024DFB2 /* showNetworkAlert.swift in Sources */,
 				FDD9D2CB27F9E1DB0024DFB2 /* setTextLineHeight + UILabel.swift in Sources */,
 				FD0619702805516500F647D7 /* BaseModel.swift in Sources */,
 				FDD9D2C827F9E1DB0024DFB2 /* drawDashedLine + UIView.swift in Sources */,
+				FD929E7F280C7DDF008F590C /* FeedListVC.swift in Sources */,
 				FDD9D2D227F9E23A0024DFB2 /* Config.swift in Sources */,
 				FDD9D26F27F9DEC10024DFB2 /* ViewModelType.swift in Sources */,
 				FDD9D2F927F9E3870024DFB2 /* BaseControllable.swift in Sources */,
