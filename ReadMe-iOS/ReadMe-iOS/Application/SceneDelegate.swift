@@ -14,7 +14,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let _ = (scene as? UIWindowScene) else { return }
-    window!.rootViewController = UIStoryboard.list(.feedDetail).instantiateInitialViewController()!
+    setRootScene(.splash)
+  }
+  
+  private func setRootScene(_ storyboardType: Storyboards) {
+    window!.rootViewController = UIStoryboard.list(storyboardType).instantiateInitialViewController()!
   }
 
   func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

@@ -34,8 +34,8 @@ class FeedDetailVC: UIViewController {
   // MARK: - Life Cycle Part
   override func viewDidLoad() {
     super.viewDidLoad()
-//    self.bindViewModels()
     self.configureUI()
+    self.bindViewModels()
   }
 }
 
@@ -43,11 +43,67 @@ extension FeedDetailVC {
   
   // MARK: - Custom Method Part
   private func bindViewModels() {
-    let input = FeedDetailViewModel.Input()
-    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
-  }
-}
 
+    let input = FeedDetailViewModel.Input(
+
+      viewWillAppearEvent:
+        self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in })
+    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+
+    output.thumnailURL.asSignal().emit { [weak self] imgURL in
+      guard let self = self else { return }
+      self.bookCoverImageView.setImage(with: imgURL)
+    }.disposed(by: self.disposeBag)
+    
+    output.categoryName.asSignal().emit { [weak self] category in
+      guard let self = self else { return }
+      self.categoryLabel.text = category
+    }.disposed(by: self.disposeBag)
+
+    output.bookTitle.asSignal().emit { [weak self] titleViewModel in
+      guard let self = self else { return }
+      self.bookTitleTextView.setTextWithLineHeight(text: titleViewModel.content,
+                                                   lineHeightMultiple: titleViewModel.lineHeightMultiple)
+      self.bookTitleTextView.font = titleViewModel.textFont
+      // 타이틀 높이 먹여줘야 함
+    }.disposed(by: self.disposeBag)
+    
+    output.author.asSignal().emit { [weak self] author in
+      guard let self = self else { return }
+      self.authorLabel.text = author
+    }.disposed(by: self.disposeBag)
+    
+    output.sentence.asSignal().emit { [weak self] sentenceViewModel in
+      guard let self = self else { return }
+      self.sentenceTextView.setTextWithLineHeight(text: sentenceViewModel.content,
+                                                   lineHeightMultiple: sentenceViewModel.lineHeightMultiple)
+      self.sentenceTextView.font = sentenceViewModel.textFont
+      self.sentenceHeightConstraint.constant = sentenceViewModel.textViewHeight
+      self.sentenceTextView.sizeToFit()
+    }.disposed(by: self.disposeBag)
+    
+    output.comment.asSignal().emit { [weak self] commentViewModel in
+      guard let self = self else { return }
+      self.commentTextView.setTextWithLineHeight(text: commentViewModel.content,
+                                                   lineHeightMultiple: commentViewModel.lineHeightMultiple)
+      self.commentTextView.font = commentViewModel.textFont
+      self.commentHeightConstraint.constant = commentViewModel.textViewHeight
+      self.commentTextView.sizeToFit()
+    }.disposed(by: self.disposeBag)
+    
+    output.nickname.asSignal().emit { [weak self] nickname in
+      guard let self = self else { return }
+      self.nicknameLabel.text = nickname
+    }.disposed(by: self.disposeBag)
+    
+    output.date.asSignal().emit { [weak self] date in
+      guard let self = self else { return }
+      self.dateLabel.text = date
+    }.disposed(by: self.disposeBag)
+    self.view.layoutIfNeeded()
+  }
+
+}
 
 extension FeedDetailVC {
   private func configureUI() {
@@ -55,17 +111,13 @@ extension FeedDetailVC {
     
     categoryLabel.textColor = .mainBlue
     categoryLabel.font = UIFont.readMeFont(size: 12, type: .regular)
-    categoryLabel.text = "경제/경영"
     
     bookTitleTextView.textContainerInset = .zero
     bookTitleTextView.textContainer.lineFragmentPadding = 0
-    bookTitleTextView.setTextWithLineHeight(text: "운명을 바꾸는 부동산 투자 수업 운명을 바꾸는 부동산 투자 수업 ...", lineHeightMultiple: 1.23)
-    bookTitleTextView.font = UIFont.readMeFont(size: 13, type: .medium)
     bookTitleTextView.textColor = UIColor.grey05
     
     authorLabel.font = UIFont.readMeFont(size: 12, type: .regular)
     authorLabel.textColor = UIColor.init(red: 147/255, green: 147/255, blue: 147/255, alpha: 1)
-    authorLabel.text = "부동산읽어주는남자(정태익) 저 "
     
     sentenceTextView.textColor = UIColor.grey05
     sentenceTextView.textContainerInset = .zero
@@ -80,10 +132,5 @@ extension FeedDetailVC {
 
     dateLabel.textColor = UIColor.grey02
     dateLabel.font = UIFont.readMeFont(size: 12, type: .regular)
-    
-    sentenceHeightConstraint.constant = 300
-    commentHeightConstraint.constant = 1000
-    self.view.layoutIfNeeded()
-    
   }
 }

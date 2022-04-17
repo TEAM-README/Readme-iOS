@@ -52,12 +52,13 @@ extension FeedDetailViewModel {
   private func bindOutput(output: Output, disposeBag: DisposeBag) {
     let feedDetailRelay = useCase.bookDetailInformation
     
-    feedDetailRelay.subscribe(onNext: { model in
+    feedDetailRelay.subscribe(onNext: { [weak self] model in
+      guard let self = self else { return }
       output.categoryName.accept(model.category)
       output.author.accept(model.author)
-      output.bookTitle.accept(makeTextViewModel(type: .title, text: model.title))
-      output.sentence.accept(makeTextViewModel(type: .sentence, text: model.sentence))
-      output.comment.accept(makeTextViewModel(type: .comment, text: model.comment))
+      output.bookTitle.accept(self.makeTextViewModel(type: .title, text: model.title))
+      output.sentence.accept(self.makeTextViewModel(type: .sentence, text: model.sentence))
+      output.comment.accept(self.makeTextViewModel(type: .comment, text: model.comment))
       output.nickname.accept(model.nickname)
       output.date.accept(model.date)
     }).disposed(by: self.disposeBag)
@@ -68,19 +69,24 @@ extension FeedDetailViewModel {
   private func makeTextViewModel(type : FeedDetailTextType, text: String) -> FeedTextViewModel{
     let font: UIFont
     let lineHeightMultiple: CGFloat
+    let textViewWidth: CGFloat
     
     switch(type) {
       case .title:
         font = .readMeFont(size: 13, type: .medium)
         lineHeightMultiple = 1.23
+        textViewWidth = screenWidth - 164
       case .sentence:
         font = .readMeFont(size: 13, type: .regular)
         lineHeightMultiple = 1.33
+        textViewWidth = screenWidth - 56
       case .comment:
         font = .readMeFont(size: 14, type: .extraLight)
         lineHeightMultiple = 1.33
+        textViewWidth = screenWidth - 56
     }
-    let textHeight = calculateTextViewHeight(font: font,
+    let textHeight = calculateTextViewHeight(width: textViewWidth,
+                                             font: font,
                                              lineHeightMultiple: lineHeightMultiple,
                                              text: text)
     
@@ -90,14 +96,17 @@ extension FeedDetailViewModel {
                              content: text)
   }
   
-  private func calculateTextViewHeight(font: UIFont, lineHeightMultiple: CGFloat, text: String) -> CGFloat {
+  private func calculateTextViewHeight(width: CGFloat,font: UIFont, lineHeightMultiple: CGFloat, text: String) -> CGFloat {
     let mockTextView = UITextView()
+    let newSize = CGSize(width: width, height: CGFloat.infinity)
     mockTextView.textContainerInset = .zero
     mockTextView.textContainer.lineFragmentPadding = 0
     mockTextView.setTextWithLineHeight(text: text, lineHeightMultiple: lineHeightMultiple)
+    mockTextView.isScrollEnabled = false
+    mockTextView.translatesAutoresizingMaskIntoConstraints = false
     mockTextView.font = font
-    mockTextView.sizeToFit()
-    return mockTextView.frame.height
+    let estimatedSize = mockTextView.sizeThatFits(newSize)
+    return estimatedSize.height
   }
 }
 
