@@ -24,6 +24,8 @@ class SearchVC: UIViewController {
 
   lazy var bookCV = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
   var viewModel: SearchViewModel!
+  var didSearch: Bool = false
+  var dataCount = 10 // 테스트용
   
   // MARK: - Life Cycle Part
   override func viewDidLoad() {
@@ -96,7 +98,12 @@ extension SearchVC {
   private func tapSearchButton() {
     searchButton.rx.tap
       .subscribe(onNext: {
-        self.setEmptyViewAfterSearch()
+        // TODO: - 서버 통신
+        
+//        self.setEmptyViewAfterSearch()
+        self.dataCount = 2
+        self.didSearch = true
+        self.bookCV.reloadData()
       })
       .disposed(by: disposeBag)
   }
@@ -160,7 +167,7 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
 
 extension SearchVC: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 10
+    return dataCount
   }
   
   func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -176,10 +183,14 @@ extension SearchVC: UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-    let width = UIScreen.main.bounds.width
-    let height = 30.0
-    
-    return CGSize(width: width, height: height)
+    if didSearch {
+      return .zero
+    } else {
+      let width = UIScreen.main.bounds.width
+      let height = 30.0
+      
+      return CGSize(width: width, height: height)
+    }
   }
 }
 
