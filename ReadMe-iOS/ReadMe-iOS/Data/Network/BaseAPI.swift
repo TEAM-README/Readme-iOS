@@ -13,6 +13,7 @@ enum BaseAPI{
   case login(provider: String,token : String)
   case postCheckNicknameDuplicated(nickname: String)
   case getFeedDetail(idx: Int)
+  case getFeedList(page: Int, category: String)
 
 }
 
@@ -37,7 +38,7 @@ extension BaseAPI: TargetType {
         base += ""
         case .login,.postCheckNicknameDuplicated:
           base += ""
-        case .getFeedDetail:
+        case .getFeedDetail,.getFeedList:
           base += ""
       }
     guard let url = URL(string: base) else {

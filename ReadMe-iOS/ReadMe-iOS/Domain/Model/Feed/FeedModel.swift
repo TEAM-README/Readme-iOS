@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FeedDetailModel {
+struct FeedDetailModel: Codable {
   let imgURL: String
   let category: String
   let title: String

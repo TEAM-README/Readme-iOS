@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct FeedListModel {
+struct FeedListModel: Codable {
   let category: [FeedCategory]
   let pageNum: Int
   let feedList: [FeedDetailModel]
 }
 
-enum FeedCategory: String{
+enum FeedCategory: String,Codable{
   case novel = "소설"
   case essay = "시/에세이"
   case human = "인문"
