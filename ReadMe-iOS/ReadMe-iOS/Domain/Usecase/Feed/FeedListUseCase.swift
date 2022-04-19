@@ -9,7 +9,7 @@ import RxSwift
 import RxRelay
 
 protocol FeedListUseCase {
-  func getFeedList(pageNum: Int, category: FeedCategory)
+  func getFeedList(pageNum: Int, category: FeedCategory?)
   var feedList: PublishRelay<FeedListModel> { get set }
 }
 
@@ -26,8 +26,9 @@ final class DefaultFeedListUseCase {
 }
 
 extension DefaultFeedListUseCase: FeedListUseCase {
-  func getFeedList(pageNum: Int, category: FeedCategory) {
-    repository.getFeedList(page: 0, category: category.rawValue)
+  func getFeedList(pageNum: Int, category: FeedCategory?) {
+    let categoryString = (category != nil) ? category?.rawValue : ""
+    repository.getFeedList(page: 0, category: categoryString)
       .filter{ $0 != nil }
       .subscribe(onNext: { [weak self] entity in
         guard let self = self else { return }

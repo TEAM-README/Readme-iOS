@@ -40,4 +40,11 @@ struct I18N {
     static let byteExceedErr = "닉네임은 20자를 초과할 수 없습니다."
     static let availableNickname = "사용 가능한 닉네임입니다."
   }
+  
+  struct FeedList {
+    static let categoryNoSelect = "관심 있는 카테고리를"
+    static let categoryNoSelectBold = "관심 있는 카테고리"
+    static let categoryDescriptionNoselect = "선택해보세요"
+    static let categoryDescription = "관심이 있어요"
+  }
 }
