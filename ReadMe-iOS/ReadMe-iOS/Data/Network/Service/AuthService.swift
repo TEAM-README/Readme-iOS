@@ -17,7 +17,7 @@ extension BaseService: AuthServiceType {
     requestObjectInRx(.login(provider: provider, token: token))
   }
   func checkNicknameDuplicated(nickname: String) -> Observable<Bool?> {
-    requestObjectInRx(.checkNicknameDuplicated(nickname: nickname))
+    requestObjectInRx(.postCheckNicknameDuplicated(nickname: nickname))
   }
 
 }

@@ -35,9 +35,9 @@ class SearchCVC: UICollectionViewCell, UICollectionViewRegisterable {
     super.prepareForReuse()
     
     bookCoverImageView.image = UIImage()
-    categoryLabel.text = ""
-    bookTitleLabel.text = ""
-    authorLabel.text = ""
+    categoryLabel.text?.removeAll()
+    bookTitleLabel.text?.removeAll()
+    authorLabel.text?.removeAll()
   }
 }
 
@@ -49,7 +49,7 @@ extension SearchCVC {
     bookTitleLabel.text = title
     authorLabel.text = author
     
-    bookTitleLabel.setTextWithLineHeight(text: title, lineHeight: 21.0)
+    bookTitleLabel.setTextWithLineHeight(text: title, lineHeightMultiple: 1.48)
   }
 }
 
@@ -66,7 +66,7 @@ extension SearchCVC {
     bookTitleLabel.numberOfLines = 2
     
     authorLabel.font = UIFont.readMeFont(size: 12)
-    authorLabel.textColor = .grey021
+    authorLabel.textColor = .grey06
     
     bottomLineView.backgroundColor = .grey00
   }

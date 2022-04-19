@@ -29,6 +29,21 @@ class SplashVC: UIViewController {
     navigationController?.pushViewController(signupVC, animated: false)
   }
   
+  private func pushFeedDetailView() {
+    let feedDetailVC = ModuleFactory.shared.makeFeedDetailVC(idx: 0)
+    navigationController?.pushViewController(feedDetailVC, animated: false)
+  }
+  
+  private func pushSearchView() {
+    let searchVC = ModuleFactory.shared.makeSearchVC()
+    navigationController?.pushViewController(searchVC, animated: false)
+  }
+  
+  private func pushBaseView() {
+    let baseVC = ModuleFactory.shared.makeBaseVC()
+    navigationController?.pushViewController(baseVC, animated: false)
+  }
+  
   private func pushWriteView() {
     let writeVC = ModuleFactory.shared.makeWriteVC()
     navigationController?.pushViewController(writeVC, animated: false)
