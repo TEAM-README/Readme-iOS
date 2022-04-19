@@ -49,7 +49,6 @@
 		FD929E5F280A62E1008F590C /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD929E5E280A62E1008F590C /* FeedService.swift */; };
 		FD929E7C280C7DDF008F590C /* FeedListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD929E76280C7DDF008F590C /* FeedListUseCase.swift */; };
 		FD929E7D280C7DDF008F590C /* FeedListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD929E77280C7DDF008F590C /* FeedListRepository.swift */; };
-		FD929E7E280C7DDF008F590C /* FeedListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD929E78280C7DDF008F590C /* FeedListModel.swift */; };
 		FD929E7F280C7DDF008F590C /* FeedListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD929E79280C7DDF008F590C /* FeedListVC.swift */; };
 		FD929E80280C7DDF008F590C /* FeedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD929E7A280C7DDF008F590C /* FeedListViewModel.swift */; };
 		FD929E81280C7DDF008F590C /* FeedListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD929E7B280C7DDF008F590C /* FeedListEntity.swift */; };
@@ -98,7 +97,7 @@
 		FDD9D2C627F9E1DB0024DFB2 /* UINavigation + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2BF27F9E1DB0024DFB2 /* UINavigation + Extension.swift */; };
 		FDD9D2C827F9E1DB0024DFB2 /* drawDashedLine + UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2C127F9E1DB0024DFB2 /* drawDashedLine + UIView.swift */; };
 		FDD9D2C927F9E1DB0024DFB2 /* successCatch + Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2C227F9E1DB0024DFB2 /* successCatch + Result.swift */; };
-		FDD9D2CB27F9E1DB0024DFB2 /* setTextLineHeight + UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2C427F9E1DB0024DFB2 /* setTextLineHeight + UILabel.swift */; };
+		FDD9D2CB27F9E1DB0024DFB2 /* setTextLineHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2C427F9E1DB0024DFB2 /* setTextLineHeight.swift */; };
 		FDD9D2CC27F9E1DB0024DFB2 /* controllerFromStoryboard + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2C527F9E1DB0024DFB2 /* controllerFromStoryboard + UIViewController.swift */; };
 		FDD9D2D027F9E2240024DFB2 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2CF27F9E2240024DFB2 /* BaseService.swift */; };
 		FDD9D2D227F9E23A0024DFB2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D2D127F9E23A0024DFB2 /* Config.swift */; };
@@ -187,7 +186,6 @@
 		FD929E5E280A62E1008F590C /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
 		FD929E76280C7DDF008F590C /* FeedListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListUseCase.swift; sourceTree = "<group>"; };
 		FD929E77280C7DDF008F590C /* FeedListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListRepository.swift; sourceTree = "<group>"; };
-		FD929E78280C7DDF008F590C /* FeedListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListModel.swift; sourceTree = "<group>"; };
 		FD929E79280C7DDF008F590C /* FeedListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListVC.swift; sourceTree = "<group>"; };
 		FD929E7A280C7DDF008F590C /* FeedListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListViewModel.swift; sourceTree = "<group>"; };
 		FD929E7B280C7DDF008F590C /* FeedListEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListEntity.swift; sourceTree = "<group>"; };
@@ -239,7 +237,7 @@
 		FDD9D2BF27F9E1DB0024DFB2 /* UINavigation + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigation + Extension.swift"; sourceTree = "<group>"; };
 		FDD9D2C127F9E1DB0024DFB2 /* drawDashedLine + UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "drawDashedLine + UIView.swift"; sourceTree = "<group>"; };
 		FDD9D2C227F9E1DB0024DFB2 /* successCatch + Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "successCatch + Result.swift"; sourceTree = "<group>"; };
-		FDD9D2C427F9E1DB0024DFB2 /* setTextLineHeight + UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "setTextLineHeight + UILabel.swift"; sourceTree = "<group>"; };
+		FDD9D2C427F9E1DB0024DFB2 /* setTextLineHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setTextLineHeight.swift; sourceTree = "<group>"; };
 		FDD9D2C527F9E1DB0024DFB2 /* controllerFromStoryboard + UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "controllerFromStoryboard + UIViewController.swift"; sourceTree = "<group>"; };
 		FDD9D2CF27F9E2240024DFB2 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		FDD9D2D127F9E23A0024DFB2 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -456,7 +454,6 @@
 		FD85CECE2809C94300E7BE7B /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				FD929E78280C7DDF008F590C /* FeedListModel.swift */,
 				FD85CED22809C9E900E7BE7B /* FeedModel.swift */,
 			);
 			path = Feed;
@@ -671,6 +668,7 @@
 			isa = PBXGroup;
 			children = (
 				FDD9D28127F9DFAE0024DFB2 /* addToolBar.swift */,
+				FDD9D2C427F9E1DB0024DFB2 /* setTextLineHeight.swift */,
 				FDD9D28427F9DFAE0024DFB2 /* applyShadow.swift */,
 				FDD9D28227F9DFAE0024DFB2 /* calculatePastTime.swift */,
 				FDD9D27D27F9DFAE0024DFB2 /* calculateTopInset.swift */,
@@ -737,7 +735,6 @@
 			children = (
 				FDD9D2C527F9E1DB0024DFB2 /* controllerFromStoryboard + UIViewController.swift */,
 				FDD9D2C127F9E1DB0024DFB2 /* drawDashedLine + UIView.swift */,
-				FDD9D2C427F9E1DB0024DFB2 /* setTextLineHeight + UILabel.swift */,
 				FDD9D2C227F9E1DB0024DFB2 /* successCatch + Result.swift */,
 				FDD9D2BF27F9E1DB0024DFB2 /* UINavigation + Extension.swift */,
 				FD0619842805579F00F647D7 /* XibView + UIView.swift */,
@@ -1405,7 +1402,6 @@
 				FDD9D2D427F9E2400024DFB2 /* ResponseObject.swift in Sources */,
 				FD01F0712808062E002F80D2 /* shakeAction.swift in Sources */,
 				FDDB0B72280585740055B208 /* MyPageVC.swift in Sources */,
-				FD929E7E280C7DDF008F590C /* FeedListModel.swift in Sources */,
 				FDD9D29827F9DFAF0024DFB2 /* setDefaultFonts.swift in Sources */,
 				FDD9D2F827F9E3870024DFB2 /* Presentable.swift in Sources */,
 				FDE1A2AE2805BF8D000DDBE2 /* LoginVC.swift in Sources */,
@@ -1424,7 +1420,7 @@
 				FD929E80280C7DDF008F590C /* FeedListViewModel.swift in Sources */,
 				FDE1A2AF2805BF8D000DDBE2 /* LoginViewModel.swift in Sources */,
 				FDD9D28B27F9DFAF0024DFB2 /* showNetworkAlert.swift in Sources */,
-				FDD9D2CB27F9E1DB0024DFB2 /* setTextLineHeight + UILabel.swift in Sources */,
+				FDD9D2CB27F9E1DB0024DFB2 /* setTextLineHeight.swift in Sources */,
 				FD0619702805516500F647D7 /* BaseModel.swift in Sources */,
 				FDD9D2C827F9E1DB0024DFB2 /* drawDashedLine + UIView.swift in Sources */,
 				FD929E7F280C7DDF008F590C /* FeedListVC.swift in Sources */,
