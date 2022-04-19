@@ -41,7 +41,7 @@ extension LoginVC {
     guideLabel.text = I18N.Login.guideText
     guideLabel.textColor = UIColor.grey04
     guideLabel.font = UIFont.readMeFont(size: 15, type: .regular)
-    guideLabel.setTargetAttributedText(targetString: I18N.Login.guideEmphasisText, type: .semiBold)
+    guideLabel.setTargetAttributedText(targetString: I18N.Login.guideEmphasisText, fontType: .semiBold)
   }
 }
 
