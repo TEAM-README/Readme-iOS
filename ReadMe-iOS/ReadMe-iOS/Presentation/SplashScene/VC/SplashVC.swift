@@ -12,7 +12,8 @@ class SplashVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     delayWithSeconds(1) {
-      self.pushFeedDetailView()
+//      self.pushSignupView()
+      self.pushBaseView()
     }
     
     
@@ -31,5 +32,15 @@ class SplashVC: UIViewController {
   private func pushFeedDetailView() {
     let feedDetailVC = ModuleFactory.shared.makeFeedDetailVC(idx: 0)
     navigationController?.pushViewController(feedDetailVC, animated: false)
+  }
+  
+  private func pushSearchView() {
+    let searchVC = ModuleFactory.shared.makeSearchVC()
+    navigationController?.pushViewController(searchVC, animated: false)
+  }
+  
+  private func pushBaseView() {
+    let baseVC = ModuleFactory.shared.makeBaseVC()
+    navigationController?.pushViewController(baseVC, animated: false)
   }
 }
