@@ -8,6 +8,7 @@
 import UIKit
 
 import SnapKit
+import RxSwift
 
 @frozen
 enum flowType {
@@ -36,6 +37,8 @@ class WriteVC: UIViewController {
   private let secondTitleLabel = UILabel()
   private let sentenceTextView = UITextView()
   
+  private let disposeBag = DisposeBag()
+  
   let username: String = "혜화동 꽃가마"
   let bookname: String = "바람이분다어쩌고저쩌고뭐?" // 11글자 초과면 끝에 자르기
   
@@ -48,6 +51,22 @@ class WriteVC: UIViewController {
     
     configureUI()
     setLayout()
+    bindViewModel()
+    setFirstFlow()
+  }
+}
+
+// MARK: - Custom Method
+
+extension WriteVC {
+  // FIXME: - 함수 네이밍 수정
+  private func bindViewModel() {
+    // FIXME: - 캐츄 생성 플로우 참고
+    nextButton.rx.tap
+      .subscribe(onNext: {
+        self.setSecondFlow()
+      })
+      .disposed(by: disposeBag)
   }
 }
 
@@ -59,28 +78,18 @@ extension WriteVC {
     
     progressView.progressTintColor = .pointBlue
     progressView.trackTintColor = .grey01
-    progressView.progress = 0.5
     
-    cheerLabel.text = username + I18N.Write.startCheer
     cheerLabel.font = .readMeFont(size: 14, type: .bold)
     cheerLabel.textColor = .mainBlue
-    cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.6)
-    cheerLabel.setTargetAttributedText(targetString: I18N.Write.startCheer, fontType: .regular, color: .grey08)
     
-    describeLabel.text = I18N.Write.startDescribe
     describeLabel.font = .readMeFont(size: 14, type: .regular)
     describeLabel.textColor = .grey08
     describeLabel.numberOfLines = 2
     describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.6)
     
-    titleLabel.text = I18N.Write.firstTitle
     titleLabel.font = .readMeFont(size: 16, type: .semiBold)
     titleLabel.textColor = .black
-    
-    writeTextView.setTextWithLineHeight(text: writeTextView.text, lineHeightMultiple: 1.6)
-    writeTextView.text = I18N.Write.firstPlaceholder
-    writeTextView.font = .readMeFont(size: 15)
-    writeTextView.textColor = .grey09
+
     writeTextView.layer.borderColor = UIColor.grey00.cgColor
     writeTextView.layer.borderWidth = 1
     writeTextView.layer.cornerRadius = 16
@@ -121,17 +130,65 @@ extension WriteVC {
     sentenceTextView.setTextWithLineHeight(text: sentenceTextView.text, lineHeightMultiple: 1.6)
     sentenceTextView.font = .readMeFont(size: 13)
     sentenceTextView.textColor = .grey04
-    
-    // TODO: - 플로우에 따라 ui 분기처리 + textview layout 변경
-    secondView.isHidden = true
   }
   
+  // FIXME: - 플로우 바뀔때 애니메이션 스르륵
   private func setFirstFlow() {
+    firstView.isHidden = false
+    secondView.isHidden = true
     
+    progressView.progress = 0.5
+    
+    cheerLabel.text = username + I18N.Write.startCheer
+    cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.6)
+    cheerLabel.setTargetAttributedText(targetString: I18N.Write.startCheer, fontType: .regular, color: .grey08)
+    
+    describeLabel.text = I18N.Write.startDescribe
+    describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.6)
+    
+    titleLabel.text = I18N.Write.firstTitle
+    
+    writeTextView.setTextWithLineHeight(text: writeTextView.text, lineHeightMultiple: 1.6)
+    writeTextView.text = I18N.Write.firstPlaceholder
+    writeTextView.font = .readMeFont(size: 15)
+    writeTextView.textColor = .grey09
+    
+    // textView height 원상태 복구
+    writeTextView.snp.updateConstraints { make in
+      make.leading.equalToSuperview().inset(24)
+      make.top.equalTo(titleLabel.snp.bottom).offset(20)
+      make.trailing.equalToSuperview().inset(42)
+      make.height.equalTo((UIScreen.main.bounds.width - 68) * 0.61)
+    }
   }
   
   private func setSecondFlow() {
+    firstView.isHidden = true
+    secondView.isHidden = false
     
+    progressView.progress = 1
+    
+    cheerLabel.text = username + I18N.Write.heartCheer
+    cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.6)
+    cheerLabel.setTargetAttributedText(targetString: I18N.Write.heartCheer, fontType: .regular, color: .grey08)
+    
+    describeLabel.text = I18N.Write.heartDescribe
+    describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.6)
+    
+    titleLabel.text = I18N.Write.secondTitle
+    
+    writeTextView.setTextWithLineHeight(text: writeTextView.text, lineHeightMultiple: 1.6)
+    writeTextView.text = I18N.Write.secondPlaceholder
+    writeTextView.font = .readMeFont(size: 15)
+    writeTextView.textColor = .grey09
+    
+    // textView height 변경
+    writeTextView.snp.updateConstraints { make in
+      make.leading.equalToSuperview().inset(24)
+      make.top.equalTo(titleLabel.snp.bottom).offset(20)
+      make.trailing.equalToSuperview().inset(42)
+      make.height.equalTo((UIScreen.main.bounds.width - 68) * 0.69)
+    }
   }
   
   private func setLayout() {
