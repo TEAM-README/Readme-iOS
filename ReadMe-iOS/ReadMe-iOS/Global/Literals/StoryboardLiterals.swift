@@ -13,6 +13,7 @@ enum Storyboards: String {
   case signup = "Signup"
   case base = "Base"
   case home = "Home"
+  case feedDetail = "FeedDetail"
   case mypage = "MyPage"
   case search = "Search"
 }

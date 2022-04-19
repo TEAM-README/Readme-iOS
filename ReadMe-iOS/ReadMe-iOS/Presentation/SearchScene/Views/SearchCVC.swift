@@ -49,7 +49,7 @@ extension SearchCVC {
     bookTitleLabel.text = title
     authorLabel.text = author
     
-    bookTitleLabel.setTextWithLineHeight(text: title, lineHeight: 21.0)
+    bookTitleLabel.setTextWithLineHeight(text: title, lineHeightMultiple: 1.48)
   }
 }
 
