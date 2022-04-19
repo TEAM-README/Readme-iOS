@@ -14,6 +14,7 @@ protocol ModuleFactoryProtocol {
   func makeHomeVC() -> HomeVC
   func makeMyPageVC() -> MyPageVC
   func makeSearchVC() -> SearchVC
+  func makeWriteVC() -> WriteVC
 }
 
 final class ModuleFactory: ModuleFactoryProtocol{
@@ -46,6 +47,16 @@ final class ModuleFactory: ModuleFactoryProtocol{
     searchVC.viewModel = viewModel
     
     return searchVC
+  }
+  
+  func makeWriteVC() -> WriteVC {
+    let repository = DefaultWriteRepository()
+    let useCase = DefaultWriteUseCase(repository: repository)
+    let viewModel = WriteViewModel(useCase: useCase)
+    let writeVC = WriteVC.controllerFromStoryboard(.write)
+    writeVC.viewModel = viewModel
+    
+    return writeVC
   }
   
   func makeBaseVC() -> BaseVC { BaseVC.controllerFromStoryboard(.base) }
