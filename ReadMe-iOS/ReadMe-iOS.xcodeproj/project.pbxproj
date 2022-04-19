@@ -16,6 +16,7 @@
 		2B52A31228083D7F00CFB1D0 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52A31128083D7F00CFB1D0 /* SearchUseCase.swift */; };
 		2B52A31428083D8F00CFB1D0 /* SearchEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52A31328083D8F00CFB1D0 /* SearchEntity.swift */; };
 		2B52A31628083DAB00CFB1D0 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52A31528083DAB00CFB1D0 /* SearchRepository.swift */; };
+		2B9605EC280D373E006FF358 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9605EB280D373E006FF358 /* SearchService.swift */; };
 		2BABE36D280C881F00EFA45E /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABE36C280C881F00EFA45E /* SearchHeaderView.swift */; };
 		48DD3798A7387D615B01CCF9 /* Pods_ReadMe_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDEAB949A3007921A9DA799 /* Pods_ReadMe_iOS.framework */; };
 		FD01F06F2807F8E7002F80D2 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD01F06E2807F8E7002F80D2 /* Pretendard-Bold.otf */; };
@@ -142,6 +143,7 @@
 		2B52A31128083D7F00CFB1D0 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
 		2B52A31328083D8F00CFB1D0 /* SearchEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEntity.swift; sourceTree = "<group>"; };
 		2B52A31528083DAB00CFB1D0 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
+		2B9605EB280D373E006FF358 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		2BABE36C280C881F00EFA45E /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 		AA209110609425843DFDE109 /* Pods-ReadMe-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BDC606173607FC03ED959B5E /* Pods-ReadMe-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.release.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -278,7 +280,7 @@
 		2B52A30228083C6900CFB1D0 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				2B52A30928083CD200CFB1D0 /* SearchModel.swift */,
+				2B52A30F28083D6500CFB1D0 /* SearchViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -304,7 +306,7 @@
 		2B52A30B28083D2900CFB1D0 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				2B52A30F28083D6500CFB1D0 /* SearchViewModel.swift */,
+				2B52A30928083CD200CFB1D0 /* SearchModel.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -811,6 +813,7 @@
 			children = (
 				FDD9D2CF27F9E2240024DFB2 /* BaseService.swift */,
 				FD99D58A28071DDC00BB7FDA /* AuthService.swift */,
+				2B9605EB280D373E006FF358 /* SearchService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1243,6 +1246,7 @@
 			files = (
 				FDD9D2E527F9E32C0024DFB2 /* AppLog.swift in Sources */,
 				FDDB0B58280583EE0055B208 /* HomeViewModel.swift in Sources */,
+				2B9605EC280D373E006FF358 /* SearchService.swift in Sources */,
 				FD99D59A28073C4900BB7FDA /* SignupVC.swift in Sources */,
 				FD99D5AA28073DB200BB7FDA /* BottomButton.swift in Sources */,
 				FDD9D29027F9DFAF0024DFB2 /* showToastMessage.swift in Sources */,

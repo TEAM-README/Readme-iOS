@@ -44,7 +44,7 @@ class SearchCVC: UICollectionViewCell, UICollectionViewRegisterable {
 // MARK: - setData Part
 extension SearchCVC {
   func initCell(image: String, category: String, title: String, author: String) {
-    bookCoverImageView.backgroundColor = .grey04
+    bookCoverImageView.setImage(with: image)
     categoryLabel.text = category
     bookTitleLabel.text = title
     authorLabel.text = author

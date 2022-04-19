@@ -7,8 +7,6 @@
 
 import UIKit
 
-import UIKit
-
 struct ImageLiterals{
   
   struct TabBar{
@@ -19,6 +17,10 @@ struct ImageLiterals{
     
     static let mypage = UIImage(named: "tab-mypage")!
     static let mypageSelected = UIImage(named: "tab-mypage-clicked")!
+  }
+  
+  struct Search {
+    static let search = UIImage(named: "ic_ search")
   }
   
 }

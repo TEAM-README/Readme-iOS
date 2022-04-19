@@ -15,12 +15,13 @@ final class SearchViewModel: ViewModelType {
   
   // MARK: - Inputs
   struct Input {
-    let searchText: Observable<String?>
+    let viewWillAppearEvent: Observable<Void>
+//    let searchText: Observable<String?>
   }
   
   // MARK: - Outputs
   struct Output {
-    
+    var contentList = PublishRelay<[SearchBookModel]>()
   }
   
   init(useCase: SearchUseCase) {
@@ -33,12 +34,21 @@ extension SearchViewModel {
     let output = Output()
     self.bindOutput(output: output, disposeBag: disposeBag)
     
-    // TODO: - useCase.. 연결..
+    input.viewWillAppearEvent.subscribe(onNext: { [weak self] in
+      guard let self = self else { return }
+      self.useCase.getSearchRecentInformation()
+    })
+    .disposed(by: disposeBag)
     
     return output
   }
   
   private func bindOutput(output: Output, disposeBag: DisposeBag) {
+    let searchRecentRelay = useCase.searchResultInformation
     
+    searchRecentRelay.subscribe(onNext: { model in
+      output.contentList.accept(model)
+    })
+    .disposed(by: self.disposeBag)
   }
 }

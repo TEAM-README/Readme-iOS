@@ -8,8 +8,13 @@
 import UIKit
 
 protocol UICollectionViewRegisterable {
-    static var isFromNib: Bool { get }
-    static func register(target: UICollectionView)
+  static var isFromNib: Bool { get }
+  static func register(target: UICollectionView)
+}
+
+protocol UIICollectionReusableViewRegisterable {
+  static var isFromNib: Bool { get }
+  static func register(target: UICollectionView, isHeader: Bool)
 }
 
 extension UICollectionViewRegisterable where Self: UICollectionViewCell {
@@ -22,7 +27,7 @@ extension UICollectionViewRegisterable where Self: UICollectionViewCell {
     }
 }
 
-extension UICollectionViewRegisterable where Self: UICollectionReusableView {
+extension UIICollectionReusableViewRegisterable where Self: UICollectionReusableView {
   static func register(target: UICollectionView, isHeader: Bool) {
     if self.isFromNib {
       if isHeader {

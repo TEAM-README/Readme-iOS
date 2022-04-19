@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class SearchHeaderView: UICollectionReusableView {
+class SearchHeaderView: UICollectionReusableView, UIICollectionReusableViewRegisterable {
   
   static var isFromNib: Bool = false
   

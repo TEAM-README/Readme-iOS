@@ -39,7 +39,7 @@ final class ModuleFactory: ModuleFactoryProtocol{
   }
   
   func makeSearchVC() -> SearchVC {
-    let repository = DefaultSearchRepository()
+    let repository = DefaultSearchRepository(service: BaseService.default)
     let useCase = DefaultSearchUseCase(repository: repository)
     let viewModel = SearchViewModel(useCase: useCase)
     let searchVC = SearchVC.controllerFromStoryboard(.search)

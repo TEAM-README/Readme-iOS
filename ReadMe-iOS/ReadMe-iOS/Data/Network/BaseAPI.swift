@@ -12,7 +12,7 @@ enum BaseAPI{
   case sampleAPI(sample : String)
   case login(provider: String,token : String)
   case checkNicknameDuplicated(nickname: String)
-
+  case getSearchRecent
 }
 
 extension BaseAPI: TargetType {
@@ -34,8 +34,10 @@ extension BaseAPI: TargetType {
       switch self{
       case .sampleAPI:
         base += ""
-        case .login,.checkNicknameDuplicated:
-          base += ""
+      case .login,.checkNicknameDuplicated:
+        base += ""
+      case .getSearchRecent:
+        base += ""
       }
     guard let url = URL(string: base) else {
        fatalError("baseURL could not be configured")

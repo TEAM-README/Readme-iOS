@@ -26,6 +26,8 @@ class SearchVC: UIViewController {
   var viewModel: SearchViewModel!
   var didSearch: Bool = false
   var dataCount = 10 // 테스트용
+//  var contentList: [SearchModel] = []
+  var contentList: [SearchBookModel] = []
   
   // MARK: - Life Cycle Part
   override func viewDidLoad() {
@@ -52,7 +54,7 @@ extension SearchVC {
     searchTextField.layer.cornerRadius = 22
     searchTextField.delegate = self
     
-    searchButton.setImage(UIImage(named: "ic_ search"), for: .normal)
+    searchButton.setImage(ImageLiterals.Search.search, for: .normal)
     
     beforeSearchEmptyLabel.text = I18N.Search.emptyBeforeSearch
     beforeSearchEmptyLabel.font = UIFont.readMeFont(size: 15, type: .medium)
@@ -90,9 +92,20 @@ extension SearchVC {
 // MARK: - Custom Method Part
 extension SearchVC {
   private func bindViewModels() {
-//    let input = SearchViewModel.Input(
-//      searchText: searchTextField.rx.text
-//    )
+    let input = SearchViewModel.Input(
+      viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in
+        // viewWillAppear 호출 후 실행
+      })
+    
+    let output = self.viewModel.transform(from: input,
+                                          disposeBag: self.disposeBag)
+    
+    output.contentList.asSignal().emit { [weak self] content in
+      guard let self = self else { return }
+      self.contentList = content
+      self.bookCV.reloadData()
+    }
+    .disposed(by: disposeBag)
   }
   
   private func tapSearchButton() {
@@ -120,8 +133,7 @@ extension SearchVC {
   
   private func setRegister() {
     SearchCVC.register(target: bookCV)
-//    SearchHeaderView.register(target: bookCV, isHeader: true)
-    bookCV.register(SearchHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SearchHeaderView.className)
+    SearchHeaderView.register(target: bookCV, isHeader: true)
   }
   
   private func setEmptyViewBeforeSearch() {
@@ -167,7 +179,7 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
 
 extension SearchVC: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return dataCount
+    return contentList.count
   }
   
   func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -178,7 +190,10 @@ extension SearchVC: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCVC.className, for: indexPath) as? SearchCVC else { return UICollectionViewCell() }
-    cell.initCell(image: "-", category: "자기계발", title: "운명을 바꾸는 부동산 투자 수업 운명을 바꾸는 부동산 투자 수업이지롱가리아아아아하나두울셋", author: "부동산읽어주는남자(정태익) 저")
+    cell.initCell(image: contentList[indexPath.item].imgURL,
+                  category: contentList[indexPath.item].category,
+                  title: contentList[indexPath.item].title,
+                  author: contentList[indexPath.item].author)
     return cell
   }
   
