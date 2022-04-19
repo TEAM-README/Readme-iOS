@@ -8,6 +8,9 @@
 import UIKit
 import SnapKit
 
+let screenWidth = UIScreen.main.bounds.width
+let screenHeight = UIScreen.main.bounds.height
+
 class BaseVC: UIViewController {
   // MARK: - Vars & Lets Part
   private let moduleFactory = ModuleFactory.shared

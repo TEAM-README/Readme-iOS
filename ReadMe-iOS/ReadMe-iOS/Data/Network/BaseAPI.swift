@@ -11,7 +11,8 @@ import Alamofire
 enum BaseAPI{
   case sampleAPI(sample : String)
   case login(provider: String,token : String)
-  case checkNicknameDuplicated(nickname: String)
+  case postCheckNicknameDuplicated(nickname: String)
+  case getFeedDetail(idx: Int)
 
 }
 
@@ -34,7 +35,9 @@ extension BaseAPI: TargetType {
       switch self{
       case .sampleAPI:
         base += ""
-        case .login,.checkNicknameDuplicated:
+        case .login,.postCheckNicknameDuplicated:
+          base += ""
+        case .getFeedDetail:
           base += ""
       }
     guard let url = URL(string: base) else {
@@ -64,7 +67,7 @@ extension BaseAPI: TargetType {
   ///  각 case 별로 get,post,delete,put 인지 정의합니다.
   var method: Moya.Method {
     switch self{
-      case .sampleAPI,.login,.checkNicknameDuplicated:
+      case .sampleAPI,.login,.postCheckNicknameDuplicated:
       return .post
     default :
       return .get
@@ -93,7 +96,7 @@ extension BaseAPI: TargetType {
       case .login(let provider,let token):
         params["provider"] = provider
         params["token"] = token
-      case .checkNicknameDuplicated(let nickname):
+      case .postCheckNicknameDuplicated(let nickname):
         params["nickname"] = nickname
       default:
         break
