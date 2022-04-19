@@ -33,6 +33,7 @@
 		FD06198928055C2200F647D7 /* makeKernValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06198828055C2200F647D7 /* makeKernValue.swift */; };
 		FD06198C28055CC700F647D7 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06198B28055CC700F647D7 /* TabbarView.swift */; };
 		FD106C50280E78FF00D803D8 /* ScrollToTop + UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD106C4F280E78FF00D803D8 /* ScrollToTop + UITableView.swift */; };
+		FD106C52280E96BD00D803D8 /* UsecaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD106C51280E96BD00D803D8 /* UsecaseType.swift */; };
 		FD2937BE280E5EF5003B4685 /* FeedList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD2937BD280E5EF5003B4685 /* FeedList.storyboard */; };
 		FD2937C4280E60E7003B4685 /* FeedListContentTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2937C2280E60E7003B4685 /* FeedListContentTVC.swift */; };
 		FD2937C5280E60E7003B4685 /* FeedListCategoryTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD2937C3280E60E7003B4685 /* FeedListCategoryTVC.xib */; };
@@ -170,6 +171,7 @@
 		FD06198828055C2200F647D7 /* makeKernValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = makeKernValue.swift; sourceTree = "<group>"; };
 		FD06198B28055CC700F647D7 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
 		FD106C4F280E78FF00D803D8 /* ScrollToTop + UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollToTop + UITableView.swift"; sourceTree = "<group>"; };
+		FD106C51280E96BD00D803D8 /* UsecaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsecaseType.swift; sourceTree = "<group>"; };
 		FD2937BD280E5EF5003B4685 /* FeedList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FeedList.storyboard; sourceTree = "<group>"; };
 		FD2937C2280E60E7003B4685 /* FeedListContentTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListContentTVC.swift; sourceTree = "<group>"; };
 		FD2937C3280E60E7003B4685 /* FeedListCategoryTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedListCategoryTVC.xib; sourceTree = "<group>"; };
@@ -762,6 +764,7 @@
 				FDD9D26827F9DEC10024DFB2 /* UICollectionViewRegisterable.swift */,
 				FDD9D26A27F9DEC10024DFB2 /* UITableViewRegisterable.swift */,
 				FDD9D26B27F9DEC10024DFB2 /* ViewModelType.swift */,
+				FD106C51280E96BD00D803D8 /* UsecaseType.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1327,6 +1330,7 @@
 				FD99D5AA28073DB200BB7FDA /* BottomButton.swift in Sources */,
 				FDD9D29027F9DFAF0024DFB2 /* showToastMessage.swift in Sources */,
 				FD0619872805586200F647D7 /* TabbarIcon.swift in Sources */,
+				FD106C52280E96BD00D803D8 /* UsecaseType.swift in Sources */,
 				FDD9D2FB27F9E3870024DFB2 /* LaunchInstructor.swift in Sources */,
 				FD99D59B28073C4900BB7FDA /* SignupViewModel.swift in Sources */,
 				FDD9D2FC27F9E3870024DFB2 /* Router.swift in Sources */,

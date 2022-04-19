@@ -51,6 +51,8 @@ extension FeedListViewModel {
   
   private func bindOutput(output: Output, disposeBag: DisposeBag) {
     let feedListRelay = useCase.feedList
+    let scrollToTopRelay = useCase.scrollToTop
+    
     feedListRelay.subscribe(onNext: { [weak self] feedListModel in
       guard let self = self else { return }
       var feedDatasource: [FeedListDataModel] = []
@@ -62,6 +64,10 @@ extension FeedListViewModel {
       feedDatasource.append(category)
       feedDatasource.append(contentsOf: feedList)
       output.feedList.accept(feedDatasource)
+    }).disposed(by: self.disposeBag)
+    
+    scrollToTopRelay.subscribe(onNext: { 
+      output.scrollToTop.accept(())
     }).disposed(by: self.disposeBag)
   }
   
@@ -87,18 +93,22 @@ extension FeedListViewModel {
     let font: UIFont
     let lineHeightMultiple: CGFloat
     let textViewWidth: CGFloat
+    let maxLine: Int
     
     switch(type) {
       case .sentence:
         font = .readMeFont(size: 13, type: .regular)
         lineHeightMultiple = 1.33
         textViewWidth = screenWidth - 70
+        maxLine = 4
       case .comment:
         font = .readMeFont(size: 14, type: .extraLight)
         lineHeightMultiple = 1.33
         textViewWidth = screenWidth - 70
+        maxLine = 6
     }
-    let textHeight = calculateTextViewHeight(width: textViewWidth,
+    let textHeight = calculateTextViewHeight(maxLine: maxLine,
+                                             width: textViewWidth,
                                              font: font,
                                              lineHeightMultiple: lineHeightMultiple,
                                              text: text)
@@ -109,13 +119,14 @@ extension FeedListViewModel {
                              content: text)
   }
   
-  private func calculateTextViewHeight(width: CGFloat,font: UIFont, lineHeightMultiple: CGFloat, text: String) -> CGFloat {
+  private func calculateTextViewHeight(maxLine: Int, width: CGFloat,font: UIFont, lineHeightMultiple: CGFloat, text: String) -> CGFloat {
     let mockTextView = UITextView()
     let newSize = CGSize(width: width, height: CGFloat.infinity)
     mockTextView.textContainerInset = .zero
     mockTextView.textContainer.lineFragmentPadding = 0
     mockTextView.setTextWithLineHeight(text: text, lineHeightMultiple: lineHeightMultiple)
     mockTextView.isScrollEnabled = false
+    mockTextView.textContainer.maximumNumberOfLines = maxLine
     mockTextView.translatesAutoresizingMaskIntoConstraints = false
     mockTextView.font = font
     let estimatedSize = mockTextView.sizeThatFits(newSize)

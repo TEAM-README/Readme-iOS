@@ -72,9 +72,6 @@ extension FeedListVC {
 
             contentCell.viewModel = contentData
             return contentCell
-
-            
-
         }
       }.disposed(by: self.disposeBag)
   }

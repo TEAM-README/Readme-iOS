@@ -27,6 +27,7 @@ final class TabbarView: XibView{
   
   @IBAction func homeButtonClicked(_ sender: Any) {
     makeVibrate()
+    postObserverAction(.homeButtonClicked)
     if currentTab != .home{
       delegate?.tabbarClicked(.home)
       currentTab = .home

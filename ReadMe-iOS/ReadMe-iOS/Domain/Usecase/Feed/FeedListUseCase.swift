@@ -11,17 +11,20 @@ import RxRelay
 protocol FeedListUseCase {
   func getFeedList(pageNum: Int, category: [FeedCategory])
   var feedList: PublishRelay<FeedListModel> { get set }
+  var scrollToTop: PublishRelay<Void> { get set }
 }
 
-final class DefaultFeedListUseCase {
+final class DefaultFeedListUseCase: UseCaseType{
   
   private let repository: FeedListRepository
   private let disposeBag = DisposeBag()
   
   var feedList = PublishRelay<FeedListModel>()
+  var scrollToTop = PublishRelay<Void>()
   
   init(repository: FeedListRepository) {
     self.repository = repository
+    self.addObserver()
   }
 }
 
@@ -36,5 +39,14 @@ extension DefaultFeedListUseCase: FeedListUseCase {
         let model = entity!.toDomain()
         self.feedList.accept(model)
       }).disposed(by: self.disposeBag)
+  }
+  
+}
+
+extension DefaultFeedListUseCase {
+  private func addObserver() {
+    addObserverAction(.homeButtonClicked) { _ in
+      self.scrollToTop.accept(())
+    }
   }
 }

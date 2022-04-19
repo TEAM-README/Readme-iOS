@@ -47,10 +47,14 @@ extension FeedListContentTVC {
     sentenceTextView.textColor = UIColor.grey05
     sentenceTextView.textContainerInset = .zero
     sentenceTextView.textContainer.lineFragmentPadding = 0
+    sentenceTextView.textContainer.maximumNumberOfLines = 4
+    sentenceTextView.textContainer.lineBreakMode = .byTruncatingTail
     
     commentTextView.textColor = UIColor.black
     commentTextView.textContainer.lineFragmentPadding = 0
     commentTextView.textContainerInset = .zero
+    commentTextView.textContainer.maximumNumberOfLines = 6
+    commentTextView.textContainer.lineBreakMode = .byTruncatingTail
     
     nicknameLabel.textColor = UIColor.init(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
     nicknameLabel.font = UIFont.readMeFont(size: 12, type: .regular)
@@ -61,7 +65,6 @@ extension FeedListContentTVC {
   
   private func bindViewModel() {
     guard let viewModel = viewModel else { return }
-    print("@@",viewModel.sentenceTextViewModel)
     categoryLabel.text = viewModel.category
     titleLabel.text = viewModel.title
     nicknameLabel.text = viewModel.nickname
