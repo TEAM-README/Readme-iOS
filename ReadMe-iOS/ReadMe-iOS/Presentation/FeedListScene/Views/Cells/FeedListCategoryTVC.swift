@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct FeedCategoryViewModel {
+struct FeedCategoryViewModel: FeedListDataSource{
   let category : [FeedCategory]
 }
 
@@ -32,7 +32,10 @@ final class FeedListCategoryTVC: UITableViewCell, UITableViewRegisterable {
 extension FeedListCategoryTVC {
   private func configureUI() {
     categoryLabel.font = .readMeFont(size: 16, type: .light)
+    categoryLabel.textColor = .black
+    
     descriptionLabel.font = .readMeFont(size: 16, type: .light)
+    categoryLabel.textColor = .black
   }
   
   private func bindViewModel() {

@@ -12,7 +12,7 @@ class SplashVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     delayWithSeconds(1) {
-      self.pushFeedDetailView()
+      self.pushFeedListView()
     }
     
     
@@ -31,5 +31,10 @@ class SplashVC: UIViewController {
   private func pushFeedDetailView() {
     let feedDetailVC = ModuleFactory.shared.makeFeedDetailVC(idx: 0)
     navigationController?.pushViewController(feedDetailVC, animated: false)
+  }
+  
+  private func pushFeedListView() {
+    let feedListVC = ModuleFactory.shared.makeFeedListVC()
+    navigationController?.pushViewController(feedListVC, animated: true)
   }
 }

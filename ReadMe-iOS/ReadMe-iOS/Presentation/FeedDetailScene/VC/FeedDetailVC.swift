@@ -30,7 +30,6 @@ class FeedDetailVC: UIViewController {
   @IBOutlet weak var sentenceHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var commentHeightConstraint: NSLayoutConstraint!
   
-  
   // MARK: - Life Cycle Part
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -52,7 +51,6 @@ extension FeedDetailVC {
 
     output.thumnailURL.asSignal().emit { [weak self] imgURL in
       guard let self = self else { return }
-      print("imgURL",imgURL)
       self.bookCoverImageView.setImage(with: imgURL)
     }.disposed(by: self.disposeBag)
     

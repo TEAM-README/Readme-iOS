@@ -7,18 +7,17 @@
 
 import UIKit
 
-struct FeedListContentViewModel {
+struct FeedListContentViewModel: FeedListDataSource {
   let category: String
   let title: String
-  let sentence: String
   let sentenceTextViewModel: FeedTextViewModel
-  let comment: String
   let commentTextViewModel: FeedTextViewModel
   let nickname: String
   let date: String
 }
 
-class FeedListContentTVC: UITableViewCell {
+class FeedListContentTVC: UITableViewCell, UITableViewRegisterable {
+  static var isFromNib: Bool = true
   var viewModel: FeedListContentViewModel? { didSet { bindViewModel() }}
   
   @IBOutlet weak var categoryLabel: UILabel!
@@ -35,12 +34,6 @@ class FeedListContentTVC: UITableViewCell {
     super.awakeFromNib()
     self.configureUI()
   }
-  
-  override func setSelected(_ selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
-    
-  }
-  
 }
 
 extension FeedListContentTVC {
@@ -68,5 +61,24 @@ extension FeedListContentTVC {
   
   private func bindViewModel() {
     guard let viewModel = viewModel else { return }
+    print("@@",viewModel.sentenceTextViewModel)
+    categoryLabel.text = viewModel.category
+    titleLabel.text = viewModel.title
+    nicknameLabel.text = viewModel.nickname
+    dateLabel.text = viewModel.date
+    
+    sentenceTextView.setTextWithLineHeight(
+      text: viewModel.sentenceTextViewModel.content,
+      lineHeightMultiple: viewModel.sentenceTextViewModel.lineHeightMultiple)
+    sentenceTextView.font = viewModel.sentenceTextViewModel.textFont
+    sentenceHeightConstraint.constant = viewModel.sentenceTextViewModel.textViewHeight
+    sentenceTextView.sizeToFit()
+    
+    commentTextView.setTextWithLineHeight(
+      text: viewModel.commentTextViewModel.content,
+      lineHeightMultiple: viewModel.commentTextViewModel.lineHeightMultiple)
+    commentTextView.font = viewModel.commentTextViewModel.textFont
+    commentHeightConstraint.constant = viewModel.commentTextViewModel.textViewHeight
+    commentTextView.sizeToFit()
   }
 }

@@ -135,7 +135,7 @@
                 <outlet property="dateLabel" destination="2Zi-wb-ovO" id="LIY-7f-Vvp"/>
                 <outlet property="nicknameLabel" destination="7n4-1z-BhE" id="oFX-3q-6Ds"/>
                 <outlet property="sentenceHeightConstraint" destination="Fxf-2x-aqV" id="yLb-dI-HWd"/>
-                <outlet property="sentenceTextView" destination="Fxf-2x-aqV" id="qRC-ug-4f9"/>
+                <outlet property="sentenceTextView" destination="gpB-ia-5rA" id="rEQ-Qj-UJW"/>
                 <outlet property="titleLabel" destination="942-c6-JoU" id="zaF-QP-iUa"/>
             </connections>
             <point key="canvasLocation" x="188.40579710144928" y="343.86160714285711"/>
