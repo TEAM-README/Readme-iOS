@@ -11,7 +11,7 @@ import SnapKit
 import RxSwift
 
 @frozen
-enum flowType {
+enum FlowType {
   case firstFlow
   case secondFlow
 }
@@ -19,23 +19,13 @@ enum flowType {
 class WriteVC: UIViewController {
   
   // MARK: - Vars & Lets Part
+  
   private let topBgView = UIView()
   private let cheerLabel = UILabel()
   private let describeLabel = UILabel()
-  private let titleLabel = UILabel()
-  private let writeTextView = UITextView()
+  private let firstView = WriteFirstFlow()
+  private let secondView = WriteSecondFlow()
   private let nextButton = BottomButton()
-  
-  private let firstView = UIView()
-  private let firstTitleLabel = UILabel()
-  private let bookCoverImageView = UIImageView()
-  private let categoryLabel = UILabel()
-  private let bookTitleLabel = UILabel()
-  private let bookAuthorLabel = UILabel()
-  
-  private let secondView = UIView()
-  private let secondTitleLabel = UILabel()
-  private let sentenceTextView = UITextView()
   
   private let disposeBag = DisposeBag()
   
@@ -44,29 +34,118 @@ class WriteVC: UIViewController {
   
   lazy var progressView = UIProgressView()
   var viewModel: WriteViewModel!
+  var flowType: FlowType = .firstFlow
   
-  // MARK: - Vars & Lets Part
+  // MARK: - Life Cycle Part
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     configureUI()
     setLayout()
-    bindViewModel()
-    setFirstFlow()
+    bindViewModels()
+    setFlow(.firstFlow)
   }
 }
 
 // MARK: - Custom Method
 
 extension WriteVC {
-  // FIXME: - 함수 네이밍 수정
-  private func bindViewModel() {
-    // FIXME: - 캐츄 생성 플로우 참고
+  private func bindViewModels() {
     nextButton.rx.tap
       .subscribe(onNext: {
-        self.setSecondFlow()
+        self.setFlow(self.flowType)
       })
       .disposed(by: disposeBag)
+  }
+}
+
+// MARK: - Custom Methods
+
+extension WriteVC {
+  private func setFlow(_ type: FlowType) {
+    switch type {
+    case .firstFlow:
+      setFirstFlow()
+    case .secondFlow:
+      setSecondFlow()
+    }
+  }
+  
+  private func setTopLabel(_ type: FlowType) {
+    switch type {
+    case .firstFlow:
+      cheerLabel.text = username + I18N.Write.startCheer
+      cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.6)
+      cheerLabel.setTargetAttributedText(targetString: I18N.Write.startCheer, fontType: .regular, color: .grey08)
+      
+      describeLabel.text = I18N.Write.startDescribe
+      describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.6)
+      
+    case .secondFlow:
+      cheerLabel.text = username + I18N.Write.heartCheer
+      describeLabel.text = I18N.Write.heartDescribe
+      
+      cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.6)
+      cheerLabel.setTargetAttributedText(targetString: I18N.Write.heartCheer, fontType: .regular, color: .grey08)
+      
+      describeLabel.setTextWithLineHeight(text: I18N.Write.heartDescribe, lineHeightMultiple: 1.6)
+    }
+  }
+  
+  private func setFirstFlow() {
+    progressView.progress = 0.5
+    
+    UIView.animate(withDuration: 0.2,
+                   delay: 0,
+                   options: .curveEaseInOut,
+                   animations: {
+      
+      [self.secondView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 0 }
+      
+    }, completion: { _ in
+      
+      self.setTopLabel(self.flowType)
+      
+      UIView.animate(withDuration: 0.2,
+                     delay: 0,
+                     options: .curveEaseInOut,
+                     animations: {
+        
+        [self.firstView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 1 }
+        
+      }, completion: { _ in
+        self.flowType = .secondFlow
+      })
+    })
+    
+  }
+  
+  private func setSecondFlow() {
+    progressView.progress = 1
+    
+    // 임의 데이터
+    secondView.setData(bookname: "책이름이요오오오", sentence: "‘스마트폰보다 재미있는 게 있을까' 이것만큼 어려운 주제가 없다는 것을 안다. 하지만 그래도 답하고 싶었던 이유는, 언제나 카톡 속 ㅋㅋㅋ가 아닌, 실제로 웃을 수 있는 상황을 바랐기 때문이 아닐까ㅋㅋㅋㅋㅋㅋㅋㅋㅋㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹ")
+    
+    UIView.animate(withDuration: 0.2,
+                   delay: 0,
+                   options: .curveEaseInOut,
+                   animations: {
+      
+      [self.firstView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 0 }
+      
+    }, completion: { _ in
+      UIView.animate(withDuration: 0.2,
+                     delay: 0,
+                     options: .curveEaseInOut,
+                     animations: {
+        
+        self.setTopLabel(self.flowType)
+        [self.secondView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 1 }
+      }, completion: { _ in
+        self.flowType = .firstFlow
+      })
+    })
   }
 }
 
@@ -74,7 +153,7 @@ extension WriteVC {
 
 extension WriteVC {
   private func configureUI() {
-    topBgView.backgroundColor = .grey07
+    topBgView.backgroundColor = .grey00
     
     progressView.progressTintColor = .pointBlue
     progressView.trackTintColor = .grey01
@@ -87,114 +166,16 @@ extension WriteVC {
     describeLabel.numberOfLines = 2
     describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.6)
     
-    titleLabel.font = .readMeFont(size: 16, type: .semiBold)
-    titleLabel.textColor = .black
-
-    writeTextView.layer.borderColor = UIColor.grey00.cgColor
-    writeTextView.layer.borderWidth = 1
-    writeTextView.layer.cornerRadius = 16
-    writeTextView.textContainerInset = UIEdgeInsets(top: 18, left: 22, bottom: 18, right: 22)
-    
     nextButton.title = I18N.Write.next
     nextButton.isEnabled = true
     
-    firstTitleLabel.text = I18N.Write.selectedBook
-    firstTitleLabel.font = .readMeFont(size: 14, type: .medium)
-    firstTitleLabel.textColor = .black
-    firstTitleLabel.setTextWithLineHeight(text: firstTitleLabel.text, lineHeightMultiple: 1.5)
-    
-    bookCoverImageView.backgroundColor = .alertRed
-    
-    categoryLabel.text = "엥 그래요?"
-    categoryLabel.font = .readMeFont(size: 12)
-    categoryLabel.textColor = .mainBlue
-    categoryLabel.setTextWithLineHeight(text: categoryLabel.text, lineHeightMultiple: 1.0)
-    
-    bookTitleLabel.text = "운명을 바꾸는 부동산 투자 수업 운명을 바꾸는 부동산 투자 수업 ..."
-    bookTitleLabel.font = .readMeFont(size: 13, type: .medium)
-    bookTitleLabel.textColor = .grey05
-    bookTitleLabel.setTextWithLineHeight(text: bookTitleLabel.text, lineHeightMultiple: 1.48)
-    bookTitleLabel.numberOfLines = 2
-    
-    bookAuthorLabel.text = "부동산읽어주는남자(정태익) 저 "
-    bookAuthorLabel.font = .readMeFont(size: 12)
-    bookAuthorLabel.textColor = .grey06
-    bookAuthorLabel.setTextWithLineHeight(text: bookAuthorLabel.text, lineHeightMultiple: 1.0)
-    
-    secondTitleLabel.text = bookname + I18N.Write.interestedSentence
-    secondTitleLabel.textColor = .mainBlue
-    secondTitleLabel.setTargetAttributedText(targetString: I18N.Write.interestedSentence, fontType: .semiBold, color: .grey04)
-    secondTitleLabel.font = .readMeFont(size: 14, type: .semiBold)
-    
-    sentenceTextView.text = "‘스마트폰보다 재미있는 게 있을까' 이것만큼 어려운 주제가 없다는 것을 안다. 하지만 그래도 답하고 싶었던 이유는, 언제나 카톡 속 ㅋㅋㅋ가 아닌, 실제로 웃을 수 있는 상황을 바랐기 때문이 아닐까"
-    sentenceTextView.setTextWithLineHeight(text: sentenceTextView.text, lineHeightMultiple: 1.6)
-    sentenceTextView.font = .readMeFont(size: 13)
-    sentenceTextView.textColor = .grey04
-  }
-  
-  // FIXME: - 플로우 바뀔때 애니메이션 스르륵
-  private func setFirstFlow() {
-    firstView.isHidden = false
-    secondView.isHidden = true
-    
-    progressView.progress = 0.5
-    
-    cheerLabel.text = username + I18N.Write.startCheer
-    cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.6)
-    cheerLabel.setTargetAttributedText(targetString: I18N.Write.startCheer, fontType: .regular, color: .grey08)
-    
-    describeLabel.text = I18N.Write.startDescribe
-    describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.6)
-    
-    titleLabel.text = I18N.Write.firstTitle
-    
-    writeTextView.setTextWithLineHeight(text: writeTextView.text, lineHeightMultiple: 1.6)
-    writeTextView.text = I18N.Write.firstPlaceholder
-    writeTextView.font = .readMeFont(size: 15)
-    writeTextView.textColor = .grey09
-    
-    // textView height 원상태 복구
-    writeTextView.snp.updateConstraints { make in
-      make.leading.equalToSuperview().inset(24)
-      make.top.equalTo(titleLabel.snp.bottom).offset(20)
-      make.trailing.equalToSuperview().inset(42)
-      make.height.equalTo((UIScreen.main.bounds.width - 68) * 0.61)
-    }
-  }
-  
-  private func setSecondFlow() {
-    firstView.isHidden = true
-    secondView.isHidden = false
-    
-    progressView.progress = 1
-    
-    cheerLabel.text = username + I18N.Write.heartCheer
-    cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.6)
-    cheerLabel.setTargetAttributedText(targetString: I18N.Write.heartCheer, fontType: .regular, color: .grey08)
-    
-    describeLabel.text = I18N.Write.heartDescribe
-    describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.6)
-    
-    titleLabel.text = I18N.Write.secondTitle
-    
-    writeTextView.setTextWithLineHeight(text: writeTextView.text, lineHeightMultiple: 1.6)
-    writeTextView.text = I18N.Write.secondPlaceholder
-    writeTextView.font = .readMeFont(size: 15)
-    writeTextView.textColor = .grey09
-    
-    // textView height 변경
-    writeTextView.snp.updateConstraints { make in
-      make.leading.equalToSuperview().inset(24)
-      make.top.equalTo(titleLabel.snp.bottom).offset(20)
-      make.trailing.equalToSuperview().inset(42)
-      make.height.equalTo((UIScreen.main.bounds.width - 68) * 0.69)
-    }
+    [cheerLabel, describeLabel, firstView, secondView].forEach { $0.alpha = 0 }
   }
   
   private func setLayout() {
     view.addSubviews([topBgView, cheerLabel, describeLabel,
-                     titleLabel, writeTextView, progressView,
-                      firstView, secondView, nextButton])
+                      firstView, secondView, progressView,
+                      nextButton])
     
     cheerLabel.snp.makeConstraints { make in
       make.leading.equalToSuperview().inset(28)
@@ -216,77 +197,23 @@ extension WriteVC {
       make.top.equalTo(topBgView.snp.bottom)
     }
     
-    titleLabel.snp.makeConstraints { make in
-      make.leading.equalToSuperview().inset(28)
-      make.top.equalTo(topBgView.snp.bottom).offset(32)
-    }
-    
-    writeTextView.snp.makeConstraints { make in
-      make.leading.equalToSuperview().inset(24)
-      make.top.equalTo(titleLabel.snp.bottom).offset(20)
-      make.trailing.equalToSuperview().inset(42)
-      make.height.equalTo((UIScreen.main.bounds.width - 68) * 0.61)
-    }
-    
     nextButton.snp.makeConstraints { make in
       make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(22)
       make.bottom.equalTo(view.safeAreaLayoutGuide).inset(34)
       make.height.equalTo(nextButton.snp.width).multipliedBy(0.156)
     }
     
-    firstView.addSubviews([firstTitleLabel, bookCoverImageView, categoryLabel,
-                          bookTitleLabel, bookAuthorLabel])
-    
     firstView.snp.makeConstraints { make in
       make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-      make.top.equalTo(writeTextView.snp.bottom).offset(37)
+      make.top.equalTo(progressView.snp.bottom)
+      make.bottom.equalTo(nextButton.snp.top)
     }
-    
-    firstTitleLabel.snp.makeConstraints { make in
-      make.leading.equalToSuperview().inset(28)
-      make.top.equalToSuperview()
-    }
-    
-    bookCoverImageView.snp.makeConstraints { make in
-      make.leading.equalToSuperview().inset(28)
-      make.top.equalTo(firstTitleLabel.snp.bottom).offset(18)
-      make.height.equalTo(82)
-      make.width.equalTo(bookCoverImageView.snp.height).multipliedBy(0.68)
-    }
-    
-    categoryLabel.snp.makeConstraints { make in
-      make.leading.equalTo(bookCoverImageView.snp.trailing).offset(22)
-      make.top.equalTo(bookCoverImageView.snp.top)
-    }
-    
-    bookTitleLabel.snp.makeConstraints { make in
-      make.leading.equalTo(categoryLabel.snp.leading)
-      make.top.equalTo(categoryLabel.snp.bottom).offset(6)
-      make.trailing.equalToSuperview().inset(57)
-    }
-    
-    bookAuthorLabel.snp.makeConstraints { make in
-      make.leading.equalTo(categoryLabel.snp.leading)
-      make.top.equalTo(bookTitleLabel.snp.bottom).offset(14)
-      make.trailing.equalTo(bookTitleLabel.snp.trailing)
-    }
-    
-    secondView.addSubviews([secondTitleLabel, sentenceTextView])
     
     secondView.snp.makeConstraints { make in
-      make.leading.equalToSuperview().inset(28)
-      make.trailing.equalToSuperview().inset(46)
-      make.top.equalTo(writeTextView.snp.bottom).offset(28)
-      make.bottom.equalTo(nextButton.snp.top).offset(61)
-    }
-    
-    secondTitleLabel.snp.makeConstraints { make in
-      make.leading.top.trailing.equalToSuperview()
-    }
-    
-    sentenceTextView.snp.makeConstraints { make in
-      make.leading.trailing.bottom.equalToSuperview()
-      make.top.equalTo(secondTitleLabel.snp.bottom).offset(14)
+      make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+      make.top.equalTo(progressView.snp.bottom)
+      make.bottom.equalTo(nextButton.snp.top)
     }
   }
 }
+

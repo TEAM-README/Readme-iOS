@@ -16,6 +16,8 @@
 		2B52A31228083D7F00CFB1D0 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52A31128083D7F00CFB1D0 /* SearchUseCase.swift */; };
 		2B52A31428083D8F00CFB1D0 /* SearchEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52A31328083D8F00CFB1D0 /* SearchEntity.swift */; };
 		2B52A31628083DAB00CFB1D0 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52A31528083DAB00CFB1D0 /* SearchRepository.swift */; };
+		2B6DED8B28105BE8002BD931 /* WriteFirstFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DED8A28105BE8002BD931 /* WriteFirstFlow.swift */; };
+		2B6DED8D28105F3E002BD931 /* WriteSecondFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DED8C28105F3E002BD931 /* WriteSecondFlow.swift */; };
 		2B7DCCA7280E7E490062BAE8 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DCCA6280E7E490062BAE8 /* WriteViewModel.swift */; };
 		2B7DCCA9280E7E580062BAE8 /* WriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DCCA8280E7E580062BAE8 /* WriteVC.swift */; };
 		2B7DCCAB280E7ED70062BAE8 /* Write.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B7DCCAA280E7ED70062BAE8 /* Write.storyboard */; };
@@ -156,6 +158,8 @@
 		2B52A31128083D7F00CFB1D0 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
 		2B52A31328083D8F00CFB1D0 /* SearchEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEntity.swift; sourceTree = "<group>"; };
 		2B52A31528083DAB00CFB1D0 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
+		2B6DED8A28105BE8002BD931 /* WriteFirstFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFirstFlow.swift; sourceTree = "<group>"; };
+		2B6DED8C28105F3E002BD931 /* WriteSecondFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteSecondFlow.swift; sourceTree = "<group>"; };
 		2B7DCCA6280E7E490062BAE8 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
 		2B7DCCA8280E7E580062BAE8 /* WriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteVC.swift; sourceTree = "<group>"; };
 		2B7DCCAA280E7ED70062BAE8 /* Write.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Write.storyboard; sourceTree = "<group>"; };
@@ -401,6 +405,8 @@
 			isa = PBXGroup;
 			children = (
 				2B7DCCAA280E7ED70062BAE8 /* Write.storyboard */,
+				2B6DED8A28105BE8002BD931 /* WriteFirstFlow.swift */,
+				2B6DED8C28105F3E002BD931 /* WriteSecondFlow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1426,6 +1432,7 @@
 				FDD9D2E227F9E32C0024DFB2 /* AnalyticsType.swift in Sources */,
 				FDD9D2F727F9E3870024DFB2 /* CoordinatorFinishOutput.swift in Sources */,
 				FDE1A2AD2805BF8D000DDBE2 /* LoginModel.swift in Sources */,
+				2B6DED8D28105F3E002BD931 /* WriteSecondFlow.swift in Sources */,
 				FD0619722805516500F647D7 /* BaseViewModel.swift in Sources */,
 				FD85CED32809C9E900E7BE7B /* FeedModel.swift in Sources */,
 				FDD9D28D27F9DFAF0024DFB2 /* calculateTopInset.swift in Sources */,
@@ -1448,6 +1455,7 @@
 				FD929E5F280A62E1008F590C /* FeedService.swift in Sources */,
 				FDD9D2E627F9E32C0024DFB2 /* FirebaseAnalyticsProvider.swift in Sources */,
 				FDE1A2AC2805BF8D000DDBE2 /* LoginRepository.swift in Sources */,
+				2B6DED8B28105BE8002BD931 /* WriteFirstFlow.swift in Sources */,
 				FDD9D27727F9DF190024DFB2 /* ImageLiterals.swift in Sources */,
 				FD06196E2805516500F647D7 /* BaseUseCase.swift in Sources */,
 				FDD9D29727F9DFAF0024DFB2 /* PanDirectionGesture.swift in Sources */,
