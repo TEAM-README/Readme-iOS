@@ -47,7 +47,7 @@ extension SettingVC {
     agreementLabel.textColor = .grey04
     
     logoutLabel.text = I18N.Setting.logout
-    logoutLabel.textColor = .alertRed
+    logoutLabel.textColor = .logoutRed
   }
   
   private func setButtonActions() {

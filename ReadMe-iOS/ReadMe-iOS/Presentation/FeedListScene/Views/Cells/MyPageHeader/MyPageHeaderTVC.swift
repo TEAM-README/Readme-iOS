@@ -19,6 +19,7 @@ final class MyPageHeaderTVC: UITableViewCell, UITableViewRegisterable {
   override func awakeFromNib() {
     super.awakeFromNib()
     self.configureUI()
+    self.setButtonAction()
   }
   
 }
@@ -40,5 +41,11 @@ extension MyPageHeaderTVC {
     let countString = String(viewModel.bookCount) + I18N.MyPage.count
     totalCountLabel.text = I18N.MyPage.total + countString + I18N.MyPage.countDescription
     totalCountLabel.setTargetAttributedText(targetString: countString, type: .medium, color: .white)
+  }
+  
+  private func setButtonAction() {
+    settingButton.press {
+      self.postObserverAction(.moveSettingView)
+    }
   }
 }
