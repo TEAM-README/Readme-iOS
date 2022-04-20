@@ -14,11 +14,11 @@ class WriteFirstFlow: UIView {
   // MARK: - Vars & Lets Part
   private let firstTitleLabel = UILabel()
   private let firstContentTitleLabel = UILabel()
-  private let firstTextView = UITextView()
   private let bookCoverImageView = UIImageView()
   private let categoryLabel = UILabel()
   private let bookTitleLabel = UILabel()
   private let bookAuthorLabel = UILabel()
+  let firstTextView = UITextView()
   
   // MARK: - Life Cycles
   override init(frame: CGRect) {

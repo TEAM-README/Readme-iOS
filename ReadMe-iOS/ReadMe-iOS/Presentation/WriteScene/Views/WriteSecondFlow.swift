@@ -14,8 +14,8 @@ class WriteSecondFlow: UIView {
   // MARK: - Vars & Lets Part
   private let secondTitleLabel = UILabel()
   private let secondContentTitleLabel = UILabel()
-  private let secondTextView = UITextView()
   private let sentenceTextView = UITextView()
+  let secondTextView = UITextView()
   
   // MARK: - Life Cycles
   override init(frame: CGRect) {
@@ -33,12 +33,18 @@ class WriteSecondFlow: UIView {
 
 extension WriteSecondFlow {
   func setData(bookname: String, sentence: String) {
-    secondContentTitleLabel.text = bookname + I18N.Write.interestedSentence
+    
+    if bookname.count > 11 {
+      let startIndex = bookname.index(bookname.startIndex, offsetBy: 0)
+      let endIndex = bookname.index(bookname.startIndex, offsetBy: 10)
+      secondContentTitleLabel.text = String(bookname[startIndex..<endIndex]) + "..." + I18N.Write.interestedSentence
+    } else {
+      secondContentTitleLabel.text = bookname + I18N.Write.interestedSentence
+    }
     secondContentTitleLabel.textColor = .mainBlue
     secondContentTitleLabel.setTargetAttributedText(targetString: I18N.Write.interestedSentence, fontType: .semiBold, color: .grey04)
     secondContentTitleLabel.font = .readMeFont(size: 14, type: .semiBold)
     
-//    sentenceTextView.text = "‘스마트폰보다 재미있는 게 있을까' 이것만큼 어려운 주제가 없다는 것을 안다. 하지만 그래도 답하고 싶었던 이유는, 언제나 카톡 속 ㅋㅋㅋ가 아닌, 실제로 웃을 수 있는 상황을 바랐기 때문이 아닐까ㅋㅋㅋㅋㅋㅋㅋㅋㅋㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹ"
     sentenceTextView.text = sentence
     sentenceTextView.setTextWithLineHeight(text: sentenceTextView.text, lineHeightMultiple: 1.6)
   }

@@ -30,7 +30,10 @@ class WriteVC: UIViewController {
   private let disposeBag = DisposeBag()
   
   let username: String = "혜화동 꽃가마"
-  let bookname: String = "바람이분다어쩌고저쩌고뭐?" // 11글자 초과면 끝에 자르기
+  let bookname: String = "바람이분다, 살아야 한다"
+  
+  private var sentence: String?
+  private var impression: String?
   var viewModel: WriteViewModel!
   var flowType: FlowType = .firstFlow
   
@@ -40,6 +43,7 @@ class WriteVC: UIViewController {
     super.viewDidLoad()
     
     setLayout()
+    setDelegate()
     bindViewModels()
     configureUI()
     setFlow(.firstFlow)
@@ -56,11 +60,12 @@ extension WriteVC {
       })
       .disposed(by: disposeBag)
   }
-}
-
-// MARK: - Custom Methods
-
-extension WriteVC {
+  
+  private func setDelegate() {
+    firstView.firstTextView.delegate = self
+    secondView.secondTextView.delegate = self
+  }
+  
   private func setFlow(_ type: FlowType) {
     switch type {
     case .firstFlow:
@@ -122,8 +127,7 @@ extension WriteVC {
   private func setSecondFlow() {
     progressBar.setPercentage(ratio: 1)
     
-    // 임의 데이터
-    secondView.setData(bookname: "책이름이요오오오", sentence: "‘스마트폰보다 재미있는 게 있을까' 이것만큼 어려운 주제가 없다는 것을 안다. 하지만 그래도 답하고 싶었던 이유는, 언제나 카톡 속 ㅋㅋㅋ가 아닌, 실제로 웃을 수 있는 상황을 바랐기 때문이 아닐까ㅋㅋㅋㅋㅋㅋㅋㅋㅋㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹ")
+    secondView.setData(bookname: bookname, sentence: sentence ?? "")
     
     UIView.animate(withDuration: 0.2,
                    delay: 0,
@@ -144,6 +148,55 @@ extension WriteVC {
         self.flowType = .firstFlow
       })
     })
+  }
+}
+
+// MARK: - UITextViewDelegate
+
+extension WriteVC: UITextViewDelegate {
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+      self.view.endEditing(true)
+  }
+  
+  func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+    switch textView {
+    case firstView.firstTextView:
+      if textView.text == I18N.Write.firstPlaceholder {
+        textView.textColor = .black
+        textView.text = ""
+      }
+    case secondView.secondTextView:
+      if textView.text == I18N.Write.secondPlaceholder {
+        textView.textColor = .black
+        textView.text = ""
+      }
+    default:
+      return true
+    }
+    
+    return true
+  }
+  
+  func textViewDidEndEditing(_ textView: UITextView) {
+    switch textView {
+    case firstView.firstTextView:
+      if textView.text == "" {
+        textView.text = I18N.Write.firstPlaceholder
+        textView.textColor = .grey09
+      } else {
+        self.sentence = firstView.firstTextView.text
+      }
+    case secondView.secondTextView:
+      if textView.text == "" {
+        textView.text = I18N.Write.secondPlaceholder
+        textView.textColor = .grey09
+      } else {
+        self.impression = secondView.secondTextView.text
+      }
+    default:
+      return
+    }
   }
 }
 
