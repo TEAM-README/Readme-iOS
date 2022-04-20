@@ -44,6 +44,8 @@
 		FD0619872805586200F647D7 /* TabbarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0619862805586200F647D7 /* TabbarIcon.swift */; };
 		FD06198928055C2200F647D7 /* makeKernValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06198828055C2200F647D7 /* makeKernValue.swift */; };
 		FD06198C28055CC700F647D7 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06198B28055CC700F647D7 /* TabbarView.swift */; };
+		FD0C386C280FDFBA004E79C7 /* MyPageHeaderTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0C386A280FDFBA004E79C7 /* MyPageHeaderTVC.swift */; };
+		FD0C386D280FDFBA004E79C7 /* MyPageHeaderTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD0C386B280FDFBA004E79C7 /* MyPageHeaderTVC.xib */; };
 		FD106C50280E78FF00D803D8 /* ScrollToTop + UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD106C4F280E78FF00D803D8 /* ScrollToTop + UITableView.swift */; };
 		FD106C52280E96BD00D803D8 /* UsecaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD106C51280E96BD00D803D8 /* UsecaseType.swift */; };
 		FD2937BE280E5EF5003B4685 /* FeedList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD2937BD280E5EF5003B4685 /* FeedList.storyboard */; };
@@ -192,6 +194,8 @@
 		FD0619862805586200F647D7 /* TabbarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarIcon.swift; sourceTree = "<group>"; };
 		FD06198828055C2200F647D7 /* makeKernValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = makeKernValue.swift; sourceTree = "<group>"; };
 		FD06198B28055CC700F647D7 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; usesTabs = 1; };
+		FD0C386A280FDFBA004E79C7 /* MyPageHeaderTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHeaderTVC.swift; sourceTree = "<group>"; };
+		FD0C386B280FDFBA004E79C7 /* MyPageHeaderTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageHeaderTVC.xib; sourceTree = "<group>"; };
 		FD106C4F280E78FF00D803D8 /* ScrollToTop + UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollToTop + UITableView.swift"; sourceTree = "<group>"; };
 		FD106C51280E96BD00D803D8 /* UsecaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsecaseType.swift; sourceTree = "<group>"; };
 		FD2937BD280E5EF5003B4685 /* FeedList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FeedList.storyboard; sourceTree = "<group>"; };
@@ -496,13 +500,39 @@
 			path = Tabbar;
 			sourceTree = "<group>";
 		};
-		FD2937BF280E60C2003B4685 /* Cells */ = {
+		FD0C3867280FDEF4004E79C7 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				FD2937C3280E60E7003B4685 /* FeedListCategoryTVC.xib */,
+				FD2937C6280E6100003B4685 /* FeedListCategoryTVC.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		FD0C3868280FDEFC004E79C7 /* MyPageHeader */ = {
+			isa = PBXGroup;
+			children = (
+				FD0C386A280FDFBA004E79C7 /* MyPageHeaderTVC.swift */,
+				FD0C386B280FDFBA004E79C7 /* MyPageHeaderTVC.xib */,
+			);
+			path = MyPageHeader;
+			sourceTree = "<group>";
+		};
+		FD0C3869280FDF09004E79C7 /* FeedContent */ = {
 			isa = PBXGroup;
 			children = (
 				FD2937C7280E6100003B4685 /* FeedListContentTVC.xib */,
 				FD2937C2280E60E7003B4685 /* FeedListContentTVC.swift */,
-				FD2937C3280E60E7003B4685 /* FeedListCategoryTVC.xib */,
-				FD2937C6280E6100003B4685 /* FeedListCategoryTVC.swift */,
+			);
+			path = FeedContent;
+			sourceTree = "<group>";
+		};
+		FD2937BF280E60C2003B4685 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				FD0C3869280FDF09004E79C7 /* FeedContent */,
+				FD0C3868280FDEFC004E79C7 /* MyPageHeader */,
+				FD0C3867280FDEF4004E79C7 /* Category */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1355,6 +1385,7 @@
 				FDDB0B7A280587000055B208 /* Home.storyboard in Resources */,
 				FD06197F2805526800F647D7 /* TabbarIcon.xib in Resources */,
 				FD0619642805457600F647D7 /* Pretendard-SemiBold.otf in Resources */,
+				FD0C386D280FDFBA004E79C7 /* MyPageHeaderTVC.xib in Resources */,
 				FD0619602805457600F647D7 /* Pretendard-Light.otf in Resources */,
 				FD2937C9280E6100003B4685 /* FeedListContentTVC.xib in Resources */,
 				FDE1A2B62805BFC6000DDBE2 /* Login.storyboard in Resources */,
@@ -1423,6 +1454,7 @@
 				FDD9D2E527F9E32C0024DFB2 /* AppLog.swift in Sources */,
 				FD85CECD2809C92F00E7BE7B /* FeedDetailEntity.swift in Sources */,
 				FDDB0B58280583EE0055B208 /* HomeViewModel.swift in Sources */,
+				FD0C386C280FDFBA004E79C7 /* MyPageHeaderTVC.swift in Sources */,
 				2B9605EC280D373E006FF358 /* SearchService.swift in Sources */,
 				FD99D59A28073C4900BB7FDA /* SignupVC.swift in Sources */,
 				FD99D5AA28073DB200BB7FDA /* BottomButton.swift in Sources */,
