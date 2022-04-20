@@ -36,6 +36,7 @@ extension BaseVC: MainTabbarDelegate{
   }
   
   func tabbarClicked(_ type: TabbarIconType) {
+
     if !tabList.contains(type){
       let vc = makeScene(type)
       vc.view.translatesAutoresizingMaskIntoConstraints = false
@@ -59,8 +60,8 @@ extension BaseVC: MainTabbarDelegate{
   
   private func makeScene(_ type: TabbarIconType) -> UIViewController{
     switch(type) {
-      case .home: return moduleFactory.makeFeedListVC()
-      case .mypage: return moduleFactory.makeMyPageVC()
+      case .home: return moduleFactory.makeFeedListVC(isMyPage: false)
+      case .mypage: return moduleFactory.makeFeedListVC(isMyPage: true)
     }
   }
 }

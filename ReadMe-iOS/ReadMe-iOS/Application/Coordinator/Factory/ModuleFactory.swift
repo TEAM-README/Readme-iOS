@@ -13,7 +13,7 @@ protocol ModuleFactoryProtocol {
   func makeBaseVC() -> BaseVC
   func makeHomeVC() -> HomeVC
   func makeFeedDetailVC(idx: Int) -> FeedDetailVC
-  func makeFeedListVC() -> FeedListVC
+  func makeFeedListVC(isMyPage: Bool) -> FeedListVC
   func makeMyPageVC() -> MyPageVC
   func makeSearchVC() -> SearchVC
 }
@@ -61,10 +61,14 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return feedDetailVC
     }
   
-  func makeFeedListVC() -> FeedListVC {
-    let repository = DefaultFeedListRepository(service: BaseService.default)
-    let useCase = DefaultFeedListUseCase(repository: repository)
-    let viewModel = FeedListViewModel(useCase: useCase)
+  func makeFeedListVC(isMyPage: Bool) -> FeedListVC {
+    let feedRepository = DefaultFeedListRepository(service: BaseService.default)
+    let myPageRepository = DefaultMyPageRepository(service: BaseService.default)
+    let useCase = DefaultFeedListUseCase(
+      myPageRepository: myPageRepository,
+      feedrepository: feedRepository)
+    let viewModel = FeedListViewModel(useCase: useCase,
+                                      isMyPage: isMyPage)
     let feedListVC =  FeedListVC.controllerFromStoryboard(.feedList)
     feedListVC.viewModel = viewModel
     return feedListVC

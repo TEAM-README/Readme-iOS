@@ -58,7 +58,7 @@ struct I18N {
   struct MyPage {
     static let nicknameDescription = " 님의 책장"
     static let count = "개"
-    static let total = "총"
+    static let total = "총 "
     static let countDescription = "의 글이 있어요"
   }
 }

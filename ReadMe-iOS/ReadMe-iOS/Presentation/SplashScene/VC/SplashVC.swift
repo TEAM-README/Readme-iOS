@@ -45,7 +45,7 @@ class SplashVC: UIViewController {
   }
   
   private func pushFeedListView() {
-    let feedListVC = ModuleFactory.shared.makeFeedListVC()
-    navigationController?.pushViewController(feedListVC, animated: true)
+    let feedListVC = ModuleFactory.shared.makeFeedListVC(isMyPage: false)
+    navigationController?.pushViewController(feedListVC, animated: false)
   }
 }

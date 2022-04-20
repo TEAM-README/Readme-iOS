@@ -14,9 +14,10 @@ struct FeedListContentViewModel: FeedListDataSource {
   let commentTextViewModel: FeedTextViewModel
   let nickname: String
   let date: String
+  let isMyPage: Bool
 }
 
-class FeedListContentTVC: UITableViewCell, UITableViewRegisterable {
+final class FeedListContentTVC: UITableViewCell, UITableViewRegisterable {
   static var isFromNib: Bool = true
   var viewModel: FeedListContentViewModel? { didSet { bindViewModel() }}
   
@@ -65,6 +66,7 @@ extension FeedListContentTVC {
   
   private func bindViewModel() {
     guard let viewModel = viewModel else { return }
+    contentView.backgroundColor = viewModel.isMyPage ? .mainBlue : .grey00
     categoryLabel.text = viewModel.category
     titleLabel.text = viewModel.title
     nicknameLabel.text = viewModel.nickname
@@ -73,6 +75,7 @@ extension FeedListContentTVC {
     sentenceTextView.setTextWithLineHeight(
       text: viewModel.sentenceTextViewModel.content,
       lineHeightMultiple: viewModel.sentenceTextViewModel.lineHeightMultiple)
+    sentenceTextView.setCharacterSpacing(kernValue: -0.1)
     sentenceTextView.font = viewModel.sentenceTextViewModel.textFont
     sentenceHeightConstraint.constant = viewModel.sentenceTextViewModel.textViewHeight
     sentenceTextView.sizeToFit()
@@ -80,6 +83,7 @@ extension FeedListContentTVC {
     commentTextView.setTextWithLineHeight(
       text: viewModel.commentTextViewModel.content,
       lineHeightMultiple: viewModel.commentTextViewModel.lineHeightMultiple)
+    sentenceTextView.setCharacterSpacing(kernValue: -0.2)
     commentTextView.font = viewModel.commentTextViewModel.textFont
     commentHeightConstraint.constant = viewModel.commentTextViewModel.textViewHeight
     commentTextView.sizeToFit()

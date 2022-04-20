@@ -1181,7 +1181,7 @@
 		FDDB0B61280585410055B208 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				FDDB0B6D280585740055B208 /* MyPageViewModel.swift */,
+				FDDB0B6B280585740055B208 /* MyPageModel.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -1223,7 +1223,7 @@
 		FDDB0B662805855F0055B208 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				FDDB0B6B280585740055B208 /* MyPageModel.swift */,
+				FDDB0B6D280585740055B208 /* MyPageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

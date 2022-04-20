@@ -7,14 +7,10 @@
 
 import UIKit
 
-struct MyPageHeaderViewModel {
-  var nickname: String
-  var totalCount: Int
-}
-
-class MyPageHeaderTVC: UITableViewCell {
+final class MyPageHeaderTVC: UITableViewCell, UITableViewRegisterable {
   
-  var viewModel: MyPageHeaderViewModel! { didSet { bindViewModel() }}
+  static var isFromNib: Bool = true
+  var viewModel: MyPageModel! { didSet { bindViewModel() }}
   
   @IBOutlet weak var nicknameLabel: UILabel!
   @IBOutlet weak var totalCountLabel: UILabel!
@@ -41,7 +37,7 @@ extension MyPageHeaderTVC {
     nicknameLabel.text = viewModel.nickname + I18N.MyPage.nicknameDescription
     nicknameLabel.setTargetAttributedText(targetString: viewModel.nickname, type: .semiBold)
     
-    let countString = String(viewModel.totalCount) + I18N.MyPage.count
+    let countString = String(viewModel.bookCount) + I18N.MyPage.count
     totalCountLabel.text = I18N.MyPage.total + countString + I18N.MyPage.countDescription
     totalCountLabel.setTargetAttributedText(targetString: countString, type: .medium, color: .white)
   }
