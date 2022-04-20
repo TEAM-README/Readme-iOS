@@ -61,4 +61,11 @@ struct I18N {
     static let total = "총 "
     static let countDescription = "의 글이 있어요"
   }
+  
+  struct Setting {
+    static let settingTitle = "환경설정"
+    static let contact = "문의하기"
+    static let agreement = "약관 보기"
+    static let logout = "로그아웃"
+  }
 }
