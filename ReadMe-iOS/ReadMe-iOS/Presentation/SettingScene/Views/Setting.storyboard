@@ -147,6 +147,7 @@
                     <connections>
                         <outlet property="agreementButton" destination="xnl-8B-ufK" id="cZg-lQ-W9z"/>
                         <outlet property="agreementLabel" destination="fqE-3i-TF2" id="7aF-Ft-85G"/>
+                        <outlet property="backButton" destination="gcx-Hc-oTv" id="YIz-9f-5af"/>
                         <outlet property="contactButton" destination="ATo-70-2CY" id="UGx-Ga-xfJ"/>
                         <outlet property="contactLabel" destination="7St-KL-99K" id="xMB-K9-KFc"/>
                         <outlet property="logoutButton" destination="0Xp-PV-Q4c" id="maA-LX-ZG7"/>

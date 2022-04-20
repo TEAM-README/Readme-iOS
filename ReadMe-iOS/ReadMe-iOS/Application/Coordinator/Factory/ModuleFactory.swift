@@ -16,6 +16,7 @@ protocol ModuleFactoryProtocol {
   func makeFeedListVC(isMyPage: Bool) -> FeedListVC
   func makeMyPageVC() -> MyPageVC
   func makeSearchVC() -> SearchVC
+  func makeSettingVC() -> SettingVC
 }
 
 final class ModuleFactory: ModuleFactoryProtocol{
@@ -74,5 +75,6 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return feedListVC
   }
   func makeMyPageVC() -> MyPageVC { MyPageVC.controllerFromStoryboard(.mypage) }
+  func makeSettingVC() -> SettingVC { SettingVC.controllerFromStoryboard(.setting) }
 
 }

@@ -78,6 +78,16 @@ extension BaseVC {
       let detailVC = ModuleFactory.shared.makeFeedDetailVC(idx: idx)
       self.navigationController?.pushViewController(detailVC, animated: true)
     }
+    
+    addObserverAction(.moveSettingView) { _ in
+      let settingVC = ModuleFactory.shared.makeSettingVC()
+      self.navigationController?.pushViewController(settingVC, animated: true)
+    }
+    
+    addObserverAction(.logout) { _ in
+      let loginVC = ModuleFactory.shared.makeLoginVC()
+      self.navigationController?.pushViewController(loginVC, animated: true)
+    }
   }
 }
 

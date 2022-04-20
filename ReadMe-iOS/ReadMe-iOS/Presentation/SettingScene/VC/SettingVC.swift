@@ -10,6 +10,7 @@ import UIKit
 class SettingVC: UIViewController {
   
   @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var backButton: UIButton!
   
   @IBOutlet weak var contactLabel: UILabel!
   @IBOutlet weak var agreementLabel: UILabel!
@@ -59,7 +60,11 @@ extension SettingVC {
     }
     
     logoutButton.press {
-      postObserverAction(.logout)
+      self.postObserverAction(.logout)
+    }
+    
+    backButton.press {
+      self.navigationController?.popViewController(animated: true)
     }
   }
 }
