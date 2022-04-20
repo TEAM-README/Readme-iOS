@@ -47,4 +47,11 @@ struct I18N {
     static let emptyBeforeSearch = "책을 검색하고 읽은 책을 추가해보세요"
     static let emptyAfterSearch = "책 검색 결과가 없습니다"
   }
+  
+  struct FeedList {
+    static let categoryNoSelect = "관심 있는 카테고리를"
+    static let categoryNoSelectBold = "관심 있는 카테고리"
+    static let categoryDescriptionNoselect = "선택해보세요"
+    static let categoryDescription = "관심이 있어요"
+  }
 }

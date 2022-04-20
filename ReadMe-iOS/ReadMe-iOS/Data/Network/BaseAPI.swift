@@ -13,6 +13,8 @@ enum BaseAPI{
   case login(provider: String,token : String)
   case postCheckNicknameDuplicated(nickname: String)
   case getFeedDetail(idx: Int)
+  case getFeedList(page: Int, category: String)
+
   case getSearchRecent
 }
 
@@ -37,7 +39,7 @@ extension BaseAPI: TargetType {
         base += ""
         case .login,.postCheckNicknameDuplicated:
           base += ""
-        case .getFeedDetail:
+        case .getFeedDetail,.getFeedList:
           base += ""
       case .getSearchRecent:
         base += ""
