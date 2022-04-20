@@ -9,6 +9,7 @@ import UIKit
 
 protocol MainTabbarDelegate{
   func tabbarClicked(_ type: TabbarIconType)
+	func plusButtonClicked()
 }
 
 final class TabbarView: XibView{
@@ -19,7 +20,8 @@ final class TabbarView: XibView{
   
   @IBOutlet weak var homeIcon: TabbarIcon!
   @IBOutlet weak var mypageIcon: TabbarIcon!
-  
+  @IBOutlet weak var plusButton: UIButton!
+
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setTabbarViewModel()
@@ -41,7 +43,12 @@ final class TabbarView: XibView{
       currentTab = .mypage
     }
   }
-  
+    
+  @IBAction func plusButtonClicked(_ sender: Any) {
+    makeVibrate()
+		delegate?.plusButtonClicked()
+  }
+    
   private func setTabbarViewModel() {
     homeIcon.viewModel = TabbarIconViewModel(type: .home, clicked: currentTab == .home)
     mypageIcon.viewModel = TabbarIconViewModel(type: .mypage, clicked: currentTab == .mypage)

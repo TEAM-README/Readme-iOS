@@ -50,6 +50,13 @@ extension BaseVC: MainTabbarDelegate{
     }
   }
   
+  func plusButtonClicked() {
+    let searchVC = ModuleFactory.shared.makeSearchVC()
+    searchVC.modalPresentationStyle = .fullScreen
+    
+    self.present(searchVC, animated: true)
+  }
+  
   private func makeScene(_ type: TabbarIconType) -> UIViewController{
     switch(type) {
       case .home: return moduleFactory.makeFeedListVC()

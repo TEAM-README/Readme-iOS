@@ -16,6 +16,7 @@ enum Storyboards: String {
   case feedDetail = "FeedDetail"
   case feedList = "FeedList"
   case mypage = "MyPage"
+  case search = "Search"
 }
 
 extension UIStoryboard{
