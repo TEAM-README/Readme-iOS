@@ -83,7 +83,7 @@ extension FeedListContentTVC {
     commentTextView.setTextWithLineHeight(
       text: viewModel.commentTextViewModel.content,
       lineHeightMultiple: viewModel.commentTextViewModel.lineHeightMultiple)
-    sentenceTextView.setCharacterSpacing(kernValue: -0.2)
+    commentTextView.setCharacterSpacing(kernValue: -0.2)
     commentTextView.font = viewModel.commentTextViewModel.textFont
     commentHeightConstraint.constant = viewModel.commentTextViewModel.textViewHeight
     commentTextView.sizeToFit()
