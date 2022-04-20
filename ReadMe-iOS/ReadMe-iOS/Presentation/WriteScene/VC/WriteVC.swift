@@ -149,6 +149,29 @@ extension WriteVC {
       })
     })
   }
+  
+  private func upAnimation() {
+    UIView.animate(withDuration: 0.3,
+                   delay: 0,
+                   options: .curveEaseOut,
+                   animations: {
+      let frame = CGAffineTransform(translationX: 0, y: -(UIScreen.main.bounds.height*106/844))
+      [self.topBgView, self.progressBar, self.firstView, self.secondView].forEach { $0.transform = frame }
+      [self.cheerLabel, self.describeLabel].forEach { $0.alpha = 0 }
+      
+    }, completion: nil)
+  }
+  
+  private func downAnimation() {
+    UIView.animate(withDuration: 0.3,
+                   delay: 0,
+                   options: .curveEaseOut,
+                   animations: {
+      let frame = CGAffineTransform(translationX: 0, y: 0)
+      [self.topBgView, self.progressBar, self.firstView, self.secondView].forEach { $0.transform = frame }
+      [self.cheerLabel, self.describeLabel].forEach { $0.alpha = 1 }
+    }, completion: nil)
+  }
 }
 
 // MARK: - UITextViewDelegate
@@ -160,6 +183,7 @@ extension WriteVC: UITextViewDelegate {
   }
   
   func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+    upAnimation()
     switch textView {
     case firstView.firstTextView:
       if textView.text == I18N.Write.firstPlaceholder {
@@ -179,6 +203,7 @@ extension WriteVC: UITextViewDelegate {
   }
   
   func textViewDidEndEditing(_ textView: UITextView) {
+    downAnimation()
     switch textView {
     case firstView.firstTextView:
       if textView.text == "" {
