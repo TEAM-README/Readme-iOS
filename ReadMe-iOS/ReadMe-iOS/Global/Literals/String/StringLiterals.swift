@@ -48,6 +48,13 @@ struct I18N {
     static let emptyAfterSearch = "책 검색 결과가 없습니다"
   }
   
+  struct FeedList {
+    static let categoryNoSelect = "관심 있는 카테고리를"
+    static let categoryNoSelectBold = "관심 있는 카테고리"
+    static let categoryDescriptionNoselect = "선택해보세요"
+    static let categoryDescription = "관심이 있어요"
+  }
+  
   struct Write {
     static let startCheer = " 님의 시작을 응원해요!"
     static let heartCheer = " 님의 마음을 응원해요!"

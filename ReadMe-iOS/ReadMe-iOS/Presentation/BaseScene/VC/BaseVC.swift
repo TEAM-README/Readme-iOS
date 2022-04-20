@@ -59,7 +59,7 @@ extension BaseVC: MainTabbarDelegate{
   
   private func makeScene(_ type: TabbarIconType) -> UIViewController{
     switch(type) {
-      case .home: return moduleFactory.makeHomeVC()
+      case .home: return moduleFactory.makeFeedListVC()
       case .mypage: return moduleFactory.makeMyPageVC()
     }
   }
