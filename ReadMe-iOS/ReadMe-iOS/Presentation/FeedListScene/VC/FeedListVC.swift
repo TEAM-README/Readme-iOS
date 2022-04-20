@@ -28,6 +28,7 @@ final class FeedListVC: UIViewController {
     self.bindCells()
     self.configureTableView()
     self.bindViewModels()
+    self.bindTableView()
   }
 }
 
@@ -39,7 +40,7 @@ extension FeedListVC {
   private func configureTableView() {
     feedListTV.separatorStyle = .none
     feedListTV.backgroundColor = .clear
-    feedListTV.allowsSelection = false
+//    feedListTV.allowsSelection = false
     feedListTV.showsVerticalScrollIndicator = false
   }
   
@@ -97,5 +98,18 @@ extension FeedListVC {
 
         }
       }.disposed(by: self.disposeBag)
+  }
+  
+  private func bindTableView() {
+    feedListTV.rx.modelAndIndexSelected(FeedListDataModel.self)
+      .subscribe(onNext: { [weak self] (model,index) in
+        guard let self = self else { return }
+        guard model.type == .content else { return }
+        let selectedModel = model.dataSource as! FeedListContentViewModel
+        print("CLICK")
+        self.postObserverAction(.moveFeedDetail, object: selectedModel.idx)
+      }).disposed(by: self.disposeBag)
+    
+    
   }
 }

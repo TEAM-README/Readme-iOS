@@ -31,7 +31,7 @@ extension DefaultFeedRepository: FeedRepository {
 extension DefaultFeedRepository {
   private func makeMockFeedEntity() -> Observable<FeedDetailEntity?> {
     return .create { observer in
-      let fakeFeedInformation = FeedDetailEntity.init(imgURL: "https://bookthumb-phinf.pstatic.net/cover/071/526/07152669.jpg?udate=20220203",
+      let fakeFeedInformation = FeedDetailEntity.init(idx: 0, imgURL: "https://bookthumb-phinf.pstatic.net/cover/071/526/07152669.jpg?udate=20220203",
                                                       category: "경제/경영",
                                                       title: "총균쇠",
                                                       author: "재레드 다이아몬드",

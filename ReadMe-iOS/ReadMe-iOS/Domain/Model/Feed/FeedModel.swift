@@ -8,6 +8,7 @@
 import Foundation
 
 struct FeedDetailModel {
+  let idx: Int
   let imgURL: String
   let category: String
   let title: String

@@ -8,6 +8,7 @@
 import UIKit
 
 struct FeedListContentViewModel: FeedListDataSource {
+  let idx: Int
   let category: String
   let title: String
   let sentenceTextViewModel: FeedTextViewModel

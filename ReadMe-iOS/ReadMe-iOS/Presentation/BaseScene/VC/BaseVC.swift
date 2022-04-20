@@ -25,6 +25,11 @@ class BaseVC: UIViewController {
     super.viewDidLoad()
     configureTabbarDelegate()
     tabbarClicked(.home)
+    addObserver()
+  }
+  
+  open override func didMove(toParent parent: UIViewController?) {
+    navigationController?.fixInteractivePopGestureRecognizer(delegate: self)
   }
 }
 
@@ -66,4 +71,22 @@ extension BaseVC: MainTabbarDelegate{
   }
 }
 
+extension BaseVC {
+  func addObserver() {
+    addObserverAction(.moveFeedDetail) { noti in
+      guard let idx = noti.object as? Int else { return }
+      let detailVC = ModuleFactory.shared.makeFeedDetailVC(idx: idx)
+      self.navigationController?.pushViewController(detailVC, animated: true)
+    }
+  }
+}
 
+extension BaseVC : UIGestureRecognizerDelegate {
+  public func gestureRecognizer(
+    _ gestureRecognizer: UIGestureRecognizer,
+    shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer
+  ) -> Bool {
+    return otherGestureRecognizer is PanDirectionGestureRecognizer
+  }
+
+}

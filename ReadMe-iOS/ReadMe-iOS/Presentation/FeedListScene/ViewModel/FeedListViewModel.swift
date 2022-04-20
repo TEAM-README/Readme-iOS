@@ -102,7 +102,8 @@ extension FeedListViewModel {
 extension FeedListViewModel {
   private func makeFeedContentViewModel(_ model: FeedListModel,isMyPage: Bool) -> [FeedListContentViewModel] {
     let contents = model.feedList.map { detailModel in
-      FeedListContentViewModel.init(category: detailModel.category,
+      FeedListContentViewModel.init(idx: detailModel.idx,
+                                    category: detailModel.category,
                                     title: detailModel.title,
                                     sentenceTextViewModel: makeTextViewModel(type: .sentence,
                                                                              text: detailModel.sentence),

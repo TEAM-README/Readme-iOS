@@ -46,6 +46,7 @@
 		FD06198C28055CC700F647D7 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06198B28055CC700F647D7 /* TabbarView.swift */; };
 		FD0C386C280FDFBA004E79C7 /* MyPageHeaderTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0C386A280FDFBA004E79C7 /* MyPageHeaderTVC.swift */; };
 		FD0C386D280FDFBA004E79C7 /* MyPageHeaderTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD0C386B280FDFBA004E79C7 /* MyPageHeaderTVC.xib */; };
+		FD0C386F28104DE5004E79C7 /* modelItemSelected + RxCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0C386E28104DE5004E79C7 /* modelItemSelected + RxCocoa.swift */; };
 		FD106C50280E78FF00D803D8 /* ScrollToTop + UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD106C4F280E78FF00D803D8 /* ScrollToTop + UITableView.swift */; };
 		FD106C52280E96BD00D803D8 /* UsecaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD106C51280E96BD00D803D8 /* UsecaseType.swift */; };
 		FD2937BE280E5EF5003B4685 /* FeedList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD2937BD280E5EF5003B4685 /* FeedList.storyboard */; };
@@ -196,6 +197,7 @@
 		FD06198B28055CC700F647D7 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; usesTabs = 1; };
 		FD0C386A280FDFBA004E79C7 /* MyPageHeaderTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHeaderTVC.swift; sourceTree = "<group>"; };
 		FD0C386B280FDFBA004E79C7 /* MyPageHeaderTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageHeaderTVC.xib; sourceTree = "<group>"; };
+		FD0C386E28104DE5004E79C7 /* modelItemSelected + RxCocoa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "modelItemSelected + RxCocoa.swift"; sourceTree = "<group>"; };
 		FD106C4F280E78FF00D803D8 /* ScrollToTop + UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollToTop + UITableView.swift"; sourceTree = "<group>"; };
 		FD106C51280E96BD00D803D8 /* UsecaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsecaseType.swift; sourceTree = "<group>"; };
 		FD2937BD280E5EF5003B4685 /* FeedList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FeedList.storyboard; sourceTree = "<group>"; };
@@ -864,6 +866,7 @@
 				FD0619842805579F00F647D7 /* XibView + UIView.swift */,
 				FD99D5AB2807407800BB7FDA /* addPadding + UITextField.swift */,
 				FD106C4F280E78FF00D803D8 /* ScrollToTop + UITableView.swift */,
+				FD0C386E28104DE5004E79C7 /* modelItemSelected + RxCocoa.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1539,6 +1542,7 @@
 				FD99D59728073C4900BB7FDA /* SignupUseCase.swift in Sources */,
 				FD85CECC2809C92F00E7BE7B /* FeedDetailViewModel.swift in Sources */,
 				FDD9D2D427F9E2400024DFB2 /* ResponseObject.swift in Sources */,
+				FD0C386F28104DE5004E79C7 /* modelItemSelected + RxCocoa.swift in Sources */,
 				2B0CFB422809DFD5007F3145 /* SearchCVC.swift in Sources */,
 				FD01F0712808062E002F80D2 /* shakeAction.swift in Sources */,
 				FDDB0B72280585740055B208 /* MyPageVC.swift in Sources */,
