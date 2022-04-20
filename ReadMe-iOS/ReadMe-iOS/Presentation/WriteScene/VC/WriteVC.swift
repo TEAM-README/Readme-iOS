@@ -26,13 +26,11 @@ class WriteVC: UIViewController {
   private let firstView = WriteFirstFlow()
   private let secondView = WriteSecondFlow()
   private let nextButton = BottomButton()
-  
+  private let progressBar = ProgressBar()
   private let disposeBag = DisposeBag()
   
   let username: String = "혜화동 꽃가마"
   let bookname: String = "바람이분다어쩌고저쩌고뭐?" // 11글자 초과면 끝에 자르기
-  
-  lazy var progressView = UIProgressView()
   var viewModel: WriteViewModel!
   var flowType: FlowType = .firstFlow
   
@@ -41,9 +39,9 @@ class WriteVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    configureUI()
     setLayout()
     bindViewModels()
+    configureUI()
     setFlow(.firstFlow)
   }
 }
@@ -94,7 +92,7 @@ extension WriteVC {
   }
   
   private func setFirstFlow() {
-    progressView.progress = 0.5
+    progressBar.setPercentage(ratio: 0.5)
     
     UIView.animate(withDuration: 0.2,
                    delay: 0,
@@ -122,7 +120,7 @@ extension WriteVC {
   }
   
   private func setSecondFlow() {
-    progressView.progress = 1
+    progressBar.setPercentage(ratio: 1)
     
     // 임의 데이터
     secondView.setData(bookname: "책이름이요오오오", sentence: "‘스마트폰보다 재미있는 게 있을까' 이것만큼 어려운 주제가 없다는 것을 안다. 하지만 그래도 답하고 싶었던 이유는, 언제나 카톡 속 ㅋㅋㅋ가 아닌, 실제로 웃을 수 있는 상황을 바랐기 때문이 아닐까ㅋㅋㅋㅋㅋㅋㅋㅋㅋㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹ")
@@ -155,8 +153,7 @@ extension WriteVC {
   private func configureUI() {
     topBgView.backgroundColor = .grey00
     
-    progressView.progressTintColor = .pointBlue
-    progressView.trackTintColor = .grey01
+    progressBar.setPercentage(ratio: 0.0)
     
     cheerLabel.font = .readMeFont(size: 14, type: .bold)
     cheerLabel.textColor = .mainBlue
@@ -174,7 +171,7 @@ extension WriteVC {
   
   private func setLayout() {
     view.addSubviews([topBgView, cheerLabel, describeLabel,
-                      firstView, secondView, progressView,
+                      firstView, secondView, progressBar,
                       nextButton])
     
     cheerLabel.snp.makeConstraints { make in
@@ -192,9 +189,10 @@ extension WriteVC {
       make.bottom.equalTo(describeLabel.snp.bottom).offset(32)
     }
     
-    progressView.snp.makeConstraints { make in
+    progressBar.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview()
       make.top.equalTo(topBgView.snp.bottom)
+      make.height.equalTo(2)
     }
     
     nextButton.snp.makeConstraints { make in
@@ -205,13 +203,13 @@ extension WriteVC {
     
     firstView.snp.makeConstraints { make in
       make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-      make.top.equalTo(progressView.snp.bottom)
+      make.top.equalTo(progressBar.snp.bottom)
       make.bottom.equalTo(nextButton.snp.top)
     }
     
     secondView.snp.makeConstraints { make in
       make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-      make.top.equalTo(progressView.snp.bottom)
+      make.top.equalTo(progressBar.snp.bottom)
       make.bottom.equalTo(nextButton.snp.top)
     }
   }
