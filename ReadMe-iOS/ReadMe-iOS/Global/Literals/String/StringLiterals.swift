@@ -68,4 +68,10 @@ struct I18N {
     static let interestedSentence = "에서 인상 깊었던 문장"
     static let next = "다음"
   }
+  
+  struct WriteCheck {
+    static let titleThrough = "기록을 통해 "
+    static let titleDay = " 님의 하루가\n 더 풍요로워졌길 바라요!"
+    static let register = "등록하기"
+  }
 }
