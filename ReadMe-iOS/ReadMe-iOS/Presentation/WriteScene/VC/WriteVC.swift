@@ -34,6 +34,7 @@ class WriteVC: UIViewController {
   
   private var sentence: String?
   private var impression: String?
+  
   var viewModel: WriteViewModel!
   var flowType: FlowType = .firstFlow
   
@@ -99,7 +100,7 @@ extension WriteVC {
   private func setFirstFlow() {
     progressBar.setPercentage(ratio: 0.5)
     
-    UIView.animate(withDuration: 0.2,
+    UIView.animate(withDuration: 0.4,
                    delay: 0,
                    options: .curveEaseInOut,
                    animations: {
@@ -110,7 +111,7 @@ extension WriteVC {
       
       self.setTopLabel(self.flowType)
       
-      UIView.animate(withDuration: 0.2,
+      UIView.animate(withDuration: 0.4,
                      delay: 0,
                      options: .curveEaseInOut,
                      animations: {
@@ -129,7 +130,7 @@ extension WriteVC {
     
     secondView.setData(bookname: bookname, sentence: sentence ?? "")
     
-    UIView.animate(withDuration: 0.2,
+    UIView.animate(withDuration: 0.4,
                    delay: 0,
                    options: .curveEaseInOut,
                    animations: {
@@ -137,7 +138,7 @@ extension WriteVC {
       [self.firstView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 0 }
       
     }, completion: { _ in
-      UIView.animate(withDuration: 0.2,
+      UIView.animate(withDuration: 0.4,
                      delay: 0,
                      options: .curveEaseInOut,
                      animations: {
