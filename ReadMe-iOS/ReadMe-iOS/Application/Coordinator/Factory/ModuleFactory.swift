@@ -52,8 +52,7 @@ final class ModuleFactory: ModuleFactoryProtocol{
   }
   
   func makeWriteVC() -> WriteVC {
-    let repository = DefaultWriteRepository()
-    let useCase = DefaultWriteUseCase(repository: repository)
+    let useCase = DefaultWriteUseCase()
     let viewModel = WriteViewModel(useCase: useCase)
     let writeVC = WriteVC.controllerFromStoryboard(.write)
     writeVC.viewModel = viewModel
@@ -80,6 +79,7 @@ final class ModuleFactory: ModuleFactoryProtocol{
     feedListVC.viewModel = viewModel
     return feedListVC
   }
+  
   func makeMyPageVC() -> MyPageVC { MyPageVC.controllerFromStoryboard(.mypage) }
 
 }

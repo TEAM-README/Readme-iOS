@@ -14,11 +14,10 @@ protocol WriteUseCase {
 
 final class DefaultWriteUseCase {
   
-  private let repository: WriteRepository
   private let disposeBag = DisposeBag()
   
-  init(repository: WriteRepository) {
-    self.repository = repository
+  init() {
+    
   }
 }
 
