@@ -108,6 +108,10 @@ extension SearchVC {
     .disposed(by: disposeBag)
   }
   
+  private func bindCollectionView() {
+    // TODO: - modelAndIndexSelected
+  }
+  
   private func tapSearchButton() {
     searchButton.rx.tap
       .subscribe(onNext: {

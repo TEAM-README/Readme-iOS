@@ -56,6 +56,8 @@ extension WriteFirstFlow {
     firstContentTitleLabel.textColor = .black
     firstContentTitleLabel.setTextWithLineHeight(text: firstContentTitleLabel.text, lineHeightMultiple: 1.5)
     
+    bookCoverImageView.backgroundColor = .alertRed
+    
     categoryLabel.text = "엥 그래요?"
     categoryLabel.font = .readMeFont(size: 12)
     categoryLabel.textColor = .mainBlue

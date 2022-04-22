@@ -14,6 +14,7 @@ import RxSwift
 enum FlowType {
   case firstFlow
   case secondFlow
+  case next
 }
 
 class WriteVC: UIViewController {
@@ -47,7 +48,7 @@ class WriteVC: UIViewController {
     setDelegate()
     bindViewModels()
     configureUI()
-    setFlow(.firstFlow)
+    setFlow(self.flowType)
   }
 }
 
@@ -67,12 +68,21 @@ extension WriteVC {
     secondView.secondTextView.delegate = self
   }
   
+  private func pushWriteCheckView() {
+    let writeCheckVC = ModuleFactory.shared.makeWriteCheckVC()
+    // TODO: - 데이터 전달
+    
+    navigationController?.pushViewController(writeCheckVC, animated: true)
+  }
+  
   private func setFlow(_ type: FlowType) {
     switch type {
     case .firstFlow:
       setFirstFlow()
     case .secondFlow:
       setSecondFlow()
+    case .next:
+      pushWriteCheckView()
     }
   }
   
@@ -94,6 +104,8 @@ extension WriteVC {
       cheerLabel.setTargetAttributedText(targetString: I18N.Write.heartCheer, fontType: .regular, color: .grey08)
       
       describeLabel.setTextWithLineHeight(text: I18N.Write.heartDescribe, lineHeightMultiple: 1.6)
+    default:
+      return
     }
   }
   
@@ -146,7 +158,7 @@ extension WriteVC {
         self.setTopLabel(self.flowType)
         [self.secondView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 1 }
       }, completion: { _ in
-        self.flowType = .firstFlow
+        self.flowType = .next
       })
     })
   }
@@ -159,7 +171,6 @@ extension WriteVC {
       let frame = CGAffineTransform(translationX: 0, y: -(UIScreen.main.bounds.height*106/844))
       [self.topBgView, self.progressBar, self.firstView, self.secondView].forEach { $0.transform = frame }
       [self.cheerLabel, self.describeLabel].forEach { $0.alpha = 0 }
-      
     }, completion: nil)
   }
   
@@ -291,6 +302,15 @@ extension WriteVC {
       make.top.equalTo(progressBar.snp.bottom)
       make.bottom.equalTo(nextButton.snp.top)
     }
+  }
+}
+
+extension WriteVC : UIGestureRecognizerDelegate {
+  public func gestureRecognizer(
+    _ gestureRecognizer: UIGestureRecognizer,
+    shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer
+  ) -> Bool {
+    return otherGestureRecognizer is PanDirectionGestureRecognizer
   }
 }
 

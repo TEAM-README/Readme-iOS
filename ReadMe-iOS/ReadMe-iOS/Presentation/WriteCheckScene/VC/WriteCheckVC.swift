@@ -40,6 +40,10 @@ class WriteCheckVC: UIViewController {
     self.setLayout()
     self.bindViewModels()
   }
+  
+  open override func didMove(toParent parent: UIViewController?) {
+    navigationController?.fixInteractivePopGestureRecognizer(delegate: self)
+  }
 }
 
 // MARK: - UI Component Part
@@ -203,5 +207,14 @@ extension WriteCheckVC {
       make.bottom.equalTo(view.safeAreaLayoutGuide).inset(34)
       make.height.equalTo(registerButton.snp.width).multipliedBy(0.156)
     }
+  }
+}
+
+extension WriteCheckVC : UIGestureRecognizerDelegate {
+  public func gestureRecognizer(
+    _ gestureRecognizer: UIGestureRecognizer,
+    shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer
+  ) -> Bool {
+    return otherGestureRecognizer is PanDirectionGestureRecognizer
   }
 }
