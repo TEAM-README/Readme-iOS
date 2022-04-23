@@ -129,7 +129,6 @@ extension AlertVC {
     
     alertView.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview().inset(27)
-      make.height.equalTo(245)
       make.centerY.equalToSuperview().offset(-26)
     }
     
@@ -155,6 +154,7 @@ extension AlertVC {
     
     divideLineView.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview()
+      make.top.equalTo(descriptionLabel.snp.bottom).offset(29)
       make.bottom.equalToSuperview().inset(57)
       make.height.equalTo(1)
     }
