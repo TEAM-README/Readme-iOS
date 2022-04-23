@@ -13,7 +13,7 @@ class SplashVC: UIViewController {
     super.viewDidLoad()
     delayWithSeconds(1) {
 //      self.pushSignupView()
-      self.pushWriteView()
+      self.pushWriteCompleteView()
     }
     
     
@@ -52,5 +52,10 @@ class SplashVC: UIViewController {
   private func pushWriteView() {
     let writeVC = ModuleFactory.shared.makeWriteVC()
     navigationController?.pushViewController(writeVC, animated: false)
+  }
+  
+  private func pushWriteCompleteView() {
+    let writeCompleteVC = ModuleFactory.shared.makeWriteCompleteVC()
+    navigationController?.pushViewController(writeCompleteVC, animated: false)
   }
 }

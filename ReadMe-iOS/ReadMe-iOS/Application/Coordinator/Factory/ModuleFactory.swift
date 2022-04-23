@@ -60,6 +60,15 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return writeVC
   }
   
+  func makeWriteCompleteVC() -> WriteCompleteVC {
+    let useCase = DefaultWriteCompleteUseCase()
+    let viewModel = WriteCompleteViewModel(useCase: useCase)
+    let writeCompleteVC = WriteCompleteVC.controllerFromStoryboard(.writeComplete)
+    writeCompleteVC.viewModel = viewModel
+    
+    return writeCompleteVC
+  }
+  
   func makeBaseVC() -> BaseVC { BaseVC.controllerFromStoryboard(.base) }
   func makeHomeVC() -> HomeVC { HomeVC.controllerFromStoryboard(.home) }
   func makeFeedDetailVC(idx: Int) -> FeedDetailVC {

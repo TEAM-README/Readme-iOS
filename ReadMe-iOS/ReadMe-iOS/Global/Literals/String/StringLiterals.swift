@@ -68,4 +68,10 @@ struct I18N {
     static let interestedSentence = "에서 인상 깊었던 문장"
     static let next = "다음"
   }
+  
+  struct WriteComplete {
+    static let title = "등록을 완료했어요"
+    static let subtitle = "피드 와 마이페이지 에서\n작성한 감상글을 확인할 수 있어요"
+    static let move = "피드 구경하러 가기"
+  }
 }
