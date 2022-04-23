@@ -108,10 +108,6 @@ extension SearchVC {
     .disposed(by: disposeBag)
   }
   
-  private func bindCollectionView() {
-    // TODO: - modelAndIndexSelected
-  }
-  
   private func tapSearchButton() {
     searchButton.rx.tap
       .subscribe(onNext: {
@@ -169,6 +165,15 @@ extension SearchVC {
 extension SearchVC: UICollectionViewDelegate {
   func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
     self.view.endEditing(true)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let writeVC = ModuleFactory.shared.makeWriteVC()
+    let content = contentList[indexPath.item]
+    
+    writeVC.setFirstFlowData(bookcover: content.imgURL, bookname: content.title, category: content.category, author: content.author)
+    
+    navigationController?.pushViewController(writeVC, animated: true)
   }
 }
 

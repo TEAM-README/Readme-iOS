@@ -26,10 +26,12 @@ class WriteCheckVC: UIViewController {
   private let bookTitleLabel = UILabel()
   private let bookAuthorLabel = UILabel()
   private let registerButton = BottomButton()
-  
   private let disposeBag = DisposeBag()
+  
+  private var formatter = DateFormatter()
   var viewModel: WriteCheckViewModel!
-  let username: String = "수빈랏소짱"
+  
+  let username: String = "혜화동 꽃가마"
   
   // MARK: - Life Cycle Part
   
@@ -60,9 +62,14 @@ extension WriteCheckVC {
       .disposed(by: disposeBag)
   }
   
-  func setPreviousData(quote: String, impression: String) {
+  func setPreviousData(bookcover: String, category: String, bookname: String, author: String, quote: String, impression: String) {
     quoteTextView.text = quote
     impressionTextView.text = impression
+    
+    bookCoverImageView.setImage(with: bookcover)
+    categoryLabel.text = category
+    bookTitleLabel.text = bookname
+    bookAuthorLabel.text = author
   }
 }
 
@@ -111,25 +118,22 @@ extension WriteCheckVC {
     usernameLabel.textColor = .grey10
     usernameLabel.setTextWithLineHeight(text: username, lineHeightMultiple: 1.0)
     
-    dateLabel.text = "2021/10/33"
+    formatter.dateFormat = "yyyy/MM/dd"
+    let currentDateString = formatter.string(from: Date())
+    dateLabel.text = currentDateString
     dateLabel.font = .readMeFont(size: 12)
     dateLabel.textColor = .grey11
     dateLabel.setTextWithLineHeight(text: dateLabel.text, lineHeightMultiple: 1.0)
     
-    bookCoverImageView.backgroundColor = .alertRed
-    
-    categoryLabel.text = "경제/경영"
     categoryLabel.font = .readMeFont(size: 12)
     categoryLabel.textColor = .mainBlue
     categoryLabel.setTextWithLineHeight(text: categoryLabel.text, lineHeightMultiple: 1.0)
     
-    bookTitleLabel.text = "운명을 바꾸는 부동산 투자 수업 운명을 바꾸는 부동산 투자 수업 ..."
     bookTitleLabel.font = .readMeFont(size: 13, type: .medium)
     bookTitleLabel.textColor = .grey05
     bookTitleLabel.setTextWithLineHeight(text: bookTitleLabel.text, lineHeightMultiple: 1.48)
     bookTitleLabel.numberOfLines = 2
     
-    bookAuthorLabel.text = "부동산읽어주는남자(정태익) 저 "
     bookAuthorLabel.font = .readMeFont(size: 12)
     bookAuthorLabel.textColor = .grey06
     bookAuthorLabel.setTextWithLineHeight(text: bookAuthorLabel.text, lineHeightMultiple: 1.0)

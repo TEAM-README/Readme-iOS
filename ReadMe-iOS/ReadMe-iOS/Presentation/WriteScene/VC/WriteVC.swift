@@ -30,8 +30,11 @@ class WriteVC: UIViewController {
   private let progressBar = ProgressBar()
   private let disposeBag = DisposeBag()
   
-  let username: String = "혜화동 꽃가마"
-  let bookname: String = "바람이분다, 살아야 한다"
+  var username: String = "혜화동 꽃가마"
+  var bookname: String?
+  var bookImgURL: String?
+  var category: String?
+  var author: String?
   
   private var quote: String?
   private var impression: String?
@@ -50,11 +53,23 @@ class WriteVC: UIViewController {
     configureUI()
     setFlow(self.flowType)
   }
+  
+  open override func didMove(toParent parent: UIViewController?) {
+    navigationController?.fixInteractivePopGestureRecognizer(delegate: self)
+  }
 }
 
 // MARK: - Custom Method
 
 extension WriteVC {
+  func setFirstFlowData(bookcover: String, bookname: String, category: String, author: String) {
+    firstView.setData(bookcover: bookcover, bookname: bookname, category: category, author: author)
+    self.bookname = bookname
+    self.category = category
+    self.author = author
+    self.bookImgURL = bookcover
+  }
+  
   private func bindViewModels() {
     nextButton.rx.tap
       .subscribe(onNext: {
@@ -71,7 +86,7 @@ extension WriteVC {
   private func pushWriteCheckView() {
     let writeCheckVC = ModuleFactory.shared.makeWriteCheckVC()
     // TODO: - 데이터 전달
-    writeCheckVC.setPreviousData(quote: quote ?? "--", impression: impression ?? "---")
+    writeCheckVC.setPreviousData(bookcover: bookImgURL ?? "", category: category ?? "", bookname: bookname ?? "", author: author ?? "", quote: quote ?? "-", impression: impression ?? "-")
     navigationController?.pushViewController(writeCheckVC, animated: true)
   }
   
@@ -134,13 +149,12 @@ extension WriteVC {
         self.flowType = .secondFlow
       })
     })
-    
   }
   
   private func setSecondFlow() {
     progressBar.setPercentage(ratio: 1)
     
-    secondView.setData(bookname: bookname, sentence: quote ?? "")
+    secondView.setData(bookname: bookname ?? "", sentence: quote ?? "")
     
     UIView.animate(withDuration: 0.4,
                    delay: 0,

@@ -30,7 +30,17 @@ class WriteFirstFlow: UIView {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+}
+
+// MARK: - Custom Methods Part
+
+extension WriteFirstFlow {
+  func setData(bookcover: String, bookname: String, category: String, author: String) {
+    bookCoverImageView.setImage(with: bookcover)
+    bookTitleLabel.text = bookname
+    categoryLabel.text = category
+    bookAuthorLabel.text = author
+  }
 }
 
 // MARK: - UI & Layout
@@ -56,20 +66,15 @@ extension WriteFirstFlow {
     firstContentTitleLabel.textColor = .black
     firstContentTitleLabel.setTextWithLineHeight(text: firstContentTitleLabel.text, lineHeightMultiple: 1.5)
     
-    bookCoverImageView.backgroundColor = .alertRed
-    
-    categoryLabel.text = "엥 그래요?"
     categoryLabel.font = .readMeFont(size: 12)
     categoryLabel.textColor = .mainBlue
     categoryLabel.setTextWithLineHeight(text: categoryLabel.text, lineHeightMultiple: 1.0)
     
-    bookTitleLabel.text = "운명을 바꾸는 부동산 투자 수업 운명을 바꾸는 부동산 투자 수업 ..."
     bookTitleLabel.font = .readMeFont(size: 13, type: .medium)
     bookTitleLabel.textColor = .grey05
     bookTitleLabel.setTextWithLineHeight(text: bookTitleLabel.text, lineHeightMultiple: 1.48)
     bookTitleLabel.numberOfLines = 2
     
-    bookAuthorLabel.text = "부동산읽어주는남자(정태익) 저 "
     bookAuthorLabel.font = .readMeFont(size: 12)
     bookAuthorLabel.textColor = .grey06
     bookAuthorLabel.setTextWithLineHeight(text: bookAuthorLabel.text, lineHeightMultiple: 1.0)

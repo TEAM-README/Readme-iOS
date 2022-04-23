@@ -13,7 +13,7 @@ class SplashVC: UIViewController {
     super.viewDidLoad()
     delayWithSeconds(1) {
 //      self.pushSignupView()
-      self.pushWriteView()
+      self.pushSearchView()
     }
   }
   
