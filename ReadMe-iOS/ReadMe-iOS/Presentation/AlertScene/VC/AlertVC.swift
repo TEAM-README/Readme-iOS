@@ -20,7 +20,6 @@ class AlertVC: UIViewController {
   
   // MARK: - Vars & Lets Part
   private let disposeBag = DisposeBag()
-//  var viewModel: AlertViewModel!
   var closure: (() -> Void)?
   
   // MARK: - UI Component Part
