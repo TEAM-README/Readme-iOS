@@ -33,7 +33,7 @@ class WriteVC: UIViewController {
   let username: String = "혜화동 꽃가마"
   let bookname: String = "바람이분다, 살아야 한다"
   
-  private var sentence: String?
+  private var quote: String?
   private var impression: String?
   
   var viewModel: WriteViewModel!
@@ -71,7 +71,7 @@ extension WriteVC {
   private func pushWriteCheckView() {
     let writeCheckVC = ModuleFactory.shared.makeWriteCheckVC()
     // TODO: - 데이터 전달
-    
+    writeCheckVC.setPreviousData(quote: quote ?? "--", impression: impression ?? "---")
     navigationController?.pushViewController(writeCheckVC, animated: true)
   }
   
@@ -140,7 +140,7 @@ extension WriteVC {
   private func setSecondFlow() {
     progressBar.setPercentage(ratio: 1)
     
-    secondView.setData(bookname: bookname, sentence: sentence ?? "")
+    secondView.setData(bookname: bookname, sentence: quote ?? "")
     
     UIView.animate(withDuration: 0.4,
                    delay: 0,
@@ -222,7 +222,7 @@ extension WriteVC: UITextViewDelegate {
         textView.text = I18N.Write.firstPlaceholder
         textView.textColor = .grey09
       } else {
-        self.sentence = firstView.firstTextView.text
+        self.quote = firstView.firstTextView.text
       }
     case secondView.secondTextView:
       if textView.text == "" {

@@ -46,6 +46,26 @@ class WriteCheckVC: UIViewController {
   }
 }
 
+// MARK: - Custom Method Part
+
+extension WriteCheckVC {
+  private func bindViewModels() {
+    let input = WriteCheckViewModel.Input()
+    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+    
+    registerButton.rx.tap
+      .subscribe(onNext: {
+        // TODO: - 서버 통신 quote, impression 보내기
+      })
+      .disposed(by: disposeBag)
+  }
+  
+  func setPreviousData(quote: String, impression: String) {
+    quoteTextView.text = quote
+    impressionTextView.text = impression
+  }
+}
+
 // MARK: - UI Component Part
 
 extension WriteCheckVC {
@@ -63,11 +83,11 @@ extension WriteCheckVC {
     
     bgImageView.image = ImageLiterals.WriteCheck.bg
     
-    quoteTextView.text = "‘스마트폰보다 재미있는게 있을까' 이것만큼 어려운주제가 없다는 것을 안다. 하지만 그래도 답하고 싶었던 이유는, 언제나 카톡 속ㅋㅋㅋ가 아닌, 실제로 웃을 수 있는 상황을 바랐기 때문이 아닐까"
     quoteTextView.font = .readMeFont(size: 14)
     quoteTextView.textColor = .grey05
     quoteTextView.textContainer.maximumNumberOfLines = 4
     quoteTextView.textContainer.lineBreakMode = .byTruncatingTail
+    quoteTextView.textContainerInset = .zero
     quoteTextView.setTextWithLineHeight(text: quoteTextView.text, lineHeightMultiple: 1.6)
     quoteTextView.isEditable = false
     quoteTextView.isSelectable = false
@@ -75,11 +95,11 @@ extension WriteCheckVC {
     
     divideLineView.backgroundColor = .mainBlue.withAlphaComponent(0.4)
     
-    impressionTextView.text = "나만의 시간을 보내고 싶어서 휴학을 했어요. 하지만 밤새 유튜브 보고 새벽 5시에 잠들고 오후 3시에 일어나는게 반복돼요. 스마트폰이 제 시간을 뺏어간다는 느낌이 들어 회의감이 자주 들었어요. 그래서 저 문장이 유독 공감갔고, '스마트폰보다 재미있는게 있을까'란 질문에 생각을 해봤지만 생각이 잘 안나더라구용. 한번 찾아보려합니다."
     impressionTextView.font = .readMeFont(size: 14, type: .extraLight)
     impressionTextView.textColor = .black
     impressionTextView.textContainer.maximumNumberOfLines = 6
     impressionTextView.textContainer.lineBreakMode = .byTruncatingTail
+    impressionTextView.textContainerInset = .zero
     // FIXME: - lineheight가 위로도 붙어서 레이아웃이 제대로 맞지 않는 것 같아여
     impressionTextView.setTextWithLineHeight(text: impressionTextView.text, lineHeightMultiple: 1.6)
     impressionTextView.isEditable = false
@@ -116,16 +136,6 @@ extension WriteCheckVC {
     
     registerButton.title = I18N.WriteCheck.register
     registerButton.isEnabled = true
-  }
-}
-
-// MARK: - Custom Method Part
-
-extension WriteCheckVC {
-  
-  private func bindViewModels() {
-    let input = WriteCheckViewModel.Input()
-    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
   }
 }
 
