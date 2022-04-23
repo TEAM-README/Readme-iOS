@@ -19,6 +19,7 @@ enum Storyboards: String {
   case search = "Search"
   case write = "Write"
   case writeCheck = "WriteCheck"
+  case alert = "Alert"
 }
 
 extension UIStoryboard{

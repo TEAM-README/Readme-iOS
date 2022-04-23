@@ -74,4 +74,11 @@ struct I18N {
     static let titleDay = " 님의 하루가\n 더 풍요로워졌길 바라요!"
     static let register = "등록하기"
   }
+  
+  struct ReadmeAlert {
+    static let title = "기록한 내용을 버리고\n돌아가시겠습니까?"
+    static let description = "작성한 내용이 저장되지 않습니다"
+    static let cancel = "취소"
+    static let ok = "확인"
+  }
 }
