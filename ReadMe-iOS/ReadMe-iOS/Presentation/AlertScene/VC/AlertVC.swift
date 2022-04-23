@@ -129,7 +129,7 @@ extension AlertVC {
     
     alertView.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview().inset(27)
-      make.height.equalTo(alertView.snp.width).multipliedBy(0.72)
+      make.height.equalTo(245)
       make.centerY.equalToSuperview().offset(-26)
     }
     
@@ -145,7 +145,7 @@ extension AlertVC {
     
     titleLabel.snp.makeConstraints { make in
       make.centerX.equalToSuperview()
-      make.top.equalTo(alertImageView.snp.bottom).offset(19)
+      make.top.equalTo(alertImageView.snp.bottom).offset(10)
     }
     
     descriptionLabel.snp.makeConstraints { make in
@@ -155,9 +155,6 @@ extension AlertVC {
     
     divideLineView.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview()
-//      make.top.equalToSuperview().inset(alertView.frame.height * 0.76)
-//      make.top.equalTo(descriptionLabel.snp.bottom).offset(29)
-      
       make.bottom.equalToSuperview().inset(57)
       make.height.equalTo(1)
     }
