@@ -29,11 +29,12 @@ final class TabbarView: XibView{
   
   @IBAction func homeButtonClicked(_ sender: Any) {
     makeVibrate()
-    postObserverAction(.homeButtonClicked)
     if currentTab != .home{
       delegate?.tabbarClicked(.home)
       currentTab = .home
-    }
+		} else {
+			postObserverAction(.homeButtonClicked)
+		}
   }
   
   @IBAction func myPageClicked(_ sender: Any) {
@@ -41,7 +42,9 @@ final class TabbarView: XibView{
     if currentTab != .mypage{
       delegate?.tabbarClicked(.mypage)
       currentTab = .mypage
-    }
+		} else {
+			postObserverAction(.mypageButtonClicked)
+		}
   }
     
   @IBAction func plusButtonClicked(_ sender: Any) {

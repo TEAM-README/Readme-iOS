@@ -15,7 +15,8 @@ struct FeedListEntity: Codable{
   
   func toDomain() -> FeedListModel {
     let feedList = self.feedList.map { entity in
-      return FeedDetailModel.init(imgURL: entity.imgURL,
+      return FeedDetailModel.init(idx: entity.idx,
+                                  imgURL: entity.imgURL,
                                   category: entity.category,
                                   title: entity.title,
                                   author: entity.author,

@@ -60,6 +60,11 @@
 		FD0619872805586200F647D7 /* TabbarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0619862805586200F647D7 /* TabbarIcon.swift */; };
 		FD06198928055C2200F647D7 /* makeKernValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06198828055C2200F647D7 /* makeKernValue.swift */; };
 		FD06198C28055CC700F647D7 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD06198B28055CC700F647D7 /* TabbarView.swift */; };
+		FD0C386C280FDFBA004E79C7 /* MyPageHeaderTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0C386A280FDFBA004E79C7 /* MyPageHeaderTVC.swift */; };
+		FD0C386D280FDFBA004E79C7 /* MyPageHeaderTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD0C386B280FDFBA004E79C7 /* MyPageHeaderTVC.xib */; };
+		FD0C386F28104DE5004E79C7 /* modelItemSelected + RxCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0C386E28104DE5004E79C7 /* modelItemSelected + RxCocoa.swift */; };
+		FD0C387428105DF3004E79C7 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0C387328105DF3004E79C7 /* SettingVC.swift */; };
+		FD0C387628105DF9004E79C7 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD0C387528105DF9004E79C7 /* Setting.storyboard */; };
 		FD106C50280E78FF00D803D8 /* ScrollToTop + UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD106C4F280E78FF00D803D8 /* ScrollToTop + UITableView.swift */; };
 		FD106C52280E96BD00D803D8 /* UsecaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD106C51280E96BD00D803D8 /* UsecaseType.swift */; };
 		FD2937BE280E5EF5003B4685 /* FeedList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD2937BD280E5EF5003B4685 /* FeedList.storyboard */; };
@@ -224,6 +229,11 @@
 		FD0619862805586200F647D7 /* TabbarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarIcon.swift; sourceTree = "<group>"; };
 		FD06198828055C2200F647D7 /* makeKernValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = makeKernValue.swift; sourceTree = "<group>"; };
 		FD06198B28055CC700F647D7 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; usesTabs = 1; };
+		FD0C386A280FDFBA004E79C7 /* MyPageHeaderTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHeaderTVC.swift; sourceTree = "<group>"; };
+		FD0C386B280FDFBA004E79C7 /* MyPageHeaderTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageHeaderTVC.xib; sourceTree = "<group>"; };
+		FD0C386E28104DE5004E79C7 /* modelItemSelected + RxCocoa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "modelItemSelected + RxCocoa.swift"; sourceTree = "<group>"; };
+		FD0C387328105DF3004E79C7 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
+		FD0C387528105DF9004E79C7 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		FD106C4F280E78FF00D803D8 /* ScrollToTop + UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollToTop + UITableView.swift"; sourceTree = "<group>"; };
 		FD106C51280E96BD00D803D8 /* UsecaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsecaseType.swift; sourceTree = "<group>"; };
 		FD2937BD280E5EF5003B4685 /* FeedList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FeedList.storyboard; sourceTree = "<group>"; };
@@ -647,13 +657,64 @@
 			path = Tabbar;
 			sourceTree = "<group>";
 		};
-		FD2937BF280E60C2003B4685 /* Cells */ = {
+		FD0C3867280FDEF4004E79C7 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				FD2937C3280E60E7003B4685 /* FeedListCategoryTVC.xib */,
+				FD2937C6280E6100003B4685 /* FeedListCategoryTVC.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		FD0C3868280FDEFC004E79C7 /* MyPageHeader */ = {
+			isa = PBXGroup;
+			children = (
+				FD0C386A280FDFBA004E79C7 /* MyPageHeaderTVC.swift */,
+				FD0C386B280FDFBA004E79C7 /* MyPageHeaderTVC.xib */,
+			);
+			path = MyPageHeader;
+			sourceTree = "<group>";
+		};
+		FD0C3869280FDF09004E79C7 /* FeedContent */ = {
 			isa = PBXGroup;
 			children = (
 				FD2937C7280E6100003B4685 /* FeedListContentTVC.xib */,
 				FD2937C2280E60E7003B4685 /* FeedListContentTVC.swift */,
-				FD2937C3280E60E7003B4685 /* FeedListCategoryTVC.xib */,
-				FD2937C6280E6100003B4685 /* FeedListCategoryTVC.swift */,
+			);
+			path = FeedContent;
+			sourceTree = "<group>";
+		};
+		FD0C387028105DC4004E79C7 /* SettingScene */ = {
+			isa = PBXGroup;
+			children = (
+				FD0C387228105DCC004E79C7 /* Views */,
+				FD0C387128105DC9004E79C7 /* VC */,
+			);
+			path = SettingScene;
+			sourceTree = "<group>";
+		};
+		FD0C387128105DC9004E79C7 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				FD0C387328105DF3004E79C7 /* SettingVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		FD0C387228105DCC004E79C7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FD0C387528105DF9004E79C7 /* Setting.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FD2937BF280E60C2003B4685 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				FD0C3869280FDF09004E79C7 /* FeedContent */,
+				FD0C3868280FDEFC004E79C7 /* MyPageHeader */,
+				FD0C3867280FDEF4004E79C7 /* Category */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -939,6 +1000,7 @@
 		FDD9D25E27F9DAE80024DFB2 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				FD0C387028105DC4004E79C7 /* SettingScene */,
 				FD929E75280C7DC9008F590C /* FeedListScene */,
 				FD85CEBE2809C8EE00E7BE7B /* FeedDetailScene */,
 				FD99D5A728073D8E00BB7FDA /* Component */,
@@ -988,6 +1050,7 @@
 				FD0619842805579F00F647D7 /* XibView + UIView.swift */,
 				FD99D5AB2807407800BB7FDA /* addPadding + UITextField.swift */,
 				FD106C4F280E78FF00D803D8 /* ScrollToTop + UITableView.swift */,
+				FD0C386E28104DE5004E79C7 /* modelItemSelected + RxCocoa.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1311,7 +1374,7 @@
 		FDDB0B61280585410055B208 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				FDDB0B6D280585740055B208 /* MyPageViewModel.swift */,
+				FDDB0B6B280585740055B208 /* MyPageModel.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -1353,7 +1416,7 @@
 		FDDB0B662805855F0055B208 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				FDDB0B6B280585740055B208 /* MyPageModel.swift */,
+				FDDB0B6D280585740055B208 /* MyPageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1515,6 +1578,7 @@
 				FDDB0B7A280587000055B208 /* Home.storyboard in Resources */,
 				FD06197F2805526800F647D7 /* TabbarIcon.xib in Resources */,
 				FD0619642805457600F647D7 /* Pretendard-SemiBold.otf in Resources */,
+				FD0C386D280FDFBA004E79C7 /* MyPageHeaderTVC.xib in Resources */,
 				FD0619602805457600F647D7 /* Pretendard-Light.otf in Resources */,
 				FD2937C9280E6100003B4685 /* FeedListContentTVC.xib in Resources */,
 				FDE1A2B62805BFC6000DDBE2 /* Login.storyboard in Resources */,
@@ -1525,6 +1589,7 @@
 				2B7DCCAB280E7ED70062BAE8 /* Write.storyboard in Resources */,
 				FDDB0B76280585AF0055B208 /* MyPage.storyboard in Resources */,
 				FD06195C2805457600F647D7 /* Pretendard-ExtraBold.otf in Resources */,
+				FD0C387628105DF9004E79C7 /* Setting.storyboard in Resources */,
 				FD0619632805457600F647D7 /* Pretendard-Regular.otf in Resources */,
 				FD2937BE280E5EF5003B4685 /* FeedList.storyboard in Resources */,
 				2B6DED9E28106D31002BD931 /* ProgressBar.xib in Resources */,
@@ -1586,6 +1651,7 @@
 				FDD9D2E527F9E32C0024DFB2 /* AppLog.swift in Sources */,
 				FD85CECD2809C92F00E7BE7B /* FeedDetailEntity.swift in Sources */,
 				FDDB0B58280583EE0055B208 /* HomeViewModel.swift in Sources */,
+				FD0C386C280FDFBA004E79C7 /* MyPageHeaderTVC.swift in Sources */,
 				2B9605EC280D373E006FF358 /* SearchService.swift in Sources */,
 				FD99D59A28073C4900BB7FDA /* SignupVC.swift in Sources */,
 				FD99D5AA28073DB200BB7FDA /* BottomButton.swift in Sources */,
@@ -1680,6 +1746,7 @@
 				FD99D59728073C4900BB7FDA /* SignupUseCase.swift in Sources */,
 				FD85CECC2809C92F00E7BE7B /* FeedDetailViewModel.swift in Sources */,
 				FDD9D2D427F9E2400024DFB2 /* ResponseObject.swift in Sources */,
+				FD0C386F28104DE5004E79C7 /* modelItemSelected + RxCocoa.swift in Sources */,
 				2B0CFB422809DFD5007F3145 /* SearchCVC.swift in Sources */,
 				FD01F0712808062E002F80D2 /* shakeAction.swift in Sources */,
 				FDDB0B72280585740055B208 /* MyPageVC.swift in Sources */,
@@ -1688,6 +1755,7 @@
 				FDE1A2AE2805BF8D000DDBE2 /* LoginVC.swift in Sources */,
 				FDDB0B57280583EE0055B208 /* HomeVC.swift in Sources */,
 				FD99D58D2807211A00BB7FDA /* LoginVC + Kakao.swift in Sources */,
+				FD0C387428105DF3004E79C7 /* SettingVC.swift in Sources */,
 				FDDB0B74280585740055B208 /* MyPageEntity.swift in Sources */,
 				FD85CEC82809C92F00E7BE7B /* FeedDetailUseCase.swift in Sources */,
 				2BA6EB5B2811D2B100715C31 /* WriteCheckViewModel.swift in Sources */,

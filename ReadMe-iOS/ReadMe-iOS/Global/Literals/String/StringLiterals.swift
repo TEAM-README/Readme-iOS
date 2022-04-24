@@ -55,6 +55,20 @@ struct I18N {
     static let categoryDescription = "관심이 있어요"
   }
   
+  struct MyPage {
+    static let nicknameDescription = " 님의 책장"
+    static let count = "개"
+    static let total = "총 "
+    static let countDescription = "의 글이 있어요"
+  }
+  
+  struct Setting {
+    static let settingTitle = "환경설정"
+    static let contact = "문의하기"
+    static let agreement = "약관 보기"
+    static let logout = "로그아웃"
+  }
+  
   struct Write {
     static let startCheer = " 님의 시작을 응원해요!"
     static let heartCheer = " 님의 마음을 응원해요!"

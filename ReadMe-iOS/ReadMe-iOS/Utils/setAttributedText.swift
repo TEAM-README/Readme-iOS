@@ -8,7 +8,7 @@
 import UIKit
 
 extension UILabel {
-  func setTargetAttributedText(targetString : String, fontType: ReadmeFontType, color: UIColor = .black){
+  func setTargetAttributedText(targetString : String, fontType: ReadmeFontType,color: UIColor? = nil){
     let fontSize = self.font.pointSize
     let font = UIFont.readMeFont(size: fontSize, type: fontType)
     let fullText = self.text ?? ""
@@ -16,6 +16,9 @@ extension UILabel {
     let attributedString = NSMutableAttributedString(string: fullText)
     attributedString.addAttributes([.font : font, .foregroundColor : color], range: range)
     attributedString.addAttribute(.font, value: font, range: range)
+    if let textColor = color {
+       attributedString.addAttribute(.foregroundColor, value: textColor, range: range)
+    }
     self.attributedText = attributedString
   }
 }
