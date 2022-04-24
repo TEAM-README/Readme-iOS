@@ -36,6 +36,21 @@ extension UIColor {
   @nonobjc class var grey06: UIColor {
     return UIColor(red: 147.0 / 255.0, green: 147.0 / 255.0, blue: 147.0 / 255.0, alpha: 1.0)
   }
+  
+  /// grey01 - 02 사이의 grey 색상
+  @nonobjc class var grey07: UIColor {
+    return UIColor(red: 229.0 / 255.0, green: 229.0 / 255.0, blue: 229.0 / 255.0, alpha: 1.0)
+  }
+  
+  /// grey03 - 04 사이의 grey 색상
+  @nonobjc class var grey08: UIColor {
+    return UIColor(red: 79.0 / 255.0, green: 79.0 / 255.0, blue: 79.0 / 255.0, alpha: 1.0)
+  }
+  
+  /// grey01 - 02 사이의 grey 색상
+  @nonobjc class var grey09: UIColor {
+    return UIColor(red: 200.0 / 255.0, green: 200.0 / 255.0, blue: 200.0 / 255.0, alpha: 1.0)
+  }
 
   @nonobjc class var yellow: UIColor {
     return UIColor(red: 255.0 / 255.0, green: 202.0 / 255.0, blue: 122.0 / 255.0, alpha: 1.0)
@@ -43,6 +58,10 @@ extension UIColor {
 
   @nonobjc class var mainBlue: UIColor {
     return UIColor(red: 121.0 / 255.0, green: 165.0 / 255.0, blue: 251.0 / 255.0, alpha: 1.0)
+  }
+  
+  @nonobjc class var pointBlue: UIColor {
+    return UIColor(red: 163.0 / 255.0, green: 194.0 / 255.0, blue: 255.0 / 255.0, alpha: 1.0)
   }
 
   @nonobjc class var alertRed: UIColor {

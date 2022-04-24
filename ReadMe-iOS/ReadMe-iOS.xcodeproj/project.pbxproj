@@ -17,6 +17,14 @@
 		2B52A31228083D7F00CFB1D0 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52A31128083D7F00CFB1D0 /* SearchUseCase.swift */; };
 		2B52A31428083D8F00CFB1D0 /* SearchEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52A31328083D8F00CFB1D0 /* SearchEntity.swift */; };
 		2B52A31628083DAB00CFB1D0 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52A31528083DAB00CFB1D0 /* SearchRepository.swift */; };
+		2B6DED8B28105BE8002BD931 /* WriteFirstFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DED8A28105BE8002BD931 /* WriteFirstFlow.swift */; };
+		2B6DED8D28105F3E002BD931 /* WriteSecondFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DED8C28105F3E002BD931 /* WriteSecondFlow.swift */; };
+		2B6DED9E28106D31002BD931 /* ProgressBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B6DED9D28106D31002BD931 /* ProgressBar.xib */; };
+		2B6DEDA028106EB0002BD931 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DED9F28106EB0002BD931 /* ProgressBar.swift */; };
+		2B7DCCA7280E7E490062BAE8 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DCCA6280E7E490062BAE8 /* WriteViewModel.swift */; };
+		2B7DCCA9280E7E580062BAE8 /* WriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DCCA8280E7E580062BAE8 /* WriteVC.swift */; };
+		2B7DCCAB280E7ED70062BAE8 /* Write.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B7DCCAA280E7ED70062BAE8 /* Write.storyboard */; };
+		2B7DCCB1280E7F7D0062BAE8 /* WriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DCCB0280E7F7D0062BAE8 /* WriteUseCase.swift */; };
 		2B9605EC280D373E006FF358 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9605EB280D373E006FF358 /* SearchService.swift */; };
 		2BABE36D280C881F00EFA45E /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABE36C280C881F00EFA45E /* SearchHeaderView.swift */; };
 		2BF64E9A280EF94700383F28 /* SignupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF64E99280EF94600383F28 /* SignupEntity.swift */; };
@@ -168,6 +176,14 @@
 		2B52A31128083D7F00CFB1D0 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
 		2B52A31328083D8F00CFB1D0 /* SearchEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEntity.swift; sourceTree = "<group>"; };
 		2B52A31528083DAB00CFB1D0 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
+		2B6DED8A28105BE8002BD931 /* WriteFirstFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFirstFlow.swift; sourceTree = "<group>"; };
+		2B6DED8C28105F3E002BD931 /* WriteSecondFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteSecondFlow.swift; sourceTree = "<group>"; };
+		2B6DED9D28106D31002BD931 /* ProgressBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressBar.xib; sourceTree = "<group>"; };
+		2B6DED9F28106EB0002BD931 /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressBar.swift; path = ../../../../../../../Downloads/ProgressBar.swift; sourceTree = "<group>"; };
+		2B7DCCA6280E7E490062BAE8 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
+		2B7DCCA8280E7E580062BAE8 /* WriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteVC.swift; sourceTree = "<group>"; };
+		2B7DCCAA280E7ED70062BAE8 /* Write.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Write.storyboard; sourceTree = "<group>"; };
+		2B7DCCB0280E7F7D0062BAE8 /* WriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteUseCase.swift; sourceTree = "<group>"; };
 		2B9605EB280D373E006FF358 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		2BABE36C280C881F00EFA45E /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 		2BF64E99280EF94600383F28 /* SignupEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupEntity.swift; sourceTree = "<group>"; };
@@ -393,6 +409,59 @@
 				2B52A30228083C6900CFB1D0 /* ViewModel */,
 			);
 			path = SearchScene;
+			sourceTree = "<group>";
+		};
+		2B6DED8E28106786002BD931 /* ProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				2B6DED9D28106D31002BD931 /* ProgressBar.xib */,
+				2B6DED9F28106EB0002BD931 /* ProgressBar.swift */,
+			);
+			path = ProgressBar;
+			sourceTree = "<group>";
+		};
+		2B7DCCA2280E7E0A0062BAE8 /* WriteScene */ = {
+			isa = PBXGroup;
+			children = (
+				2B7DCCA5280E7E360062BAE8 /* Views */,
+				2B7DCCA4280E7E300062BAE8 /* VC */,
+				2B7DCCA3280E7E290062BAE8 /* ViewModel */,
+			);
+			path = WriteScene;
+			sourceTree = "<group>";
+		};
+		2B7DCCA3280E7E290062BAE8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2B7DCCA6280E7E490062BAE8 /* WriteViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2B7DCCA4280E7E300062BAE8 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				2B7DCCA8280E7E580062BAE8 /* WriteVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		2B7DCCA5280E7E360062BAE8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B7DCCAA280E7ED70062BAE8 /* Write.storyboard */,
+				2B6DED8A28105BE8002BD931 /* WriteFirstFlow.swift */,
+				2B6DED8C28105F3E002BD931 /* WriteSecondFlow.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2B7DCCAF280E7F710062BAE8 /* Write */ = {
+			isa = PBXGroup;
+			children = (
+				2B7DCCB0280E7F7D0062BAE8 /* WriteUseCase.swift */,
+			);
+			path = Write;
 			sourceTree = "<group>";
 		};
 		96BEEFE36BD7FC57BABEEC21 /* Pods */ = {
@@ -759,6 +828,7 @@
 		FD99D5A728073D8E00BB7FDA /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				2B6DED8E28106786002BD931 /* ProgressBar */,
 				FD99D5A828073DA100BB7FDA /* Button */,
 			);
 			path = Component;
@@ -859,6 +929,7 @@
 				FDD9D26427F9DE370024DFB2 /* HomeScene */,
 				FDDB0B652805855A0055B208 /* MyPageScene */,
 				2B578F722806FBFF00513240 /* SearchScene */,
+				2B7DCCA2280E7E0A0062BAE8 /* WriteScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -987,6 +1058,7 @@
 		FDD9D29C27F9DFFA0024DFB2 /* Usecase */ = {
 			isa = PBXGroup;
 			children = (
+				2B7DCCAF280E7F710062BAE8 /* Write */,
 				2B52A30C28083D3C00CFB1D0 /* Search */,
 				FD85CED12809C9BD00E7BE7B /* Feed */,
 				FD99D5A228073CA000BB7FDA /* Signup */,
@@ -1426,11 +1498,13 @@
 				FD2937C5280E60E7003B4685 /* FeedListCategoryTVC.xib in Resources */,
 				FD06197D2805525B00F647D7 /* TabbarView.xib in Resources */,
 				FDD9D25227F9CB290024DFB2 /* Assets.xcassets in Resources */,
+				2B7DCCAB280E7ED70062BAE8 /* Write.storyboard in Resources */,
 				FDDB0B76280585AF0055B208 /* MyPage.storyboard in Resources */,
 				FD06195C2805457600F647D7 /* Pretendard-ExtraBold.otf in Resources */,
 				FD0C387628105DF9004E79C7 /* Setting.storyboard in Resources */,
 				FD0619632805457600F647D7 /* Pretendard-Regular.otf in Resources */,
 				FD2937BE280E5EF5003B4685 /* FeedList.storyboard in Resources */,
+				2B6DED9E28106D31002BD931 /* ProgressBar.xib in Resources */,
 				FD06195D2805457600F647D7 /* Pretendard-Black.otf in Resources */,
 				FD06197B2805523E00F647D7 /* Base.storyboard in Resources */,
 			);
@@ -1493,6 +1567,7 @@
 				FD99D59A28073C4900BB7FDA /* SignupVC.swift in Sources */,
 				FD99D5AA28073DB200BB7FDA /* BottomButton.swift in Sources */,
 				FDD9D29027F9DFAF0024DFB2 /* showToastMessage.swift in Sources */,
+				2B7DCCA7280E7E490062BAE8 /* WriteViewModel.swift in Sources */,
 				FD0619872805586200F647D7 /* TabbarIcon.swift in Sources */,
 				FD106C52280E96BD00D803D8 /* UsecaseType.swift in Sources */,
 				FDD9D2FB27F9E3870024DFB2 /* LaunchInstructor.swift in Sources */,
@@ -1508,6 +1583,7 @@
 				FDD9D2E227F9E32C0024DFB2 /* AnalyticsType.swift in Sources */,
 				FDD9D2F727F9E3870024DFB2 /* CoordinatorFinishOutput.swift in Sources */,
 				FDE1A2AD2805BF8D000DDBE2 /* LoginModel.swift in Sources */,
+				2B6DED8D28105F3E002BD931 /* WriteSecondFlow.swift in Sources */,
 				FD0619722805516500F647D7 /* BaseViewModel.swift in Sources */,
 				FD85CED32809C9E900E7BE7B /* FeedModel.swift in Sources */,
 				FDD9D28D27F9DFAF0024DFB2 /* calculateTopInset.swift in Sources */,
@@ -1532,6 +1608,7 @@
 				FDD9D2E627F9E32C0024DFB2 /* FirebaseAnalyticsProvider.swift in Sources */,
 				FD106C50280E78FF00D803D8 /* ScrollToTop + UITableView.swift in Sources */,
 				FDE1A2AC2805BF8D000DDBE2 /* LoginRepository.swift in Sources */,
+				2B6DED8B28105BE8002BD931 /* WriteFirstFlow.swift in Sources */,
 				FDD9D27727F9DF190024DFB2 /* ImageLiterals.swift in Sources */,
 				FD06196E2805516500F647D7 /* BaseUseCase.swift in Sources */,
 				FDD9D29727F9DFAF0024DFB2 /* PanDirectionGesture.swift in Sources */,
@@ -1568,7 +1645,9 @@
 				FDD9D2E727F9E32C0024DFB2 /* RuntimeProviderType.swift in Sources */,
 				FD99D59828073C4900BB7FDA /* SignupRepository.swift in Sources */,
 				FDDB0B54280583EE0055B208 /* HomeUseCase.swift in Sources */,
+				2B7DCCB1280E7F7D0062BAE8 /* WriteUseCase.swift in Sources */,
 				FDD9D28F27F9DFAF0024DFB2 /* downloadImage.swift in Sources */,
+				2B7DCCA9280E7E580062BAE8 /* WriteVC.swift in Sources */,
 				FD06198C28055CC700F647D7 /* TabbarView.swift in Sources */,
 				FD99D59728073C4900BB7FDA /* SignupUseCase.swift in Sources */,
 				FD85CECC2809C92F00E7BE7B /* FeedDetailViewModel.swift in Sources */,
@@ -1589,6 +1668,7 @@
 				FD2937C8280E6100003B4685 /* FeedListCategoryTVC.swift in Sources */,
 				FDE1A2B02805BF8D000DDBE2 /* LoginEntity.swift in Sources */,
 				2BABE36D280C881F00EFA45E /* SearchHeaderView.swift in Sources */,
+				2B6DEDA028106EB0002BD931 /* ProgressBar.swift in Sources */,
 				FD99D58F2807225E00BB7FDA /* LoginVC + Apple.swift in Sources */,
 				FD929E7C280C7DDF008F590C /* FeedListUseCase.swift in Sources */,
 				FD0619852805579F00F647D7 /* XibView + UIView.swift in Sources */,

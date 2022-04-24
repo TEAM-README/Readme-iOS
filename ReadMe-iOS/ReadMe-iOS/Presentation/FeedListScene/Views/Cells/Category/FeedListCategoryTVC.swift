@@ -43,14 +43,14 @@ extension FeedListCategoryTVC {
     if viewModel.category.isEmpty {
       categoryLabel.text = I18N.FeedList.categoryNoSelect
       categoryLabel.setTargetAttributedText(targetString: I18N.FeedList.categoryNoSelectBold,
-                                            type: .semiBold)
+                                            fontType: .semiBold)
       descriptionLabel.text = I18N.FeedList.categoryDescriptionNoselect
     }else {
       let boldPartString = makeCategoryBoldString(category: viewModel.category)
       
       categoryLabel.text = boldPartString + "에"
       categoryLabel.setTargetAttributedText(targetString: boldPartString,
-                                            type: .semiBold)
+                                            fontType: .semiBold)
       descriptionLabel.text = I18N.FeedList.categoryDescription
     }
   }
