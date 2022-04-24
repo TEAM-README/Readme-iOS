@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct WriteCheckEntity {
-
+struct WriteCheckEntity: Codable {
+  let success: Bool
 }

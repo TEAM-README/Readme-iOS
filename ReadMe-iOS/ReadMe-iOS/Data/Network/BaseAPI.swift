@@ -15,8 +15,9 @@ enum BaseAPI{
   case getFeedDetail(idx: Int)
   case getFeedList(page: Int, category: String)
   case getNickname
-
+  
   case getSearchRecent
+  case write(bookTitle: String, bookAuthor: String, quote: String, impression: String)
 }
 
 extension BaseAPI: TargetType {
@@ -34,21 +35,23 @@ extension BaseAPI: TargetType {
   ///      case b -> path 는 /new" 입니다.
   ///
   public var baseURL: URL {
-      var base = Config.Network.baseURL
-      switch self{
-      case .sampleAPI:
-        base += ""
-        case .login,.postCheckNicknameDuplicated:
-          base += ""
-        case .getFeedDetail,.getFeedList:
-          base += ""
-      case .getSearchRecent:
-        base += ""
-        case .getNickname:
-          base += ""
-      }
+    var base = Config.Network.baseURL
+    switch self{
+    case .sampleAPI:
+      base += ""
+    case .login,.postCheckNicknameDuplicated:
+      base += ""
+    case .getFeedDetail,.getFeedList:
+      base += ""
+    case .getSearchRecent:
+      base += ""
+    case .getNickname:
+      base += ""
+    case .write:
+      base += ""
+    }
     guard let url = URL(string: base) else {
-       fatalError("baseURL could not be configured")
+      fatalError("baseURL could not be configured")
     }
     return url
   }
@@ -74,7 +77,7 @@ extension BaseAPI: TargetType {
   ///  각 case 별로 get,post,delete,put 인지 정의합니다.
   var method: Moya.Method {
     switch self{
-      case .sampleAPI,.login,.postCheckNicknameDuplicated:
+    case .sampleAPI,.login,.postCheckNicknameDuplicated, .write:
       return .post
     default :
       return .get
@@ -97,17 +100,21 @@ extension BaseAPI: TargetType {
   private var bodyParameters: Parameters? {
     var params: Parameters = [:]
     switch self{
-      case .sampleAPI(let email):
-        params["email"] = email
-        params["password"] = "여기에 필요한 Value값 넣기"
-      case .login(let provider,let token):
-        params["provider"] = provider
-        params["token"] = token
-      case .postCheckNicknameDuplicated(let nickname):
-        params["nickname"] = nickname
-      default:
-        break
-        
+    case .sampleAPI(let email):
+      params["email"] = email
+      params["password"] = "여기에 필요한 Value값 넣기"
+    case .login(let provider,let token):
+      params["provider"] = provider
+      params["token"] = token
+    case .postCheckNicknameDuplicated(let nickname):
+      params["nickname"] = nickname
+    case .write(let booktitle, let bookauthor, let quote, let impression):
+      params["booktitle"] = booktitle
+      params["bookauthor"] = bookauthor
+      params["quote"] = quote
+      params["impression"] = impression
+    default:
+      break
     }
     return params
   }
@@ -147,14 +154,14 @@ extension BaseAPI: TargetType {
   ///
   var task: Task {
     switch self{
-      case .sampleAPI,.login:
+    case .sampleAPI, .login, .write:
       return .requestParameters(parameters: bodyParameters ?? [:], encoding: parameterEncoding)
     default:
       return .requestPlain
       
     }
   }
-
+  
   public var headers: [String: String]? {
     if let userToken = UserDefaults.standard.string(forKey: "userToken") {
       return ["Authorization": userToken,
