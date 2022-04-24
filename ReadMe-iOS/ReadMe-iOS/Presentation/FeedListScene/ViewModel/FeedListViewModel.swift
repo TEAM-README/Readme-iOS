@@ -11,6 +11,7 @@ import RxRelay
 final class FeedListViewModel: ViewModelType {
 
   private var pageNum: Int = 0
+  private let isMyPage: Bool
   private var category: [FeedCategory] = []
   private let useCase: FeedListUseCase
   private let disposeBag = DisposeBag()
@@ -23,12 +24,15 @@ final class FeedListViewModel: ViewModelType {
   
   // MARK: - Outputs
   struct Output {
+    var isMyPageMode = PublishRelay<Bool>()
     var scrollToTop = PublishRelay<Void>()
     var feedList = PublishRelay<[FeedListDataModel]>()
+    var userData = PublishRelay<MyPageModel>()
   }
   
-  init(useCase: FeedListUseCase) {
+  init(useCase: FeedListUseCase,isMyPage: Bool) {
     self.useCase = useCase
+    self.isMyPage = isMyPage
   }
 }
 
@@ -38,6 +42,8 @@ extension FeedListViewModel {
     self.bindOutput(output: output, disposeBag: disposeBag)
     input.viewWillAppearEvent.subscribe(onNext: { [weak self] in
       guard let self = self else { return }
+      output.isMyPageMode.accept(self.isMyPage)
+      self.useCase.getUserData()
       self.useCase.getFeedList(pageNum: self.pageNum, category: self.category)
     }).disposed(by: self.disposeBag)
     
@@ -51,23 +57,42 @@ extension FeedListViewModel {
   
   private func bindOutput(output: Output, disposeBag: DisposeBag) {
     let feedListRelay = useCase.feedList
-    let scrollToTopRelay = useCase.scrollToTop
+    let homeScrollToTopRelay = useCase.homeScrollToTop
+    let mypageScrollToTopRelay = useCase.mypageScrollToTop
+    let userDataRelay = useCase.userMyPageData
     
-    feedListRelay.subscribe(onNext: { [weak self] feedListModel in
+    Observable.combineLatest(userDataRelay,feedListRelay) { userData, feedListData -> FeedBundleData in
+      FeedBundleData(myPageData: userData, feedListData: feedListData)
+    }.subscribe(onNext: { [weak self] data in
       guard let self = self else { return }
       var feedDatasource: [FeedListDataModel] = []
-      let category = FeedListDataModel(type: .category,
-                                       dataSource: FeedCategoryViewModel(category: feedListModel.category))
-      let feedList = self.makeFeedContentViewModel(feedListModel).map { contentViewModel in
+      let feedList = self.makeFeedContentViewModel(data.feedListData,isMyPage: self.isMyPage).map { contentViewModel in
         FeedListDataModel(type: .content, dataSource: contentViewModel)
       }
-      feedDatasource.append(category)
       feedDatasource.append(contentsOf: feedList)
-      output.feedList.accept(feedDatasource)
+
+      if !self.isMyPage { // 마이페이지가 아니면 카테고리 정보를 불러와야 함.
+        let category = FeedListDataModel(type: .category,
+                                         dataSource: FeedCategoryViewModel(category: data.feedListData.category))
+        feedDatasource.insert(category, at: 0)
+        output.feedList.accept(feedDatasource)
+      } else {
+        let userData = FeedListDataModel(type: .myPageHeader, dataSource: data.myPageData)
+        feedDatasource.insert(userData, at: 0)
+        output.feedList.accept(feedDatasource)
+      }
     }).disposed(by: self.disposeBag)
     
-    scrollToTopRelay.subscribe(onNext: { 
-      output.scrollToTop.accept(())
+    homeScrollToTopRelay.subscribe(onNext: {
+      if !self.isMyPage { output.scrollToTop.accept(()) }
+    }).disposed(by: self.disposeBag)
+    
+    mypageScrollToTopRelay.subscribe(onNext: {
+      if self.isMyPage { output.scrollToTop.accept(()) }
+    }).disposed(by: self.disposeBag)
+    
+    userDataRelay.subscribe(onNext: {  model in
+      output.userData.accept(model)
     }).disposed(by: self.disposeBag)
   }
   
@@ -75,16 +100,18 @@ extension FeedListViewModel {
 }
 
 extension FeedListViewModel {
-  private func makeFeedContentViewModel(_ model: FeedListModel) -> [FeedListContentViewModel] {
+  private func makeFeedContentViewModel(_ model: FeedListModel,isMyPage: Bool) -> [FeedListContentViewModel] {
     let contents = model.feedList.map { detailModel in
-      FeedListContentViewModel.init(category: detailModel.category,
+      FeedListContentViewModel.init(idx: detailModel.idx,
+                                    category: detailModel.category,
                                     title: detailModel.title,
                                     sentenceTextViewModel: makeTextViewModel(type: .sentence,
                                                                              text: detailModel.sentence),
                                     commentTextViewModel: makeTextViewModel(type: .comment,
                                                                              text: detailModel.comment),
                                     nickname: detailModel.nickname,
-                                    date: detailModel.date)
+                                    date: detailModel.date,
+      isMyPage: isMyPage)
     }
     return contents
   }
@@ -142,6 +169,7 @@ struct FeedListDataModel {
 }
 
 enum FeedListContentType {
+  case myPageHeader
   case category
   case content
 }
@@ -149,4 +177,9 @@ enum FeedListContentType {
 enum FeedListTextType {
   case sentence
   case comment
+}
+
+struct FeedBundleData {
+  let myPageData: MyPageModel
+  let feedListData: FeedListModel
 }
