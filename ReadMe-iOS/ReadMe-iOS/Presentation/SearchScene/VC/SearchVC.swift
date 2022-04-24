@@ -166,6 +166,15 @@ extension SearchVC: UICollectionViewDelegate {
   func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
     self.view.endEditing(true)
   }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let writeVC = ModuleFactory.shared.makeWriteVC()
+    let content = contentList[indexPath.item]
+    
+    writeVC.setFirstFlowData(bookcover: content.imgURL, bookname: content.title, category: content.category, author: content.author)
+    
+    navigationController?.pushViewController(writeVC, animated: true)
+  }
 }
 
 extension SearchVC: UICollectionViewDelegateFlowLayout {

@@ -13,9 +13,10 @@ protocol ModuleFactoryProtocol {
   func makeBaseVC() -> BaseVC
   func makeHomeVC() -> HomeVC
   func makeFeedDetailVC(idx: Int) -> FeedDetailVC
-  func makeFeedListVC() -> FeedListVC
+  func makeFeedListVC(isMyPage: Bool) -> FeedListVC
   func makeMyPageVC() -> MyPageVC
   func makeSearchVC() -> SearchVC
+  func makeSettingVC() -> SettingVC
   func makeWriteVC() -> WriteVC
 }
 
@@ -60,6 +61,16 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return writeVC
   }
   
+  func  makeWriteCheckVC() -> WriteCheckVC {
+    let repository = DefaultWriteCheckRepository(service: BaseService.default)
+    let useCase = DefaultWriteCheckUseCase(repository: repository)
+    let viewModel = WriteCheckViewModel(useCase: useCase)
+    let writeCheckVC = WriteCheckVC.controllerFromStoryboard(.writeCheck)
+    writeCheckVC.viewModel = viewModel
+    
+    return writeCheckVC
+  }
+  
   func makeWriteCompleteVC() -> WriteCompleteVC {
     let useCase = DefaultWriteCompleteUseCase()
     let viewModel = WriteCompleteViewModel(useCase: useCase)
@@ -80,15 +91,20 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return feedDetailVC
     }
   
-  func makeFeedListVC() -> FeedListVC {
-    let repository = DefaultFeedListRepository(service: BaseService.default)
-    let useCase = DefaultFeedListUseCase(repository: repository)
-    let viewModel = FeedListViewModel(useCase: useCase)
+  func makeFeedListVC(isMyPage: Bool) -> FeedListVC {
+    let feedRepository = DefaultFeedListRepository(service: BaseService.default)
+    let myPageRepository = DefaultMyPageRepository(service: BaseService.default)
+    let useCase = DefaultFeedListUseCase(
+      myPageRepository: myPageRepository,
+      feedrepository: feedRepository)
+    let viewModel = FeedListViewModel(useCase: useCase,
+                                      isMyPage: isMyPage)
     let feedListVC =  FeedListVC.controllerFromStoryboard(.feedList)
     feedListVC.viewModel = viewModel
     return feedListVC
   }
   
   func makeMyPageVC() -> MyPageVC { MyPageVC.controllerFromStoryboard(.mypage) }
+  func makeSettingVC() -> SettingVC { SettingVC.controllerFromStoryboard(.setting) }
 
 }

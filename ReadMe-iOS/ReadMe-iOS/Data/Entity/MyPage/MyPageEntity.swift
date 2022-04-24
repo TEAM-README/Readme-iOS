@@ -7,6 +7,12 @@
 
 import Foundation
 
-struct MyPageEntity {
-
+struct MyPageEntity: Codable{
+  let nickname: String
+  let bookCount: Int
+  
+  func toDomain() -> MyPageModel {
+    MyPageModel(nickname: self.nickname,
+                bookCount: self.bookCount)
+  }
 }

@@ -14,6 +14,7 @@ import RxSwift
 enum FlowType {
   case firstFlow
   case secondFlow
+  case next
 }
 
 class WriteVC: UIViewController {
@@ -29,10 +30,13 @@ class WriteVC: UIViewController {
   private let progressBar = ProgressBar()
   private let disposeBag = DisposeBag()
   
-  let username: String = "혜화동 꽃가마"
-  let bookname: String = "바람이분다, 살아야 한다"
+  var username: String = "혜화동 꽃가마"
+  var bookname: String?
+  var bookImgURL: String?
+  var category: String?
+  var author: String?
   
-  private var sentence: String?
+  private var quote: String?
   private var impression: String?
   
   var viewModel: WriteViewModel!
@@ -47,13 +51,25 @@ class WriteVC: UIViewController {
     setDelegate()
     bindViewModels()
     configureUI()
-    setFlow(.firstFlow)
+    setFlow(self.flowType)
+  }
+  
+  open override func didMove(toParent parent: UIViewController?) {
+    navigationController?.fixInteractivePopGestureRecognizer(delegate: self)
   }
 }
 
 // MARK: - Custom Method
 
 extension WriteVC {
+  func setFirstFlowData(bookcover: String, bookname: String, category: String, author: String) {
+    firstView.setData(bookcover: bookcover, bookname: bookname, category: category, author: author)
+    self.bookname = bookname
+    self.category = category
+    self.author = author
+    self.bookImgURL = bookcover
+  }
+  
   private func bindViewModels() {
     nextButton.rx.tap
       .subscribe(onNext: {
@@ -67,12 +83,21 @@ extension WriteVC {
     secondView.secondTextView.delegate = self
   }
   
+  private func pushWriteCheckView() {
+    let writeCheckVC = ModuleFactory.shared.makeWriteCheckVC()
+    // TODO: - 데이터 전달
+    writeCheckVC.setPreviousData(bookcover: bookImgURL ?? "", category: category ?? "", bookname: bookname ?? "", author: author ?? "", quote: quote ?? "-", impression: impression ?? "-")
+    navigationController?.pushViewController(writeCheckVC, animated: true)
+  }
+  
   private func setFlow(_ type: FlowType) {
     switch type {
     case .firstFlow:
       setFirstFlow()
     case .secondFlow:
       setSecondFlow()
+    case .next:
+      pushWriteCheckView()
     }
   }
   
@@ -94,6 +119,8 @@ extension WriteVC {
       cheerLabel.setTargetAttributedText(targetString: I18N.Write.heartCheer, fontType: .regular, color: .grey08)
       
       describeLabel.setTextWithLineHeight(text: I18N.Write.heartDescribe, lineHeightMultiple: 1.6)
+    default:
+      return
     }
   }
   
@@ -122,13 +149,12 @@ extension WriteVC {
         self.flowType = .secondFlow
       })
     })
-    
   }
   
   private func setSecondFlow() {
     progressBar.setPercentage(ratio: 1)
     
-    secondView.setData(bookname: bookname, sentence: sentence ?? "")
+    secondView.setData(bookname: bookname ?? "", sentence: quote ?? "")
     
     UIView.animate(withDuration: 0.4,
                    delay: 0,
@@ -146,7 +172,7 @@ extension WriteVC {
         self.setTopLabel(self.flowType)
         [self.secondView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 1 }
       }, completion: { _ in
-        self.flowType = .firstFlow
+        self.flowType = .next
       })
     })
   }
@@ -159,7 +185,6 @@ extension WriteVC {
       let frame = CGAffineTransform(translationX: 0, y: -(UIScreen.main.bounds.height*106/844))
       [self.topBgView, self.progressBar, self.firstView, self.secondView].forEach { $0.transform = frame }
       [self.cheerLabel, self.describeLabel].forEach { $0.alpha = 0 }
-      
     }, completion: nil)
   }
   
@@ -211,7 +236,7 @@ extension WriteVC: UITextViewDelegate {
         textView.text = I18N.Write.firstPlaceholder
         textView.textColor = .grey09
       } else {
-        self.sentence = firstView.firstTextView.text
+        self.quote = firstView.firstTextView.text
       }
     case secondView.secondTextView:
       if textView.text == "" {
@@ -291,6 +316,15 @@ extension WriteVC {
       make.top.equalTo(progressBar.snp.bottom)
       make.bottom.equalTo(nextButton.snp.top)
     }
+  }
+}
+
+extension WriteVC : UIGestureRecognizerDelegate {
+  public func gestureRecognizer(
+    _ gestureRecognizer: UIGestureRecognizer,
+    shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer
+  ) -> Bool {
+    return otherGestureRecognizer is PanDirectionGestureRecognizer
   }
 }
 

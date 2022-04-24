@@ -18,6 +18,8 @@ enum Storyboards: String {
   case mypage = "MyPage"
   case search = "Search"
   case write = "Write"
+  case writeCheck = "WriteCheck"
+  case setting = "Setting"
   case writeComplete = "WriteComplete"
 }
 

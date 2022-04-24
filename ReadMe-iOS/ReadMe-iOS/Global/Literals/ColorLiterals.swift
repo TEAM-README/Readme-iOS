@@ -51,6 +51,16 @@ extension UIColor {
   @nonobjc class var grey09: UIColor {
     return UIColor(red: 200.0 / 255.0, green: 200.0 / 255.0, blue: 200.0 / 255.0, alpha: 1.0)
   }
+  
+  // writeCheckVC의 userNameLabel에 사용
+  @nonobjc class var grey10: UIColor {
+    return UIColor(red: 101.0 / 255.0, green: 101.0 / 255.0, blue: 101.0 / 255.0, alpha: 1.0)
+  }
+  
+  // writeCheckVC의 dateLabel에 사용
+  @nonobjc class var grey11: UIColor {
+    return UIColor(red: 186.0 / 255.0, green: 186.0 / 255.0, blue: 186.0 / 255.0, alpha: 1.0)
+  }
 
   @nonobjc class var yellow: UIColor {
     return UIColor(red: 255.0 / 255.0, green: 202.0 / 255.0, blue: 122.0 / 255.0, alpha: 1.0)
@@ -66,6 +76,10 @@ extension UIColor {
 
   @nonobjc class var alertRed: UIColor {
     return UIColor(red: 210.0 / 255.0, green: 57.0 / 255.0, blue: 57.0 / 255.0, alpha: 1.0)
+  }
+  
+  @nonobjc class var logoutRed: UIColor {
+    return UIColor(red: 251.0 / 255.0 , green: 121.0 / 255.0, blue: 121.0 / 255.0, alpha: 1.0)
   }
   
   @nonobjc class var enabledTabbarColor: UIColor {

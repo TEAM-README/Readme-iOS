@@ -8,6 +8,7 @@
 import Foundation
 
 struct FeedDetailEntity: Codable {
+  let idx: Int
   let imgURL: String
   let category: String
   let title: String
@@ -18,7 +19,8 @@ struct FeedDetailEntity: Codable {
   let date: String
   
   func toDomain() -> FeedDetailModel {
-    FeedDetailModel.init(imgURL: self.imgURL,
+    FeedDetailModel.init(idx:self.idx,
+                         imgURL: self.imgURL,
                          category: self.category,
                          title: self.title,
                          author: self.author,

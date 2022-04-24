@@ -13,10 +13,8 @@ class SplashVC: UIViewController {
     super.viewDidLoad()
     delayWithSeconds(1) {
 //      self.pushSignupView()
-      self.pushWriteCompleteView()
+      self.pushSearchView()
     }
-    
-    
   }
   
   private func pushLoginView() {
@@ -45,13 +43,18 @@ class SplashVC: UIViewController {
   }
   
   private func pushFeedListView() {
-    let feedListVC = ModuleFactory.shared.makeFeedListVC()
-    navigationController?.pushViewController(feedListVC, animated: true)
+    let feedListVC = ModuleFactory.shared.makeFeedListVC(isMyPage: false)
+    navigationController?.pushViewController(feedListVC, animated: false)
   }
   
   private func pushWriteView() {
     let writeVC = ModuleFactory.shared.makeWriteVC()
     navigationController?.pushViewController(writeVC, animated: false)
+  }
+  
+  private func pushWriteCheckView() {
+    let writeCheckVC = ModuleFactory.shared.makeWriteCheckVC()
+    navigationController?.pushViewController(writeCheckVC, animated: false)
   }
   
   private func pushWriteCompleteView() {

@@ -7,6 +7,7 @@
 
 import Foundation
 
-struct MyPageModel {
-
+struct MyPageModel: Codable, FeedListDataSource{
+  let nickname: String
+  let bookCount: Int
 }

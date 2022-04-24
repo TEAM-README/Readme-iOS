@@ -121,10 +121,13 @@ extension FeedDetailVC {
     sentenceTextView.textColor = UIColor.grey05
     sentenceTextView.textContainerInset = .zero
     sentenceTextView.textContainer.lineFragmentPadding = 0
+    sentenceTextView.setCharacterSpacing(kernValue: -0.1)
     
     commentTextView.textColor = UIColor.black
     commentTextView.textContainer.lineFragmentPadding = 0
     commentTextView.textContainerInset = .zero
+    commentTextView.setCharacterSpacing(kernValue: -0.2)
+
 
     nicknameLabel.textColor = UIColor.init(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
     nicknameLabel.font = UIFont.readMeFont(size: 12, type: .regular)
