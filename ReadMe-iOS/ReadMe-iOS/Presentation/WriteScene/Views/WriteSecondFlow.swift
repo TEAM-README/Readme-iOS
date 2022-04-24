@@ -70,6 +70,7 @@ extension WriteSecondFlow {
     secondTextView.textContainerInset = UIEdgeInsets(top: 18, left: 22, bottom: 18, right: 22)
     
     sentenceTextView.textContainer.maximumNumberOfLines = 4
+    sentenceTextView.textContainer.lineFragmentPadding = 0
     sentenceTextView.textContainer.lineBreakMode = .byTruncatingTail
     sentenceTextView.font = .readMeFont(size: 13)
     sentenceTextView.textColor = .grey04

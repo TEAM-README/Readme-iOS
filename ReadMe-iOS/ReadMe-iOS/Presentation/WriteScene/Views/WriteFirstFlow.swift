@@ -40,6 +40,9 @@ extension WriteFirstFlow {
     bookTitleLabel.text = bookname
     categoryLabel.text = category
     bookAuthorLabel.text = author
+    
+    bookTitleLabel.setTextWithLineHeight(text: bookTitleLabel.text, lineHeightMultiple: 1.48)
+    bookAuthorLabel.setTextWithLineHeight(text: bookAuthorLabel.text, lineHeightMultiple: 1.0)
   }
 }
 
@@ -72,12 +75,10 @@ extension WriteFirstFlow {
     
     bookTitleLabel.font = .readMeFont(size: 13, type: .medium)
     bookTitleLabel.textColor = .grey05
-    bookTitleLabel.setTextWithLineHeight(text: bookTitleLabel.text, lineHeightMultiple: 1.48)
     bookTitleLabel.numberOfLines = 2
     
     bookAuthorLabel.font = .readMeFont(size: 12)
     bookAuthorLabel.textColor = .grey06
-    bookAuthorLabel.setTextWithLineHeight(text: bookAuthorLabel.text, lineHeightMultiple: 1.0)
   }
   
   private func setLayout() {
@@ -116,7 +117,7 @@ extension WriteFirstFlow {
     
     bookTitleLabel.snp.makeConstraints { make in
       make.leading.equalTo(categoryLabel.snp.leading)
-      make.top.equalTo(categoryLabel.snp.bottom).offset(6)
+      make.top.equalTo(categoryLabel.snp.bottom).offset(2)
       make.trailing.equalToSuperview().inset(57)
     }
     

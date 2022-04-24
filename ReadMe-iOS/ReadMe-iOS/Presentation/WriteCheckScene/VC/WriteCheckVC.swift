@@ -85,8 +85,8 @@ extension WriteCheckVC {
     titleLabel.textColor = .grey08
     titleLabel.textAlignment = .center
     // FIXME: - 둘 중에 하나만 적용됨
-    titleLabel.setTextWithLineHeight(text: titleLabel.text, lineHeightMultiple: 1.6)
-    titleLabel.setTargetAttributedText(targetString: username, fontType: .bold, color: .mainBlue)
+//    titleLabel.setTargetAttributedText(targetString: username, fontType: .bold, color: .mainBlue)
+//    titleLabel.setTextWithLineHeight(text: titleLabel.text, lineHeightMultiple: 1.6)
     
     bgImageView.image = ImageLiterals.WriteCheck.bg
     
@@ -95,6 +95,7 @@ extension WriteCheckVC {
     quoteTextView.textContainer.maximumNumberOfLines = 4
     quoteTextView.textContainer.lineBreakMode = .byTruncatingTail
     quoteTextView.textContainerInset = .zero
+    quoteTextView.textContainer.lineFragmentPadding = 0
     quoteTextView.setTextWithLineHeight(text: quoteTextView.text, lineHeightMultiple: 1.6)
     quoteTextView.isEditable = false
     quoteTextView.isSelectable = false
@@ -107,7 +108,7 @@ extension WriteCheckVC {
     impressionTextView.textContainer.maximumNumberOfLines = 6
     impressionTextView.textContainer.lineBreakMode = .byTruncatingTail
     impressionTextView.textContainerInset = .zero
-    // FIXME: - lineheight가 위로도 붙어서 레이아웃이 제대로 맞지 않는 것 같아여
+    impressionTextView.textContainer.lineFragmentPadding = 0
     impressionTextView.setTextWithLineHeight(text: impressionTextView.text, lineHeightMultiple: 1.6)
     impressionTextView.isEditable = false
     impressionTextView.isSelectable = false
@@ -155,7 +156,7 @@ extension WriteCheckVC {
     titleLabel.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide).inset(16)
       make.centerX.equalToSuperview()
-      make.height.equalTo(41)
+      make.height.equalTo(43)
     }
     
     bgImageView.snp.makeConstraints { make in
@@ -206,7 +207,7 @@ extension WriteCheckVC {
     
     bookTitleLabel.snp.makeConstraints { make in
       make.leading.equalTo(categoryLabel.snp.leading)
-      make.top.equalTo(categoryLabel.snp.bottom).offset(6)
+      make.top.equalTo(categoryLabel.snp.bottom).offset(2)
       make.trailing.equalToSuperview().inset(57)
     }
     
