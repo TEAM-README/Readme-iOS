@@ -51,6 +51,7 @@ class WriteVC: UIViewController {
     setDelegate()
     bindViewModels()
     configureUI()
+    setFirstFlowData()
     setFlow(self.flowType)
   }
   
@@ -62,12 +63,13 @@ class WriteVC: UIViewController {
 // MARK: - Custom Method
 
 extension WriteVC {
-  func setFirstFlowData(bookInfo: WriteModel) {
-    firstView.setData(bookInfo: bookInfo)
-    self.bookname = bookInfo.bookname
-    self.category = bookInfo.category
-    self.author = bookInfo.author
-    self.bookImgURL = bookInfo.bookcover
+  private func setFirstFlowData() {
+    firstView.setData(bookInfo: viewModel.bookInfo)
+    
+    self.bookname = viewModel.bookInfo.bookname
+    self.category = viewModel.bookInfo.category
+    self.author = viewModel.bookInfo.author
+    self.bookImgURL = viewModel.bookInfo.bookcover
   }
   
   private func bindViewModels() {

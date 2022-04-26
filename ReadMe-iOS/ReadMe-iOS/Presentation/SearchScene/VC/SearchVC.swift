@@ -168,11 +168,9 @@ extension SearchVC: UICollectionViewDelegate {
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let writeVC = ModuleFactory.shared.makeWriteVC()
     let content = contentList[indexPath.item]
-    
     let bookInfo = WriteModel.init(bookcover: content.imgURL, bookname: content.title, category: content.category, author: content.author)
-    writeVC.setFirstFlowData(bookInfo: bookInfo)
+    let writeVC = ModuleFactory.shared.makeWriteVC(bookInfo: bookInfo)
     
     navigationController?.pushViewController(writeVC, animated: true)
   }

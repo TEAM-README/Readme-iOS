@@ -12,6 +12,7 @@ final class WriteViewModel: ViewModelType {
   
   private let useCase: WriteUseCase
   private let disposeBag = DisposeBag()
+  let bookInfo: WriteModel
   
   // MARK: - Inputs
   struct Input {
@@ -23,8 +24,9 @@ final class WriteViewModel: ViewModelType {
     
   }
   
-  init(useCase: WriteUseCase) {
+  init(useCase: WriteUseCase, bookInfo: WriteModel) {
     self.useCase = useCase
+    self.bookInfo = bookInfo
   }
 }
 
