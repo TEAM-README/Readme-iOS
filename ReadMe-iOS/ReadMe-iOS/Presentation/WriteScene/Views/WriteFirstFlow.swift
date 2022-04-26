@@ -35,11 +35,11 @@ class WriteFirstFlow: UIView {
 // MARK: - Custom Methods Part
 
 extension WriteFirstFlow {
-  func setData(bookcover: String, bookname: String, category: String, author: String) {
-    bookCoverImageView.setImage(with: bookcover)
-    bookTitleLabel.text = bookname
-    categoryLabel.text = category
-    bookAuthorLabel.text = author
+  func setData(bookInfo: WriteModel) {
+    bookCoverImageView.setImage(with: bookInfo.bookcover)
+    bookTitleLabel.text = bookInfo.bookname
+    categoryLabel.text = bookInfo.category
+    bookAuthorLabel.text = bookInfo.author
     
     bookTitleLabel.setTextWithLineHeight(text: bookTitleLabel.text, lineHeightMultiple: 1.48)
     bookAuthorLabel.setTextWithLineHeight(text: bookAuthorLabel.text, lineHeightMultiple: 1.0)

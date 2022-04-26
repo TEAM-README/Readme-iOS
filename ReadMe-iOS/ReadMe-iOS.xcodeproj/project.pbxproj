@@ -25,6 +25,7 @@
 		2B7DCCA9280E7E580062BAE8 /* WriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DCCA8280E7E580062BAE8 /* WriteVC.swift */; };
 		2B7DCCAB280E7ED70062BAE8 /* Write.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B7DCCAA280E7ED70062BAE8 /* Write.storyboard */; };
 		2B7DCCB1280E7F7D0062BAE8 /* WriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DCCB0280E7F7D0062BAE8 /* WriteUseCase.swift */; };
+		2B87EF1E28183AA4006247AE /* WriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B87EF1D28183AA4006247AE /* WriteModel.swift */; };
 		2B9605EC280D373E006FF358 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9605EB280D373E006FF358 /* SearchService.swift */; };
 		2BA6EB572811D2B100715C31 /* WriteCheckUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA6EB512811D2B100715C31 /* WriteCheckUseCase.swift */; };
 		2BA6EB582811D2B100715C31 /* WriteCheckRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA6EB522811D2B100715C31 /* WriteCheckRepository.swift */; };
@@ -192,6 +193,7 @@
 		2B7DCCA8280E7E580062BAE8 /* WriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteVC.swift; sourceTree = "<group>"; };
 		2B7DCCAA280E7ED70062BAE8 /* Write.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Write.storyboard; sourceTree = "<group>"; };
 		2B7DCCB0280E7F7D0062BAE8 /* WriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteUseCase.swift; sourceTree = "<group>"; };
+		2B87EF1D28183AA4006247AE /* WriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteModel.swift; sourceTree = "<group>"; };
 		2B9605EB280D373E006FF358 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		2BA6EB512811D2B100715C31 /* WriteCheckUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCheckUseCase.swift; sourceTree = "<group>"; };
 		2BA6EB522811D2B100715C31 /* WriteCheckRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCheckRepository.swift; sourceTree = "<group>"; };
@@ -478,6 +480,14 @@
 				2B7DCCB0280E7F7D0062BAE8 /* WriteUseCase.swift */,
 			);
 			path = Write;
+			sourceTree = "<group>";
+		};
+		2B87EF1C28183A93006247AE /* WriteModel */ = {
+			isa = PBXGroup;
+			children = (
+				2B87EF1D28183AA4006247AE /* WriteModel.swift */,
+			);
+			path = WriteModel;
 			sourceTree = "<group>";
 		};
 		2BA6EB4B2811D22F00715C31 /* WriteCheckScene */ = {
@@ -1158,6 +1168,7 @@
 		FDD9D29D27F9E00A0024DFB2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2B87EF1C28183A93006247AE /* WriteModel */,
 				2BA6EB5E2811D2DD00715C31 /* WriteCheck */,
 				2B52A30B28083D2900CFB1D0 /* Search */,
 				FD85CECE2809C94300E7BE7B /* Feed */,
@@ -1681,6 +1692,7 @@
 				FDD9D24927F9CB270024DFB2 /* AppDelegate.swift in Sources */,
 				FDD9D28E27F9DFAF0024DFB2 /* manageObserverAction.swift in Sources */,
 				FDD9D26E27F9DEC10024DFB2 /* UITableViewRegisterable.swift in Sources */,
+				2B87EF1E28183AA4006247AE /* WriteModel.swift in Sources */,
 				FDD9D27527F9DF130024DFB2 /* StringLiterals.swift in Sources */,
 				FDD9D24B27F9CB270024DFB2 /* SceneDelegate.swift in Sources */,
 				FDD9D27127F9DEF20024DFB2 /* StoryboardLiterals.swift in Sources */,
