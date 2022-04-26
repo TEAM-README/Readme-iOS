@@ -29,4 +29,8 @@ struct ImageLiterals{
   struct WriteComplete {
     static let check = UIImage(named: "ic_ check")
   }
+  
+  struct ReadmeAlert {
+    static let alert = UIImage(named: "ic_ alert")
+  }
 }

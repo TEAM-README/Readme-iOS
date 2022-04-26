@@ -61,6 +61,11 @@ extension UIColor {
   @nonobjc class var grey11: UIColor {
     return UIColor(red: 186.0 / 255.0, green: 186.0 / 255.0, blue: 186.0 / 255.0, alpha: 1.0)
   }
+  
+  // alert divideLineView
+  @nonobjc class var grey12: UIColor {
+    return UIColor(red: 236.0 / 255.0, green: 236.0 / 255.0, blue: 236.0 / 255.0, alpha: 1.0)
+  }
 
   @nonobjc class var yellow: UIColor {
     return UIColor(red: 255.0 / 255.0, green: 202.0 / 255.0, blue: 122.0 / 255.0, alpha: 1.0)

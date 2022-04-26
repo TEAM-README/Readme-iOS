@@ -13,7 +13,7 @@ class SplashVC: UIViewController {
     super.viewDidLoad()
     delayWithSeconds(1) {
 //      self.pushSignupView()
-      self.pushSearchView()
+      self.presentAlertVC()
     }
   }
   
@@ -48,7 +48,8 @@ class SplashVC: UIViewController {
   }
   
   private func pushWriteView() {
-    let writeVC = ModuleFactory.shared.makeWriteVC()
+    let bookInfo = WriteModel.init(bookcover: "-", bookname: "-", category: "-", author: "-")
+    let writeVC = ModuleFactory.shared.makeWriteVC(bookInfo: bookInfo)
     navigationController?.pushViewController(writeVC, animated: false)
   }
   
@@ -60,5 +61,18 @@ class SplashVC: UIViewController {
   private func pushWriteCompleteView() {
     let writeCompleteVC = ModuleFactory.shared.makeWriteCompleteVC()
     navigationController?.pushViewController(writeCompleteVC, animated: false)
+  }
+  
+  private func presentAlertVC() {
+    let alertVC = ModuleFactory.shared.makeAlertVC()
+    alertVC.modalPresentationStyle = .fullScreen
+    alertVC.modalTransitionStyle = .crossDissolve
+    alertVC.setAlertTitle(title: I18N.ReadmeAlert.title, description: I18N.ReadmeAlert.description)
+    alertVC.setAlertType(.twoAction, action: I18N.ReadmeAlert.cancel, I18N.ReadmeAlert.ok)
+    alertVC.closure = {
+      self.pushSearchView()
+    }
+    
+    present(alertVC, animated: true)
   }
 }

@@ -80,12 +80,15 @@ struct I18N {
     static let secondPlaceholder = "책을 읽었을 때 무엇을 느끼고 배우셨나요?"
     static let selectedBook = "내가 선택한 책"
     static let interestedSentence = "에서 인상 깊었던 문장"
-    static let next = "다음"
   }
   
   struct WriteCheck {
     static let titleThrough = "기록을 통해 "
     static let titleDay = " 님의 하루가\n 더 풍요로워졌길 바라요!"
+  }
+  
+  struct Button {
+    static let next = "다음"
     static let register = "등록하기"
   }
   
@@ -93,5 +96,12 @@ struct I18N {
     static let title = "등록을 완료했어요"
     static let subtitle = "피드 와 마이페이지 에서\n작성한 감상글을 확인할 수 있어요"
     static let move = "피드 구경하러 가기"
+  }
+  
+  struct ReadmeAlert {
+    static let title = "기록한 내용을 버리고\n돌아가시겠습니까?"
+    static let description = "작성한 내용이 저장되지 않습니다"
+    static let cancel = "취소"
+    static let ok = "확인"
   }
 }
