@@ -41,8 +41,8 @@ extension WriteFirstFlow {
     categoryLabel.text = bookInfo.category
     bookAuthorLabel.text = bookInfo.author
     
-    bookTitleLabel.setTextWithLineHeight(text: bookTitleLabel.text, lineHeightMultiple: 1.48)
-    bookAuthorLabel.setTextWithLineHeight(text: bookAuthorLabel.text, lineHeightMultiple: 1.0)
+    bookTitleLabel.setTextWithLineHeight(text: bookTitleLabel.text, lineHeightMultiple: 1.23)
+    bookAuthorLabel.setTextWithLineHeight(text: bookAuthorLabel.text, lineHeightMultiple: 0.83)
   }
 }
 
@@ -55,7 +55,7 @@ extension WriteFirstFlow {
     firstTitleLabel.textColor = .black
     
     firstTextView.text = I18N.Write.firstPlaceholder
-    firstTextView.setTextWithLineHeight(text: firstTextView.text, lineHeightMultiple: 1.6)
+    firstTextView.setTextWithLineHeight(text: firstTextView.text, lineHeightMultiple: 1.33)
     firstTextView.font = .readMeFont(size: 15)
     firstTextView.textColor = .grey09
     
@@ -71,7 +71,7 @@ extension WriteFirstFlow {
     
     categoryLabel.font = .readMeFont(size: 12)
     categoryLabel.textColor = .mainBlue
-    categoryLabel.setTextWithLineHeight(text: categoryLabel.text, lineHeightMultiple: 1.0)
+    categoryLabel.setTextWithLineHeight(text: categoryLabel.text, lineHeightMultiple: 0.83)
     
     bookTitleLabel.font = .readMeFont(size: 13, type: .medium)
     bookTitleLabel.textColor = .grey05
@@ -117,7 +117,7 @@ extension WriteFirstFlow {
     
     bookTitleLabel.snp.makeConstraints { make in
       make.leading.equalTo(categoryLabel.snp.leading)
-      make.top.equalTo(categoryLabel.snp.bottom).offset(2)
+      make.top.equalTo(categoryLabel.snp.bottom).offset(6)
       make.trailing.equalToSuperview().inset(57)
     }
     

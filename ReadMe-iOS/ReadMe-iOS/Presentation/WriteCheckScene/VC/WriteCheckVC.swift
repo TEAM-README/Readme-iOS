@@ -83,33 +83,31 @@ extension WriteCheckVC {
     titleLabel.numberOfLines = 2
     titleLabel.font = .readMeFont(size: 14)
     titleLabel.textColor = .grey08
+    titleLabel.setTargetAttributedText(targetString: username, fontType: .bold, color: .mainBlue, text: titleLabel.text, lineHeightMultiple: 1.33)
     titleLabel.textAlignment = .center
-    // FIXME: - 둘 중에 하나만 적용됨
-//    titleLabel.setTargetAttributedText(targetString: username, fontType: .bold, color: .mainBlue)
-//    titleLabel.setTextWithLineHeight(text: titleLabel.text, lineHeightMultiple: 1.6)
     
     bgImageView.image = ImageLiterals.WriteCheck.bg
     
-    quoteTextView.font = .readMeFont(size: 14)
+    quoteTextView.setTextWithLineHeight(text: quoteTextView.text, lineHeightMultiple: 1.33)
+    quoteTextView.font = .readMeFont(size: 13)
     quoteTextView.textColor = .grey05
     quoteTextView.textContainer.maximumNumberOfLines = 4
     quoteTextView.textContainer.lineBreakMode = .byTruncatingTail
     quoteTextView.textContainerInset = .zero
     quoteTextView.textContainer.lineFragmentPadding = 0
-    quoteTextView.setTextWithLineHeight(text: quoteTextView.text, lineHeightMultiple: 1.6)
     quoteTextView.isEditable = false
     quoteTextView.isSelectable = false
     quoteTextView.isScrollEnabled = false
     
     divideLineView.backgroundColor = .mainBlue.withAlphaComponent(0.4)
     
+    impressionTextView.setTextWithLineHeight(text: impressionTextView.text, lineHeightMultiple: 1.33)
     impressionTextView.font = .readMeFont(size: 14, type: .extraLight)
     impressionTextView.textColor = .black
     impressionTextView.textContainer.maximumNumberOfLines = 6
     impressionTextView.textContainer.lineBreakMode = .byTruncatingTail
     impressionTextView.textContainerInset = .zero
     impressionTextView.textContainer.lineFragmentPadding = 0
-    impressionTextView.setTextWithLineHeight(text: impressionTextView.text, lineHeightMultiple: 1.6)
     impressionTextView.isEditable = false
     impressionTextView.isSelectable = false
     impressionTextView.isScrollEnabled = false
@@ -117,27 +115,27 @@ extension WriteCheckVC {
     usernameLabel.text = username
     usernameLabel.font = .readMeFont(size: 12)
     usernameLabel.textColor = .grey10
-    usernameLabel.setTextWithLineHeight(text: username, lineHeightMultiple: 1.0)
+    usernameLabel.setTextWithLineHeight(text: username, lineHeightMultiple: 0.83)
     
     formatter.dateFormat = "yyyy/MM/dd"
     let currentDateString = formatter.string(from: Date())
     dateLabel.text = currentDateString
     dateLabel.font = .readMeFont(size: 12)
     dateLabel.textColor = .grey11
-    dateLabel.setTextWithLineHeight(text: dateLabel.text, lineHeightMultiple: 1.0)
+    dateLabel.setTextWithLineHeight(text: dateLabel.text, lineHeightMultiple: 0.83)
     
     categoryLabel.font = .readMeFont(size: 12)
     categoryLabel.textColor = .mainBlue
-    categoryLabel.setTextWithLineHeight(text: categoryLabel.text, lineHeightMultiple: 1.0)
+    categoryLabel.setTextWithLineHeight(text: categoryLabel.text, lineHeightMultiple: 0.83)
     
     bookTitleLabel.font = .readMeFont(size: 13, type: .medium)
     bookTitleLabel.textColor = .grey05
-    bookTitleLabel.setTextWithLineHeight(text: bookTitleLabel.text, lineHeightMultiple: 1.48)
+    bookTitleLabel.setTextWithLineHeight(text: bookTitleLabel.text, lineHeightMultiple: 1.23)
     bookTitleLabel.numberOfLines = 2
     
     bookAuthorLabel.font = .readMeFont(size: 12)
     bookAuthorLabel.textColor = .grey06
-    bookAuthorLabel.setTextWithLineHeight(text: bookAuthorLabel.text, lineHeightMultiple: 1.0)
+    bookAuthorLabel.setTextWithLineHeight(text: bookAuthorLabel.text, lineHeightMultiple: 0.83)
     
     registerButton.title = I18N.Button.register
     registerButton.isEnabled = true
@@ -156,7 +154,7 @@ extension WriteCheckVC {
     titleLabel.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide).inset(16)
       make.centerX.equalToSuperview()
-      make.height.equalTo(43)
+      make.height.equalTo(50)
     }
     
     bgImageView.snp.makeConstraints { make in
@@ -166,20 +164,20 @@ extension WriteCheckVC {
     
     quoteTextView.snp.makeConstraints { make in
       make.leading.equalToSuperview().inset(28)
-      make.top.equalTo(bgImageView.snp.top).inset(26) // 41
+      make.top.equalTo(bgImageView.snp.top).inset(41)
       make.trailing.equalToSuperview().inset(84)
     }
     
     divideLineView.snp.makeConstraints { make in
       make.leading.equalTo(quoteTextView.snp.leading)
-      make.top.equalTo(quoteTextView.snp.bottom).offset(20) // 26
+      make.top.equalTo(quoteTextView.snp.bottom).offset(26)
       make.trailing.equalToSuperview()
       make.height.equalTo(1)
     }
     
     impressionTextView.snp.makeConstraints { make in
       make.leading.equalToSuperview().inset(28)
-      make.top.equalTo(divideLineView.snp.bottom).offset(11) // 21
+      make.top.equalTo(divideLineView.snp.bottom).offset(21)
       make.trailing.equalToSuperview().inset(42)
     }
     
@@ -207,7 +205,7 @@ extension WriteCheckVC {
     
     bookTitleLabel.snp.makeConstraints { make in
       make.leading.equalTo(categoryLabel.snp.leading)
-      make.top.equalTo(categoryLabel.snp.bottom).offset(2)
+      make.top.equalTo(categoryLabel.snp.bottom).offset(6)
       make.trailing.equalToSuperview().inset(57)
     }
     

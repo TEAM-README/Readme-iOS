@@ -105,20 +105,20 @@ extension WriteVC {
     switch type {
     case .firstFlow:
       cheerLabel.text = username + I18N.Write.startCheer
-      cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.6)
+      cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.33)
       cheerLabel.setTargetAttributedText(targetString: I18N.Write.startCheer, fontType: .regular, color: .grey08)
       
       describeLabel.text = I18N.Write.startDescribe
-      describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.6)
+      describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.33)
       
     case .secondFlow:
       cheerLabel.text = username + I18N.Write.heartCheer
       describeLabel.text = I18N.Write.heartDescribe
       
-      cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.6)
+      cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.33)
       cheerLabel.setTargetAttributedText(targetString: I18N.Write.heartCheer, fontType: .regular, color: .grey08)
       
-      describeLabel.setTextWithLineHeight(text: I18N.Write.heartDescribe, lineHeightMultiple: 1.6)
+      describeLabel.setTextWithLineHeight(text: I18N.Write.heartDescribe, lineHeightMultiple: 1.33)
     default:
       return
     }
@@ -265,7 +265,7 @@ extension WriteVC {
     describeLabel.font = .readMeFont(size: 14, type: .regular)
     describeLabel.textColor = .grey08
     describeLabel.numberOfLines = 2
-    describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.6)
+    describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.33)
     
     nextButton.title = I18N.Button.next
     nextButton.isEnabled = true
