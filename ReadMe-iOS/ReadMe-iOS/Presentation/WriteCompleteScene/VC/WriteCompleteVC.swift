@@ -41,8 +41,8 @@ extension WriteCompleteVC {
     
     moveButton.rx.tap
       .subscribe(onNext: {
-        // TODO: - 피드로 화면 전환
         print("📍 피드로 갑니다 슝")
+        self.dismiss(animated: true)
       })
       .disposed(by: disposeBag)
   }
