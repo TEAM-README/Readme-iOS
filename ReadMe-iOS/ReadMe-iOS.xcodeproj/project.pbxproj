@@ -37,7 +37,6 @@
 		2BA7085728143F260021717F /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7085128143F260021717F /* AlertVC.swift */; };
 		2BA7085828143F260021717F /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7085228143F260021717F /* AlertViewModel.swift */; };
 		2BA70862281440B30021717F /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BA70861281440B30021717F /* Alert.storyboard */; };
-		2BA7086728145EB10021717F /* AlertUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7086628145EB10021717F /* AlertUseCase.swift */; };
 		2BABE36D280C881F00EFA45E /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABE36C280C881F00EFA45E /* SearchHeaderView.swift */; };
 		2BF64E9A280EF94700383F28 /* SignupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF64E99280EF94600383F28 /* SignupEntity.swift */; };
 		FD01F06F2807F8E7002F80D2 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD01F06E2807F8E7002F80D2 /* Pretendard-Bold.otf */; };
@@ -203,7 +202,6 @@
 		2BA7085128143F260021717F /* AlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertVC.swift; sourceTree = "<group>"; };
 		2BA7085228143F260021717F /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		2BA70861281440B30021717F /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
-		2BA7086628145EB10021717F /* AlertUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUseCase.swift; sourceTree = "<group>"; };
 		2BABE36C280C881F00EFA45E /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 		2BF64E99280EF94600383F28 /* SignupEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupEntity.swift; sourceTree = "<group>"; };
 		47915226E9B56538C326162E /* Pods-ReadMe-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -576,14 +574,6 @@
 				2BA70861281440B30021717F /* Alert.storyboard */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		2BA7086328145E8C0021717F /* Alert */ = {
-			isa = PBXGroup;
-			children = (
-				2BA7086628145EB10021717F /* AlertUseCase.swift */,
-			);
-			path = Alert;
 			sourceTree = "<group>";
 		};
 		96BEEFE36BD7FC57BABEEC21 /* Pods */ = {
@@ -1130,7 +1120,6 @@
 		FDD9D29C27F9DFFA0024DFB2 /* Usecase */ = {
 			isa = PBXGroup;
 			children = (
-				2BA7086328145E8C0021717F /* Alert */,
 				2BA6EB602811D30F00715C31 /* WriteCheck */,
 				2B7DCCAF280E7F710062BAE8 /* Write */,
 				2B52A30C28083D3C00CFB1D0 /* Search */,
@@ -1734,7 +1723,6 @@
 				FD06198C28055CC700F647D7 /* TabbarView.swift in Sources */,
 				FD99D59728073C4900BB7FDA /* SignupUseCase.swift in Sources */,
 				FD85CECC2809C92F00E7BE7B /* FeedDetailViewModel.swift in Sources */,
-				2BA7086728145EB10021717F /* AlertUseCase.swift in Sources */,
 				FDD9D2D427F9E2400024DFB2 /* ResponseObject.swift in Sources */,
 				2B0CFB422809DFD5007F3145 /* SearchCVC.swift in Sources */,
 				FD01F0712808062E002F80D2 /* shakeAction.swift in Sources */,

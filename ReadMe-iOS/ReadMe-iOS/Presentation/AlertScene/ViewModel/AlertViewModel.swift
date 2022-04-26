@@ -9,7 +9,6 @@ import RxSwift
 
 final class AlertViewModel: ViewModelType {
 
-  private let useCase: AlertUseCase
   private let disposeBag = DisposeBag()
   
   // MARK: - Inputs
@@ -22,8 +21,8 @@ final class AlertViewModel: ViewModelType {
     
   }
   
-  init(useCase: AlertUseCase) {
-    self.useCase = useCase
+  init() {
+    
   }
 }
 
