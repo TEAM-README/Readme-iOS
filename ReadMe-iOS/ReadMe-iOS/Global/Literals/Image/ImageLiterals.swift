@@ -26,4 +26,8 @@ struct ImageLiterals{
   struct WriteCheck {
     static let bg = UIImage(named: "writeCheck_bg")
   }
+  
+  struct ReadmeAlert {
+    static let alert = UIImage(named: "ic_ alert")
+  }
 }

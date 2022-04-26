@@ -71,6 +71,12 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return writeCheckVC
   }
   
+  func makeAlertVC() -> AlertVC {
+    let alertVC = AlertVC.controllerFromStoryboard(.alert)
+    
+    return alertVC
+  }
+  
   func makeBaseVC() -> BaseVC { BaseVC.controllerFromStoryboard(.base) }
   func makeHomeVC() -> HomeVC { HomeVC.controllerFromStoryboard(.home) }
   func makeFeedDetailVC(idx: Int) -> FeedDetailVC {
