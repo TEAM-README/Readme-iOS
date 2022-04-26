@@ -139,7 +139,7 @@ extension WriteCheckVC {
     bookAuthorLabel.textColor = .grey06
     bookAuthorLabel.setTextWithLineHeight(text: bookAuthorLabel.text, lineHeightMultiple: 1.0)
     
-    registerButton.title = I18N.WriteCheck.register
+    registerButton.title = I18N.Button.register
     registerButton.isEnabled = true
   }
 }

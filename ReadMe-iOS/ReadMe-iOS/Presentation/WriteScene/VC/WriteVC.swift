@@ -267,7 +267,7 @@ extension WriteVC {
     describeLabel.numberOfLines = 2
     describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.6)
     
-    nextButton.title = I18N.Write.next
+    nextButton.title = I18N.Button.next
     nextButton.isEnabled = true
     
     [cheerLabel, describeLabel, firstView, secondView].forEach { $0.alpha = 0 }
