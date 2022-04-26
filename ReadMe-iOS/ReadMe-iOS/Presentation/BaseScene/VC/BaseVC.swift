@@ -25,6 +25,11 @@ class BaseVC: UIViewController {
     super.viewDidLoad()
     configureTabbarDelegate()
     tabbarClicked(.home)
+    addObserver()
+  }
+  
+  open override func didMove(toParent parent: UIViewController?) {
+    navigationController?.fixInteractivePopGestureRecognizer(delegate: self)
   }
 }
 
@@ -36,6 +41,7 @@ extension BaseVC: MainTabbarDelegate{
   }
   
   func tabbarClicked(_ type: TabbarIconType) {
+
     if !tabList.contains(type){
       let vc = makeScene(type)
       vc.view.translatesAutoresizingMaskIntoConstraints = false
@@ -60,10 +66,38 @@ extension BaseVC: MainTabbarDelegate{
   
   private func makeScene(_ type: TabbarIconType) -> UIViewController{
     switch(type) {
-      case .home: return moduleFactory.makeFeedListVC()
-      case .mypage: return moduleFactory.makeMyPageVC()
+      case .home: return moduleFactory.makeFeedListVC(isMyPage: false)
+      case .mypage: return moduleFactory.makeFeedListVC(isMyPage: true)
     }
   }
 }
 
+extension BaseVC {
+  func addObserver() {
+    addObserverAction(.moveFeedDetail) { noti in
+      guard let idx = noti.object as? Int else { return }
+      let detailVC = ModuleFactory.shared.makeFeedDetailVC(idx: idx)
+      self.navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    addObserverAction(.moveSettingView) { _ in
+      let settingVC = ModuleFactory.shared.makeSettingVC()
+      self.navigationController?.pushViewController(settingVC, animated: true)
+    }
+    
+    addObserverAction(.logout) { _ in
+      let loginVC = ModuleFactory.shared.makeLoginVC()
+      self.navigationController?.pushViewController(loginVC, animated: true)
+    }
+  }
+}
 
+extension BaseVC : UIGestureRecognizerDelegate {
+  public func gestureRecognizer(
+    _ gestureRecognizer: UIGestureRecognizer,
+    shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer
+  ) -> Bool {
+    return otherGestureRecognizer is PanDirectionGestureRecognizer
+  }
+
+}

@@ -46,7 +46,7 @@ extension WriteSecondFlow {
     secondContentTitleLabel.font = .readMeFont(size: 14, type: .semiBold)
     
     sentenceTextView.text = sentence
-    sentenceTextView.setTextWithLineHeight(text: sentenceTextView.text, lineHeightMultiple: 1.6)
+    sentenceTextView.setTextWithLineHeight(text: sentenceTextView.text, lineHeightMultiple: 1.33)
   }
 }
 
@@ -60,7 +60,7 @@ extension WriteSecondFlow {
     secondTitleLabel.textColor = .black
     
     secondTextView.text = I18N.Write.secondPlaceholder
-    secondTextView.setTextWithLineHeight(text: secondTextView.text, lineHeightMultiple: 1.6)
+    secondTextView.setTextWithLineHeight(text: secondTextView.text, lineHeightMultiple: 1.33)
     secondTextView.font = .readMeFont(size: 15)
     secondTextView.textColor = .grey09
     
@@ -70,6 +70,7 @@ extension WriteSecondFlow {
     secondTextView.textContainerInset = UIEdgeInsets(top: 18, left: 22, bottom: 18, right: 22)
     
     sentenceTextView.textContainer.maximumNumberOfLines = 4
+    sentenceTextView.textContainer.lineFragmentPadding = 0
     sentenceTextView.textContainer.lineBreakMode = .byTruncatingTail
     sentenceTextView.font = .readMeFont(size: 13)
     sentenceTextView.textColor = .grey04

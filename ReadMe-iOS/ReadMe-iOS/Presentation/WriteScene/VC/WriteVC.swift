@@ -51,6 +51,7 @@ class WriteVC: UIViewController {
     setDelegate()
     bindViewModels()
     configureUI()
+    setFirstFlowData()
     setFlow(self.flowType)
   }
   
@@ -62,12 +63,13 @@ class WriteVC: UIViewController {
 // MARK: - Custom Method
 
 extension WriteVC {
-  func setFirstFlowData(bookcover: String, bookname: String, category: String, author: String) {
-    firstView.setData(bookcover: bookcover, bookname: bookname, category: category, author: author)
-    self.bookname = bookname
-    self.category = category
-    self.author = author
-    self.bookImgURL = bookcover
+  private func setFirstFlowData() {
+    firstView.setData(bookInfo: viewModel.bookInfo)
+    
+    self.bookname = viewModel.bookInfo.bookname
+    self.category = viewModel.bookInfo.category
+    self.author = viewModel.bookInfo.author
+    self.bookImgURL = viewModel.bookInfo.bookcover
   }
   
   private func bindViewModels() {
@@ -105,20 +107,20 @@ extension WriteVC {
     switch type {
     case .firstFlow:
       cheerLabel.text = username + I18N.Write.startCheer
-      cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.6)
+      cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.33)
       cheerLabel.setTargetAttributedText(targetString: I18N.Write.startCheer, fontType: .regular, color: .grey08)
       
       describeLabel.text = I18N.Write.startDescribe
-      describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.6)
+      describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.33)
       
     case .secondFlow:
       cheerLabel.text = username + I18N.Write.heartCheer
       describeLabel.text = I18N.Write.heartDescribe
       
-      cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.6)
+      cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.33)
       cheerLabel.setTargetAttributedText(targetString: I18N.Write.heartCheer, fontType: .regular, color: .grey08)
       
-      describeLabel.setTextWithLineHeight(text: I18N.Write.heartDescribe, lineHeightMultiple: 1.6)
+      describeLabel.setTextWithLineHeight(text: I18N.Write.heartDescribe, lineHeightMultiple: 1.33)
     default:
       return
     }
@@ -265,9 +267,9 @@ extension WriteVC {
     describeLabel.font = .readMeFont(size: 14, type: .regular)
     describeLabel.textColor = .grey08
     describeLabel.numberOfLines = 2
-    describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.6)
+    describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.33)
     
-    nextButton.title = I18N.Write.next
+    nextButton.title = I18N.Button.next
     nextButton.isEnabled = true
     
     [cheerLabel, describeLabel, firstView, secondView].forEach { $0.alpha = 0 }

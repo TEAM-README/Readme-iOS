@@ -13,10 +13,11 @@ protocol ModuleFactoryProtocol {
   func makeBaseVC() -> BaseVC
   func makeHomeVC() -> HomeVC
   func makeFeedDetailVC(idx: Int) -> FeedDetailVC
-  func makeFeedListVC() -> FeedListVC
+  func makeFeedListVC(isMyPage: Bool) -> FeedListVC
   func makeMyPageVC() -> MyPageVC
   func makeSearchVC() -> SearchVC
-  func makeWriteVC() -> WriteVC
+  func makeSettingVC() -> SettingVC
+  func makeWriteVC(bookInfo: WriteModel) -> WriteVC
 }
 
 final class ModuleFactory: ModuleFactoryProtocol{
@@ -51,9 +52,9 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return searchVC
   }
   
-  func makeWriteVC() -> WriteVC {
+  func makeWriteVC(bookInfo: WriteModel) -> WriteVC {
     let useCase = DefaultWriteUseCase()
-    let viewModel = WriteViewModel(useCase: useCase)
+    let viewModel = WriteViewModel(useCase: useCase, bookInfo: bookInfo)
     let writeVC = WriteVC.controllerFromStoryboard(.write)
     writeVC.viewModel = viewModel
     
@@ -87,15 +88,20 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return feedDetailVC
     }
   
-  func makeFeedListVC() -> FeedListVC {
-    let repository = DefaultFeedListRepository(service: BaseService.default)
-    let useCase = DefaultFeedListUseCase(repository: repository)
-    let viewModel = FeedListViewModel(useCase: useCase)
+  func makeFeedListVC(isMyPage: Bool) -> FeedListVC {
+    let feedRepository = DefaultFeedListRepository(service: BaseService.default)
+    let myPageRepository = DefaultMyPageRepository(service: BaseService.default)
+    let useCase = DefaultFeedListUseCase(
+      myPageRepository: myPageRepository,
+      feedrepository: feedRepository)
+    let viewModel = FeedListViewModel(useCase: useCase,
+                                      isMyPage: isMyPage)
     let feedListVC =  FeedListVC.controllerFromStoryboard(.feedList)
     feedListVC.viewModel = viewModel
     return feedListVC
   }
   
-  func makeMyPageVC() -> MyPageVC { MyPageVC.controllerFromStoryboard(.mypage)
-  }
+  func makeMyPageVC() -> MyPageVC { MyPageVC.controllerFromStoryboard(.mypage) }
+  func makeSettingVC() -> SettingVC { SettingVC.controllerFromStoryboard(.setting) }
+
 }
