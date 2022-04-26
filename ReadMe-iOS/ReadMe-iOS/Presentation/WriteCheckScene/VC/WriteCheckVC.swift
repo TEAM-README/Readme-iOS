@@ -169,6 +169,7 @@ extension WriteCheckVC {
     
     registerButton.title = I18N.Button.register
     registerButton.isEnabled = true
+    registerButton.press(animated: true, for: .touchUpInside) { return }
   }
 }
 

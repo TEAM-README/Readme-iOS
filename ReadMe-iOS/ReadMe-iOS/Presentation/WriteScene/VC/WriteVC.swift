@@ -75,6 +75,7 @@ extension WriteVC {
   private func bindViewModels() {
     nextButton.rx.tap
       .subscribe(onNext: {
+        self.makeVibrate(degree: .light)
         self.setFlow(self.flowType)
       })
       .disposed(by: disposeBag)

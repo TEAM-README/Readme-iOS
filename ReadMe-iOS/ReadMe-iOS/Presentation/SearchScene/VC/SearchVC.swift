@@ -113,6 +113,7 @@ extension SearchVC {
       .subscribe(onNext: {
         // TODO: - 서버 통신
         
+        self.makeVibrate(degree: .light)
 //        self.setEmptyViewAfterSearch()
         self.dataCount = 2
         self.didSearch = true
