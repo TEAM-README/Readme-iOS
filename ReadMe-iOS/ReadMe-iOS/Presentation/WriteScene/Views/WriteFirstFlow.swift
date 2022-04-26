@@ -30,7 +30,20 @@ class WriteFirstFlow: UIView {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+}
+
+// MARK: - Custom Methods Part
+
+extension WriteFirstFlow {
+  func setData(bookInfo: WriteModel) {
+    bookCoverImageView.setImage(with: bookInfo.bookcover)
+    bookTitleLabel.text = bookInfo.bookname
+    categoryLabel.text = bookInfo.category
+    bookAuthorLabel.text = bookInfo.author
+    
+    bookTitleLabel.setTextWithLineHeight(text: bookTitleLabel.text, lineHeightMultiple: 1.23)
+    bookAuthorLabel.setTextWithLineHeight(text: bookAuthorLabel.text, lineHeightMultiple: 0.83)
+  }
 }
 
 // MARK: - UI & Layout
@@ -42,7 +55,7 @@ extension WriteFirstFlow {
     firstTitleLabel.textColor = .black
     
     firstTextView.text = I18N.Write.firstPlaceholder
-    firstTextView.setTextWithLineHeight(text: firstTextView.text, lineHeightMultiple: 1.6)
+    firstTextView.setTextWithLineHeight(text: firstTextView.text, lineHeightMultiple: 1.33)
     firstTextView.font = .readMeFont(size: 15)
     firstTextView.textColor = .grey09
     
@@ -56,24 +69,16 @@ extension WriteFirstFlow {
     firstContentTitleLabel.textColor = .black
     firstContentTitleLabel.setTextWithLineHeight(text: firstContentTitleLabel.text, lineHeightMultiple: 1.5)
     
-    // TODO: - 데이터 앞에서 전달받아서 넣기
-    bookCoverImageView.backgroundColor = .alertRed
-    
-    categoryLabel.text = "엥 그래요?"
     categoryLabel.font = .readMeFont(size: 12)
     categoryLabel.textColor = .mainBlue
-    categoryLabel.setTextWithLineHeight(text: categoryLabel.text, lineHeightMultiple: 1.0)
+    categoryLabel.setTextWithLineHeight(text: categoryLabel.text, lineHeightMultiple: 0.83)
     
-    bookTitleLabel.text = "운명을 바꾸는 부동산 투자 수업 운명을 바꾸는 부동산 투자 수업 ..."
     bookTitleLabel.font = .readMeFont(size: 13, type: .medium)
     bookTitleLabel.textColor = .grey05
-    bookTitleLabel.setTextWithLineHeight(text: bookTitleLabel.text, lineHeightMultiple: 1.48)
     bookTitleLabel.numberOfLines = 2
     
-    bookAuthorLabel.text = "부동산읽어주는남자(정태익) 저 "
     bookAuthorLabel.font = .readMeFont(size: 12)
     bookAuthorLabel.textColor = .grey06
-    bookAuthorLabel.setTextWithLineHeight(text: bookAuthorLabel.text, lineHeightMultiple: 1.0)
   }
   
   private func setLayout() {

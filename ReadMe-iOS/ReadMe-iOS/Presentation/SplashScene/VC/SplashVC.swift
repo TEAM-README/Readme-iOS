@@ -13,10 +13,8 @@ class SplashVC: UIViewController {
     super.viewDidLoad()
     delayWithSeconds(1) {
 //      self.pushSignupView()
-      self.pushWriteView()
+      self.pushSearchView()
     }
-    
-    
   }
   
   private func pushLoginView() {
@@ -50,7 +48,13 @@ class SplashVC: UIViewController {
   }
   
   private func pushWriteView() {
-    let writeVC = ModuleFactory.shared.makeWriteVC()
+    let bookInfo = WriteModel.init(bookcover: "-", bookname: "-", category: "-", author: "-")
+    let writeVC = ModuleFactory.shared.makeWriteVC(bookInfo: bookInfo)
     navigationController?.pushViewController(writeVC, animated: false)
+  }
+  
+  private func pushWriteCheckView() {
+    let writeCheckVC = ModuleFactory.shared.makeWriteCheckVC()
+    navigationController?.pushViewController(writeCheckVC, animated: false)
   }
 }
