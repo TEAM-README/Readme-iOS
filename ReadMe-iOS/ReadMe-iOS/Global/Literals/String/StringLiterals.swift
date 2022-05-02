@@ -87,15 +87,21 @@ struct I18N {
     static let titleDay = " 님의 하루가\n 더 풍요로워졌길 바라요!"
   }
   
-  struct Button {
-    static let next = "다음"
-    static let register = "등록하기"
-  }
-  
   struct WriteComplete {
     static let title = "등록을 완료했어요"
     static let subtitle = "피드 와 마이페이지 에서\n작성한 감상글을 확인할 수 있어요"
     static let move = "피드 구경하러 가기"
+  }
+  
+  struct Filter {
+    
+  }
+  
+  struct Button {
+    static let next = "다음"
+    static let register = "등록하기"
+    static let reset = " 필터 초기화"
+    static let apply = "적용"
   }
   
   struct ReadmeAlert {

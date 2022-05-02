@@ -33,4 +33,8 @@ struct ImageLiterals{
   struct ReadmeAlert {
     static let alert = UIImage(named: "ic_ alert")
   }
+  
+  struct Filter {
+    static let reset = UIImage(named: "ic_reset")
+  }
 }
