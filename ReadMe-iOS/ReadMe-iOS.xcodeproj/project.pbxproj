@@ -39,6 +39,8 @@
 		2BA7085828143F260021717F /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7085228143F260021717F /* AlertViewModel.swift */; };
 		2BA70862281440B30021717F /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BA70861281440B30021717F /* Alert.storyboard */; };
 		2BABE36D280C881F00EFA45E /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABE36C280C881F00EFA45E /* SearchHeaderView.swift */; };
+		2BD34FAB281F95690043EBD6 /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD34FAA281F95690043EBD6 /* BottomSheetVC.swift */; };
+		2BD34FAD281F95720043EBD6 /* BottomSheet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BD34FAC281F95720043EBD6 /* BottomSheet.storyboard */; };
 		2BF64E9A280EF94700383F28 /* SignupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF64E99280EF94600383F28 /* SignupEntity.swift */; };
 		2BFD0234281EECEC0025F660 /* FilterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFD022E281EECEC0025F660 /* FilterUseCase.swift */; };
 		2BFD0235281EECEC0025F660 /* FilterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFD022F281EECEC0025F660 /* FilterRepository.swift */; };
@@ -225,6 +227,8 @@
 		2BA7085228143F260021717F /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		2BA70861281440B30021717F /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
 		2BABE36C280C881F00EFA45E /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
+		2BD34FAA281F95690043EBD6 /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
+		2BD34FAC281F95720043EBD6 /* BottomSheet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BottomSheet.storyboard; sourceTree = "<group>"; };
 		2BF64E99280EF94600383F28 /* SignupEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupEntity.swift; sourceTree = "<group>"; };
 		2BFD022E281EECEC0025F660 /* FilterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterUseCase.swift; sourceTree = "<group>"; };
 		2BFD022F281EECEC0025F660 /* FilterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRepository.swift; sourceTree = "<group>"; };
@@ -624,6 +628,15 @@
 				2BA70861281440B30021717F /* Alert.storyboard */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		2BD34FA9281F954F0043EBD6 /* BottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				2BD34FAA281F95690043EBD6 /* BottomSheetVC.swift */,
+				2BD34FAC281F95720043EBD6 /* BottomSheet.storyboard */,
+			);
+			path = BottomSheet;
 			sourceTree = "<group>";
 		};
 		2BFD022D281EECD60025F660 /* FilterScene */ = {
@@ -1122,6 +1135,7 @@
 		FD99D5A728073D8E00BB7FDA /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				2BD34FA9281F954F0043EBD6 /* BottomSheet */,
 				2B6DED8E28106786002BD931 /* ProgressBar */,
 				FD99D5A828073DA100BB7FDA /* Button */,
 			);
@@ -1822,6 +1836,7 @@
 				2B6DED9E28106D31002BD931 /* ProgressBar.xib in Resources */,
 				2BFD023E281EED1F0025F660 /* Filter.storyboard in Resources */,
 				FD06195D2805457600F647D7 /* Pretendard-Black.otf in Resources */,
+				2BD34FAD281F95720043EBD6 /* BottomSheet.storyboard in Resources */,
 				2BA6EB622811D32600715C31 /* WriteCheck.storyboard in Resources */,
 				FD06197B2805523E00F647D7 /* Base.storyboard in Resources */,
 			);
@@ -2005,6 +2020,7 @@
 				2BA6EB592811D2B100715C31 /* WriteCheckModel.swift in Sources */,
 				FD85CECB2809C92F00E7BE7B /* FeedDetailVC.swift in Sources */,
 				FD2937C8280E6100003B4685 /* FeedListCategoryTVC.swift in Sources */,
+				2BD34FAB281F95690043EBD6 /* BottomSheetVC.swift in Sources */,
 				FDE1A2B02805BF8D000DDBE2 /* LoginEntity.swift in Sources */,
 				2BABE36D280C881F00EFA45E /* SearchHeaderView.swift in Sources */,
 				2B6DEDA028106EB0002BD931 /* ProgressBar.swift in Sources */,

@@ -113,9 +113,9 @@ final class ModuleFactory: ModuleFactoryProtocol{
   func makeFilterVC() -> FilterVC {
     let repository = DefaultFilterRepository(service: BaseService.default)
     let useCase = DefaultFilterUseCase(repository: repository)
-    let viewNodel = FilterViewModel(useCase: useCase)
+    let viewModel = FilterViewModel(useCase: useCase)
     let filterVC = FilterVC.controllerFromStoryboard(.filter)
-    filterVC.viewModel = viewNodel
+    filterVC.viewModel = viewModel
     return filterVC
   }
   

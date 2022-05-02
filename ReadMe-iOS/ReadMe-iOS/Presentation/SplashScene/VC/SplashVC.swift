@@ -49,9 +49,10 @@ class SplashVC: UIViewController {
   }
   
   private func pushFilterView() {
-    let filterVC = ModuleFactory.shared.makeFilterVC()
+//    let filterVC = ModuleFactory.shared.makeFilterVC()
+    let filterVC = BottomSheetVC(contentViewController: ModuleFactory.shared.makeFilterVC())
     filterVC.modalPresentationStyle = .overFullScreen
-    filterVC.modalTransitionStyle = .crossDissolve
+//    filterVC.modalTransitionStyle = .crossDissolve
     present(filterVC, animated: true)
   }
   

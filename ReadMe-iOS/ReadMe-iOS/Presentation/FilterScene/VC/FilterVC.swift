@@ -26,7 +26,7 @@ class FilterVC: UIViewController {
 // MARK: - UI
 extension FilterVC {
   private func configUI() {
-    view.backgroundColor = .black.withAlphaComponent(0.6)
+    view.backgroundColor = .orange
   }
 }
 
