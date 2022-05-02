@@ -17,6 +17,7 @@ final class FeedListCategoryTVC: UITableViewCell, UITableViewRegisterable {
   
   @IBOutlet weak var categoryLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!
+  @IBOutlet weak var categoryButton: UIButton!
   
   override func awakeFromNib() {
     super.awakeFromNib()

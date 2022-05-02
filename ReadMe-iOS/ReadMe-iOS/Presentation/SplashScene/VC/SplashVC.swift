@@ -13,7 +13,8 @@ class SplashVC: UIViewController {
     super.viewDidLoad()
     delayWithSeconds(1) {
 //      self.pushSignupView()
-      self.pushBaseView()
+//      self.pushBaseView()
+      self.pushFilterView()
     }
   }
   
@@ -45,6 +46,13 @@ class SplashVC: UIViewController {
   private func pushFeedListView() {
     let feedListVC = ModuleFactory.shared.makeFeedListVC(isMyPage: false)
     navigationController?.pushViewController(feedListVC, animated: false)
+  }
+  
+  private func pushFilterView() {
+    let filterVC = ModuleFactory.shared.makeFilterVC()
+    filterVC.modalPresentationStyle = .overFullScreen
+    filterVC.modalTransitionStyle = .crossDissolve
+    present(filterVC, animated: true)
   }
   
   private func pushWriteView() {

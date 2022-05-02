@@ -110,6 +110,15 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return feedListVC
   }
   
+  func makeFilterVC() -> FilterVC {
+    let repository = DefaultFilterRepository(service: BaseService.default)
+    let useCase = DefaultFilterUseCase(repository: repository)
+    let viewNodel = FilterViewModel(useCase: useCase)
+    let filterVC = FilterVC.controllerFromStoryboard(.filter)
+    filterVC.viewModel = viewNodel
+    return filterVC
+  }
+  
   func makeMyPageVC() -> MyPageVC { MyPageVC.controllerFromStoryboard(.mypage) }
   func makeSettingVC() -> SettingVC { SettingVC.controllerFromStoryboard(.setting) }
 

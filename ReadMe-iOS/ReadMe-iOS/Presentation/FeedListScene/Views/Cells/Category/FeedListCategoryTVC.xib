@@ -63,6 +63,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="categoryButton" destination="8xe-uw-KLs" id="E6c-We-ZeD"/>
                 <outlet property="categoryLabel" destination="wFf-g5-i0E" id="BNr-aH-vec"/>
                 <outlet property="descriptionLabel" destination="Ntw-ZE-2D0" id="2zm-TW-449"/>
             </connections>
