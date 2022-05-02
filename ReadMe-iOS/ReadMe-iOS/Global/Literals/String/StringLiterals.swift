@@ -92,6 +92,12 @@ struct I18N {
     static let register = "등록하기"
   }
   
+  struct WriteComplete {
+    static let title = "등록을 완료했어요"
+    static let subtitle = "피드 와 마이페이지 에서\n작성한 감상글을 확인할 수 있어요"
+    static let move = "피드 구경하러 가기"
+  }
+  
   struct ReadmeAlert {
     static let title = "기록한 내용을 버리고\n돌아가시겠습니까?"
     static let description = "작성한 내용이 저장되지 않습니다"

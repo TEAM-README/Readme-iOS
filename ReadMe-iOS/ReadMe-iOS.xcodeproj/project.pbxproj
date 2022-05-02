@@ -40,6 +40,13 @@
 		2BA70862281440B30021717F /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BA70861281440B30021717F /* Alert.storyboard */; };
 		2BABE36D280C881F00EFA45E /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABE36C280C881F00EFA45E /* SearchHeaderView.swift */; };
 		2BF64E9A280EF94700383F28 /* SignupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF64E99280EF94600383F28 /* SignupEntity.swift */; };
+		2BFE0C002812E92400DF6F4C /* WriteCompleteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFE0BFA2812E92400DF6F4C /* WriteCompleteUseCase.swift */; };
+		2BFE0C012812E92400DF6F4C /* WriteCompleteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFE0BFB2812E92400DF6F4C /* WriteCompleteRepository.swift */; };
+		2BFE0C022812E92400DF6F4C /* WriteCompleteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFE0BFC2812E92400DF6F4C /* WriteCompleteModel.swift */; };
+		2BFE0C032812E92400DF6F4C /* WriteCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFE0BFD2812E92400DF6F4C /* WriteCompleteVC.swift */; };
+		2BFE0C042812E92400DF6F4C /* WriteCompleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFE0BFE2812E92400DF6F4C /* WriteCompleteViewModel.swift */; };
+		2BFE0C052812E92400DF6F4C /* WriteCompleteEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFE0BFF2812E92400DF6F4C /* WriteCompleteEntity.swift */; };
+		2BFE0C0E2812E9B300DF6F4C /* WriteComplete.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BFE0C0D2812E9B300DF6F4C /* WriteComplete.storyboard */; };
 		FD01F06F2807F8E7002F80D2 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD01F06E2807F8E7002F80D2 /* Pretendard-Bold.otf */; };
 		FD01F0712808062E002F80D2 /* shakeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01F0702808062E002F80D2 /* shakeAction.swift */; };
 		FD01F07428082237002F80D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD01F07328082237002F80D2 /* Main.storyboard */; };
@@ -211,6 +218,13 @@
 		2BA70861281440B30021717F /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
 		2BABE36C280C881F00EFA45E /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 		2BF64E99280EF94600383F28 /* SignupEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupEntity.swift; sourceTree = "<group>"; };
+		2BFE0BFA2812E92400DF6F4C /* WriteCompleteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCompleteUseCase.swift; sourceTree = "<group>"; };
+		2BFE0BFB2812E92400DF6F4C /* WriteCompleteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCompleteRepository.swift; sourceTree = "<group>"; };
+		2BFE0BFC2812E92400DF6F4C /* WriteCompleteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCompleteModel.swift; sourceTree = "<group>"; };
+		2BFE0BFD2812E92400DF6F4C /* WriteCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCompleteVC.swift; sourceTree = "<group>"; };
+		2BFE0BFE2812E92400DF6F4C /* WriteCompleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCompleteViewModel.swift; sourceTree = "<group>"; };
+		2BFE0BFF2812E92400DF6F4C /* WriteCompleteEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCompleteEntity.swift; sourceTree = "<group>"; };
+		2BFE0C0D2812E9B300DF6F4C /* WriteComplete.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WriteComplete.storyboard; sourceTree = "<group>"; };
 		47915226E9B56538C326162E /* Pods-ReadMe-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		893A028F11E470966C8D7097 /* Pods_ReadMe_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadMe_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E69CCAD3467CF7B0BFE2CA60 /* Pods-ReadMe-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.release.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -560,6 +574,72 @@
 				2BA6EB512811D2B100715C31 /* WriteCheckUseCase.swift */,
 			);
 			path = WriteCheck;
+			sourceTree = "<group>";
+		};
+		2BFE0BF92812E8C100DF6F4C /* WriteCompleteScene */ = {
+			isa = PBXGroup;
+			children = (
+				2BFE0C0C2812E98100DF6F4C /* Views */,
+				2BFE0C0B2812E97B00DF6F4C /* VC */,
+				2BFE0C0A2812E97300DF6F4C /* ViewModel */,
+			);
+			path = WriteCompleteScene;
+			sourceTree = "<group>";
+		};
+		2BFE0C062812E93100DF6F4C /* WriteComplete */ = {
+			isa = PBXGroup;
+			children = (
+				2BFE0BFA2812E92400DF6F4C /* WriteCompleteUseCase.swift */,
+			);
+			path = WriteComplete;
+			sourceTree = "<group>";
+		};
+		2BFE0C072812E93E00DF6F4C /* WriteComplete */ = {
+			isa = PBXGroup;
+			children = (
+				2BFE0BFC2812E92400DF6F4C /* WriteCompleteModel.swift */,
+			);
+			path = WriteComplete;
+			sourceTree = "<group>";
+		};
+		2BFE0C082812E95600DF6F4C /* WriteComplete */ = {
+			isa = PBXGroup;
+			children = (
+				2BFE0BFF2812E92400DF6F4C /* WriteCompleteEntity.swift */,
+			);
+			path = WriteComplete;
+			sourceTree = "<group>";
+		};
+		2BFE0C092812E96100DF6F4C /* WriteComplete */ = {
+			isa = PBXGroup;
+			children = (
+				2BFE0BFB2812E92400DF6F4C /* WriteCompleteRepository.swift */,
+			);
+			path = WriteComplete;
+			sourceTree = "<group>";
+		};
+		2BFE0C0A2812E97300DF6F4C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2BFE0BFE2812E92400DF6F4C /* WriteCompleteViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2BFE0C0B2812E97B00DF6F4C /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				2BFE0BFD2812E92400DF6F4C /* WriteCompleteVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		2BFE0C0C2812E98100DF6F4C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2BFE0C0D2812E9B300DF6F4C /* WriteComplete.storyboard */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		2BA7084D28143EE70021717F /* AlertScene */ = {
@@ -1064,6 +1144,7 @@
 				2B578F722806FBFF00513240 /* SearchScene */,
 				2B7DCCA2280E7E0A0062BAE8 /* WriteScene */,
 				2BA6EB4B2811D22F00715C31 /* WriteCheckScene */,
+				2BFE0BF92812E8C100DF6F4C /* WriteCompleteScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -1169,6 +1250,7 @@
 			isa = PBXGroup;
 			children = (
 				2BA6EB5D2811D2C500715C31 /* WriteCheck */,
+				2BFE0C092812E96100DF6F4C /* WriteComplete */,
 				2B52A30E28083D4B00CFB1D0 /* Search */,
 				FD85CED02809C97D00E7BE7B /* Feed */,
 				FD01F07228080AAD002F80D2 /* SIgnup */,
@@ -1194,6 +1276,7 @@
 			isa = PBXGroup;
 			children = (
 				2BA6EB602811D30F00715C31 /* WriteCheck */,
+				2BFE0C062812E93100DF6F4C /* WriteComplete */,
 				2B7DCCAF280E7F710062BAE8 /* Write */,
 				2B52A30C28083D3C00CFB1D0 /* Search */,
 				FD85CED12809C9BD00E7BE7B /* Feed */,
@@ -1211,6 +1294,7 @@
 			children = (
 				2B87EF1C28183A93006247AE /* WriteModel */,
 				2BA6EB5E2811D2DD00715C31 /* WriteCheck */,
+				2BFE0C072812E93E00DF6F4C /* WriteComplete */,
 				2B52A30B28083D2900CFB1D0 /* Search */,
 				FD85CECE2809C94300E7BE7B /* Feed */,
 				FD99D5A128073C9A00BB7FDA /* Signup */,
@@ -1226,6 +1310,7 @@
 			isa = PBXGroup;
 			children = (
 				2BA6EB5F2811D2F800715C31 /* WriteCheck */,
+				2BFE0C082812E95600DF6F4C /* WriteComplete */,
 				2B52A30D28083D4400CFB1D0 /* Search */,
 				FD85CED42809CA0600E7BE7B /* Feed */,
 				FD85CECF2809C97000E7BE7B /* Signup */,
@@ -1645,6 +1730,7 @@
 				FD0C387628105DF9004E79C7 /* Setting.storyboard in Resources */,
 				FD0619632805457600F647D7 /* Pretendard-Regular.otf in Resources */,
 				FD2937BE280E5EF5003B4685 /* FeedList.storyboard in Resources */,
+				2BFE0C0E2812E9B300DF6F4C /* WriteComplete.storyboard in Resources */,
 				2B6DED9E28106D31002BD931 /* ProgressBar.xib in Resources */,
 				FD06195D2805457600F647D7 /* Pretendard-Black.otf in Resources */,
 				2BA6EB622811D32600715C31 /* WriteCheck.storyboard in Resources */,
@@ -1740,6 +1826,7 @@
 				FDD9D24B27F9CB270024DFB2 /* SceneDelegate.swift in Sources */,
 				FDD9D27127F9DEF20024DFB2 /* StoryboardLiterals.swift in Sources */,
 				FDD9D27327F9DF0C0024DFB2 /* ColorLiterals.swift in Sources */,
+				2BFE0C052812E92400DF6F4C /* WriteCompleteEntity.swift in Sources */,
 				FDD9D29427F9DFAF0024DFB2 /* applyShadow.swift in Sources */,
 				FDDB0B73280585740055B208 /* MyPageViewModel.swift in Sources */,
 				FDD9D2FE27F9E3870024DFB2 /* ModuleFactory.swift in Sources */,
@@ -1781,6 +1868,7 @@
 				FDD9D2CC27F9E1DB0024DFB2 /* controllerFromStoryboard + UIViewController.swift in Sources */,
 				FD85CEC92809C92F00E7BE7B /* FeedRepository.swift in Sources */,
 				FDD9D26C27F9DEC10024DFB2 /* UICollectionViewRegisterable.swift in Sources */,
+				2BFE0C042812E92400DF6F4C /* WriteCompleteViewModel.swift in Sources */,
 				FD2937C4280E60E7003B4685 /* FeedListContentTVC.swift in Sources */,
 				FDDB0B71280585740055B208 /* MyPageModel.swift in Sources */,
 				FDD9D2D627F9E24D0024DFB2 /* BaseAPI.swift in Sources */,
@@ -1798,6 +1886,7 @@
 				2B7DCCB1280E7F7D0062BAE8 /* WriteUseCase.swift in Sources */,
 				FDD9D28F27F9DFAF0024DFB2 /* downloadImage.swift in Sources */,
 				2B7DCCA9280E7E580062BAE8 /* WriteVC.swift in Sources */,
+				2BFE0C022812E92400DF6F4C /* WriteCompleteModel.swift in Sources */,
 				FD06198C28055CC700F647D7 /* TabbarView.swift in Sources */,
 				FD99D59728073C4900BB7FDA /* SignupUseCase.swift in Sources */,
 				FD85CECC2809C92F00E7BE7B /* FeedDetailViewModel.swift in Sources */,
@@ -1808,11 +1897,13 @@
 				FDDB0B72280585740055B208 /* MyPageVC.swift in Sources */,
 				FDD9D29827F9DFAF0024DFB2 /* setDefaultFonts.swift in Sources */,
 				FDD9D2F827F9E3870024DFB2 /* Presentable.swift in Sources */,
+				2BFE0C012812E92400DF6F4C /* WriteCompleteRepository.swift in Sources */,
 				FDE1A2AE2805BF8D000DDBE2 /* LoginVC.swift in Sources */,
 				FDDB0B57280583EE0055B208 /* HomeVC.swift in Sources */,
 				FD99D58D2807211A00BB7FDA /* LoginVC + Kakao.swift in Sources */,
 				FD0C387428105DF3004E79C7 /* SettingVC.swift in Sources */,
 				FDDB0B74280585740055B208 /* MyPageEntity.swift in Sources */,
+				2BFE0C032812E92400DF6F4C /* WriteCompleteVC.swift in Sources */,
 				FD85CEC82809C92F00E7BE7B /* FeedDetailUseCase.swift in Sources */,
 				2BA6EB5B2811D2B100715C31 /* WriteCheckViewModel.swift in Sources */,
 				2BA6EB592811D2B100715C31 /* WriteCheckModel.swift in Sources */,
@@ -1828,6 +1919,7 @@
 				FD99D5AC2807407800BB7FDA /* addPadding + UITextField.swift in Sources */,
 				FD929E80280C7DDF008F590C /* FeedListViewModel.swift in Sources */,
 				FDE1A2AF2805BF8D000DDBE2 /* LoginViewModel.swift in Sources */,
+				2BFE0C002812E92400DF6F4C /* WriteCompleteUseCase.swift in Sources */,
 				2BF64E9A280EF94700383F28 /* SignupEntity.swift in Sources */,
 				FDD9D28B27F9DFAF0024DFB2 /* showNetworkAlert.swift in Sources */,
 				FDD9D2CB27F9E1DB0024DFB2 /* setTextLineHeight.swift in Sources */,

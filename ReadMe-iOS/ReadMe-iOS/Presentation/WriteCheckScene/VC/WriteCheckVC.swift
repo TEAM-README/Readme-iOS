@@ -30,6 +30,8 @@ class WriteCheckVC: UIViewController {
   
   private var formatter = DateFormatter()
   var viewModel: WriteCheckViewModel!
+  var writeRequestFail = PublishSubject<Void>()
+  var writeRequest = PublishSubject<WriteRequestModel>()
   
   let username: String = "혜화동 꽃가마"
   
@@ -52,14 +54,42 @@ class WriteCheckVC: UIViewController {
 
 extension WriteCheckVC {
   private func bindViewModels() {
-    let input = WriteCheckViewModel.Input()
+    let input = WriteCheckViewModel.Input(
+      registerButtonClicked: self.registerButton.rx.tap.map({ _ in
+        WriteRequestModel.init(bookTitle: self.bookTitleLabel.text ?? "", bookAuthor: self.bookAuthorLabel.text ?? "", quote: self.quoteTextView.text ?? "", impression: self.impressionTextView.text ?? "")
+      })
+      .asObservable(),
+      registerRequestFail: writeRequestFail,
+      registerRequestSuccess: writeRequest)
+    
     let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
     
-    registerButton.rx.tap
-      .subscribe(onNext: {
-        // TODO: - 서버 통신 quote, impression 보내기
-      })
-      .disposed(by: disposeBag)
+    output.writeRequestStart.subscribe(onNext: { [weak self] data in
+//      guard let self = self else { return }
+      print("📏 data: \(data)")
+      // FIXME: - 요청 시작한 경우 임시 화면 전환
+      let writeCompleteVC = ModuleFactory.shared.makeWriteCompleteVC()
+      self?.navigationController?.pushViewController(writeCompleteVC, animated: true)
+    })
+    .disposed(by: self.disposeBag)
+    
+    output.writeRequestSuccess.subscribe(onNext: {[weak self] result in
+      print("📐 writeRequestSuccess - result : \(result)")
+      // TODO: - 글 작성 성공할 경우 writeComplete로 넘기기
+    })
+    .disposed(by: self.disposeBag)
+    
+    output.showRegisterFailError.subscribe(onNext: { _ in
+//      guard let self = self else { return }
+//      let msg = I18N.Login.loginFailMessage
+      print("📌 writeRequestFailError")
+    })
+    
+    output.showNetworkError.subscribe(onNext: { [weak self] in
+      guard let self = self else { return }
+      self.showNetworkErrorAlert()
+    })
+    .disposed(by: self.disposeBag)
   }
   
   func setPreviousData(bookcover: String, category: String, bookname: String, author: String, quote: String, impression: String) {
@@ -139,6 +169,7 @@ extension WriteCheckVC {
     
     registerButton.title = I18N.Button.register
     registerButton.isEnabled = true
+    registerButton.press(animated: true, for: .touchUpInside) { return }
   }
 }
 

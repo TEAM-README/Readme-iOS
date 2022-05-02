@@ -71,6 +71,15 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return writeCheckVC
   }
   
+  func makeWriteCompleteVC() -> WriteCompleteVC {
+    let useCase = DefaultWriteCompleteUseCase()
+    let viewModel = WriteCompleteViewModel(useCase: useCase)
+    let writeCompleteVC = WriteCompleteVC.controllerFromStoryboard(.writeComplete)
+    writeCompleteVC.viewModel = viewModel
+    
+    return writeCompleteVC
+  }
+  
   func makeAlertVC() -> AlertVC {
     let alertVC = AlertVC.controllerFromStoryboard(.alert)
     
