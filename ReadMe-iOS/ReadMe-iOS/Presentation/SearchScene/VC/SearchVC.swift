@@ -26,7 +26,6 @@ class SearchVC: UIViewController {
   var viewModel: SearchViewModel!
   var didSearch: Bool = false
   var dataCount = 10 // 테스트용
-//  var contentList: [SearchModel] = []
   var contentList: [SearchBookModel] = []
   
   // MARK: - Life Cycle Part
