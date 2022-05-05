@@ -21,8 +21,8 @@ class CategoryCVC: UICollectionViewCell, UICollectionViewRegisterable {
   var viewModel: CategoryViewModel? { didSet { bindViewModel() }}
   
   // MARK: - Vars & Lets Part
-    var categoryLabel = UILabel()
-  
+  var categoryLabel = UILabel()
+  var isSelectedCell: Bool = false
   
   // MARK: - Life Cycle Part
   override init(frame: CGRect) {
@@ -53,11 +53,13 @@ extension CategoryCVC {
   func selectedUI() {
     self.backgroundColor = .bgBlue
     categoryLabel.textColor = .mainBlue
+    isSelectedCell = true
   }
   
   func deselectedUI() {
     self.backgroundColor = .grey15
     categoryLabel.textColor = .grey14
+    isSelectedCell = false
   }
   
   private func setLayout() {

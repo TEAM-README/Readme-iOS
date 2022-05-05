@@ -34,7 +34,7 @@ final class FilterVC: UIViewController {
     self.configUI()
     self.setLayout()
     self.setCollectionView()
-    self.bindCells()
+    self.bindCollectionView()
     self.bindViewModels()
   }
 }
@@ -80,25 +80,32 @@ extension FilterVC {
 extension FilterVC {
   private func setCollectionView() {
     categoryCV.delegate = self
-    categoryCV.dataSource = self
-    
     categoryCV.backgroundColor = .clear
-    collectionViewFlowLayout.estimatedItemSize = .zero
     
     CategoryCVC.register(target: categoryCV)
   }
   
-  private func bindCells() {
-//    let categorys = [Category.novel, Category.essay, Category.human, Category.health, Category.social, Category.hobby, Category.history, Category.religion, Category.home, Category.language, Category.travel, Category.computer, Category.magazine, Category.comic, Category.art, Category.improve, Category.economy]
+  private func bindCollectionView() {
+    let items = Observable.of(Category.allCases)
     
-//    Observable.of(categorys)
-//      .bind(to: categoryCV.rx.items) { (collectionView, indexpath, item) -> UICollectionViewCell in
-////        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCVC.className, for: indexpath) as? CategoryCVC else { return UICollectionViewCell() }
-//
-//        print("🔍")
-//
-//        return UICollectionViewCell()
-//      }
+    items.asObservable()
+      .bind(to: categoryCV.rx.items(cellIdentifier: CategoryCVC.className, cellType: CategoryCVC.self)) { index, item, cell in
+        cell.categoryLabel.text = Category.allCases[index].rawValue
+      }
+      .disposed(by: disposeBag)
+    
+    categoryCV.rx
+      .modelAndIndexSelected(Category.self)
+      .subscribe(onNext: { category, indexpath in
+        if let cell = self.categoryCV.cellForItem(at: indexpath) as? CategoryCVC {
+          if cell.isSelectedCell {
+            cell.deselectedUI()
+          } else {
+            cell.selectedUI()
+          }
+        }
+      })
+      .disposed(by: disposeBag)
   }
   
   private func bindViewModels() {
@@ -134,18 +141,5 @@ extension FilterVC: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
     return UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
-  }
-}
-
-extension FilterVC: UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return Category.allCases.count
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCVC.className, for: indexPath) as? CategoryCVC else { return UICollectionViewCell() }
-    cell.categoryLabel.text = Category.allCases[indexPath.item].rawValue
-    
-    return cell
   }
 }
