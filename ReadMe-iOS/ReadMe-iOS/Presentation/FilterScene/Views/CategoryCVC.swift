@@ -18,7 +18,6 @@ struct CategoryViewModel: CategoryDataSource {
 class CategoryCVC: UICollectionViewCell, UICollectionViewRegisterable {
   
   static var isFromNib: Bool = false
-  var viewModel: CategoryViewModel? { didSet { bindViewModel() }}
   
   // MARK: - Vars & Lets Part
   var categoryLabel = UILabel()
@@ -50,16 +49,16 @@ extension CategoryCVC {
     categoryLabel.textColor = .grey14
   }
   
-  func selectedUI() {
-    self.backgroundColor = .bgBlue
-    categoryLabel.textColor = .mainBlue
-    isSelectedCell = true
-  }
-  
-  func deselectedUI() {
-    self.backgroundColor = .grey15
-    categoryLabel.textColor = .grey14
-    isSelectedCell = false
+  func changeState(isSelected: Bool) {
+    if isSelected {
+      self.backgroundColor = .bgBlue
+      categoryLabel.textColor = .mainBlue
+      isSelectedCell = true
+    } else {
+      self.backgroundColor = .grey15
+      categoryLabel.textColor = .grey14
+      isSelectedCell = false
+    }
   }
   
   private func setLayout() {
@@ -68,11 +67,5 @@ extension CategoryCVC {
     categoryLabel.snp.makeConstraints { make in
       make.center.equalToSuperview()
     }
-  }
-  
-  private func bindViewModel() {
-    guard let viewModel = viewModel else { return }
-//    categoryLabel.text = viewModel.category
-    print("🤬 viewModel.category: \(viewModel.category)")
   }
 }

@@ -18,7 +18,7 @@ final class FilterVC: UIViewController {
   
   private let collectionViewFlowLayout = LeftAlignedCollectionViewFlowLayout()
   private let disposeBag = DisposeBag()
-  private var category = PublishSubject<[FilterModel]>()
+  private var selectedCategory: [Category] = []
   var viewModel: FilterViewModel!
   
   // MARK: - UI Component Part
@@ -34,8 +34,9 @@ final class FilterVC: UIViewController {
     self.configUI()
     self.setLayout()
     self.setCollectionView()
-    self.bindCollectionView()
     self.bindViewModels()
+    self.bindCollectionView()
+    self.tapButton()
   }
 }
 
@@ -91,17 +92,25 @@ extension FilterVC {
     items.asObservable()
       .bind(to: categoryCV.rx.items(cellIdentifier: CategoryCVC.className, cellType: CategoryCVC.self)) { index, item, cell in
         cell.categoryLabel.text = Category.allCases[index].rawValue
+        
+        if self.selectedCategory.contains(item) {
+          cell.changeState(isSelected: true)
+        } else {
+          cell.changeState(isSelected: false)
+        }
       }
       .disposed(by: disposeBag)
     
     categoryCV.rx
       .modelAndIndexSelected(Category.self)
       .subscribe(onNext: { category, indexpath in
+        self.makeVibrate(degree: .light)
         if let cell = self.categoryCV.cellForItem(at: indexpath) as? CategoryCVC {
           if cell.isSelectedCell {
-            cell.deselectedUI()
+            self.selectedCategory.append(category)
+            cell.changeState(isSelected: false)
           } else {
-            cell.selectedUI()
+            cell.changeState(isSelected: true)
           }
         }
       })
@@ -109,8 +118,31 @@ extension FilterVC {
   }
   
   private func bindViewModels() {
-//    let input = FilterViewModel.Input(viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in }, category: category)
-//    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+    let input = FilterViewModel.Input(viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { i in
+    })
+    
+    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+    
+    output.selectedCategory.asSignal().emit { [weak self] category in
+      guard let self = self else { return }
+      self.selectedCategory = category
+    }
+  }
+  
+  private func tapButton() {
+    resetButton.rx.tap
+      .subscribe(onNext: {
+        self.makeVibrate()
+        self.selectedCategory.removeAll()
+        self.categoryCV.reloadData()
+      })
+      .disposed(by: disposeBag)
+    
+    applyButton.rx.tap
+      .subscribe(onNext: {
+        self.makeVibrate()
+      })
+      .disposed(by: disposeBag)
   }
 }
 

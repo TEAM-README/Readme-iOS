@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol FilterRepository {
-  func getCategory() -> Observable<Category?>
+  func getCategory() -> Observable<FilterModel?>
 }
 
 final class DefaultFilterRepository {
@@ -22,10 +22,16 @@ final class DefaultFilterRepository {
 }
 
 extension DefaultFilterRepository: FilterRepository {
-  func getCategory() -> Observable<Category?> {
+  func getCategory() -> Observable<FilterModel?> {
+    return makeMockFilterCategory()
+  }
+}
+
+extension DefaultFilterRepository {
+  private func makeMockFilterCategory() -> Observable<FilterModel?> {
     return .create { observer in
-//      let category = Category.allCases
-//      observer.onNext(category)
+      let fakeCategory = FilterModel.init(category: [Category.economy, Category.magazine, Category.computer])
+      observer.onNext(fakeCategory)
       return Disposables.create()
     }
   }

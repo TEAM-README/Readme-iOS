@@ -10,8 +10,7 @@ import RxRelay
 
 protocol FilterUseCase {
   func getSelectedCategory()
-//  var selectedCategory: PublishRelay<FeedCategory> { get set }
-//  var category: PublishRelay<Category> { get set }
+  var selectedCategory: PublishRelay<[Category]> { get set }
 }
 
 final class DefaultFilterUseCase {
@@ -19,8 +18,7 @@ final class DefaultFilterUseCase {
   private let repository: FilterRepository
   private let disposeBag = DisposeBag()
   
-  var category = PublishRelay<Category>()
-  var selectedCategory = PublishRelay<Category>()
+  var selectedCategory = PublishRelay<[Category]>()
   
   init(repository: FilterRepository) {
     self.repository = repository
@@ -33,7 +31,8 @@ extension DefaultFilterUseCase: FilterUseCase {
       .filter { $0 != nil }
       .subscribe(onNext: { [weak self] entity in
         guard let self = self else { return }
-//        self.category.accept(entity)
+        let categoryList = entity?.category
+        self.selectedCategory.accept(categoryList ?? [])
       })
       .disposed(by: disposeBag)
   }

@@ -10,21 +10,18 @@ import RxRelay
 
 final class FilterViewModel: ViewModelType {
 
-//  private var category: [Category] = []
   private let useCase: FilterUseCase
   private let disposeBag = DisposeBag()
-//  let category: PublishSubject<[FilterModel]> = Category.allCases.map {"\($0)"}
+  private var category: [Category] = []
   
   // MARK: - Inputs
   struct Input {
     let viewWillAppearEvent: Observable<Void>
-    let category: Observable<[FilterModel]>
   }
   
   // MARK: - Outputs
   struct Output {
-    var selectedCategory = PublishRelay<[FilterModel]>()
-//    var category = PublishRelay<[FilterModel]>()
+    var selectedCategory = PublishRelay<[Category]>()
   }
   
   init(useCase: FilterUseCase) {
@@ -45,17 +42,15 @@ extension FilterViewModel {
     })
     .disposed(by: disposeBag)
     
-    input.category.subscribe(onNext: { [weak self] category in
-      guard let self = self else { return }
-//      self.category = category
-    })
-    .disposed(by: disposeBag)
-    
     return output
   }
   
   private func bindOutput(output: Output, disposeBag: DisposeBag) {
-//    let categoryListRelay = useCase.category
-//    let selectedCatagoryListRelay = useCase.selectedCategory
+    let selectedCategoryRelay = useCase.selectedCategory
+    
+    selectedCategoryRelay.subscribe(onNext: { model in
+      output.selectedCategory.accept(model)
+    })
+    .disposed(by: disposeBag)
   }
 }

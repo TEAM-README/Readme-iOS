@@ -8,7 +8,7 @@
 import Foundation
 
 struct FilterModel {
-  let category: Category
+  let category: [Category]
 }
 
 enum Category: String, CaseIterable {
