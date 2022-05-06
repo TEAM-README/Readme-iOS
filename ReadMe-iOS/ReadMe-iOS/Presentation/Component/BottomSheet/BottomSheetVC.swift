@@ -60,7 +60,7 @@ extension BottomSheetVC {
     
     addChild(contentVC) // contentVC를 BottomSheetVC의 자식으로 설정
     bottomSheetView.addSubview(contentVC.view) // contentVC의 view가 맨 앞에 등장하도록
-    contentVC.didMove(toParent: self) // ?
+    contentVC.didMove(toParent: self)
     
     bottomSheetView.backgroundColor = .clear
     bottomSheetView.layer.cornerRadius = 20
@@ -145,6 +145,12 @@ extension BottomSheetVC {
   
   @objc
   private func dimmerViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
+    hideBottomSheetAndGoBack()
+  }
+}
+
+extension BottomSheetVC: BottomSheetDelegate {
+  func dismissButtonTapped() {
     hideBottomSheetAndGoBack()
   }
 }

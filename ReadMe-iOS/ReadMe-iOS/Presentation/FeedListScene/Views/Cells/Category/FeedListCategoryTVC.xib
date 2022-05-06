@@ -39,6 +39,9 @@
                             <constraint firstAttribute="width" constant="45" id="IPf-5G-LnM"/>
                         </constraints>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <connections>
+                            <action selector="tapCategoryButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MXy-aa-3RP"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wFf-g5-i0E">
                         <rect key="frame" x="82" y="36" width="39.5" height="19.5"/>

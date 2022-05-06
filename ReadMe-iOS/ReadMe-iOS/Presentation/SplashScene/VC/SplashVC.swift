@@ -13,8 +13,7 @@ class SplashVC: UIViewController {
     super.viewDidLoad()
     delayWithSeconds(1) {
 //      self.pushSignupView()
-//      self.pushBaseView()
-      self.pushFilterView()
+      self.pushBaseView()
     }
   }
   
@@ -49,10 +48,8 @@ class SplashVC: UIViewController {
   }
   
   private func pushFilterView() {
-//    let filterVC = ModuleFactory.shared.makeFilterVC()
     let filterVC = BottomSheetVC(contentViewController: ModuleFactory.shared.makeFilterVC())
     filterVC.modalPresentationStyle = .overFullScreen
-//    filterVC.modalTransitionStyle = .crossDissolve
     present(filterVC, animated: true)
   }
   

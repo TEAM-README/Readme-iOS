@@ -19,6 +19,7 @@ final class FilterVC: UIViewController {
   private let collectionViewFlowLayout = LeftAlignedCollectionViewFlowLayout()
   private let disposeBag = DisposeBag()
   private var selectedCategory: [Category] = []
+  var buttonDelegate: BottomSheetDelegate?
   var viewModel: FilterViewModel!
   
   // MARK: - UI Component Part
@@ -141,6 +142,9 @@ extension FilterVC {
     applyButton.rx.tap
       .subscribe(onNext: {
         self.makeVibrate()
+        // TODO: - 서버통신..
+        print("📍통신")
+        self.buttonDelegate?.dismissButtonTapped()
       })
       .disposed(by: disposeBag)
   }
