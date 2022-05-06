@@ -61,10 +61,10 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return writeVC
   }
   
-  func  makeWriteCheckVC() -> WriteCheckVC {
+  func  makeWriteCheckVC(writeInfo: WriteCheckModel) -> WriteCheckVC {
     let repository = DefaultWriteCheckRepository(service: BaseService.default)
     let useCase = DefaultWriteCheckUseCase(repository: repository)
-    let viewModel = WriteCheckViewModel(useCase: useCase)
+    let viewModel = WriteCheckViewModel(useCase: useCase, data: writeInfo)
     let writeCheckVC = WriteCheckVC.controllerFromStoryboard(.writeCheck)
     writeCheckVC.viewModel = viewModel
     

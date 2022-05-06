@@ -13,7 +13,6 @@ struct SearchModel {
 
 struct SearchBookModel {
   let imgURL: String
-  let category: String
   let title: String
   let author: String
 }
