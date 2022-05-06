@@ -199,7 +199,6 @@ extension SearchVC: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCVC.className, for: indexPath) as? SearchCVC else { return UICollectionViewCell() }
     cell.initCell(image: contentList[indexPath.item].imgURL,
-                  category: contentList[indexPath.item].category,
                   title: contentList[indexPath.item].title,
                   author: contentList[indexPath.item].author)
     return cell

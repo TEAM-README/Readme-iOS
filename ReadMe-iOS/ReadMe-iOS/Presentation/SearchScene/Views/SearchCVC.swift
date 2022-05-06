@@ -15,7 +15,7 @@ class SearchCVC: UICollectionViewCell, UICollectionViewRegisterable {
   
   // MARK: - Vars & Lets Part
   private let bookCoverImageView = UIImageView()
-  private let categoryLabel = UILabel()
+  private let stackView = UIStackView()
   private let bookTitleLabel = UILabel()
   private let authorLabel = UILabel()
   private let bottomLineView = UIView()
@@ -35,7 +35,6 @@ class SearchCVC: UICollectionViewCell, UICollectionViewRegisterable {
     super.prepareForReuse()
     
     bookCoverImageView.image = UIImage()
-    categoryLabel.text?.removeAll()
     bookTitleLabel.text?.removeAll()
     authorLabel.text?.removeAll()
   }
@@ -43,9 +42,8 @@ class SearchCVC: UICollectionViewCell, UICollectionViewRegisterable {
 
 // MARK: - setData Part
 extension SearchCVC {
-  func initCell(image: String, category: String, title: String, author: String) {
+  func initCell(image: String, title: String, author: String) {
     bookCoverImageView.setImage(with: image)
-    categoryLabel.text = category
     bookTitleLabel.text = title
     authorLabel.text = author
     
@@ -58,9 +56,6 @@ extension SearchCVC {
   private func configureUI() {
     bookCoverImageView.contentMode = .scaleAspectFill
     
-    categoryLabel.font = .readMeFont(size: 12, type: .semiBold)
-    categoryLabel.textColor = .mainBlue
-    
     bookTitleLabel.font = .readMeFont(size: 14, type: .semiBold)
     bookTitleLabel.textColor = .grey05
     bookTitleLabel.numberOfLines = 2
@@ -69,11 +64,16 @@ extension SearchCVC {
     authorLabel.textColor = .grey06
     
     bottomLineView.backgroundColor = .grey00
+    
+    stackView.axis = .vertical
+    stackView.alignment = .fill
+    stackView.spacing = 14
+    stackView.addArrangedSubview(bookTitleLabel)
+    stackView.addArrangedSubview(authorLabel)
   }
   
   private func setLayout() {
-    self.addSubviews([bookCoverImageView, categoryLabel, bookTitleLabel,
-                     authorLabel, bottomLineView])
+    self.addSubviews([bookCoverImageView, stackView, bottomLineView])
     
     bookCoverImageView.snp.makeConstraints { make in
       make.leading.equalToSuperview().inset(28)
@@ -81,20 +81,10 @@ extension SearchCVC {
       make.width.equalTo(bookCoverImageView.snp.height).multipliedBy(0.69)
     }
     
-    categoryLabel.snp.makeConstraints { make in
+    stackView.snp.makeConstraints { make in
       make.leading.equalTo(bookCoverImageView.snp.trailing).offset(24)
-      make.top.equalToSuperview().inset(22)
-    }
-    
-    bookTitleLabel.snp.makeConstraints { make in
-      make.leading.equalTo(categoryLabel.snp.leading)
-      make.top.equalTo(categoryLabel.snp.bottom).offset(6)
       make.trailing.equalToSuperview().inset(35)
-    }
-    
-    authorLabel.snp.makeConstraints { make in
-      make.leading.equalTo(categoryLabel.snp.leading)
-      make.top.equalTo(bookTitleLabel.snp.bottom).offset(14)
+      make.centerY.equalTo(bookCoverImageView.snp.centerY)
     }
     
     bottomLineView.snp.makeConstraints { make in
