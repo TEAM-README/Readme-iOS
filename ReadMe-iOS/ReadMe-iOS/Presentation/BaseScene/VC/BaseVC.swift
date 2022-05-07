@@ -57,7 +57,8 @@ extension BaseVC: MainTabbarDelegate{
   }
   
   func plusButtonClicked() {
-    let searchVC = ModuleFactory.shared.makeSearchVC()
+    let rootVC = ModuleFactory.shared.makeSearchVC()
+    let searchVC = UINavigationController(rootViewController: rootVC)
     searchVC.modalPresentationStyle = .fullScreen
     
     self.present(searchVC, animated: true)

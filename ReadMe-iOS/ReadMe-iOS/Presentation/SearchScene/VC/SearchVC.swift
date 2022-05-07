@@ -26,7 +26,6 @@ class SearchVC: UIViewController {
   var viewModel: SearchViewModel!
   var didSearch: Bool = false
   var dataCount = 10 // 테스트용
-//  var contentList: [SearchModel] = []
   var contentList: [SearchBookModel] = []
   
   // MARK: - Life Cycle Part
@@ -113,6 +112,7 @@ extension SearchVC {
       .subscribe(onNext: {
         // TODO: - 서버 통신
         
+        self.makeVibrate(degree: .light)
 //        self.setEmptyViewAfterSearch()
         self.dataCount = 2
         self.didSearch = true
@@ -166,6 +166,14 @@ extension SearchVC: UICollectionViewDelegate {
   func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
     self.view.endEditing(true)
   }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let content = contentList[indexPath.item]
+    let bookInfo = WriteModel.init(bookcover: content.imgURL, bookname: content.title, category: content.category, author: content.author)
+    let writeVC = ModuleFactory.shared.makeWriteVC(bookInfo: bookInfo)
+    
+    navigationController?.pushViewController(writeVC, animated: true)
+  }
 }
 
 extension SearchVC: UICollectionViewDelegateFlowLayout {
@@ -191,7 +199,6 @@ extension SearchVC: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCVC.className, for: indexPath) as? SearchCVC else { return UICollectionViewCell() }
     cell.initCell(image: contentList[indexPath.item].imgURL,
-                  category: contentList[indexPath.item].category,
                   title: contentList[indexPath.item].title,
                   author: contentList[indexPath.item].author)
     return cell

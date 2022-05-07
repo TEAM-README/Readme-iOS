@@ -23,4 +23,14 @@ struct ImageLiterals{
     static let search = UIImage(named: "ic_ search")
   }
   
+  struct WriteCheck {
+    static let bg = UIImage(named: "writeCheck_bg")
+  }
+  struct WriteComplete {
+    static let check = UIImage(named: "ic_ check")
+  }
+  
+  struct ReadmeAlert {
+    static let alert = UIImage(named: "ic_ alert")
+  }
 }

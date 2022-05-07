@@ -36,11 +36,11 @@ extension MyPageHeaderTVC {
   private func bindViewModel() {
     guard let viewModel = viewModel else { return }
     nicknameLabel.text = viewModel.nickname + I18N.MyPage.nicknameDescription
-    nicknameLabel.setTargetAttributedText(targetString: viewModel.nickname, type: .semiBold)
+    nicknameLabel.setTargetAttributedText(targetString: viewModel.nickname, fontType: .semiBold)
     
     let countString = String(viewModel.bookCount) + I18N.MyPage.count
     totalCountLabel.text = I18N.MyPage.total + countString + I18N.MyPage.countDescription
-    totalCountLabel.setTargetAttributedText(targetString: countString, type: .medium, color: .white)
+    totalCountLabel.setTargetAttributedText(targetString: countString, fontType: .medium, color: .white)
   }
   
   private func setButtonAction() {

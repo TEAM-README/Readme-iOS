@@ -17,7 +17,7 @@ protocol ModuleFactoryProtocol {
   func makeMyPageVC() -> MyPageVC
   func makeSearchVC() -> SearchVC
   func makeSettingVC() -> SettingVC
-  func makeWriteVC() -> WriteVC
+  func makeWriteVC(bookInfo: WriteModel) -> WriteVC
 }
 
 final class ModuleFactory: ModuleFactoryProtocol{
@@ -52,13 +52,38 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return searchVC
   }
   
-  func makeWriteVC() -> WriteVC {
+  func makeWriteVC(bookInfo: WriteModel) -> WriteVC {
     let useCase = DefaultWriteUseCase()
-    let viewModel = WriteViewModel(useCase: useCase)
+    let viewModel = WriteViewModel(useCase: useCase, bookInfo: bookInfo)
     let writeVC = WriteVC.controllerFromStoryboard(.write)
     writeVC.viewModel = viewModel
     
     return writeVC
+  }
+  
+  func  makeWriteCheckVC() -> WriteCheckVC {
+    let repository = DefaultWriteCheckRepository(service: BaseService.default)
+    let useCase = DefaultWriteCheckUseCase(repository: repository)
+    let viewModel = WriteCheckViewModel(useCase: useCase)
+    let writeCheckVC = WriteCheckVC.controllerFromStoryboard(.writeCheck)
+    writeCheckVC.viewModel = viewModel
+    
+    return writeCheckVC
+  }
+  
+  func makeWriteCompleteVC() -> WriteCompleteVC {
+    let useCase = DefaultWriteCompleteUseCase()
+    let viewModel = WriteCompleteViewModel(useCase: useCase)
+    let writeCompleteVC = WriteCompleteVC.controllerFromStoryboard(.writeComplete)
+    writeCompleteVC.viewModel = viewModel
+    
+    return writeCompleteVC
+  }
+  
+  func makeAlertVC() -> AlertVC {
+    let alertVC = AlertVC.controllerFromStoryboard(.alert)
+    
+    return alertVC
   }
   
   func makeBaseVC() -> BaseVC { BaseVC.controllerFromStoryboard(.base) }
