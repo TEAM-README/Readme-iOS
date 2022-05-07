@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxRelay
 import RxCocoa
+import SnapKit
 
 final class FeedListVC: UIViewController {
   // MARK: - Vars & Lets Part
@@ -26,6 +27,7 @@ final class FeedListVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.bindCells()
+    self.setEmptyView()
     self.configureTableView()
     self.bindViewModels()
     self.bindTableView()
@@ -35,12 +37,21 @@ final class FeedListVC: UIViewController {
 extension FeedListVC {
   private func bindCells() {
     FeedListContentTVC.register(target: feedListTV)
+    FeedListEmptyTVC.register(target: feedListTV)
+  }
+  
+  private func setEmptyView() {
+    self.view.addSubview(emptyView)
+    emptyView.isMyPage = false
+    emptyView.isHidden = false
+    emptyView.snp.makeConstraints {
+      $0.edges.equalTo(feedListTV)
+    }
   }
   
   private func configureTableView() {
     feedListTV.separatorStyle = .none
     feedListTV.backgroundColor = .clear
-//    feedListTV.allowsSelection = false
     feedListTV.showsVerticalScrollIndicator = false
   }
   
@@ -96,6 +107,14 @@ extension FeedListVC {
             contentCell.viewModel = contentData
             return contentCell
 
+          case .empty:
+            let contentData = item.dataSource as! FeedListEmtpyViewData
+            guard let emptyCell = tableView.dequeueReusableCell(withIdentifier: FeedListEmptyTVC.className) as? FeedListEmptyTVC else { return UITableViewCell() }
+            emptyCell.isMyPage = contentData.isMyPage
+            emptyCell.backgroundColor = .clear
+            emptyCell.selectionStyle = .none
+            emptyCell.cellHeight = self.feedListTV.frame.height - 104
+            return emptyCell
         }
       }.disposed(by: self.disposeBag)
   }
@@ -106,10 +125,7 @@ extension FeedListVC {
         guard let self = self else { return }
         guard model.type == .content else { return }
         let selectedModel = model.dataSource as! FeedListContentViewModel
-        print("CLICK")
         self.postObserverAction(.moveFeedDetail, object: selectedModel.idx)
       }).disposed(by: self.disposeBag)
-    
-    
   }
 }
