@@ -27,7 +27,6 @@ final class FeedListVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.bindCells()
-    self.setEmptyView()
     self.configureTableView()
     self.bindViewModels()
     self.bindTableView()
@@ -38,15 +37,6 @@ extension FeedListVC {
   private func bindCells() {
     FeedListContentTVC.register(target: feedListTV)
     FeedListEmptyTVC.register(target: feedListTV)
-  }
-  
-  private func setEmptyView() {
-    self.view.addSubview(emptyView)
-    emptyView.isMyPage = false
-    emptyView.isHidden = false
-    emptyView.snp.makeConstraints {
-      $0.edges.equalTo(feedListTV)
-    }
   }
   
   private func configureTableView() {
