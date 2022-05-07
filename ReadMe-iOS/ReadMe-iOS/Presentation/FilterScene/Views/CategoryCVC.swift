@@ -47,6 +47,7 @@ extension CategoryCVC {
     
     categoryLabel.font = .readMeFont(size: 16)
     categoryLabel.textColor = .grey14
+    categoryLabel.setCharacterSpacing(kernValue: -0.1)
   }
   
   func changeState(isSelected: Bool) {
