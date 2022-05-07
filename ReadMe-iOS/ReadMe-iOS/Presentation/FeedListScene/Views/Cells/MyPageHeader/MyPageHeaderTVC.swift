@@ -26,10 +26,10 @@ final class MyPageHeaderTVC: UITableViewCell, UITableViewRegisterable {
 
 extension MyPageHeaderTVC {
   private func configureUI() {
-    nicknameLabel.textColor = .white
+    nicknameLabel.textColor = .mainBlue
     nicknameLabel.font = .readMeFont(size: 20, type: .light)
     
-    totalCountLabel.textColor = .init(white: 1, alpha: 0.6)
+    totalCountLabel.textColor = .mainBlue_60
     totalCountLabel.font = .readMeFont(size: 14, type: .medium)
   }
   
@@ -40,7 +40,7 @@ extension MyPageHeaderTVC {
     
     let countString = String(viewModel.bookCount) + I18N.MyPage.count
     totalCountLabel.text = I18N.MyPage.total + countString + I18N.MyPage.countDescription
-    totalCountLabel.setTargetAttributedText(targetString: countString, fontType: .medium, color: .white)
+    totalCountLabel.setTargetAttributedText(targetString: countString, fontType: .medium, color: .mainBlue)
   }
   
   private func setButtonAction() {

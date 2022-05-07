@@ -67,7 +67,7 @@ extension FeedListContentTVC {
   
   private func bindViewModel() {
     guard let viewModel = viewModel else { return }
-    contentView.backgroundColor = viewModel.isMyPage ? .mainBlue : .grey00
+    contentView.backgroundColor = viewModel.isMyPage ? .subBlue : .grey00
     categoryLabel.text = viewModel.category
     titleLabel.text = viewModel.title
     nicknameLabel.text = viewModel.nickname

@@ -55,7 +55,7 @@ extension FeedListVC {
         guard let self = self else { return }
         if isMyPage {
           MyPageHeaderTVC.register(target: self.feedListTV)
-          self.view.backgroundColor = .mainBlue
+          self.view.backgroundColor = .subBlue
         }else {
           FeedListCategoryTVC.register(target:
                                         self.feedListTV)
