@@ -203,7 +203,7 @@ extension WriteCheckVC {
     
     bgImageView.snp.makeConstraints { make in
       make.top.equalTo(titleLabel.snp.bottom).offset(39)
-      make.trailing.bottom.equalToSuperview()
+      make.leading.trailing.bottom.equalToSuperview()
     }
     
     quoteTextView.snp.makeConstraints { make in
