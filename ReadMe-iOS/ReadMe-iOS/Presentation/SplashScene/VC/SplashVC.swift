@@ -47,6 +47,12 @@ class SplashVC: UIViewController {
     navigationController?.pushViewController(feedListVC, animated: false)
   }
   
+  private func pushFilterView() {
+    let filterVC = BottomSheetVC(contentViewController: ModuleFactory.shared.makeFilterVC())
+    filterVC.modalPresentationStyle = .overFullScreen
+    present(filterVC, animated: true)
+  }
+  
   private func pushWriteView() {
     let bookInfo = WriteModel.init(bookcover: "-", bookname: "-", category: "-", author: "-")
     let writeVC = ModuleFactory.shared.makeWriteVC(bookInfo: bookInfo)
