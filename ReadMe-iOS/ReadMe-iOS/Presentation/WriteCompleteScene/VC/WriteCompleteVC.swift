@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import RxSwift
 
-class WriteCompleteVC: UIViewController {
+final class WriteCompleteVC: UIViewController {
   
   // MARK: - Vars & Lets Part
   private let disposeBag = DisposeBag()

@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class WriteImpressionFlow: UIView {
+final class WriteImpressionFlow: UIView {
   
   // MARK: - Vars & Lets Part
   private let titleLabel = UILabel()
