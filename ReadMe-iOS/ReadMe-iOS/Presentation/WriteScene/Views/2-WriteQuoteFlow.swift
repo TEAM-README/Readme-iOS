@@ -1,5 +1,5 @@
 //
-//  WriteFirstFlow.swift
+//  WriteQuoteFlow.swift
 //  ReadMe-iOS
 //
 //  Created by 양수빈 on 2022/04/21.
@@ -9,16 +9,16 @@ import UIKit
 
 import SnapKit
 
-class WriteFirstFlow: UIView {
+class WriteQuoteFlow: UIView {
   
   // MARK: - Vars & Lets Part
-  private let firstTitleLabel = UILabel()
-  private let firstContentTitleLabel = UILabel()
+  private let titleLabel = UILabel()
+  private let contentTitleLabel = UILabel()
   private let bookCoverImageView = UIImageView()
   private let categoryLabel = UILabel()
   private let bookTitleLabel = UILabel()
   private let bookAuthorLabel = UILabel()
-  let firstTextView = UITextView()
+  let quoteTextView = UITextView()
   
   // MARK: - Life Cycles
   override init(frame: CGRect) {
@@ -34,7 +34,7 @@ class WriteFirstFlow: UIView {
 
 // MARK: - Custom Methods Part
 
-extension WriteFirstFlow {
+extension WriteQuoteFlow {
   func setData(bookInfo: WriteModel, category: Category) {
     bookCoverImageView.setImage(with: bookInfo.bookcover)
     bookTitleLabel.text = bookInfo.bookname
@@ -48,26 +48,26 @@ extension WriteFirstFlow {
 
 // MARK: - UI & Layout
 
-extension WriteFirstFlow {
+extension WriteQuoteFlow {
   private func configureUI() {
-    firstTitleLabel.text = I18N.Write.firstTitle
-    firstTitleLabel.font = .readMeFont(size: 16, type: .semiBold)
-    firstTitleLabel.textColor = .black
+    titleLabel.text = I18N.Write.quoteTitle
+    titleLabel.font = .readMeFont(size: 16, type: .semiBold)
+    titleLabel.textColor = .black
     
-    firstTextView.text = I18N.Write.firstPlaceholder
-    firstTextView.setTextWithLineHeight(text: firstTextView.text, lineHeightMultiple: 1.33)
-    firstTextView.font = .readMeFont(size: 15)
-    firstTextView.textColor = .grey09
+    quoteTextView.text = I18N.Write.quotePlaceholder
+    quoteTextView.setTextWithLineHeight(text: quoteTextView.text, lineHeightMultiple: 1.33)
+    quoteTextView.font = .readMeFont(size: 15)
+    quoteTextView.textColor = .grey09
     
-    firstTextView.layer.borderColor = UIColor.grey00.cgColor
-    firstTextView.layer.borderWidth = 1
-    firstTextView.layer.cornerRadius = 16
-    firstTextView.textContainerInset = UIEdgeInsets(top: 18, left: 22, bottom: 18, right: 22)
+    quoteTextView.layer.borderColor = UIColor.grey00.cgColor
+    quoteTextView.layer.borderWidth = 1
+    quoteTextView.layer.cornerRadius = 16
+    quoteTextView.textContainerInset = UIEdgeInsets(top: 18, left: 22, bottom: 18, right: 22)
     
-    firstContentTitleLabel.text = I18N.Write.selectedBook
-    firstContentTitleLabel.font = .readMeFont(size: 14, type: .medium)
-    firstContentTitleLabel.textColor = .black
-    firstContentTitleLabel.setTextWithLineHeight(text: firstContentTitleLabel.text, lineHeightMultiple: 1.5)
+    contentTitleLabel.text = I18N.Write.selectedBook
+    contentTitleLabel.font = .readMeFont(size: 14, type: .medium)
+    contentTitleLabel.textColor = .black
+    contentTitleLabel.setTextWithLineHeight(text: contentTitleLabel.text, lineHeightMultiple: 1.5)
     
     categoryLabel.font = .readMeFont(size: 12)
     categoryLabel.textColor = .mainBlue
@@ -82,30 +82,30 @@ extension WriteFirstFlow {
   }
   
   private func setLayout() {
-    self.addSubviews([firstTitleLabel, firstContentTitleLabel,
-                      firstTextView, bookCoverImageView, categoryLabel,
+    self.addSubviews([titleLabel, contentTitleLabel,
+                      quoteTextView, bookCoverImageView, categoryLabel,
                       bookTitleLabel, bookAuthorLabel])
     
-    firstTitleLabel.snp.makeConstraints { make in
+    titleLabel.snp.makeConstraints { make in
       make.leading.equalToSuperview().inset(28)
       make.top.equalToSuperview().inset(32)
     }
     
-    firstTextView.snp.makeConstraints { make in
+    quoteTextView.snp.makeConstraints { make in
       make.leading.equalToSuperview().inset(24)
-      make.top.equalTo(firstTitleLabel.snp.bottom).offset(20)
+      make.top.equalTo(titleLabel.snp.bottom).offset(20)
       make.trailing.equalToSuperview().inset(42)
       make.height.equalTo((UIScreen.main.bounds.width - 68) * 0.61)
     }
     
-    firstContentTitleLabel.snp.makeConstraints { make in
+    contentTitleLabel.snp.makeConstraints { make in
       make.leading.equalToSuperview().inset(28)
-      make.top.equalTo(firstTextView.snp.bottom).offset(37)
+      make.top.equalTo(quoteTextView.snp.bottom).offset(37)
     }
     
     bookCoverImageView.snp.makeConstraints { make in
       make.leading.equalToSuperview().inset(28)
-      make.top.equalTo(firstContentTitleLabel.snp.bottom).offset(18)
+      make.top.equalTo(contentTitleLabel.snp.bottom).offset(18)
       make.height.equalTo(82)
       make.width.equalTo(bookCoverImageView.snp.height).multipliedBy(0.68)
     }
