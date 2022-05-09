@@ -55,7 +55,8 @@ class SplashVC: UIViewController {
   }
   
   private func presentFeedReportView() {
-    let feedReportVC = BottomSheetVC(contentViewController: ModuleFactory.shared.makeFeedReportVC(), type: .actionsheet)
+//    let feedReportVC = BottomSheetVC(contentViewController: ModuleFactory.shared.makeFeedReportVC(isMyPage: true), type: .oneAction)
+    let feedReportVC = BottomSheetVC(contentViewController: ModuleFactory.shared.makeFeedReportVC(isMyPage: false), type: .twoAction)
     feedReportVC.modalPresentationStyle = .overFullScreen
     present(feedReportVC, animated: true)
   }

@@ -15,6 +15,7 @@ class FeedReportVC: UIViewController {
   
   // MARK: - Vars & Lets Part
   private let disposeBag = DisposeBag()
+//  private var buttonDelegate: FeedReportDelegate?
   var viewModel: FeedReportViewModel!
   
   // MARK: - UI Component Part
@@ -47,9 +48,6 @@ extension FeedReportVC {
     buttonStackView.axis = .vertical
     buttonStackView.alignment = .leading
     buttonStackView.distribution = .fill
-    buttonStackView.addArrangedSubview(reportButton)
-    buttonStackView.addArrangedSubview(deleteButton)
-    buttonStackView.isLayoutMarginsRelativeArrangement = true
   }
   
   private func setLayout() {
@@ -61,10 +59,16 @@ extension FeedReportVC {
       make.bottom.equalTo(view.safeAreaLayoutGuide).inset(7)
     }
     
-    reportButton.snp.makeConstraints { make in
-      make.leading.trailing.equalToSuperview()
+    if !viewModel.isMyPage {
+      buttonStackView.addArrangedSubview(reportButton)
+      
+      reportButton.snp.makeConstraints { make in
+        make.leading.trailing.equalToSuperview()
+      }
     }
 
+    buttonStackView.addArrangedSubview(deleteButton)
+    
     deleteButton.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview()
     }
@@ -72,9 +76,6 @@ extension FeedReportVC {
   
   // MARK: - Custom Method Part
   private func bindViewModels() {
-//    let input = FeedReportViewModel.Input()
-//    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
-    
     reportButton.rx.tap
       .subscribe(onNext: {
         print("👅 report")

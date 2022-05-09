@@ -6,11 +6,13 @@
 //
 
 import RxSwift
+import RxRelay
 
 final class FeedReportViewModel: ViewModelType {
 
   private let useCase: FeedReportUseCase
   private let disposeBag = DisposeBag()
+  let isMyPage: Bool
   
   // MARK: - Inputs
   struct Input {
@@ -22,8 +24,9 @@ final class FeedReportViewModel: ViewModelType {
     
   }
   
-  init(useCase: FeedReportUseCase) {
+  init(useCase: FeedReportUseCase, isMyPage: Bool) {
     self.useCase = useCase
+    self.isMyPage = isMyPage
   }
 }
 
