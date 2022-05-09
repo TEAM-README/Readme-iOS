@@ -60,7 +60,8 @@ class SplashVC: UIViewController {
   }
   
   private func pushWriteCheckView() {
-    let writeCheckVC = ModuleFactory.shared.makeWriteCheckVC()
+    let writeInfo = WriteCheckModel.init(bookCover: "-", bookTitle: "-", bookAuthor: "-", bookCategory: "-", quote: "-", impression: "-")
+    let writeCheckVC = ModuleFactory.shared.makeWriteCheckVC(writeInfo: writeInfo)
     navigationController?.pushViewController(writeCheckVC, animated: false)
   }
   

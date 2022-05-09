@@ -10,6 +10,6 @@ import Foundation
 struct WriteModel {
   let bookcover: String
   let bookname: String
-  let category: String
+  let category: String?
   let author: String
 }

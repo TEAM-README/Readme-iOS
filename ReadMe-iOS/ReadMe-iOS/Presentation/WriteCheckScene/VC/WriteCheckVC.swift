@@ -43,6 +43,7 @@ class WriteCheckVC: UIViewController {
     self.configureUI()
     self.setLayout()
     self.bindViewModels()
+    self.setPreviousData()
   }
   
   open override func didMove(toParent parent: UIViewController?) {
@@ -56,7 +57,7 @@ extension WriteCheckVC {
   private func bindViewModels() {
     let input = WriteCheckViewModel.Input(
       registerButtonClicked: self.registerButton.rx.tap.map({ _ in
-        WriteRequestModel.init(bookTitle: self.bookTitleLabel.text ?? "", bookAuthor: self.bookAuthorLabel.text ?? "", quote: self.quoteTextView.text ?? "", impression: self.impressionTextView.text ?? "")
+        WriteRequestModel.init(bookCategory: self.categoryLabel.text ?? "", bookTitle: self.bookTitleLabel.text ?? "", bookAuthor: self.bookAuthorLabel.text ?? "", quote: self.quoteTextView.text ?? "", impression: self.impressionTextView.text ?? "")
       })
       .asObservable(),
       registerRequestFail: writeRequestFail,
@@ -92,15 +93,27 @@ extension WriteCheckVC {
     .disposed(by: self.disposeBag)
   }
   
-  func setPreviousData(bookcover: String, category: String, bookname: String, author: String, quote: String, impression: String) {
-    quoteTextView.text = quote
-    impressionTextView.text = impression
+  private func setPreviousData() {
+    let data = viewModel.data
     
-    bookCoverImageView.setImage(with: bookcover)
-    categoryLabel.text = category
-    bookTitleLabel.text = bookname
-    bookAuthorLabel.text = author
+    quoteTextView.text = data.quote
+    impressionTextView.text = data.impression
+    
+    bookCoverImageView.setImage(with: data.bookCover ?? "-")
+    categoryLabel.text = data.bookCategory
+    bookTitleLabel.text = data.bookTitle
+    bookAuthorLabel.text = data.bookAuthor
   }
+  
+//  private func setPreviousData(bookcover: String, category: String, bookname: String, author: String, quote: String, impression: String) {
+//    quoteTextView.text = quote
+//    impressionTextView.text = impression
+//
+//    bookCoverImageView.setImage(with: bookcover)
+//    categoryLabel.text = category
+//    bookTitleLabel.text = bookname
+//    bookAuthorLabel.text = author
+//  }
 }
 
 // MARK: - UI Component Part
@@ -190,7 +203,7 @@ extension WriteCheckVC {
     
     bgImageView.snp.makeConstraints { make in
       make.top.equalTo(titleLabel.snp.bottom).offset(39)
-      make.trailing.bottom.equalToSuperview()
+      make.leading.trailing.bottom.equalToSuperview()
     }
     
     quoteTextView.snp.makeConstraints { make in

@@ -12,6 +12,7 @@ final class WriteCheckViewModel: ViewModelType {
 
   private let useCase: WriteCheckUseCase
   private let disposeBag = DisposeBag()
+  let data: WriteCheckModel
 //  private var data: WriteRequestModel
   
   // MARK: - Inputs
@@ -30,8 +31,9 @@ final class WriteCheckViewModel: ViewModelType {
     var showNetworkError = PublishRelay<Void>()
   }
   
-  init(useCase: WriteCheckUseCase) {
+  init(useCase: WriteCheckUseCase, data: WriteCheckModel) {
     self.useCase = useCase
+    self.data = data
   }
 }
 
@@ -51,7 +53,7 @@ extension WriteCheckViewModel {
       .subscribe(onNext: { [weak self] registerRequest in
         print("📍")
         guard let self = self else { return }
-        self.useCase.postWrite(booktitle: registerRequest.bookTitle, bookauthor: registerRequest.bookAuthor, quote: registerRequest.quote, impression: registerRequest.impression)
+        self.useCase.postWrite(booktitle: registerRequest.bookTitle, bookauthor: registerRequest.bookAuthor, bookcategory: registerRequest.bookCategory, quote: registerRequest.quote, impression: registerRequest.impression)
       })
       .disposed(by: self.disposeBag)
     
