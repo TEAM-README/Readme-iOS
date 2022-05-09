@@ -9,14 +9,16 @@ import Foundation
 
 struct WriteCheckModel {
 //  let success: Bool
+  let bookCover: String?
   let bookTitle: String
   let bookAuthor: String
+  let bookCategory: String
   let quote: String
   let impression: String
 }
 
 struct WriteRequestModel {
-//  let bookCategory: String
+  let bookCategory: String
   let bookTitle: String
   let bookAuthor: String
 //  let bookCover: String

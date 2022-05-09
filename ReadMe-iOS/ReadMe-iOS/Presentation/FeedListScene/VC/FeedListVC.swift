@@ -89,6 +89,7 @@ extension FeedListVC {
             guard let categoryCell = tableView.dequeueReusableCell(withIdentifier: FeedListCategoryTVC.className) as? FeedListCategoryTVC else { return UITableViewCell() }
 
             categoryCell.viewModel = categoryData
+            categoryCell.buttonDelegate = self
             return categoryCell
           case .content :
             let contentData = item.dataSource as! FeedListContentViewModel
@@ -117,5 +118,15 @@ extension FeedListVC {
         let selectedModel = model.dataSource as! FeedListContentViewModel
         self.postObserverAction(.moveFeedDetail, object: selectedModel.idx)
       }).disposed(by: self.disposeBag)
+  }
+}
+
+extension FeedListVC: FeedCategoryDelegate {
+  func categoryButtonTapped() {
+    let filterVC = ModuleFactory.shared.makeFilterVC()
+    let bottomSheet = BottomSheetVC(contentViewController: filterVC)
+    filterVC.buttonDelegate = bottomSheet
+    bottomSheet.modalPresentationStyle = .overFullScreen
+    present(bottomSheet, animated: true)
   }
 }

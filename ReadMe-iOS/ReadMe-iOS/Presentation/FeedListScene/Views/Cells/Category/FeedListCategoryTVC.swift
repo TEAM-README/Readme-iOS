@@ -6,17 +6,25 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 struct FeedCategoryViewModel: FeedListDataSource{
   let category : [FeedCategory]
 }
 
+protocol FeedCategoryDelegate: AnyObject {
+  func categoryButtonTapped()
+}
+
 final class FeedListCategoryTVC: UITableViewCell, UITableViewRegisterable {
   static var isFromNib: Bool = true
+  weak var buttonDelegate: FeedCategoryDelegate?
   var viewModel: FeedCategoryViewModel? { didSet { bindViewModel() }}
   
   @IBOutlet weak var categoryLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!
+  @IBOutlet weak var categoryButton: UIButton!
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -27,6 +35,10 @@ final class FeedListCategoryTVC: UITableViewCell, UITableViewRegisterable {
     super.setSelected(selected, animated: animated)
   }
   
+    @IBAction func tapCategoryButton(_ sender: Any) {
+        self.makeVibrate()
+        self.buttonDelegate?.categoryButtonTapped()
+    }
 }
 
 extension FeedListCategoryTVC {

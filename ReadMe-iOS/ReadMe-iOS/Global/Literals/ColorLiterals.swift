@@ -66,6 +66,20 @@ extension UIColor {
   @nonobjc class var grey12: UIColor {
     return UIColor(red: 236.0 / 255.0, green: 236.0 / 255.0, blue: 236.0 / 255.0, alpha: 1.0)
   }
+  
+  // filter resetButton
+  @nonobjc class var grey13: UIColor {
+    return UIColor(red: 131.0 / 255.0, green: 131.0 / 255.0, blue: 131.0 / 255.0, alpha: 1.0)
+  }
+  
+  // categoryLabel
+  @nonobjc class var grey14: UIColor {
+    return UIColor(red: 146.0 / 255.0, green: 146.0 / 255.0, blue: 146.0 / 255.0, alpha: 1.0)
+  }
+  
+  @nonobjc class var grey15: UIColor {
+    return UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
+  }
 
   @nonobjc class var yellow: UIColor {
     return UIColor(red: 255.0 / 255.0, green: 202.0 / 255.0, blue: 122.0 / 255.0, alpha: 1.0)
@@ -85,6 +99,10 @@ extension UIColor {
   
   @nonobjc class var pointBlue: UIColor {
     return UIColor(red: 163.0 / 255.0, green: 194.0 / 255.0, blue: 255.0 / 255.0, alpha: 1.0)
+  }
+  
+  @nonobjc class var bgBlue: UIColor {
+    return UIColor(red: 244.0 / 255.0, green: 248.0 / 255.0, blue: 255.0 / 255.0, alpha: 1.0)
   }
 
   @nonobjc class var alertRed: UIColor {

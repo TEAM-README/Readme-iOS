@@ -61,10 +61,10 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return writeVC
   }
   
-  func  makeWriteCheckVC() -> WriteCheckVC {
+  func  makeWriteCheckVC(writeInfo: WriteCheckModel) -> WriteCheckVC {
     let repository = DefaultWriteCheckRepository(service: BaseService.default)
     let useCase = DefaultWriteCheckUseCase(repository: repository)
-    let viewModel = WriteCheckViewModel(useCase: useCase)
+    let viewModel = WriteCheckViewModel(useCase: useCase, data: writeInfo)
     let writeCheckVC = WriteCheckVC.controllerFromStoryboard(.writeCheck)
     writeCheckVC.viewModel = viewModel
     
@@ -108,6 +108,15 @@ final class ModuleFactory: ModuleFactoryProtocol{
     let feedListVC =  FeedListVC.controllerFromStoryboard(.feedList)
     feedListVC.viewModel = viewModel
     return feedListVC
+  }
+  
+  func makeFilterVC() -> FilterVC {
+    let repository = DefaultFilterRepository(service: BaseService.default)
+    let useCase = DefaultFilterUseCase(repository: repository)
+    let viewModel = FilterViewModel(useCase: useCase)
+    let filterVC = FilterVC.controllerFromStoryboard(.filter)
+    filterVC.viewModel = viewModel
+    return filterVC
   }
   
   func makeMyPageVC() -> MyPageVC { MyPageVC.controllerFromStoryboard(.mypage) }

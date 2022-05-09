@@ -78,6 +78,7 @@ struct I18N {
     static let heartCheer = " 님의 마음을 응원해요!"
     static let startDescribe = "기록은 독서의 시작입니다. 책을 끝까지 읽지 못했더라도 읽는 도중 인상 깊었던 문장을 적어보세요."
     static let heartDescribe = "글을 눈으로 읽어내려가는 것에만 그친다면 진정한 독서라고 할 수 없죠. 인상 깊었던 문장에 대한 느낀점도 남겨볼까요?"
+    static let categoryTitle = "책의 카테고리를 선택해주세요"
     static let firstTitle = "인상 깊었던 문장을 적어주세요"
     static let firstPlaceholder = "어떤 문장이 인상 깊었나요?"
     static let secondTitle = "느낀점을 적어주세요"
@@ -91,15 +92,21 @@ struct I18N {
     static let titleDay = " 님의 하루가\n 더 풍요로워졌길 바라요!"
   }
   
-  struct Button {
-    static let next = "다음"
-    static let register = "등록하기"
-  }
-  
   struct WriteComplete {
     static let title = "등록을 완료했어요"
     static let subtitle = "피드 와 마이페이지 에서\n작성한 감상글을 확인할 수 있어요"
     static let move = "피드 구경하러 가기"
+  }
+  
+  struct Filter {
+    
+  }
+  
+  struct Button {
+    static let next = "다음"
+    static let register = "등록하기"
+    static let reset = " 필터 초기화"
+    static let apply = "적용"
   }
   
   struct ReadmeAlert {

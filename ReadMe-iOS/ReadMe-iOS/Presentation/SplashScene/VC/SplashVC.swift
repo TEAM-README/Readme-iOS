@@ -47,6 +47,12 @@ class SplashVC: UIViewController {
     navigationController?.pushViewController(feedListVC, animated: false)
   }
   
+  private func pushFilterView() {
+    let filterVC = BottomSheetVC(contentViewController: ModuleFactory.shared.makeFilterVC())
+    filterVC.modalPresentationStyle = .overFullScreen
+    present(filterVC, animated: true)
+  }
+  
   private func pushWriteView() {
     let bookInfo = WriteModel.init(bookcover: "-", bookname: "-", category: "-", author: "-")
     let writeVC = ModuleFactory.shared.makeWriteVC(bookInfo: bookInfo)
@@ -54,7 +60,8 @@ class SplashVC: UIViewController {
   }
   
   private func pushWriteCheckView() {
-    let writeCheckVC = ModuleFactory.shared.makeWriteCheckVC()
+    let writeInfo = WriteCheckModel.init(bookCover: "-", bookTitle: "-", bookAuthor: "-", bookCategory: "-", quote: "-", impression: "-")
+    let writeCheckVC = ModuleFactory.shared.makeWriteCheckVC(writeInfo: writeInfo)
     navigationController?.pushViewController(writeCheckVC, animated: false)
   }
   
