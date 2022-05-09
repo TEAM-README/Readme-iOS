@@ -13,8 +13,7 @@ class SplashVC: UIViewController {
     super.viewDidLoad()
     delayWithSeconds(1) {
 //      self.pushSignupView()
-//      self.pushBaseView()
-      self.presentFeedReportView()
+      self.pushBaseView()
     }
   }
   

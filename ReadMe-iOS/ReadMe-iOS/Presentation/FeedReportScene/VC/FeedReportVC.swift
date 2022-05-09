@@ -15,7 +15,6 @@ class FeedReportVC: UIViewController {
   
   // MARK: - Vars & Lets Part
   private let disposeBag = DisposeBag()
-//  private var buttonDelegate: FeedReportDelegate?
   var viewModel: FeedReportViewModel!
   
   // MARK: - UI Component Part
