@@ -103,6 +103,8 @@ struct I18N {
     static let register = "등록하기"
     static let reset = " 필터 초기화"
     static let apply = "적용"
+    static let report = "신고하기"
+    static let delete = "삭제하기"
   }
   
   struct ReadmeAlert {

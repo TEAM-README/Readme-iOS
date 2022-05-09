@@ -24,10 +24,12 @@ final class BottomSheetVC: UIViewController {
   private var bottomSheetViewTopConstraint: NSLayoutConstraint!
   private var defaultHeight: CGFloat = UIScreen.main.bounds.width * 532 / 390
   private var actionSheetHeight: CGFloat = UIScreen.main.bounds.width * 172 / 390
+  private var bottomSheetType: BottomSheetType = .filter
   
   // MARK: - Initialize
-  init(contentViewController: UIViewController) {
+  init(contentViewController: UIViewController, type: BottomSheetType = .filter) {
     self.contentVC = contentViewController
+    self.bottomSheetType = type
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -92,12 +94,12 @@ extension BottomSheetVC {
 extension BottomSheetVC {
   // MARK: - Custom Method
   
-  private func showBottomSheet(type: BottomSheetType = .filter) {
+  private func showBottomSheet() {
     let safeAreaHeight: CGFloat = view.safeAreaLayoutGuide.layoutFrame.height
     let bottomPadding: CGFloat = view.safeAreaInsets.bottom
     var topConstant = (safeAreaHeight + bottomPadding) - defaultHeight
     
-    if type != .filter {
+    if bottomSheetType != .filter {
       topConstant = (safeAreaHeight + bottomPadding - actionSheetHeight)
     }
     

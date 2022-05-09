@@ -119,6 +119,15 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return filterVC
   }
   
+  func makeFeedReportVC() -> FeedReportVC {
+    let repository = DefaultFeedReportRepository()
+    let useCase = DefaultFeedReportUseCase(repository: repository)
+    let viewModel = FeedReportViewModel(useCase: useCase)
+    let feedReportVC = FeedReportVC.controllerFromStoryboard(.feedReport)
+    feedReportVC.viewModel = viewModel
+    return feedReportVC
+  }
+  
   func makeMyPageVC() -> MyPageVC { MyPageVC.controllerFromStoryboard(.mypage) }
   func makeSettingVC() -> SettingVC { SettingVC.controllerFromStoryboard(.setting) }
 

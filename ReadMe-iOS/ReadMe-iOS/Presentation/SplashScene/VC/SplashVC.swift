@@ -13,7 +13,8 @@ class SplashVC: UIViewController {
     super.viewDidLoad()
     delayWithSeconds(1) {
 //      self.pushSignupView()
-      self.pushBaseView()
+//      self.pushBaseView()
+      self.presentFeedReportView()
     }
   }
   
@@ -51,6 +52,12 @@ class SplashVC: UIViewController {
     let filterVC = BottomSheetVC(contentViewController: ModuleFactory.shared.makeFilterVC())
     filterVC.modalPresentationStyle = .overFullScreen
     present(filterVC, animated: true)
+  }
+  
+  private func presentFeedReportView() {
+    let feedReportVC = BottomSheetVC(contentViewController: ModuleFactory.shared.makeFeedReportVC(), type: .actionsheet)
+    feedReportVC.modalPresentationStyle = .overFullScreen
+    present(feedReportVC, animated: true)
   }
   
   private func pushWriteView() {
