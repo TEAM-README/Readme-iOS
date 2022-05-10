@@ -16,6 +16,8 @@ final class FeedListVC: UIViewController {
   
   private let disposeBag = DisposeBag()
   private var category = PublishSubject<[FeedCategory]>()
+  private var cachedIndexList: Set<IndexPath> = []
+  private var isScrollAnimationRequired = true
   var viewModel: FeedListViewModel!
   
   // MARK: - UI Component Part
@@ -31,6 +33,10 @@ final class FeedListVC: UIViewController {
     self.bindViewModels()
     self.bindTableView()
   }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    self.isScrollAnimationRequired = false
+  }
 }
 
 extension FeedListVC {
@@ -43,6 +49,7 @@ extension FeedListVC {
     feedListTV.separatorStyle = .none
     feedListTV.backgroundColor = .clear
     feedListTV.showsVerticalScrollIndicator = false
+    feedListTV.delegate = self
   }
   
   private func bindViewModels() {
@@ -128,5 +135,23 @@ extension FeedListVC: FeedCategoryDelegate {
     filterVC.buttonDelegate = bottomSheet
     bottomSheet.modalPresentationStyle = .overFullScreen
     present(bottomSheet, animated: true)
+  }
+}
+
+extension FeedListVC: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    
+    if let lastIndexPath = tableView.indexPathsForVisibleRows?.last{
+      guard isScrollAnimationRequired else { return }
+      print(lastIndexPath)
+      guard !cachedIndexList.contains(lastIndexPath) else {return}
+        if lastIndexPath.row <= indexPath.row{
+          cell.frame.origin.x = -cell.frame.width
+          UIView.animate(withDuration: 1.3, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.allowUserInteraction,.curveEaseOut], animations: {
+              cell.frame.origin.x = 0
+          }, completion: nil)
+        }
+    }
+
   }
 }
