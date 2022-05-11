@@ -23,6 +23,19 @@ struct I18N {
     static let mypage = "My Page"
   }
   
+  struct Onboarding {
+    static let skip = "건너뛰기"
+    static let next = "다음"
+    static let start = "시작하기"
+    
+    static let headerFirst = "타인의 독서 기록을\n통한 짧은 독서"
+    static let headerSecond = "간편한 독서 기록"
+    static let headerThird = "나만의 공간에 보관하기"
+    static let descriptionFirst = "다른 사람들이 어떤 책을 읽고,\n무엇을 느꼈는지 한 눈에 보아요"
+    static let descriptionSecond = "책에서 인상 깊은 문장과\n느낀 점만 작성하면 돼요"
+    static let descriptionThird = "독서 당시의 울림을 오래 소장해 보아요"
+  }
+  
   struct Login {
     static let guideText = "간단한 회원가입으로 리드미를 시작해볼까요?"
     static let guideEmphasisText = "간단한 회원가입"
