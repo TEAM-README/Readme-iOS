@@ -20,9 +20,9 @@ struct ImageLiterals{
   }
   
   struct Onboarding {
-    static let onboardingImg1 = UIImage(named: "onboarding_1")!
-    static let onboardingImg2 = UIImage(named: "onboarding_2")!
-    static let onboardingImg3 = UIImage(named: "onboarding_3")!
+    static let onboardingImg1 = UIImage(named: "img_onboarding1")!
+    static let onboardingImg2 = UIImage(named: "img_onboarding2")!
+    static let onboardingImg3 = UIImage(named: "img_onboarding3")!
     
     static let dotImg1 = UIImage(named: "dots_1")!
     static let dotImg2 = UIImage(named: "dots_2")!
