@@ -88,7 +88,7 @@ extension WriteVC {
         case .thirdFlow:
           self.flowType = .next
         case .next:
-          return
+          self.flowType = .next
         }
         self.setFlow(self.flowType)
       })
