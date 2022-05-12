@@ -97,6 +97,8 @@
 		FD2937C8280E6100003B4685 /* FeedListCategoryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2937C6280E6100003B4685 /* FeedListCategoryTVC.swift */; };
 		FD2937C9280E6100003B4685 /* FeedListContentTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD2937C7280E6100003B4685 /* FeedListContentTVC.xib */; };
 		FD400E702828AD96000CA548 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD400E6F2828AD96000CA548 /* ProgressBar.swift */; };
+		FD7BA8F7282A43C800399959 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD7BA8F6282A43C800399959 /* Onboarding.storyboard */; };
+		FD7BA8F9282A452700399959 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7BA8F8282A452700399959 /* OnboardingVC.swift */; };
 		FD85CEC82809C92F00E7BE7B /* FeedDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD85CEC22809C92F00E7BE7B /* FeedDetailUseCase.swift */; };
 		FD85CEC92809C92F00E7BE7B /* FeedRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD85CEC32809C92F00E7BE7B /* FeedRepository.swift */; };
 		FD85CECB2809C92F00E7BE7B /* FeedDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD85CEC52809C92F00E7BE7B /* FeedDetailVC.swift */; };
@@ -127,6 +129,7 @@
 		FD99D59B28073C4900BB7FDA /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D59528073C4900BB7FDA /* SignupViewModel.swift */; };
 		FD99D5AA28073DB200BB7FDA /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D5A928073DB200BB7FDA /* BottomButton.swift */; };
 		FD99D5AC2807407800BB7FDA /* addPadding + UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD99D5AB2807407800BB7FDA /* addPadding + UITextField.swift */; };
+		FDD87D26282B60BE00C44963 /* OnboardingVC + configureLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD87D25282B60BE00C44963 /* OnboardingVC + configureLayout.swift */; };
 		FDD9D24927F9CB270024DFB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */; };
 		FDD9D24B27F9CB270024DFB2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9D24A27F9CB270024DFB2 /* SceneDelegate.swift */; };
 		FDD9D25227F9CB290024DFB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDD9D25127F9CB290024DFB2 /* Assets.xcassets */; };
@@ -293,6 +296,8 @@
 		FD2937C6280E6100003B4685 /* FeedListCategoryTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListCategoryTVC.swift; sourceTree = "<group>"; };
 		FD2937C7280E6100003B4685 /* FeedListContentTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedListContentTVC.xib; sourceTree = "<group>"; };
 		FD400E6F2828AD96000CA548 /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		FD7BA8F6282A43C800399959 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		FD7BA8F8282A452700399959 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		FD85CEC22809C92F00E7BE7B /* FeedDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailUseCase.swift; sourceTree = "<group>"; };
 		FD85CEC32809C92F00E7BE7B /* FeedRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRepository.swift; sourceTree = "<group>"; };
 		FD85CEC52809C92F00E7BE7B /* FeedDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailVC.swift; sourceTree = "<group>"; };
@@ -325,6 +330,7 @@
 		FD99D5A528073CD400BB7FDA /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		FD99D5A928073DB200BB7FDA /* BottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButton.swift; sourceTree = "<group>"; };
 		FD99D5AB2807407800BB7FDA /* addPadding + UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "addPadding + UITextField.swift"; sourceTree = "<group>"; };
+		FDD87D25282B60BE00C44963 /* OnboardingVC + configureLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnboardingVC + configureLayout.swift"; sourceTree = "<group>"; };
 		FDD9D24527F9CB270024DFB2 /* ReadMe-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReadMe-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDD9D24827F9CB270024DFB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDD9D24A27F9CB270024DFB2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -968,6 +974,32 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		FD7BA8F3282A43A200399959 /* OnboardingScene */ = {
+			isa = PBXGroup;
+			children = (
+				FD7BA8F4282A43B400399959 /* Views */,
+				FD7BA8F5282A43B700399959 /* VC */,
+			);
+			path = OnboardingScene;
+			sourceTree = "<group>";
+		};
+		FD7BA8F4282A43B400399959 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FD7BA8F6282A43C800399959 /* Onboarding.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FD7BA8F5282A43B700399959 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				FD7BA8F8282A452700399959 /* OnboardingVC.swift */,
+				FDD87D25282B60BE00C44963 /* OnboardingVC + configureLayout.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
 		FD85CEBE2809C8EE00E7BE7B /* FeedDetailScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -1260,6 +1292,7 @@
 		FDD9D25E27F9DAE80024DFB2 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				FD7BA8F3282A43A200399959 /* OnboardingScene */,
 				2BFD022D281EECD60025F660 /* FilterScene */,
 				2BA7084D28143EE70021717F /* AlertScene */,
 				FD0C387028105DC4004E79C7 /* SettingScene */,
@@ -1871,6 +1904,7 @@
 				FD2937BE280E5EF5003B4685 /* FeedList.storyboard in Resources */,
 				2BFE0C0E2812E9B300DF6F4C /* WriteComplete.storyboard in Resources */,
 				2B6DED9E28106D31002BD931 /* ProgressBar.xib in Resources */,
+				FD7BA8F7282A43C800399959 /* Onboarding.storyboard in Resources */,
 				2BFD023E281EED1F0025F660 /* Filter.storyboard in Resources */,
 				FD06195D2805457600F647D7 /* Pretendard-Black.otf in Resources */,
 				2BD34FAD281F95720043EBD6 /* BottomSheet.storyboard in Resources */,
@@ -1969,6 +2003,7 @@
 				FDD9D28E27F9DFAF0024DFB2 /* manageObserverAction.swift in Sources */,
 				FDD9D26E27F9DEC10024DFB2 /* UITableViewRegisterable.swift in Sources */,
 				2B87EF1E28183AA4006247AE /* WriteModel.swift in Sources */,
+				FDD87D26282B60BE00C44963 /* OnboardingVC + configureLayout.swift in Sources */,
 				FDD9D27527F9DF130024DFB2 /* StringLiterals.swift in Sources */,
 				FDD9D24B27F9CB270024DFB2 /* SceneDelegate.swift in Sources */,
 				FDD9D27127F9DEF20024DFB2 /* StoryboardLiterals.swift in Sources */,
@@ -2025,6 +2060,7 @@
 				FDDB0B71280585740055B208 /* MyPageModel.swift in Sources */,
 				FDD9D2D627F9E24D0024DFB2 /* BaseAPI.swift in Sources */,
 				FDDB0B55280583EE0055B208 /* HomeRepository.swift in Sources */,
+				FD7BA8F9282A452700399959 /* OnboardingVC.swift in Sources */,
 				2B52A31428083D8F00CFB1D0 /* SearchEntity.swift in Sources */,
 				2BFD0238281EECEC0025F660 /* FilterViewModel.swift in Sources */,
 				FD06198928055C2200F647D7 /* makeKernValue.swift in Sources */,
@@ -2224,7 +2260,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "ReadMe-iOS/ReadMe-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = L9D5M5DM3Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ReadMe-iOS/Info.plist";
@@ -2240,7 +2276,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.readme.release;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2257,7 +2293,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "ReadMe-iOS/ReadMe-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = L9D5M5DM3Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ReadMe-iOS/Info.plist";
@@ -2273,7 +2309,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.readme.release;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
