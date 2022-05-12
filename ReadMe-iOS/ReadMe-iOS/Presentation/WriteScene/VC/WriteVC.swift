@@ -53,6 +53,7 @@ class WriteVC: UIViewController {
     
     setLayout()
     setDelegate()
+    setButtonActions()
     bindViewModels()
     configureUI()
     setFlow(self.flowType)
@@ -79,9 +80,35 @@ extension WriteVC {
     nextButton.rx.tap
       .subscribe(onNext: {
         self.makeVibrate(degree: .light)
+        switch self.flowType {
+        case .firstFlow:
+          self.flowType = .secondFlow
+        case .secondFlow:
+          self.flowType = .thirdFlow
+        case .thirdFlow:
+          self.flowType = .next
+        case .next:
+          return
+        }
         self.setFlow(self.flowType)
       })
       .disposed(by: disposeBag)
+  }
+  
+  private func setButtonActions() {
+    backButton.press {
+      switch self.flowType {
+      case .firstFlow:
+        self.navigationController?.popViewController(animated: true)
+      case .secondFlow:
+        self.flowType = .firstFlow
+      case .thirdFlow:
+        self.flowType = .secondFlow
+      case .next:
+        self.flowType = .thirdFlow
+      }
+      self.setFlow(self.flowType)
+    }
   }
   
   private func setDelegate() {
@@ -160,9 +187,7 @@ extension WriteVC {
         
         [self.firstView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 1 }
         
-      }, completion: { _ in
-        self.flowType = .secondFlow
-      })
+      }, completion: nil)
     })
   }
   
@@ -189,9 +214,7 @@ extension WriteVC {
         
         [self.secondView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 1 }
         
-      }, completion: { _ in
-        self.flowType = .thirdFlow
-      })
+      }, completion: nil)
     })
   }
   
@@ -215,9 +238,7 @@ extension WriteVC {
         
         self.setTopLabel(self.flowType)
         [self.thirdView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 1 }
-      }, completion: { _ in
-        self.flowType = .next
-      })
+      }, completion: nil)
     })
   }
   
