@@ -15,7 +15,7 @@ struct CategoryViewModel: CategoryDataSource {
   let category: [Category]
 }
 
-class CategoryCVC: UICollectionViewCell, UICollectionViewRegisterable {
+final class CategoryCVC: UICollectionViewCell, UICollectionViewRegisterable {
   
   static var isFromNib: Bool = false
   

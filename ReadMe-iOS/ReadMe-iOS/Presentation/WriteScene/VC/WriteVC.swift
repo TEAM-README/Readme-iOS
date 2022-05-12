@@ -12,9 +12,9 @@ import RxSwift
 
 @frozen
 enum FlowType {
-  case category
   case firstFlow
   case secondFlow
+  case thirdFlow
   case next
 }
 
@@ -25,9 +25,9 @@ class WriteVC: UIViewController {
   private let topBgView = UIView()
   private let cheerLabel = UILabel()
   private let describeLabel = UILabel()
-  private let categoryView = WriteCategoryFlow()
-  private let firstView = WriteFirstFlow()
-  private let secondView = WriteSecondFlow()
+  private let firstView = WriteCategoryFlow()
+  private let secondView = WriteQuoteFlow()
+  private let thirdView = WriteImpressionFlow()
   private let nextButton = BottomButton()
   private let progressBar = ProgressBar()
   private let disposeBag = DisposeBag()
@@ -42,7 +42,7 @@ class WriteVC: UIViewController {
   private var impression: String?
   
   var viewModel: WriteViewModel!
-  var flowType: FlowType = .category
+  var flowType: FlowType = .firstFlow
   
   // MARK: - Life Cycle Part
   
@@ -64,11 +64,11 @@ class WriteVC: UIViewController {
 // MARK: - Custom Method
 
 extension WriteVC {
-  private func setFirstFlowData() {
-    firstView.setData(bookInfo: viewModel.bookInfo, category: categoryView.setSelectedCategory())
+  private func setSecondFlowData() {
+    secondView.setData(bookInfo: viewModel.bookInfo, category: firstView.setSelectedCategory())
     
     self.bookname = viewModel.bookInfo.bookname
-    self.category = categoryView.setSelectedCategory().rawValue
+    self.category = firstView.setSelectedCategory().rawValue
     self.author = viewModel.bookInfo.author
     self.bookImgURL = viewModel.bookInfo.bookcover
   }
@@ -83,8 +83,8 @@ extension WriteVC {
   }
   
   private func setDelegate() {
-    firstView.firstTextView.delegate = self
-    secondView.secondTextView.delegate = self
+    secondView.quoteTextView.delegate = self
+    thirdView.impressionTextView.delegate = self
   }
   
   private func pushWriteCheckView() {
@@ -95,12 +95,12 @@ extension WriteVC {
   
   private func setFlow(_ type: FlowType) {
     switch type {
-    case .category:
-      setCategoryFlow()
     case .firstFlow:
       setFirstFlow()
     case .secondFlow:
       setSecondFlow()
+    case .thirdFlow:
+      setThirdFlow()
     case .next:
       pushWriteCheckView()
     }
@@ -108,13 +108,6 @@ extension WriteVC {
   
   private func setTopLabel(_ type: FlowType) {
     switch type {
-    case .category:
-      cheerLabel.text = username + I18N.Write.startCheer
-      cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.33)
-      cheerLabel.setTargetAttributedText(targetString: I18N.Write.startCheer, fontType: .regular, color: .grey08)
-      
-      describeLabel.text = I18N.Write.startDescribe
-      describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.33)
     case .firstFlow:
       cheerLabel.text = username + I18N.Write.startCheer
       cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.33)
@@ -122,8 +115,15 @@ extension WriteVC {
       
       describeLabel.text = I18N.Write.startDescribe
       describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.33)
-      
     case .secondFlow:
+      cheerLabel.text = username + I18N.Write.startCheer
+      cheerLabel.setTextWithLineHeight(text: cheerLabel.text, lineHeightMultiple: 1.33)
+      cheerLabel.setTargetAttributedText(targetString: I18N.Write.startCheer, fontType: .regular, color: .grey08)
+      
+      describeLabel.text = I18N.Write.startDescribe
+      describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.33)
+      
+    case .thirdFlow:
       cheerLabel.text = username + I18N.Write.heartCheer
       describeLabel.text = I18N.Write.heartDescribe
       
@@ -136,7 +136,7 @@ extension WriteVC {
     }
   }
   
-  private func setCategoryFlow() {
+  private func setFirstFlow() {
     progressBar.setPercentage(ratio: 0.3)
     
     UIView.animate(withDuration: 0.4,
@@ -144,36 +144,7 @@ extension WriteVC {
                    options: .curveEaseInOut,
                    animations: {
       
-      [self.firstView, self.secondView,
-       self.cheerLabel, self.describeLabel].forEach { $0.alpha = 0 }
-      
-    }, completion: { _ in
-      
-      self.setTopLabel(self.flowType)
-      
-      UIView.animate(withDuration: 0.4,
-                     delay: 0,
-                     options: .curveEaseInOut,
-                     animations: {
-        
-        [self.categoryView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 1 }
-        
-      }, completion: { _ in
-        self.flowType = .firstFlow
-      })
-    })
-  }
-  
-  private func setFirstFlow() {
-    progressBar.setPercentage(ratio: 0.6)
-    
-    setFirstFlowData()
-    UIView.animate(withDuration: 0.4,
-                   delay: 0,
-                   options: .curveEaseInOut,
-                   animations: {
-      
-      [self.categoryView, self.secondView,
+      [self.secondView, self.thirdView,
        self.cheerLabel, self.describeLabel].forEach { $0.alpha = 0 }
       
     }, completion: { _ in
@@ -194,16 +165,45 @@ extension WriteVC {
   }
   
   private func setSecondFlow() {
+    progressBar.setPercentage(ratio: 0.6)
+    
+    setSecondFlowData()
+    UIView.animate(withDuration: 0.4,
+                   delay: 0,
+                   options: .curveEaseInOut,
+                   animations: {
+      
+      [self.firstView, self.thirdView,
+       self.cheerLabel, self.describeLabel].forEach { $0.alpha = 0 }
+      
+    }, completion: { _ in
+      
+      self.setTopLabel(self.flowType)
+      
+      UIView.animate(withDuration: 0.4,
+                     delay: 0,
+                     options: .curveEaseInOut,
+                     animations: {
+        
+        [self.secondView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 1 }
+        
+      }, completion: { _ in
+        self.flowType = .thirdFlow
+      })
+    })
+  }
+  
+  private func setThirdFlow() {
     progressBar.setPercentage(ratio: 1)
     
-    secondView.setData(bookname: bookname ?? "", sentence: quote ?? "")
+    thirdView.setData(bookname: bookname ?? "", sentence: quote ?? "")
     
     UIView.animate(withDuration: 0.4,
                    delay: 0,
                    options: .curveEaseInOut,
                    animations: {
       
-      [self.firstView, self.categoryView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 0 }
+      [self.secondView, self.firstView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 0 }
       
     }, completion: { _ in
       UIView.animate(withDuration: 0.4,
@@ -212,7 +212,7 @@ extension WriteVC {
                      animations: {
         
         self.setTopLabel(self.flowType)
-        [self.secondView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 1 }
+        [self.thirdView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 1 }
       }, completion: { _ in
         self.flowType = .next
       })
@@ -225,7 +225,7 @@ extension WriteVC {
                    options: .curveEaseOut,
                    animations: {
       let frame = CGAffineTransform(translationX: 0, y: -(UIScreen.main.bounds.height*106/844))
-      [self.topBgView, self.progressBar, self.firstView, self.secondView].forEach { $0.transform = frame }
+      [self.topBgView, self.progressBar, self.secondView, self.thirdView].forEach { $0.transform = frame }
       [self.cheerLabel, self.describeLabel].forEach { $0.alpha = 0 }
     }, completion: nil)
   }
@@ -236,7 +236,7 @@ extension WriteVC {
                    options: .curveEaseOut,
                    animations: {
       let frame = CGAffineTransform(translationX: 0, y: 0)
-      [self.topBgView, self.progressBar, self.firstView, self.secondView].forEach { $0.transform = frame }
+      [self.topBgView, self.progressBar, self.secondView, self.thirdView].forEach { $0.transform = frame }
       [self.cheerLabel, self.describeLabel].forEach { $0.alpha = 1 }
     }, completion: nil)
   }
@@ -253,13 +253,13 @@ extension WriteVC: UITextViewDelegate {
   func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
     upAnimation()
     switch textView {
-    case firstView.firstTextView:
-      if textView.text == I18N.Write.firstPlaceholder {
+    case secondView.quoteTextView:
+      if textView.text == I18N.Write.quotePlaceholder {
         textView.textColor = .black
         textView.text = ""
       }
-    case secondView.secondTextView:
-      if textView.text == I18N.Write.secondPlaceholder {
+    case thirdView.impressionTextView:
+      if textView.text == I18N.Write.impressionPlaceholder {
         textView.textColor = .black
         textView.text = ""
       }
@@ -273,19 +273,19 @@ extension WriteVC: UITextViewDelegate {
   func textViewDidEndEditing(_ textView: UITextView) {
     downAnimation()
     switch textView {
-    case firstView.firstTextView:
+    case secondView.quoteTextView:
       if textView.text == "" {
-        textView.text = I18N.Write.firstPlaceholder
+        textView.text = I18N.Write.quotePlaceholder
         textView.textColor = .grey09
       } else {
-        self.quote = firstView.firstTextView.text
+        self.quote = secondView.quoteTextView.text
       }
-    case secondView.secondTextView:
+    case thirdView.impressionTextView:
       if textView.text == "" {
-        textView.text = I18N.Write.secondPlaceholder
+        textView.text = I18N.Write.impressionPlaceholder
         textView.textColor = .grey09
       } else {
-        self.impression = secondView.secondTextView.text
+        self.impression = thirdView.impressionTextView.text
       }
     default:
       return
@@ -312,12 +312,12 @@ extension WriteVC {
     nextButton.title = I18N.Button.next
     nextButton.isEnabled = true
     
-    [cheerLabel, describeLabel, firstView, secondView].forEach { $0.alpha = 0 }
+    [cheerLabel, describeLabel, secondView, thirdView].forEach { $0.alpha = 0 }
   }
   
   private func setLayout() {
     view.addSubviews([topBgView, cheerLabel, describeLabel,
-                      categoryView, firstView, secondView,
+                      firstView, secondView, thirdView,
                       progressBar, nextButton])
     
     cheerLabel.snp.makeConstraints { make in
@@ -347,12 +347,6 @@ extension WriteVC {
       make.height.equalTo(nextButton.snp.width).multipliedBy(0.156)
     }
     
-    categoryView.snp.makeConstraints { make in
-      make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-      make.top.equalTo(progressBar.snp.bottom)
-      make.bottom.equalTo(nextButton.snp.top)
-    }
-    
     firstView.snp.makeConstraints { make in
       make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
       make.top.equalTo(progressBar.snp.bottom)
@@ -360,6 +354,12 @@ extension WriteVC {
     }
     
     secondView.snp.makeConstraints { make in
+      make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+      make.top.equalTo(progressBar.snp.bottom)
+      make.bottom.equalTo(nextButton.snp.top)
+    }
+    
+    thirdView.snp.makeConstraints { make in
       make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
       make.top.equalTo(progressBar.snp.bottom)
       make.bottom.equalTo(nextButton.snp.top)
