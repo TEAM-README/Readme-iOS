@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxRelay
 import RxCocoa
+import SnapKit
 
 final class FeedListVC: UIViewController {
   // MARK: - Vars & Lets Part
@@ -36,12 +37,12 @@ final class FeedListVC: UIViewController {
 extension FeedListVC {
   private func bindCells() {
     FeedListContentTVC.register(target: feedListTV)
+    FeedListEmptyTVC.register(target: feedListTV)
   }
   
   private func configureTableView() {
     feedListTV.separatorStyle = .none
     feedListTV.backgroundColor = .clear
-//    feedListTV.allowsSelection = false
     feedListTV.showsVerticalScrollIndicator = false
   }
   
@@ -57,7 +58,7 @@ extension FeedListVC {
         self.isMyPage = isMyPage
         if isMyPage {
           MyPageHeaderTVC.register(target: self.feedListTV)
-          self.view.backgroundColor = .mainBlue
+          self.view.backgroundColor = .subBlue
         }else {
           FeedListCategoryTVC.register(target:
                                         self.feedListTV)
@@ -100,6 +101,14 @@ extension FeedListVC {
             contentCell.buttonDelegate = self
             return contentCell
 
+          case .empty:
+            let contentData = item.dataSource as! FeedListEmtpyViewData
+            guard let emptyCell = tableView.dequeueReusableCell(withIdentifier: FeedListEmptyTVC.className) as? FeedListEmptyTVC else { return UITableViewCell() }
+            emptyCell.isMyPage = contentData.isMyPage
+            emptyCell.backgroundColor = .clear
+            emptyCell.selectionStyle = .none
+            emptyCell.cellHeight = self.feedListTV.frame.height - 104
+            return emptyCell
         }
       }.disposed(by: self.disposeBag)
   }
@@ -110,11 +119,8 @@ extension FeedListVC {
         guard let self = self else { return }
         guard model.type == .content else { return }
         let selectedModel = model.dataSource as! FeedListContentViewModel
-        print("CLICK")
         self.postObserverAction(.moveFeedDetail, object: selectedModel.idx)
       }).disposed(by: self.disposeBag)
-    
-    
   }
 }
 

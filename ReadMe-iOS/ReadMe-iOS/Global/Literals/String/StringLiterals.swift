@@ -53,6 +53,8 @@ struct I18N {
     static let categoryNoSelectBold = "관심 있는 카테고리"
     static let categoryDescriptionNoselect = "선택해보세요"
     static let categoryDescription = "관심이 있어요"
+    static let emptyTopDescription = "관련 카테고리 글이 아직 없어요."
+    static let emptyBottomDescription = "다른 카테고리를 둘러보는 것은 어떨까요?"
   }
   
   struct MyPage {
@@ -60,6 +62,8 @@ struct I18N {
     static let count = "개"
     static let total = "총 "
     static let countDescription = "의 글이 있어요"
+    static let emptyTopDescription = "작성한 글이 없어요"
+    static let emptyBottomDescription = "아래 + 버튼을 눌러 글을 추가해 보세요"
   }
   
   struct Setting {
