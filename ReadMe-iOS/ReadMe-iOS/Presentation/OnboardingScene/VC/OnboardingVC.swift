@@ -159,12 +159,12 @@ private extension OnboardingVC {
                                                 animated: true)
       }else {
         self.moveLoginVC()
-        UserDefaults.standard.setValue(true, forKey: "onboardingComplete")
+        UserDefaults.setValue(true, forKey: UserDefaultKeyList.Onboarding.onboardingComplete)
       }
     }
     skipActionButton.press {
       self.moveLoginVC()
-      UserDefaults.standard.setValue(true, forKey: "onboardingComplete")
+      UserDefaults.setValue(true, forKey: UserDefaultKeyList.Onboarding.onboardingComplete)
     }
   }
 
