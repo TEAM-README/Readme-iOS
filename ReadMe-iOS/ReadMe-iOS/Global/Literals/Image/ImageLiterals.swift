@@ -37,4 +37,8 @@ struct ImageLiterals{
   struct Filter {
     static let reset = UIImage(named: "ic_reset")
   }
+  
+  struct NavigationBar {
+    static let close = UIImage(named: "ic_close")
+  }
 }
