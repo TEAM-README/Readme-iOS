@@ -12,9 +12,13 @@ class SplashVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     delayWithSeconds(1) {
-//      self.pushBaseView()
-      self.pushOnboardingView()
+      self.checkOnboardingState() ? self.pushOnboardingView() : self.pushBaseView()
     }
+  }
+  
+  private func checkOnboardingState() -> Bool {
+    guard let state = UserDefaults.standard.value(forKey: UserDefaultKeyList.Onboarding.onboardingComplete) as? Bool else { return false }
+    return state
   }
   
   private func pushLoginView() {
