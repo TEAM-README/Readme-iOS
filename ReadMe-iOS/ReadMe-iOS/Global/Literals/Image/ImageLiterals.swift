@@ -40,5 +40,6 @@ struct ImageLiterals{
   
   struct NavigationBar {
     static let close = UIImage(named: "ic_close")
+    static let back = UIImage(named: "ic_ back")
   }
 }

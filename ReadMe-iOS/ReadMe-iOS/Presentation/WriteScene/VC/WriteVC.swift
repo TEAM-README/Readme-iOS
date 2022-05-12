@@ -22,6 +22,8 @@ class WriteVC: UIViewController {
   
   // MARK: - Vars & Lets Part
   
+  private let naviBar = UIView()
+  private let backButton = UIButton()
   private let topBgView = UIView()
   private let cheerLabel = UILabel()
   private let describeLabel = UILabel()
@@ -297,6 +299,7 @@ extension WriteVC: UITextViewDelegate {
 
 extension WriteVC {
   private func configureUI() {
+    backButton.setImage(ImageLiterals.NavigationBar.back, for: .normal)
     topBgView.backgroundColor = .grey00
     
     progressBar.setPercentage(ratio: 0.0)
@@ -316,13 +319,26 @@ extension WriteVC {
   }
   
   private func setLayout() {
-    view.addSubviews([topBgView, cheerLabel, describeLabel,
-                      firstView, secondView, thirdView,
-                      progressBar, nextButton])
+    view.addSubviews([topBgView, naviBar, cheerLabel,
+                      describeLabel, firstView, secondView,
+                      thirdView, progressBar, nextButton])
+    
+    naviBar.addSubview(backButton)
+    
+    naviBar.snp.makeConstraints { make in
+      make.leading.trailing.equalToSuperview()
+      make.top.equalTo(view.safeAreaLayoutGuide)
+      make.height.equalTo(54)
+    }
+    
+    backButton.snp.makeConstraints { make in
+      make.leading.equalToSuperview().inset(20)
+      make.centerY.equalToSuperview()
+    }
     
     cheerLabel.snp.makeConstraints { make in
       make.leading.equalToSuperview().inset(28)
-      make.top.equalTo(view.safeAreaLayoutGuide).inset(20)
+      make.top.equalTo(naviBar.snp.bottom).offset(14)
     }
     
     describeLabel.snp.makeConstraints { make in
