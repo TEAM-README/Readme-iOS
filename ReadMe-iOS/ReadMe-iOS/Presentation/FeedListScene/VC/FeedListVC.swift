@@ -131,14 +131,8 @@ extension FeedListVC: FeedCategoryDelegate {
 extension FeedListVC: FeedListDelegate {
   func moreButtonTapped() {
     let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: self.isMyPage)
-    if self.isMyPage {
-      let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .oneAction)
-      bottomSheet.modalPresentationStyle = .overFullScreen
-      present(bottomSheet, animated: true)
-    } else {
-      let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .twoAction)
-      bottomSheet.modalPresentationStyle = .overFullScreen
-      present(bottomSheet, animated: true)
-    }
+    let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .actionSheet)
+    bottomSheet.modalPresentationStyle = .overFullScreen
+    present(bottomSheet, animated: true)
   }
 }
