@@ -12,9 +12,13 @@ class SplashVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     delayWithSeconds(1) {
-//      self.pushSignupView()
-      self.pushBaseView()
+      self.checkOnboardingState() ? self.pushOnboardingView() : self.pushBaseView()
     }
+  }
+  
+  private func checkOnboardingState() -> Bool {
+    guard let state = UserDefaults.standard.value(forKey: UserDefaultKeyList.Onboarding.onboardingComplete) as? Bool else { return false }
+    return state
   }
   
   private func pushLoginView() {
@@ -68,6 +72,11 @@ class SplashVC: UIViewController {
   private func pushWriteCompleteView() {
     let writeCompleteVC = ModuleFactory.shared.makeWriteCompleteVC()
     navigationController?.pushViewController(writeCompleteVC, animated: false)
+  }
+  
+  private func pushOnboardingView() {
+    let onboardingVC = ModuleFactory.shared.makeOnboardingVC()
+    navigationController?.pushViewController(onboardingVC, animated: false)
   }
   
   private func presentAlertVC() {

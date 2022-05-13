@@ -8,6 +8,10 @@
 import Foundation
 
 struct UserDefaultKeyList{
+  
+  struct Onboarding {
+    static let onboardingComplete = "onboardingComplete"
+  }
   struct Auth {
     static let provider = "loginProvider"
     static let userToken = "userToken"
