@@ -11,13 +11,17 @@ import MessageUI
 import RxSwift
 import RxRelay
 import RxCocoa
+import SnapKit
 
 final class FeedListVC: UIViewController {
   // MARK: - Vars & Lets Part
   
   private let disposeBag = DisposeBag()
+  private let refreshControl = UIRefreshControl()
   private var category = PublishSubject<[FeedCategory]>()
   private var isMyPage: Bool = false
+  private var cachedIndexList: Set<IndexPath> = []
+  private var isScrollAnimationRequired = true
   var viewModel: FeedListViewModel!
   
   // MARK: - UI Component Part
@@ -32,20 +36,41 @@ final class FeedListVC: UIViewController {
     self.configureTableView()
     self.bindViewModels()
     self.bindTableView()
+    self.configureRefreshControl()
     self.addObserver()
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    self.isScrollAnimationRequired = false
   }
 }
 
 extension FeedListVC {
   private func bindCells() {
     FeedListContentTVC.register(target: feedListTV)
+    FeedListEmptyTVC.register(target: feedListTV)
   }
   
   private func configureTableView() {
     feedListTV.separatorStyle = .none
     feedListTV.backgroundColor = .clear
-//    feedListTV.allowsSelection = false
     feedListTV.showsVerticalScrollIndicator = false
+    feedListTV.delegate = self
+  }
+  
+  private func configureRefreshControl() {
+    refreshControl.endRefreshing()
+    refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+    feedListTV.refreshControl = refreshControl
+  }
+  
+  @objc func refresh() {
+    delayWithSeconds(1.0) {
+      self.cachedIndexList.removeAll()
+      self.isScrollAnimationRequired = true
+      self.feedListTV.reloadData()
+      self.refreshControl.endRefreshing()
+    }
   }
   
   private func bindViewModels() {
@@ -60,7 +85,7 @@ extension FeedListVC {
         self.isMyPage = isMyPage
         if isMyPage {
           MyPageHeaderTVC.register(target: self.feedListTV)
-          self.view.backgroundColor = .mainBlue
+          self.view.backgroundColor = .subBlue
         }else {
           FeedListCategoryTVC.register(target:
                                         self.feedListTV)
@@ -103,6 +128,14 @@ extension FeedListVC {
             contentCell.buttonDelegate = self
             return contentCell
 
+          case .empty:
+            let contentData = item.dataSource as! FeedListEmtpyViewData
+            guard let emptyCell = tableView.dequeueReusableCell(withIdentifier: FeedListEmptyTVC.className) as? FeedListEmptyTVC else { return UITableViewCell() }
+            emptyCell.isMyPage = contentData.isMyPage
+            emptyCell.backgroundColor = .clear
+            emptyCell.selectionStyle = .none
+            emptyCell.cellHeight = self.feedListTV.frame.height - 104
+            return emptyCell
         }
       }.disposed(by: self.disposeBag)
   }
@@ -113,7 +146,6 @@ extension FeedListVC {
         guard let self = self else { return }
         guard model.type == .content else { return }
         let selectedModel = model.dataSource as! FeedListContentViewModel
-        print("CLICK")
         self.postObserverAction(.moveFeedDetail, object: selectedModel.idx)
       }).disposed(by: self.disposeBag)
   }
@@ -161,18 +193,30 @@ extension FeedListVC: FeedCategoryDelegate {
 extension FeedListVC: FeedListDelegate {
   func moreButtonTapped() {
     let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: self.isMyPage)
-    // FIXME: - 고치기
-    if self.isMyPage {
-      let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .oneAction)
-      bottomSheet.modalPresentationStyle = .overFullScreen
-      reportVC.buttonDelegate = bottomSheet
-      present(bottomSheet, animated: true)
-    } else {
-      let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .twoAction)
-      bottomSheet.modalPresentationStyle = .overFullScreen
-      reportVC.buttonDelegate = bottomSheet
-      present(bottomSheet, animated: true)
+    let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .actionSheet)
+    bottomSheet.modalPresentationStyle = .overFullScreen
+    present(bottomSheet, animated: true)
+  }
+}
+
+extension FeedListVC: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    
+    if let lastIndexPath = tableView.indexPathsForVisibleRows?.first{
+      guard lastIndexPath.row != 0 else {return}
+      guard isScrollAnimationRequired else { return }
+      print(lastIndexPath)
+      guard !cachedIndexList.contains(lastIndexPath) else {return}
+      cachedIndexList.insert(lastIndexPath)
+
+        if lastIndexPath.row <= indexPath.row{
+          cell.frame.origin.x = -cell.frame.width
+          UIView.animate(withDuration: 1.3, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.allowUserInteraction,.curveEaseOut], animations: {
+              cell.frame.origin.x = 0
+          }, completion: nil)
+        }
     }
+
   }
 }
 

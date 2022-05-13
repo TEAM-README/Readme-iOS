@@ -14,6 +14,7 @@ class WriteCheckVC: UIViewController {
   
   // MARK: - Vars & Lets Part
   
+  private lazy var naviBar = CustomNavigationBar(self).setDefaultBackButtonAction()
   private let titleLabel = UILabel()
   private let bgImageView = UIImageView()
   private let quoteTextView = UITextView()
@@ -54,6 +55,7 @@ class WriteCheckVC: UIViewController {
 // MARK: - Custom Method Part
 
 extension WriteCheckVC {
+  
   private func bindViewModels() {
     let input = WriteCheckViewModel.Input(
       registerButtonClicked: self.registerButton.rx.tap.map({ _ in
@@ -190,13 +192,18 @@ extension WriteCheckVC {
 
 extension WriteCheckVC {
   private func setLayout() {
-    view.addSubviews([titleLabel, bgImageView, quoteTextView,
+    view.addSubviews([titleLabel, bgImageView, naviBar, quoteTextView,
                      divideLineView, impressionTextView, usernameLabel,
                      dateLabel, bookCoverImageView, categoryLabel,
                       bookTitleLabel, bookAuthorLabel, registerButton])
     
+    naviBar.snp.makeConstraints { make in
+      make.leading.trailing.equalToSuperview()
+      make.top.equalTo(view.safeAreaLayoutGuide)
+    }
+    
     titleLabel.snp.makeConstraints { make in
-      make.top.equalTo(view.safeAreaLayoutGuide).inset(16)
+      make.top.equalTo(naviBar.snp.bottom).offset(10)
       make.centerX.equalToSuperview()
       make.height.equalTo(50)
     }

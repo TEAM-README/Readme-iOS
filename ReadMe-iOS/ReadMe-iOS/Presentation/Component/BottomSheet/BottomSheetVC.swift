@@ -13,8 +13,7 @@ final class BottomSheetVC: UIViewController {
   
   enum BottomSheetType {
     case filter
-    case oneAction
-    case twoAction
+    case actionSheet
   }
   
   // MARK: - Vars & Lets Part
@@ -101,9 +100,7 @@ extension BottomSheetVC {
     let bottomPadding: CGFloat = view.safeAreaInsets.bottom
     var topConstant = (safeAreaHeight + bottomPadding) - filterHeight
     
-    if bottomSheetType == .oneAction {
-      topConstant = (safeAreaHeight + bottomPadding - oneActinHeight)
-    } else if bottomSheetType == .twoAction {
+    if bottomSheetType == .actionSheet {
       topConstant = (safeAreaHeight + bottomPadding - twoActionHeight)
     }
     

@@ -41,7 +41,6 @@ extension WriteCompleteVC {
     
     moveButton.rx.tap
       .subscribe(onNext: {
-        print("📍 피드로 갑니다 슝")
         self.makeVibrate(degree: .light)
         self.dismiss(animated: true)
       })

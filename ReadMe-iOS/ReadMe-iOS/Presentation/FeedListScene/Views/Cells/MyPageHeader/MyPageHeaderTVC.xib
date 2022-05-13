@@ -51,7 +51,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" name="mainBlue"/>
+                <color key="backgroundColor" name="subBlue"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="Rpk-bx-I2o" secondAttribute="trailing" constant="28" id="3AN-8K-meG"/>
                     <constraint firstItem="Rpk-bx-I2o" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="4pt-5s-nX2"/>
@@ -75,8 +75,8 @@
     </objects>
     <resources>
         <image name="ic_settings" width="28" height="28"/>
-        <namedColor name="mainBlue">
-            <color red="0.47450980392156861" green="0.6470588235294118" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="subBlue">
+            <color red="0.95294117647058818" green="0.96862745098039216" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

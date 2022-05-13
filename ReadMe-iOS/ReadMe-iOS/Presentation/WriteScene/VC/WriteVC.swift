@@ -22,6 +22,7 @@ class WriteVC: UIViewController {
   
   // MARK: - Vars & Lets Part
   
+  private lazy var naviBar = CustomNavigationBar(self)
   private let topBgView = UIView()
   private let cheerLabel = UILabel()
   private let describeLabel = UILabel()
@@ -51,6 +52,7 @@ class WriteVC: UIViewController {
     
     setLayout()
     setDelegate()
+    setButtonActions()
     bindViewModels()
     configureUI()
     setFlow(self.flowType)
@@ -77,9 +79,35 @@ extension WriteVC {
     nextButton.rx.tap
       .subscribe(onNext: {
         self.makeVibrate(degree: .light)
+        switch self.flowType {
+        case .firstFlow:
+          self.flowType = .secondFlow
+        case .secondFlow:
+          self.flowType = .thirdFlow
+        case .thirdFlow:
+          self.flowType = .next
+        case .next:
+          self.flowType = .next
+        }
         self.setFlow(self.flowType)
       })
       .disposed(by: disposeBag)
+  }
+  
+  private func setButtonActions() {
+    naviBar.backButton.press {
+      switch self.flowType {
+      case .firstFlow:
+        self.navigationController?.popViewController(animated: true)
+      case .secondFlow:
+        self.flowType = .firstFlow
+      case .thirdFlow:
+        self.flowType = .secondFlow
+      case .next:
+        self.flowType = .thirdFlow
+      }
+      self.setFlow(self.flowType)
+    }
   }
   
   private func setDelegate() {
@@ -158,9 +186,7 @@ extension WriteVC {
         
         [self.firstView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 1 }
         
-      }, completion: { _ in
-        self.flowType = .secondFlow
-      })
+      }, completion: nil)
     })
   }
   
@@ -187,9 +213,7 @@ extension WriteVC {
         
         [self.secondView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 1 }
         
-      }, completion: { _ in
-        self.flowType = .thirdFlow
-      })
+      }, completion: nil)
     })
   }
   
@@ -213,9 +237,7 @@ extension WriteVC {
         
         self.setTopLabel(self.flowType)
         [self.thirdView, self.cheerLabel, self.describeLabel].forEach { $0.alpha = 1 }
-      }, completion: { _ in
-        self.flowType = .next
-      })
+      }, completion: nil)
     })
   }
   
@@ -316,13 +338,18 @@ extension WriteVC {
   }
   
   private func setLayout() {
-    view.addSubviews([topBgView, cheerLabel, describeLabel,
-                      firstView, secondView, thirdView,
-                      progressBar, nextButton])
+    view.addSubviews([topBgView, naviBar, cheerLabel,
+                      describeLabel, firstView, secondView,
+                      thirdView, progressBar, nextButton])
+    
+    naviBar.snp.makeConstraints { make in
+      make.leading.trailing.equalToSuperview()
+      make.top.equalTo(view.safeAreaLayoutGuide)
+    }
     
     cheerLabel.snp.makeConstraints { make in
       make.leading.equalToSuperview().inset(28)
-      make.top.equalTo(view.safeAreaLayoutGuide).inset(20)
+      make.top.equalTo(naviBar.snp.bottom).offset(14)
     }
     
     describeLabel.snp.makeConstraints { make in

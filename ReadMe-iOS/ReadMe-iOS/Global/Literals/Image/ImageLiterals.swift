@@ -19,6 +19,16 @@ struct ImageLiterals{
     static let mypageSelected = UIImage(named: "tab-mypage-clicked")!
   }
   
+  struct Onboarding {
+    static let onboardingImg1 = UIImage(named: "img_onboarding1")!
+    static let onboardingImg2 = UIImage(named: "img_onboarding2")!
+    static let onboardingImg3 = UIImage(named: "img_onboarding3")!
+    
+    static let dotImg1 = UIImage(named: "dots_1")!
+    static let dotImg2 = UIImage(named: "dots_2")!
+    static let dotImg3 = UIImage(named: "dots_3")!
+  }
+  
   struct Search {
     static let search = UIImage(named: "ic_ search")
   }
@@ -36,5 +46,10 @@ struct ImageLiterals{
   
   struct Filter {
     static let reset = UIImage(named: "ic_reset")
+  }
+  
+  struct NavigationBar {
+    static let close = UIImage(named: "ic_close")
+    static let back = UIImage(named: "ic_ back")
   }
 }

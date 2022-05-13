@@ -70,16 +70,23 @@ extension FeedListViewModel {
         FeedListDataModel(type: .content, dataSource: contentViewModel)
       }
       feedDatasource.append(contentsOf: feedList)
+      
+      if feedList.isEmpty {
+        feedDatasource.append(FeedListDataModel(type: .empty,
+                                                dataSource: FeedListEmtpyViewData(isMyPage: self.isMyPage)))
+      }
 
       if !self.isMyPage { // 마이페이지가 아니면 카테고리 정보를 불러와야 함.
         let category = FeedListDataModel(type: .category,
                                          dataSource: FeedCategoryViewModel(category: data.feedListData.category))
         feedDatasource.insert(category, at: 0)
-        output.feedList.accept(feedDatasource)
+          output.feedList.accept(feedDatasource)
+        
       } else {
         let userData = FeedListDataModel(type: .myPageHeader, dataSource: data.myPageData)
         feedDatasource.insert(userData, at: 0)
         output.feedList.accept(feedDatasource)
+        
       }
     }).disposed(by: self.disposeBag)
     
@@ -172,6 +179,7 @@ enum FeedListContentType {
   case myPageHeader
   case category
   case content
+  case empty
 }
 
 enum FeedListTextType {
@@ -182,4 +190,8 @@ enum FeedListTextType {
 struct FeedBundleData {
   let myPageData: MyPageModel
   let feedListData: FeedListModel
+}
+
+struct FeedListEmtpyViewData:FeedListDataSource {
+  let isMyPage: Bool
 }
