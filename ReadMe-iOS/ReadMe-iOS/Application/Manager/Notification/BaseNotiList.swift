@@ -13,6 +13,7 @@ enum BaseNotiList : String{
   case moveFeedDetail
   case moveSettingView
   case logout
+  case writeComplete
   
   static func makeNotiName(list : BaseNotiList) -> NSNotification.Name{
     return Notification.Name(String(describing: list))
