@@ -17,6 +17,7 @@ final class FeedListVC: UIViewController {
   private let disposeBag = DisposeBag()
   private let refreshControl = UIRefreshControl()
   private var category = PublishSubject<[FeedCategory]>()
+  private var isMyPage: Bool = false
   private var cachedIndexList: Set<IndexPath> = []
   private var isScrollAnimationRequired = true
   var viewModel: FeedListViewModel!
@@ -78,6 +79,7 @@ extension FeedListVC {
     output.isMyPageMode.asSignal()
       .emit(onNext: { [weak self] isMyPage in
         guard let self = self else { return }
+        self.isMyPage = isMyPage
         if isMyPage {
           MyPageHeaderTVC.register(target: self.feedListTV)
           self.view.backgroundColor = .subBlue
@@ -120,6 +122,7 @@ extension FeedListVC {
             guard let contentCell = tableView.dequeueReusableCell(withIdentifier: FeedListContentTVC.className) as? FeedListContentTVC else { return UITableViewCell() }
 
             contentCell.viewModel = contentData
+            contentCell.buttonDelegate = self
             return contentCell
 
           case .empty:
@@ -150,6 +153,15 @@ extension FeedListVC: FeedCategoryDelegate {
     let filterVC = ModuleFactory.shared.makeFilterVC()
     let bottomSheet = BottomSheetVC(contentViewController: filterVC)
     filterVC.buttonDelegate = bottomSheet
+    bottomSheet.modalPresentationStyle = .overFullScreen
+    present(bottomSheet, animated: true)
+  }
+}
+
+extension FeedListVC: FeedListDelegate {
+  func moreButtonTapped() {
+    let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: self.isMyPage)
+    let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .actionSheet)
     bottomSheet.modalPresentationStyle = .overFullScreen
     present(bottomSheet, animated: true)
   }

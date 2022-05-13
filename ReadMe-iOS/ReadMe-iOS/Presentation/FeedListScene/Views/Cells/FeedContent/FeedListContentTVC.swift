@@ -20,6 +20,7 @@ struct FeedListContentViewModel: FeedListDataSource {
 
 final class FeedListContentTVC: UITableViewCell, UITableViewRegisterable {
   static var isFromNib: Bool = true
+  var buttonDelegate: FeedListDelegate?
   var viewModel: FeedListContentViewModel? { didSet { bindViewModel() }}
   
   @IBOutlet weak var categoryLabel: UILabel!
@@ -35,6 +36,11 @@ final class FeedListContentTVC: UITableViewCell, UITableViewRegisterable {
   override func awakeFromNib() {
     super.awakeFromNib()
     self.configureUI()
+  }
+    
+  @IBAction func tapMoreButton(_ sender: Any) {
+    self.makeVibrate(degree: .light)
+    self.buttonDelegate?.moreButtonTapped()
   }
 }
 

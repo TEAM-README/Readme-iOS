@@ -16,6 +16,7 @@ enum Storyboards: String {
   case home = "Home"
   case feedDetail = "FeedDetail"
   case feedList = "FeedList"
+  case feedReport = "FeedReport"
   case mypage = "MyPage"
   case search = "Search"
   case write = "Write"

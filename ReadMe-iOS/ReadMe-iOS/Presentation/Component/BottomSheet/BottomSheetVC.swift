@@ -13,7 +13,7 @@ final class BottomSheetVC: UIViewController {
   
   enum BottomSheetType {
     case filter
-    case actionsheet
+    case actionSheet
   }
   
   // MARK: - Vars & Lets Part
@@ -22,12 +22,15 @@ final class BottomSheetVC: UIViewController {
   private let dimmerView = UIView()
   private let bottomSheetView = UIView()
   private var bottomSheetViewTopConstraint: NSLayoutConstraint!
-  private var defaultHeight: CGFloat = UIScreen.main.bounds.width * 532 / 390
-  private var actionSheetHeight: CGFloat = UIScreen.main.bounds.width * 172 / 390
+  private var filterHeight: CGFloat = UIScreen.main.bounds.width * 532 / 390
+  private var oneActinHeight: CGFloat = UIScreen.main.bounds.width * 124 / 390
+  private var twoActionHeight: CGFloat = UIScreen.main.bounds.width * 172 / 390
+  private var bottomSheetType: BottomSheetType = .filter
   
   // MARK: - Initialize
-  init(contentViewController: UIViewController) {
+  init(contentViewController: UIViewController, type: BottomSheetType = .filter) {
     self.contentVC = contentViewController
+    self.bottomSheetType = type
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -92,13 +95,13 @@ extension BottomSheetVC {
 extension BottomSheetVC {
   // MARK: - Custom Method
   
-  private func showBottomSheet(type: BottomSheetType = .filter) {
+  private func showBottomSheet() {
     let safeAreaHeight: CGFloat = view.safeAreaLayoutGuide.layoutFrame.height
     let bottomPadding: CGFloat = view.safeAreaInsets.bottom
-    var topConstant = (safeAreaHeight + bottomPadding) - defaultHeight
+    var topConstant = (safeAreaHeight + bottomPadding) - filterHeight
     
-    if type != .filter {
-      topConstant = (safeAreaHeight + bottomPadding - actionSheetHeight)
+    if bottomSheetType == .actionSheet {
+      topConstant = (safeAreaHeight + bottomPadding - twoActionHeight)
     }
     
     bottomSheetView.snp.updateConstraints { make in
