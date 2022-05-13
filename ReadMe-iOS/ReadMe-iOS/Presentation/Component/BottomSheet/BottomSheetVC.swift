@@ -47,10 +47,13 @@ final class BottomSheetVC: UIViewController {
     setLayout()
     setTapGesture()
   }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    showBottomSheet()
+  }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    showBottomSheet()
   }
 }
 
@@ -60,6 +63,8 @@ extension BottomSheetVC {
     self.view.backgroundColor = .clear
     dimmerView.backgroundColor = .black.withAlphaComponent(0.6)
     dimmerView.alpha = 0
+    self.dimmerView.alpha = 0.6
+
     
     addChild(contentVC) // contentVC를 BottomSheetVC의 자식으로 설정
     bottomSheetView.addSubview(contentVC.view) // contentVC의 view가 맨 앞에 등장하도록
@@ -73,19 +78,20 @@ extension BottomSheetVC {
   
   private func setLayout() {
     view.addSubviews([dimmerView, bottomSheetView])
-    
+
     dimmerView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
-    
+
     let topConstant = view.safeAreaInsets.bottom + view.safeAreaLayoutGuide.layoutFrame.height
-    
+
     bottomSheetView.snp.makeConstraints { make in
       make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
       make.bottom.equalToSuperview()
       make.top.equalTo(view.safeAreaLayoutGuide).inset(topConstant)
     }
-    
+    self.view.layoutIfNeeded()
+
     contentVC.view.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
@@ -98,7 +104,7 @@ extension BottomSheetVC {
   private func showBottomSheet() {
     let safeAreaHeight: CGFloat = view.safeAreaLayoutGuide.layoutFrame.height
     let bottomPadding: CGFloat = view.safeAreaInsets.bottom
-    var topConstant = (safeAreaHeight + bottomPadding) - filterHeight
+    var topConstant = (safeAreaHeight + bottomPadding) - ( filterHeight + 18 )
     
     if bottomSheetType == .actionSheet {
       topConstant = (safeAreaHeight + bottomPadding - twoActionHeight)
@@ -112,7 +118,7 @@ extension BottomSheetVC {
                    delay: 0,
                    options: .curveEaseIn,
                    animations: {
-      self.dimmerView.alpha = 0.6
+//      self.dimmerView.alpha = 0.6
       self.view.layoutIfNeeded()
     }, completion: nil)
   }
