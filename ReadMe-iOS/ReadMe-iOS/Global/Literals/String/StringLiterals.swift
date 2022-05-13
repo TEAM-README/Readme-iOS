@@ -130,8 +130,4 @@ struct I18N {
     static let cancel = "취소"
     static let ok = "확인"
   }
-  
-  struct NavigationBar {
-    static let search = "책 선택하기"
-  }
 }

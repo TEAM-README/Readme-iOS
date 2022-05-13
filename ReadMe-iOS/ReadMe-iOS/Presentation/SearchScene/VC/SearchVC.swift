@@ -15,9 +15,7 @@ class SearchVC: UIViewController {
   
   // MARK: - Vars & Lets Part
   private let disposeBag = DisposeBag()
-  private let naviBar = UIView()
-  private let closeButton = UIButton()
-  private let titleLabel = UILabel()
+  // 네비바 들어올 자리
   private let searchTextField = UITextField()
   private let searchButton = UIButton()
   private let beforeSearchEmptyLabel = UILabel()
@@ -39,7 +37,7 @@ class SearchVC: UIViewController {
     self.setCollectionView()
     self.setRegister()
     self.bindViewModels()
-    self.setButtonActions()
+    self.tapSearchButton()
   }
 }
 
@@ -47,14 +45,6 @@ class SearchVC: UIViewController {
 
 extension SearchVC {
   private func configureUI() {
-    navigationController?.navigationBar.isHidden = true
-    
-    closeButton.setImage(ImageLiterals.NavigationBar.close, for: .normal)
-    
-    titleLabel.text = I18N.NavigationBar.search
-    titleLabel.textColor = .black
-    titleLabel.font = .readMeFont(size: 16, type: .semiBold)
-    
     searchTextField.placeholder = I18N.Search.textfieldPlaceholder
     searchTextField.font = UIFont.readMeFont(size: 15)
     searchTextField.addLeftPadding(width: 22)
@@ -75,30 +65,13 @@ extension SearchVC {
   }
   
   private func setLayout() {
-    view.addSubviews([naviBar, searchTextField, bookCV])
-    
-    naviBar.addSubviews([closeButton, titleLabel])
-    
-    naviBar.snp.makeConstraints { make in
-      make.leading.trailing.equalToSuperview()
-      make.top.equalTo(view.safeAreaLayoutGuide)
-      make.height.equalTo(48)
-    }
-    
-    closeButton.snp.makeConstraints { make in
-      make.leading.equalToSuperview().inset(14)
-      make.centerY.equalToSuperview()
-    }
-    
-    titleLabel.snp.makeConstraints { make in
-      make.center.equalToSuperview()
-    }
+    view.addSubviews([searchTextField, bookCV])
     
     searchTextField.addSubview(searchButton)
     
     searchTextField.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview().inset(22)
-      make.top.equalTo(naviBar.snp.bottom).offset(15)
+      make.top.equalTo(view.safeAreaLayoutGuide).inset(15)
       make.height.equalTo(44)
     }
     
@@ -134,7 +107,7 @@ extension SearchVC {
     .disposed(by: disposeBag)
   }
   
-  private func setButtonActions() {
+  private func tapSearchButton() {
     searchButton.rx.tap
       .subscribe(onNext: {
         // TODO: - 서버 통신
@@ -146,10 +119,6 @@ extension SearchVC {
         self.bookCV.reloadData()
       })
       .disposed(by: disposeBag)
-    
-    closeButton.press {
-      self.dismiss(animated: true)
-    }
   }
   
   private func setCollectionView() {
