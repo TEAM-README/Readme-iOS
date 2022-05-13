@@ -194,6 +194,7 @@ extension FeedListVC: FeedListDelegate {
   func moreButtonTapped() {
     let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: self.isMyPage)
     let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .actionSheet)
+    reportVC.buttonDelegate = bottomSheet
     bottomSheet.modalPresentationStyle = .overFullScreen
     present(bottomSheet, animated: true)
   }

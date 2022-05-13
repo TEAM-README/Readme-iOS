@@ -16,8 +16,7 @@ final class FeedReportViewModel: ViewModelType {
   
   // MARK: - Inputs
   struct Input {
-    let reportButtonClicked: Observable<Void>
-    let deleteBUttonClickd: Observable<Void>
+    let actionButtonClicked: Observable<Void>
   }
   
   // MARK: - Outputs
@@ -36,18 +35,14 @@ extension FeedReportViewModel {
   func transform(from input: Input, disposeBag: DisposeBag) -> Output {
     let output = Output()
     self.bindOutput(output: output, disposeBag: disposeBag)
-    // input,output 상관관계 작성
     
-    // TODO: - 수정해야됨
-    input.reportButtonClicked
+    input.actionButtonClicked
       .subscribe(onNext: { button in
-        output.reportRequestSuccess.accept(button)
-      })
-      .disposed(by: self.disposeBag)
-    
-    input.deleteBUttonClickd
-      .subscribe(onNext: { button in
-        output.deleteRequestSuccess.accept(button)
+        if self.isMyPage {
+          output.deleteRequestSuccess.accept(button)
+        } else {
+          output.reportRequestSuccess.accept(button)
+        }
       })
       .disposed(by: self.disposeBag)
     
