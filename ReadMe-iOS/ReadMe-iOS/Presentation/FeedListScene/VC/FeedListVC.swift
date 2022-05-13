@@ -30,11 +30,17 @@ final class FeedListVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.feedListTV.alpha = 0
     self.bindCells()
     self.configureTableView()
     self.bindViewModels()
     self.bindTableView()
     self.configureRefreshControl()
+  }
+  override func viewWillAppear(_ animated: Bool) {
+    UIView.animate(withDuration: 0.5, delay: 0) {
+      self.feedListTV.alpha = 1
+    }
   }
   
   override func viewDidDisappear(_ animated: Bool) {
