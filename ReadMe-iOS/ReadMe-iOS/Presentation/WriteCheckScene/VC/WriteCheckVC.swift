@@ -14,8 +14,7 @@ class WriteCheckVC: UIViewController {
   
   // MARK: - Vars & Lets Part
   
-  private let naviBar = UIView()
-  private let backButton = UIButton()
+  private lazy var naviBar = CustomNavigationBar(self).setDefaultBackButtonAction()
   private let titleLabel = UILabel()
   private let bgImageView = UIImageView()
   private let quoteTextView = UITextView()
@@ -46,7 +45,6 @@ class WriteCheckVC: UIViewController {
     self.setLayout()
     self.bindViewModels()
     self.setPreviousData()
-    self.setButtonActions()
   }
   
   open override func didMove(toParent parent: UIViewController?) {
@@ -57,11 +55,6 @@ class WriteCheckVC: UIViewController {
 // MARK: - Custom Method Part
 
 extension WriteCheckVC {
-  private func setButtonActions() {
-    backButton.press {
-      self.navigationController?.popViewController(animated: true)
-    }
-  }
   
   private func bindViewModels() {
     let input = WriteCheckViewModel.Input(
@@ -130,8 +123,6 @@ extension WriteCheckVC {
 extension WriteCheckVC {
   private func configureUI() {
     view.backgroundColor = .grey00
-    
-    backButton.setImage(ImageLiterals.NavigationBar.back, for: .normal)
     
     titleLabel.text = I18N.WriteCheck.titleThrough + username +  I18N.WriteCheck.titleDay
     titleLabel.numberOfLines = 2
@@ -206,17 +197,9 @@ extension WriteCheckVC {
                      dateLabel, bookCoverImageView, categoryLabel,
                       bookTitleLabel, bookAuthorLabel, registerButton])
     
-    naviBar.addSubview(backButton)
-    
     naviBar.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview()
       make.top.equalTo(view.safeAreaLayoutGuide)
-      make.height.equalTo(54)
-    }
-    
-    backButton.snp.makeConstraints { make in
-      make.leading.equalToSuperview().inset(20)
-      make.centerY.equalToSuperview()
     }
     
     titleLabel.snp.makeConstraints { make in
