@@ -17,8 +17,6 @@ final class WriteCompleteVC: UIViewController {
   var viewModel: WriteCompleteViewModel!
   
   // MARK: - UI Component Part
-  private let naviBar = UIView()
-  private let backButton = UIButton()
   private let checkImageView = UIImageView()
   private let titleLabel = UILabel()
   private let subtitleLabel = UILabel()
@@ -30,19 +28,12 @@ final class WriteCompleteVC: UIViewController {
     self.configureUI()
     self.setLayout()
     self.bindViewModels()
-    self.setButtonActions()
   }
 }
 
 extension WriteCompleteVC {
   
   // MARK: - Custom Method Part
-  
-  private func setButtonActions() {
-    backButton.press {
-      self.navigationController?.popViewController(animated: true)
-    }
-  }
   
   private func bindViewModels() {
     let input = WriteCompleteViewModel.Input()
@@ -61,8 +52,6 @@ extension WriteCompleteVC {
 
 extension WriteCompleteVC {
   private func configureUI() {
-    backButton.setImage(ImageLiterals.NavigationBar.back, for: .normal)
-    
     checkImageView.image = ImageLiterals.WriteComplete.check
     
     titleLabel.text = I18N.WriteComplete.title
@@ -90,21 +79,7 @@ extension WriteCompleteVC {
 
 extension WriteCompleteVC {
   private func setLayout() {
-    view.addSubviews([naviBar, checkImageView, titleLabel,
-                      subtitleLabel, moveButton])
-    
-    naviBar.addSubview(backButton)
-    
-    naviBar.snp.makeConstraints { make in
-      make.leading.trailing.equalToSuperview()
-      make.top.equalTo(view.safeAreaLayoutGuide)
-      make.height.equalTo(54)
-    }
-    
-    backButton.snp.makeConstraints { make in
-      make.leading.equalToSuperview().inset(20)
-      make.centerY.equalToSuperview()
-    }
+    view.addSubviews([checkImageView, titleLabel, subtitleLabel, moveButton])
     
     checkImageView.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide).inset(UIScreen.main.bounds.height * 0.32)

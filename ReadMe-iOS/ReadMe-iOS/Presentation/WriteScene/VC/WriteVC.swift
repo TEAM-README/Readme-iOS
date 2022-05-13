@@ -22,8 +22,7 @@ class WriteVC: UIViewController {
   
   // MARK: - Vars & Lets Part
   
-  private let naviBar = UIView()
-  private let backButton = UIButton()
+  private lazy var naviBar = CustomNavigationBar(self)
   private let topBgView = UIView()
   private let cheerLabel = UILabel()
   private let describeLabel = UILabel()
@@ -96,7 +95,7 @@ extension WriteVC {
   }
   
   private func setButtonActions() {
-    backButton.press {
+    naviBar.backButton.press {
       switch self.flowType {
       case .firstFlow:
         self.navigationController?.popViewController(animated: true)
@@ -320,7 +319,6 @@ extension WriteVC: UITextViewDelegate {
 
 extension WriteVC {
   private func configureUI() {
-    backButton.setImage(ImageLiterals.NavigationBar.back, for: .normal)
     topBgView.backgroundColor = .grey00
     
     progressBar.setPercentage(ratio: 0.0)
@@ -344,17 +342,9 @@ extension WriteVC {
                       describeLabel, firstView, secondView,
                       thirdView, progressBar, nextButton])
     
-    naviBar.addSubview(backButton)
-    
     naviBar.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview()
       make.top.equalTo(view.safeAreaLayoutGuide)
-      make.height.equalTo(54)
-    }
-    
-    backButton.snp.makeConstraints { make in
-      make.leading.equalToSuperview().inset(20)
-      make.centerY.equalToSuperview()
     }
     
     cheerLabel.snp.makeConstraints { make in
