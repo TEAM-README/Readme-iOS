@@ -117,6 +117,7 @@ extension FeedListVC {
             categoryCell.viewModel = categoryData
             categoryCell.buttonDelegate = self
             return categoryCell
+            
           case .content :
             let contentData = item.dataSource as! FeedListContentViewModel
             guard let contentCell = tableView.dequeueReusableCell(withIdentifier: FeedListContentTVC.className) as? FeedListContentTVC else { return UITableViewCell() }
@@ -141,6 +142,7 @@ extension FeedListVC {
     feedListTV.rx.modelAndIndexSelected(FeedListDataModel.self)
       .subscribe(onNext: { [weak self] (model,index) in
         guard let self = self else { return }
+        if model.type == .category { self.categoryButtonTapped() }
         guard model.type == .content else { return }
         let selectedModel = model.dataSource as! FeedListContentViewModel
         self.postObserverAction(.moveFeedDetail, object: selectedModel.idx)
@@ -154,6 +156,7 @@ extension FeedListVC: FeedCategoryDelegate {
     let bottomSheet = BottomSheetVC(contentViewController: filterVC)
     filterVC.buttonDelegate = bottomSheet
     bottomSheet.modalPresentationStyle = .overFullScreen
+    bottomSheet.modalTransitionStyle = .crossDissolve
     present(bottomSheet, animated: true)
   }
 }
@@ -163,6 +166,7 @@ extension FeedListVC: FeedListDelegate {
     let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: self.isMyPage)
     let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .actionSheet)
     bottomSheet.modalPresentationStyle = .overFullScreen
+    bottomSheet.modalTransitionStyle = .crossDissolve
     present(bottomSheet, animated: true)
   }
 }
@@ -173,7 +177,6 @@ extension FeedListVC: UITableViewDelegate {
     if let lastIndexPath = tableView.indexPathsForVisibleRows?.first{
       guard lastIndexPath.row != 0 else {return}
       guard isScrollAnimationRequired else { return }
-      print(lastIndexPath)
       guard !cachedIndexList.contains(lastIndexPath) else {return}
       cachedIndexList.insert(lastIndexPath)
 
