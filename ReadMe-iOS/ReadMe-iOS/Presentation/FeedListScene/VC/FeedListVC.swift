@@ -15,6 +15,7 @@ final class FeedListVC: UIViewController {
   // MARK: - Vars & Lets Part
   
   private let disposeBag = DisposeBag()
+  private let refreshControl = UIRefreshControl()
   private var category = PublishSubject<[FeedCategory]>()
   private var cachedIndexList: Set<IndexPath> = []
   private var isScrollAnimationRequired = true
@@ -32,6 +33,7 @@ final class FeedListVC: UIViewController {
     self.configureTableView()
     self.bindViewModels()
     self.bindTableView()
+    self.configureRefreshControl()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -50,6 +52,21 @@ extension FeedListVC {
     feedListTV.backgroundColor = .clear
     feedListTV.showsVerticalScrollIndicator = false
     feedListTV.delegate = self
+  }
+  
+  private func configureRefreshControl() {
+    refreshControl.endRefreshing()
+    refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+    feedListTV.refreshControl = refreshControl
+  }
+  
+  @objc func refresh() {
+    delayWithSeconds(1.0) {
+      self.cachedIndexList.removeAll()
+      self.isScrollAnimationRequired = true
+      self.feedListTV.reloadData()
+      self.refreshControl.endRefreshing()
+    }
   }
   
   private func bindViewModels() {
@@ -141,10 +158,13 @@ extension FeedListVC: FeedCategoryDelegate {
 extension FeedListVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     
-    if let lastIndexPath = tableView.indexPathsForVisibleRows?.last{
+    if let lastIndexPath = tableView.indexPathsForVisibleRows?.first{
+      guard lastIndexPath.row != 0 else {return}
       guard isScrollAnimationRequired else { return }
       print(lastIndexPath)
       guard !cachedIndexList.contains(lastIndexPath) else {return}
+      cachedIndexList.insert(lastIndexPath)
+
         if lastIndexPath.row <= indexPath.row{
           cell.frame.origin.x = -cell.frame.width
           UIView.animate(withDuration: 1.3, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.allowUserInteraction,.curveEaseOut], animations: {
