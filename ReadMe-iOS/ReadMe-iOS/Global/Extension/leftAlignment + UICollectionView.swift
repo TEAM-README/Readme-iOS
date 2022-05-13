@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
+final class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
   override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
     let attributes = super.layoutAttributesForElements(in: rect)
     

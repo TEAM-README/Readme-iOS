@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class BottomSheetVC: UIViewController {
+final class BottomSheetVC: UIViewController {
   
   enum BottomSheetType {
     case filter

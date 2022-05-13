@@ -11,7 +11,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class WriteCategoryFlow: UIView {
+final class WriteCategoryFlow: UIView {
   
   // MARK: - Vars & Lets Part
   private let categoryTitleLabel = UILabel()
