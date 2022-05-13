@@ -15,6 +15,7 @@ class FeedReportVC: UIViewController {
   
   // MARK: - Vars & Lets Part
   private let disposeBag = DisposeBag()
+  var buttonDelegate: BottomSheetDelegate?
   var viewModel: FeedReportViewModel!
   
   // MARK: - UI Component Part
@@ -75,16 +76,19 @@ extension FeedReportVC {
   
   // MARK: - Custom Method Part
   private func bindViewModels() {
-    reportButton.rx.tap
-      .subscribe(onNext: {
-        print("👅 report")
-      })
-      .disposed(by: disposeBag)
+    let input = FeedReportViewModel.Input(reportButtonClicked: reportButton.rx.tap.asObservable(), deleteBUttonClickd: deleteButton.rx.tap.asObservable())
+    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
     
-    deleteButton.rx.tap
-      .subscribe(onNext: {
-        print("👧 delete")
+    output.reportRequestSuccess.subscribe(onNext: { [weak self] _ in
+      self?.buttonDelegate?.dismissButtonTapped(completion: {
+        self?.postObserverAction(.report)
       })
-      .disposed(by: disposeBag)
+    })
+    .disposed(by: self.disposeBag)
+    
+    output.deleteRequestSuccess.subscribe(onNext: { [weak self] _ in
+      self?.buttonDelegate?.dismissButtonTapped(completion: nil)
+    })
+    .disposed(by: self.disposeBag)
   }
 }

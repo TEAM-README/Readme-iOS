@@ -16,12 +16,14 @@ final class FeedReportViewModel: ViewModelType {
   
   // MARK: - Inputs
   struct Input {
-    
+    let reportButtonClicked: Observable<Void>
+    let deleteBUttonClickd: Observable<Void>
   }
   
   // MARK: - Outputs
   struct Output {
-    
+    let reportRequestSuccess = PublishRelay<Void>()
+    let deleteRequestSuccess = PublishRelay<Void>()
   }
   
   init(useCase: FeedReportUseCase, isMyPage: Bool) {
@@ -35,6 +37,19 @@ extension FeedReportViewModel {
     let output = Output()
     self.bindOutput(output: output, disposeBag: disposeBag)
     // input,output 상관관계 작성
+    
+    // TODO: - 수정해야됨
+    input.reportButtonClicked
+      .subscribe(onNext: { button in
+        output.reportRequestSuccess.accept(button)
+      })
+      .disposed(by: self.disposeBag)
+    
+    input.deleteBUttonClickd
+      .subscribe(onNext: { button in
+        output.deleteRequestSuccess.accept(button)
+      })
+      .disposed(by: self.disposeBag)
     
     return output
   }

@@ -126,7 +126,7 @@ extension BottomSheetVC {
     dimmerView.isUserInteractionEnabled = true
   }
   
-  private func hideBottomSheetAndGoBack() {
+  private func hideBottomSheetAndGoBack(completion: (() -> Void)? = nil) {
     let safeAreaHeight = view.safeAreaLayoutGuide.layoutFrame.height
     let bottomPadding = view.safeAreaInsets.bottom
     let topConstant = safeAreaHeight + bottomPadding
@@ -142,7 +142,7 @@ extension BottomSheetVC {
       self.view.layoutIfNeeded()
     }) { _ in
       if self.presentingViewController != nil {
-        self.dismiss(animated: true)
+        self.dismiss(animated: true, completion: completion)
       }
     }
   }
@@ -156,7 +156,7 @@ extension BottomSheetVC {
 }
 
 extension BottomSheetVC: BottomSheetDelegate {
-  func dismissButtonTapped() {
-    hideBottomSheetAndGoBack()
+  func dismissButtonTapped(completion: (() -> Void)? = nil) {
+    hideBottomSheetAndGoBack(completion: completion)
   }
 }

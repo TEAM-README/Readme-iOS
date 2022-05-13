@@ -6,6 +6,8 @@
 //
 
 import UIKit
+
+import MessageUI
 import RxSwift
 import RxRelay
 import RxCocoa
@@ -30,6 +32,7 @@ final class FeedListVC: UIViewController {
     self.configureTableView()
     self.bindViewModels()
     self.bindTableView()
+    self.addObserver()
   }
 }
 
@@ -113,8 +116,35 @@ extension FeedListVC {
         print("CLICK")
         self.postObserverAction(.moveFeedDetail, object: selectedModel.idx)
       }).disposed(by: self.disposeBag)
-    
-    
+  }
+  
+  private func addObserver() {
+    addObserverAction(.report) { _ in
+      if MFMailComposeViewController.canSendMail() {
+        let mailComposeVC = MFMailComposeViewController()
+        mailComposeVC.mailComposeDelegate = self
+
+        mailComposeVC.setToRecipients(["Readme.team.sopterm@gmail.com"])
+        mailComposeVC.setSubject("리드미 유저 신고")
+        mailComposeVC.setMessageBody("""
+
+        1. 신고 유형 사유 (상업적 광고 및 판매, 음란물/불건전한 대화, 욕설 및 비하, 도배, 부적절한 프로필 이미지, 기타 사유) :
+        2. 신고할 유저 닉네임 :
+
+        신고하신 사항은 리드미팀이 신속하게 처리하겠습니다.
+        감사합니다:)
+        """,
+                                     isHTML: false)
+
+        self.present(mailComposeVC, animated: true, completion: nil)
+      } else {
+        // 메일이 계정과 연동되지 않은 경우.
+        let mailErrorAlert = UIAlertController(title: "메일 전송 실패", message: "이메일 설정을 확인하고 다시 시도해주세요.", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in }
+        mailErrorAlert.addAction(confirmAction)
+        self.present(mailErrorAlert, animated: true, completion: nil)
+      }
+    }
   }
 }
 
@@ -131,14 +161,36 @@ extension FeedListVC: FeedCategoryDelegate {
 extension FeedListVC: FeedListDelegate {
   func moreButtonTapped() {
     let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: self.isMyPage)
+    // FIXME: - 고치기
     if self.isMyPage {
       let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .oneAction)
       bottomSheet.modalPresentationStyle = .overFullScreen
+      reportVC.buttonDelegate = bottomSheet
       present(bottomSheet, animated: true)
     } else {
       let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .twoAction)
       bottomSheet.modalPresentationStyle = .overFullScreen
+      reportVC.buttonDelegate = bottomSheet
       present(bottomSheet, animated: true)
     }
   }
+}
+
+extension FeedListVC: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+        case .cancelled:
+            controller.dismiss(animated: true) { print("mailComposeController - cancelled.")}
+        case .saved:
+            controller.dismiss(animated: true) { print("mailComposeController - saved.")}
+        case .sent:
+            controller.dismiss(animated: true) {
+                print("📍 mailComposeController - sent.")
+            }
+        case .failed:
+            controller.dismiss(animated: true) { print("mailComposeController - filed.")}
+        @unknown default:
+            return
+        }
+    }
 }
