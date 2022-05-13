@@ -8,6 +8,7 @@
 import Foundation
 
 protocol ModuleFactoryProtocol {
+  func makeOnboardingVC() -> OnboardingVC
   func makeLoginVC() -> LoginVC
   func makeSignupVC() -> SignupVC
   func makeBaseVC() -> BaseVC
@@ -24,6 +25,11 @@ protocol ModuleFactoryProtocol {
 final class ModuleFactory: ModuleFactoryProtocol{
   static let shared = ModuleFactory()
   private init() { }
+  
+  func makeOnboardingVC() -> OnboardingVC {
+    let onboardingVC = OnboardingVC.controllerFromStoryboard(.onboarding)
+    return onboardingVC
+  }
   
   func makeLoginVC() -> LoginVC {
     let repository = DefaultLoginRepository(service: BaseService.default)

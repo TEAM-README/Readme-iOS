@@ -46,25 +46,30 @@ extension SettingVC {
     agreementLabel.text = I18N.Setting.agreement
     agreementLabel.textColor = .grey04
     
-    logoutLabel.text = I18N.Setting.logout
+    logoutLabel.text = ""
     logoutLabel.textColor = .logoutRed
   }
   
   private func setButtonActions() {
     contactButton.press {
-      print("Contact")
+      self.openExternalLink(url: "https://flaxen-warlock-70e.notion.site/8dd759bd71d94caf82f52f177428060d")
     }
     
     agreementButton.press {
-      print("Agreement")
+      self.openExternalLink(url: "https://flaxen-warlock-70e.notion.site/c66b80b220814a94a699d83def211904")
     }
     
     logoutButton.press {
-      self.postObserverAction(.logout)
+//      self.postObserverAction(.logout)
     }
     
     backButton.press {
       self.navigationController?.popViewController(animated: true)
     }
+  }
+  
+  private func openExternalLink(url: String) {
+    guard let url = URL(string: url) else {return}
+    UIApplication.shared.open(url, options: [:])
   }
 }
