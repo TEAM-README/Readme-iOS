@@ -90,6 +90,7 @@ extension FilterVC {
   private func setCollectionView() {
     categoryCV.delegate = self
     categoryCV.backgroundColor = .clear
+    categoryCV.isScrollEnabled = false
     
     CategoryCVC.register(target: categoryCV)
   }

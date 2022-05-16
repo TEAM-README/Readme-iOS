@@ -22,7 +22,7 @@ final class BottomSheetVC: UIViewController {
   private let dimmerView = UIView()
   private let bottomSheetView = UIView()
   private var bottomSheetViewTopConstraint: NSLayoutConstraint!
-  private var filterHeight: CGFloat = UIScreen.main.bounds.width * 532 / 390
+  private var filterHeight: CGFloat = 532
   private var actionHeight: CGFloat = UIScreen.main.bounds.width * 172 / 390
   private var bottomSheetType: BottomSheetType = .filter
   
