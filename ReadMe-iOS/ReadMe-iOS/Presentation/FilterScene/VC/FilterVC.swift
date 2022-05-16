@@ -95,8 +95,6 @@ extension FilterVC {
   }
   
   private func bindCollectionView() {
-//    let items = Observable.of(Category.allCases)
-    
     let section = [
       CategorySectionModel(items: [Category.novel, Category.essay, Category.human]),
       CategorySectionModel(items: [Category.health, Category.social, Category.hobby]),
@@ -109,18 +107,6 @@ extension FilterVC {
     Observable.just(section)
       .bind(to: categoryCV.rx.items(dataSource: dataSource))
       .disposed(by: self.disposeBag)
-    
-//    items.asObservable()
-//      .bind(to: categoryCV.rx.items(cellIdentifier: CategoryCVC.className, cellType: CategoryCVC.self)) { index, item, cell in
-//        cell.categoryLabel.text = Category.allCases[index].rawValue
-//
-//        if self.selectedCategory.contains(item) {
-//          cell.changeState(isSelected: true)
-//        } else {
-//          cell.changeState(isSelected: false)
-//        }
-//      }
-//      .disposed(by: disposeBag)
     
     categoryCV.rx
       .modelAndIndexSelected(Category.self)
@@ -191,11 +177,6 @@ extension FilterVC: UICollectionViewDelegateFlowLayout {
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    switch section {
-    case 6:
-      return UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
-    default:
-      return UIEdgeInsets(top: 0, left: 30, bottom: 12, right: 30)
-    }
+    return UIEdgeInsets(top: 0, left: 30, bottom: 12, right: 30)
   }
 }
