@@ -186,6 +186,7 @@ extension FeedListVC: FeedCategoryDelegate {
     let bottomSheet = BottomSheetVC(contentViewController: filterVC)
     filterVC.buttonDelegate = bottomSheet
     bottomSheet.modalPresentationStyle = .overFullScreen
+    bottomSheet.modalTransitionStyle = .crossDissolve
     present(bottomSheet, animated: true)
   }
 }
@@ -196,6 +197,7 @@ extension FeedListVC: FeedListDelegate {
     let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .actionSheet)
     reportVC.buttonDelegate = bottomSheet
     bottomSheet.modalPresentationStyle = .overFullScreen
+    bottomSheet.modalTransitionStyle = .crossDissolve
     present(bottomSheet, animated: true)
   }
 }
