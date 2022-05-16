@@ -23,9 +23,16 @@ final class FilterVC: UIViewController {
   var buttonDelegate: BottomSheetDelegate?
   var viewModel: FilterViewModel!
   
-  let dataSource = RxCollectionViewSectionedReloadDataSource<CategorySectionModel> (configureCell: { dataSource, collectionView, indexPath, item in
+  private lazy var dataSource = RxCollectionViewSectionedReloadDataSource<CategorySectionModel> (configureCell: { dataSource, collectionView, indexPath, item in
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCVC.className, for: indexPath) as? CategoryCVC else { return UICollectionViewCell() }
     cell.categoryLabel.text = item.rawValue
+    
+    if self.selectedCategory.contains(item) {
+      cell.changeState(isSelected: true)
+    } else {
+      cell.changeState(isSelected: false)
+    }
+    
     return cell
   })
   
