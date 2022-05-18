@@ -23,8 +23,7 @@ final class BottomSheetVC: UIViewController {
   private let bottomSheetView = UIView()
   private var bottomSheetViewTopConstraint: NSLayoutConstraint!
   private var filterHeight: CGFloat = UIScreen.main.bounds.width * 532 / 390
-  private var oneActinHeight: CGFloat = UIScreen.main.bounds.width * 124 / 390
-  private var twoActionHeight: CGFloat = UIScreen.main.bounds.width * 172 / 390
+  private var actionHeight: CGFloat = UIScreen.main.bounds.width * 172 / 390
   private var bottomSheetType: BottomSheetType = .filter
   
   // MARK: - Initialize
@@ -48,8 +47,9 @@ final class BottomSheetVC: UIViewController {
     setTapGesture()
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
     showBottomSheet()
   }
 }
@@ -59,7 +59,7 @@ extension BottomSheetVC {
   private func configUI() {
     self.view.backgroundColor = .clear
     dimmerView.backgroundColor = .black.withAlphaComponent(0.6)
-    dimmerView.alpha = 0
+    dimmerView.alpha = 0.6
     
     addChild(contentVC) // contentVC를 BottomSheetVC의 자식으로 설정
     bottomSheetView.addSubview(contentVC.view) // contentVC의 view가 맨 앞에 등장하도록
@@ -85,6 +85,7 @@ extension BottomSheetVC {
       make.bottom.equalToSuperview()
       make.top.equalTo(view.safeAreaLayoutGuide).inset(topConstant)
     }
+    self.view.layoutIfNeeded()
     
     contentVC.view.snp.makeConstraints { make in
       make.edges.equalToSuperview()
@@ -93,15 +94,16 @@ extension BottomSheetVC {
 }
 
 extension BottomSheetVC {
+  
   // MARK: - Custom Method
   
   private func showBottomSheet() {
     let safeAreaHeight: CGFloat = view.safeAreaLayoutGuide.layoutFrame.height
-    let bottomPadding: CGFloat = view.safeAreaInsets.bottom
-    var topConstant = (safeAreaHeight + bottomPadding) - filterHeight
+    let statusBarHeight: CGFloat = getStatusBarHeight()
+    var topConstant = safeAreaHeight - statusBarHeight - filterHeight
     
     if bottomSheetType == .actionSheet {
-      topConstant = (safeAreaHeight + bottomPadding - twoActionHeight)
+      topConstant = safeAreaHeight - statusBarHeight - actionHeight
     }
     
     bottomSheetView.snp.updateConstraints { make in
@@ -112,7 +114,6 @@ extension BottomSheetVC {
                    delay: 0,
                    options: .curveEaseIn,
                    animations: {
-      self.dimmerView.alpha = 0.6
       self.view.layoutIfNeeded()
     }, completion: nil)
   }
