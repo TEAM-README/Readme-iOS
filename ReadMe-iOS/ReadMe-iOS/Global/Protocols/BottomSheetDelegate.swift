@@ -8,5 +8,5 @@
 import Foundation
 
 protocol BottomSheetDelegate {
-  func dismissButtonTapped()
+  func dismissButtonTapped(completion: (() -> Void)?)
 }
