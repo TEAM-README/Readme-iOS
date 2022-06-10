@@ -158,15 +158,49 @@
                                     <constraint firstAttribute="bottom" secondItem="DPo-gI-I5f" secondAttribute="bottom" id="kOS-XL-scL"/>
                                 </constraints>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nrc-Gs-Qei" userLabel="topNaviView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="54"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_ back" translatesAutoresizingMaskIntoConstraints="NO" id="YW1-UH-cUX">
+                                        <rect key="frame" x="20" y="13" width="28" height="28"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="28" id="rA4-MA-ZXh"/>
+                                            <constraint firstAttribute="width" constant="28" id="uu8-8Y-5rY"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVq-ga-bla">
+                                        <rect key="frame" x="0.0" y="0.0" width="59" height="54"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="59" id="cDr-kT-X9v"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <connections>
+                                            <action selector="backButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="wgl-9c-CHu"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="1VU-kd-1IR"/>
+                                    <constraint firstItem="YW1-UH-cUX" firstAttribute="centerY" secondItem="Nrc-Gs-Qei" secondAttribute="centerY" id="3JB-QD-RFV"/>
+                                    <constraint firstItem="YW1-UH-cUX" firstAttribute="leading" secondItem="Nrc-Gs-Qei" secondAttribute="leading" constant="20" id="5vg-zH-ZJ7"/>
+                                    <constraint firstAttribute="bottom" secondItem="RVq-ga-bla" secondAttribute="bottom" id="KdE-s4-ONT"/>
+                                    <constraint firstItem="RVq-ga-bla" firstAttribute="top" secondItem="Nrc-Gs-Qei" secondAttribute="top" id="hrp-sG-NuT"/>
+                                    <constraint firstItem="RVq-ga-bla" firstAttribute="leading" secondItem="Nrc-Gs-Qei" secondAttribute="leading" id="pSa-E1-XoB"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="bwP-82-v2D" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="3z3-gm-iS8"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Nrc-Gs-Qei" secondAttribute="trailing" id="Ew9-ef-G22"/>
                             <constraint firstAttribute="bottom" secondItem="bwP-82-v2D" secondAttribute="bottom" id="JaU-Pz-tH3"/>
                             <constraint firstItem="DPo-gI-I5f" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" priority="999" id="Zg9-do-01t"/>
                             <constraint firstItem="bwP-82-v2D" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="aoG-PM-zHt"/>
+                            <constraint firstItem="Nrc-Gs-Qei" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="dAa-fo-Pqq"/>
                             <constraint firstItem="DPo-gI-I5f" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" id="gQd-yN-Glg"/>
+                            <constraint firstItem="Nrc-Gs-Qei" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="nxV-GX-NzB"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="bwP-82-v2D" secondAttribute="trailing" id="pLd-5U-AJD"/>
                             <constraint firstItem="26A-Gq-fhT" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="56/390" id="xBg-L9-U1y"/>
                         </constraints>
@@ -178,8 +212,10 @@
                         <outlet property="categoryLabel" destination="1Hr-dB-hQn" id="V4T-G8-7Nr"/>
                         <outlet property="commentHeightConstraint" destination="G4b-U9-YLr" id="SWM-Ov-e8q"/>
                         <outlet property="commentTextView" destination="NqE-Fw-KVe" id="sRJ-Rm-iIo"/>
+                        <outlet property="contentScrollView" destination="bwP-82-v2D" id="kkF-Oi-yus"/>
                         <outlet property="dateLabel" destination="Ns3-5L-hBk" id="MwL-TQ-SA1"/>
                         <outlet property="detailButton" destination="KsK-gE-Gif" id="Anm-Ur-dy6"/>
+                        <outlet property="headerVIewTopConstraint" destination="dAa-fo-Pqq" id="NOb-Vi-AnX"/>
                         <outlet property="nicknameLabel" destination="3sr-RC-U8I" id="e0I-ct-UfU"/>
                         <outlet property="sentenceHeightConstraint" destination="Ka6-XQ-DOw" id="7gA-1b-V8N"/>
                         <outlet property="sentenceTextView" destination="eDd-2Y-DBj" id="bnz-xD-4Nc"/>
@@ -193,6 +229,7 @@
     </scenes>
     <resources>
         <image name="feed_bg" width="227" height="436"/>
+        <image name="ic_ back" width="28" height="28"/>
         <image name="img_ book" width="56" height="82"/>
         <image name="more_btn" width="22" height="22"/>
         <systemColor name="labelColor">

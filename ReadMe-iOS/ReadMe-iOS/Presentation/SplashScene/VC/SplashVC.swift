@@ -8,11 +8,16 @@
 import UIKit
 
 class SplashVC: UIViewController {
+  @IBOutlet weak var spalshIconView: UIImageView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     delayWithSeconds(1) {
-      self.checkOnboardingState() ? self.pushOnboardingView() : self.pushBaseView()
+      UIView.animate(withDuration: 1.0, delay: 0) {
+        self.spalshIconView.alpha = 0
+      } completion: { _ in
+        self.checkOnboardingState() ? self.pushBaseView() : self.pushOnboardingView()
+      }
     }
   }
   

@@ -32,12 +32,18 @@ final class FeedListVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.feedListTV.alpha = 0
     self.bindCells()
     self.configureTableView()
     self.bindViewModels()
     self.bindTableView()
     self.configureRefreshControl()
     self.addObserver()
+  }
+  override func viewWillAppear(_ animated: Bool) {
+    UIView.animate(withDuration: 0.5, delay: 0) {
+      self.feedListTV.alpha = 1
+    }
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -120,6 +126,7 @@ extension FeedListVC {
             categoryCell.viewModel = categoryData
             categoryCell.buttonDelegate = self
             return categoryCell
+            
           case .content :
             let contentData = item.dataSource as! FeedListContentViewModel
             guard let contentCell = tableView.dequeueReusableCell(withIdentifier: FeedListContentTVC.className) as? FeedListContentTVC else { return UITableViewCell() }
@@ -144,6 +151,7 @@ extension FeedListVC {
     feedListTV.rx.modelAndIndexSelected(FeedListDataModel.self)
       .subscribe(onNext: { [weak self] (model,index) in
         guard let self = self else { return }
+        if model.type == .category { self.categoryButtonTapped() }
         guard model.type == .content else { return }
         let selectedModel = model.dataSource as! FeedListContentViewModel
         self.postObserverAction(.moveFeedDetail, object: selectedModel.idx)
@@ -208,7 +216,6 @@ extension FeedListVC: UITableViewDelegate {
     if let lastIndexPath = tableView.indexPathsForVisibleRows?.first{
       guard lastIndexPath.row != 0 else {return}
       guard isScrollAnimationRequired else { return }
-      print(lastIndexPath)
       guard !cachedIndexList.contains(lastIndexPath) else {return}
       cachedIndexList.insert(lastIndexPath)
 

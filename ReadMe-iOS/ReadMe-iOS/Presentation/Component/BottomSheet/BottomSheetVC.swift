@@ -46,6 +46,10 @@ final class BottomSheetVC: UIViewController {
     setLayout()
     setTapGesture()
   }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    showBottomSheet()
+  }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -73,17 +77,22 @@ extension BottomSheetVC {
   
   private func setLayout() {
     view.addSubviews([dimmerView, bottomSheetView])
-    
+
     dimmerView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
-    
+
     let topConstant = view.safeAreaInsets.bottom + view.safeAreaLayoutGuide.layoutFrame.height
-    
+
     bottomSheetView.snp.makeConstraints { make in
       make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-      make.bottom.equalToSuperview()
-      make.top.equalTo(view.safeAreaLayoutGuide).inset(topConstant)
+      if bottomSheetType == .filter {
+        make.height.equalTo(filterHeight)
+        make.bottom.equalToSuperview().offset(filterHeight)
+      } else {
+        make.height.equalTo(twoActionHeight)
+        make.bottom.equalToSuperview().offset(twoActionHeight)
+      }
     }
     self.view.layoutIfNeeded()
     
@@ -102,12 +111,14 @@ extension BottomSheetVC {
     let statusBarHeight: CGFloat = getStatusBarHeight()
     var topConstant = safeAreaHeight - statusBarHeight - filterHeight
     
+    var bottomConstant: CGFloat = 0
+    
     if bottomSheetType == .actionSheet {
       topConstant = safeAreaHeight - statusBarHeight - actionHeight
     }
     
     bottomSheetView.snp.updateConstraints { make in
-      make.top.equalTo(view.safeAreaLayoutGuide).inset(topConstant)
+      make.bottom.equalToSuperview()
     }
     
     UIView.animate(withDuration: 0.25,
@@ -129,8 +140,18 @@ extension BottomSheetVC {
     let bottomPadding = view.safeAreaInsets.bottom
     let topConstant = safeAreaHeight + bottomPadding
     bottomSheetView.snp.updateConstraints { make in
-      make.top.equalTo(view.safeAreaLayoutGuide).inset(topConstant)
+      if bottomSheetType == .filter {
+        make.height.equalTo(filterHeight)
+        make.bottom.equalToSuperview().offset(filterHeight)
+      } else {
+        make.height.equalTo(twoActionHeight)
+        make.bottom.equalToSuperview().offset(twoActionHeight)
+      }
     }
+    
+    
+
+    
     
     UIView.animate(withDuration: 0.25,
                    delay: 0,

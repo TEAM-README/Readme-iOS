@@ -46,7 +46,7 @@ extension SettingVC {
     agreementLabel.text = I18N.Setting.agreement
     agreementLabel.textColor = .grey04
     
-    logoutLabel.text = ""
+    logoutLabel.text = I18N.Setting.logout
     logoutLabel.textColor = .logoutRed
   }
   
@@ -60,7 +60,7 @@ extension SettingVC {
     }
     
     logoutButton.press {
-//      self.postObserverAction(.logout)
+      self.postObserverAction(.logout)
     }
     
     backButton.press {
