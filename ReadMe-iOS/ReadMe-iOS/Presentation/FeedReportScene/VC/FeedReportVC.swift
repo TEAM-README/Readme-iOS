@@ -15,10 +15,11 @@ class FeedReportVC: UIViewController {
   
   // MARK: - Vars & Lets Part
   private let disposeBag = DisposeBag()
+  var buttonDelegate: BottomSheetDelegate?
   var viewModel: FeedReportViewModel!
   
   // MARK: - UI Component Part
-  private let reportButton = UIButton()
+  private let actionButton = UIButton()
   
   // MARK: - Life Cycle Part
   override func viewDidLoad() {
@@ -33,20 +34,20 @@ extension FeedReportVC {
   // MARK: - UI & Layout Part
   private func configureUI() {
     if viewModel.isMyPage {
-      reportButton.setTitle(I18N.Button.delete, for: .normal)
-      reportButton.setTitleColor(.alertRed, for: .normal)
+      actionButton.setTitle(I18N.Button.delete, for: .normal)
+      actionButton.setTitleColor(.alertRed, for: .normal)
     } else {
-      reportButton.setTitle(I18N.Button.report, for: .normal)
-      reportButton.setTitleColor(.grey04, for: .normal)
+      actionButton.setTitle(I18N.Button.report, for: .normal)
+      actionButton.setTitleColor(.grey04, for: .normal)
     }
-    reportButton.titleLabel?.font = .readMeFont(size: 16, type: .medium)
-    reportButton.contentHorizontalAlignment = .left
+    actionButton.titleLabel?.font = .readMeFont(size: 16, type: .medium)
+    actionButton.contentHorizontalAlignment = .left
   }
   
   private func setLayout() {
-    view.addSubview(reportButton)
+    view.addSubview(actionButton)
     
-    reportButton.snp.makeConstraints { make in
+    actionButton.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview().inset(31)
       make.top.equalToSuperview().inset(29)
       make.height.equalTo(50)
@@ -55,14 +56,19 @@ extension FeedReportVC {
   
   // MARK: - Custom Method Part
   private func bindViewModels() {
-    reportButton.rx.tap
-      .subscribe(onNext: {
-        if self.viewModel.isMyPage {
-          print("👧 delete")
-        } else {
-          print("👅 report")
-        }
+    let input = FeedReportViewModel.Input(actionButtonClicked: actionButton.rx.tap.asObservable())
+    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+    
+    output.reportRequestSuccess.subscribe(onNext: { [weak self] _ in
+      self?.buttonDelegate?.dismissButtonTapped(completion: {
+        self?.postObserverAction(.report)
       })
-      .disposed(by: disposeBag)
+    })
+    .disposed(by: self.disposeBag)
+    
+    output.deleteRequestSuccess.subscribe(onNext: { [weak self] _ in
+      self?.buttonDelegate?.dismissButtonTapped(completion: nil)
+    })
+    .disposed(by: self.disposeBag)
   }
 }

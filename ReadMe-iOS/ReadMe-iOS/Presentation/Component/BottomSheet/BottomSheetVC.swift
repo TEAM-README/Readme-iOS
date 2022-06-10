@@ -23,8 +23,7 @@ final class BottomSheetVC: UIViewController {
   private let bottomSheetView = UIView()
   private var bottomSheetViewTopConstraint: NSLayoutConstraint!
   private var filterHeight: CGFloat = 532
-  private var oneActinHeight: CGFloat = UIScreen.main.bounds.width * 124 / 390
-  private var twoActionHeight: CGFloat = UIScreen.main.bounds.width * 172 / 390
+  private var actionHeight: CGFloat = UIScreen.main.bounds.width * 172 / 390
   private var bottomSheetType: BottomSheetType = .filter
   
   // MARK: - Initialize
@@ -52,8 +51,10 @@ final class BottomSheetVC: UIViewController {
     showBottomSheet()
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    showBottomSheet()
   }
 }
 
@@ -62,9 +63,7 @@ extension BottomSheetVC {
   private func configUI() {
     self.view.backgroundColor = .clear
     dimmerView.backgroundColor = .black.withAlphaComponent(0.6)
-    dimmerView.alpha = 0
-    self.dimmerView.alpha = 0.6
-
+    dimmerView.alpha = 0.6
     
     addChild(contentVC) // contentVC를 BottomSheetVC의 자식으로 설정
     bottomSheetView.addSubview(contentVC.view) // contentVC의 view가 맨 앞에 등장하도록
@@ -96,7 +95,7 @@ extension BottomSheetVC {
       }
     }
     self.view.layoutIfNeeded()
-
+    
     contentVC.view.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
@@ -104,24 +103,18 @@ extension BottomSheetVC {
 }
 
 extension BottomSheetVC {
+  
   // MARK: - Custom Method
   
   private func showBottomSheet() {
-//    let safeAreaHeight: CGFloat = view.safeAreaLayoutGuide.layoutFrame.height
-//    let topPadding: CGFloat = view.safeAreaInsets.top
-//    let bottomPadding: CGFloat = view.safeAreaInsets.bottom
-//    print("SAFE",safeAreaHeight)
-//    var topConstant: CGFloat = screenHeight - filterHeight - topPadding - topPadding
-//    if bottomSheetType == .actionSheet {
-//      topConstant = (safeAreaHeight - twoActionHeight)
-//    }
+    let safeAreaHeight: CGFloat = view.safeAreaLayoutGuide.layoutFrame.height
+    let statusBarHeight: CGFloat = getStatusBarHeight()
+    var topConstant = safeAreaHeight - statusBarHeight - filterHeight
     
     var bottomConstant: CGFloat = 0
     
     if bottomSheetType == .actionSheet {
-      bottomConstant = twoActionHeight
-    } else {
-      bottomConstant = filterHeight
+      topConstant = safeAreaHeight - statusBarHeight - actionHeight
     }
     
     bottomSheetView.snp.updateConstraints { make in
@@ -132,7 +125,6 @@ extension BottomSheetVC {
                    delay: 0,
                    options: .curveEaseIn,
                    animations: {
-//      self.dimmerView.alpha = 0.6
       self.view.layoutIfNeeded()
     }, completion: nil)
   }
@@ -143,7 +135,7 @@ extension BottomSheetVC {
     dimmerView.isUserInteractionEnabled = true
   }
   
-  private func hideBottomSheetAndGoBack() {
+  private func hideBottomSheetAndGoBack(completion: (() -> Void)? = nil) {
     let safeAreaHeight = view.safeAreaLayoutGuide.layoutFrame.height
     let bottomPadding = view.safeAreaInsets.bottom
     let topConstant = safeAreaHeight + bottomPadding
@@ -169,7 +161,7 @@ extension BottomSheetVC {
       self.view.layoutIfNeeded()
     }) { _ in
       if self.presentingViewController != nil {
-        self.dismiss(animated: true)
+        self.dismiss(animated: true, completion: completion)
       }
     }
   }
@@ -183,7 +175,7 @@ extension BottomSheetVC {
 }
 
 extension BottomSheetVC: BottomSheetDelegate {
-  func dismissButtonTapped() {
-    hideBottomSheetAndGoBack()
+  func dismissButtonTapped(completion: (() -> Void)? = nil) {
+    hideBottomSheetAndGoBack(completion: completion)
   }
 }

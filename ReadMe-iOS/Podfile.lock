@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.6.1)
+  - Differentiator (5.0.0)
   - Firebase/Analytics (9.0.0):
     - Firebase/Core
   - Firebase/Core (9.0.0):
@@ -126,6 +127,10 @@ PODS:
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
+  - RxDataSources (5.0.0):
+    - Differentiator (~> 5.0)
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
   - RxGesture (4.0.4):
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
@@ -150,6 +155,7 @@ DEPENDENCIES:
   - Moya/RxSwift (~> 15.0)
   - PanModal
   - RxCocoa
+  - RxDataSources (~> 5.0)
   - RxGesture
   - RxRelay
   - RxSwift
@@ -162,6 +168,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Differentiator
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -183,6 +190,7 @@ SPEC REPOS:
     - PanModal
     - PromisesObjC
     - RxCocoa
+    - RxDataSources
     - RxGesture
     - RxRelay
     - RxSwift
@@ -194,6 +202,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
+  Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
   Firebase: a876fadc5ea653a377693376fd4f885c62704512
   FirebaseAnalytics: ea4f6f4b604a20b4de4d3c7f7a2cb51d9a989040
   FirebaseCore: e4c0b5d9727eaee0b43f9ed00baff7500c188d7b
@@ -215,6 +224,7 @@ SPEC CHECKSUMS:
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   PromisesObjC: 99b6f43f9e1044bd87a95a60beff28c2c44ddb72
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
   RxGesture: f3efb47ed2d26a8082f7b660d4a59970e275a7f8
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
@@ -224,6 +234,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: d6ee48709e12a619d6bbe2eb19415e99a96e9700
+PODFILE CHECKSUM: bff4a1addbdbc243aba18855d69c542c40595046
 
 COCOAPODS: 1.11.3
