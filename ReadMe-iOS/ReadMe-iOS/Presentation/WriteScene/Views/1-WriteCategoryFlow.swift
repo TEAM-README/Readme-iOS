@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 final class WriteCategoryFlow: UIView {
   
@@ -17,6 +18,19 @@ final class WriteCategoryFlow: UIView {
   private let categoryTitleLabel = UILabel()
   private let collectionViewFlowLayout = LeftAlignedCollectionViewFlowLayout()
   private let disposeBag = DisposeBag()
+  
+  private lazy var dataSource = RxCollectionViewSectionedReloadDataSource<CategorySectionModel> (configureCell: { dataSource, collectionView, indexPath, item in
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCVC.className, for: indexPath) as? CategoryCVC else { return UICollectionViewCell() }
+    cell.categoryLabel.text = item.rawValue
+
+    if item.rawValue == self.selectedCategory?.rawValue {
+      cell.changeState(isSelected: true)
+    } else {
+      cell.changeState(isSelected: false)
+    }
+
+    return cell
+  })
   
   lazy var categoryCV = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
   var selectedCategory: Category?
@@ -47,34 +61,33 @@ extension WriteCategoryFlow {
     categoryCV.delegate = self
     categoryCV.backgroundColor = .clear
     categoryCV.allowsMultipleSelection = true
+    categoryCV.isScrollEnabled = false
     
     CategoryCVC.register(target: categoryCV)
   }
   
-  // FIXME: - 얘를 VC로 빼야될까
   private func bindCollectionView() {
-    let items = Observable.of(Category.allCases)
+    let section = [
+      CategorySectionModel(items: [Category.novel, Category.essay, Category.human]),
+      CategorySectionModel(items: [Category.health, Category.social, Category.hobby]),
+      CategorySectionModel(items: [Category.history, Category.religion, Category.home]),
+      CategorySectionModel(items: [Category.language, Category.travel, Category.computer]),
+      CategorySectionModel(items: [Category.magazine, Category.comic, Category.art]),
+      CategorySectionModel(items: [Category.improve, Category.economy])
+    ]
     
-    items.asObservable()
-      .bind(to: categoryCV.rx.items(cellIdentifier: CategoryCVC.className, cellType: CategoryCVC.self)) { index, item, cell in
-        cell.categoryLabel.text = Category.allCases[index].rawValue
-        
-        if let selectedCategory = self.selectedCategory {
-          if selectedCategory != Category.allCases[index] {
-            cell.changeState(isSelected: false)
-          } else {
-            cell.changeState(isSelected: true)
-          }
-        }
-      }
-      .disposed(by: disposeBag)
+    Observable.just(section)
+      .bind(to: categoryCV.rx.items(dataSource: dataSource))
+      .disposed(by: self.disposeBag)
     
     categoryCV.rx
       .modelAndIndexSelected(Category.self)
       .subscribe(onNext: { category, indexpath in
         self.makeVibrate(degree: .light)
-        self.selectedCategory = category
-        self.categoryCV.reloadData()
+        if self.selectedCategory != category {
+          self.selectedCategory = category
+          self.categoryCV.reloadData()
+        }
       })
       .disposed(by: disposeBag)
   }
@@ -108,19 +121,14 @@ extension WriteCategoryFlow: UICollectionViewDelegate {
 
 extension WriteCategoryFlow: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    
+    let item = dataSource[indexPath.section].items[indexPath.row]
     let categoryLabel = UILabel()
-    categoryLabel.text = Category.allCases[indexPath.item].rawValue
+    categoryLabel.text = item.rawValue
     categoryLabel.sizeToFit()
     
     let cellWidth = categoryLabel.frame.width + 28
     let cellHeight = 34.0
-    
     return CGSize(width: cellWidth, height: cellHeight)
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 12
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -128,6 +136,6 @@ extension WriteCategoryFlow: UICollectionViewDelegateFlowLayout {
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    return UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
+    return UIEdgeInsets(top: 0, left: 30, bottom: 12, right: 30)
   }
 }

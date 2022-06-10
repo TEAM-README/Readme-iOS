@@ -21,8 +21,10 @@ target 'ReadMe-iOS' do
   pod 'PanModal'
   pod 'Gedatsu', configuration: %w(Debug)
   pod 'SkeletonView'
-   pod 'RxSwift'
-   pod 'RxCocoa'
-   pod 'RxGesture'
-   pod 'RxRelay'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'RxGesture'
+  pod 'RxRelay'
+  pod 'RxDataSources', '~> 5.0'
+
 end

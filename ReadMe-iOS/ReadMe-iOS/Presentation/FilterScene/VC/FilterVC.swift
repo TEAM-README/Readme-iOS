@@ -11,22 +11,36 @@ import SnapKit
 import RxSwift
 import RxRelay
 import RxCocoa
+import RxDataSources
 
 final class FilterVC: UIViewController {
   
   // MARK: - Vars & Lets Part
   
-  private let collectionViewFlowLayout = LeftAlignedCollectionViewFlowLayout()
+  private lazy var collectionViewFlowLayout = LeftAlignedCollectionViewFlowLayout()
   private let disposeBag = DisposeBag()
   private var selectedCategory: [Category] = []
   var buttonDelegate: BottomSheetDelegate?
   var viewModel: FilterViewModel!
   
+  private lazy var dataSource = RxCollectionViewSectionedReloadDataSource<CategorySectionModel> (configureCell: { dataSource, collectionView, indexPath, item in
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCVC.className, for: indexPath) as? CategoryCVC else { return UICollectionViewCell() }
+    cell.categoryLabel.text = item.rawValue
+    
+    if self.selectedCategory.contains(item) {
+      cell.changeState(isSelected: true)
+    } else {
+      cell.changeState(isSelected: false)
+    }
+    
+    return cell
+  })
+  
   // MARK: - UI Component Part
   
   private let resetButton = UIButton()
   private let applyButton = BottomButton()
-  lazy var categoryCV = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+  private lazy var categoryCV = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
   
   // MARK: - Life Cycle Part
   
@@ -83,24 +97,24 @@ extension FilterVC {
   private func setCollectionView() {
     categoryCV.delegate = self
     categoryCV.backgroundColor = .clear
+    categoryCV.isScrollEnabled = false
     
     CategoryCVC.register(target: categoryCV)
   }
   
   private func bindCollectionView() {
-    let items = Observable.of(Category.allCases)
+    let section = [
+      CategorySectionModel(items: [Category.novel, Category.essay, Category.human]),
+      CategorySectionModel(items: [Category.health, Category.social, Category.hobby]),
+      CategorySectionModel(items: [Category.history, Category.religion, Category.home]),
+      CategorySectionModel(items: [Category.language, Category.travel, Category.computer]),
+      CategorySectionModel(items: [Category.magazine, Category.comic, Category.art]),
+      CategorySectionModel(items: [Category.improve, Category.economy])
+    ]
     
-    items.asObservable()
-      .bind(to: categoryCV.rx.items(cellIdentifier: CategoryCVC.className, cellType: CategoryCVC.self)) { index, item, cell in
-        cell.categoryLabel.text = Category.allCases[index].rawValue
-        
-        if self.selectedCategory.contains(item) {
-          cell.changeState(isSelected: true)
-        } else {
-          cell.changeState(isSelected: false)
-        }
-      }
-      .disposed(by: disposeBag)
+    Observable.just(section)
+      .bind(to: categoryCV.rx.items(dataSource: dataSource))
+      .disposed(by: self.disposeBag)
     
     categoryCV.rx
       .modelAndIndexSelected(Category.self)
@@ -156,19 +170,14 @@ extension FilterVC: UICollectionViewDelegate {
 
 extension FilterVC: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    
+    let item = dataSource[indexPath.section].items[indexPath.row]
     let categoryLabel = UILabel()
-    categoryLabel.text = Category.allCases[indexPath.item].rawValue
+    categoryLabel.text = item.rawValue
     categoryLabel.sizeToFit()
     
     let cellWidth = categoryLabel.frame.width + 28
     let cellHeight = 34.0
-    
     return CGSize(width: cellWidth, height: cellHeight)
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 12
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -176,7 +185,6 @@ extension FilterVC: UICollectionViewDelegateFlowLayout {
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//    return UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 72)
-    return UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 40)
+    return UIEdgeInsets(top: 0, left: 30, bottom: 12, right: 30)
   }
 }
