@@ -70,5 +70,11 @@ extension DefaultFeedListUseCase {
     addObserverAction(.mypageButtonClicked) { _ in
       self.mypageScrollToTop.accept(())
     }
+    
+    addObserverAction(.writeComplete) { noti in
+      if let object = noti.object as? WriteRequestModel {
+        
+      }
+    }
   }
 }

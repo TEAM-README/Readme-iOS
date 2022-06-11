@@ -28,6 +28,15 @@ class BaseVC: UIViewController {
     addObserver()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    guard let navigationController = navigationController else { return }
+    for (index,vc) in navigationController.viewControllers.enumerated() {
+      if vc.className == SplashVC.className {
+        navigationController.viewControllers.remove(at: index)
+      }
+    }
+  }
+  
   open override func didMove(toParent parent: UIViewController?) {
     navigationController?.fixInteractivePopGestureRecognizer(delegate: self)
   }

@@ -11,9 +11,12 @@ import RxSwift
 class FeedDetailVC: UIViewController {
   // MARK: - Vars & Lets Part
   private let disposeBag = DisposeBag()
+  private var lastContentOffset: CGFloat = 0
   var viewModel: FeedDetailViewModel!
   
   // MARK: - UI Component Part
+  @IBOutlet weak var contentScrollView: UIScrollView!
+  
   @IBOutlet weak var bookCoverImageView: UIImageView!
   @IBOutlet weak var categoryLabel: UILabel!
   @IBOutlet weak var bookTitleTextView: UITextView!
@@ -30,11 +33,19 @@ class FeedDetailVC: UIViewController {
   @IBOutlet weak var sentenceHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var commentHeightConstraint: NSLayoutConstraint!
   
+  @IBOutlet weak var headerVIewTopConstraint: NSLayoutConstraint!
+  
   // MARK: - Life Cycle Part
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.configureScrollView()
     self.configureUI()
     self.bindViewModels()
+    self.bindButtonAction()
+  }
+  
+  @IBAction func backButtonClicked(_ sender: Any) {
+    self.navigationController?.popViewController(animated: true)
   }
 }
 
@@ -101,11 +112,31 @@ extension FeedDetailVC {
     }.disposed(by: self.disposeBag)
     self.view.layoutIfNeeded()
   }
+  
+  private func bindButtonAction() {
+    detailButton.press {
+      self.moreButtonTapped()
+    }
+  }
+  
+  private func moreButtonTapped() {
+    print("CLI")
+    let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: false)
+    let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .actionSheet)
+    bottomSheet.modalPresentationStyle = .overFullScreen
+    bottomSheet.modalTransitionStyle = .crossDissolve
+    present(bottomSheet, animated: true)
+  }
 
 }
 
 extension FeedDetailVC {
+  private func configureScrollView() {
+    contentScrollView.delegate = self
+  }
+  
   private func configureUI() {
+
     bookCoverImageView.layer.cornerRadius = 2
     
     categoryLabel.textColor = .mainBlue
@@ -134,5 +165,42 @@ extension FeedDetailVC {
 
     dateLabel.textColor = UIColor.grey02
     dateLabel.font = UIFont.readMeFont(size: 12, type: .regular)
+  }
+  
+
+}
+
+extension FeedDetailVC: UIScrollViewDelegate {
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+      if lastContentOffset > scrollView.contentOffset.y && lastContentOffset < scrollView.contentSize.height - scrollView.frame.height {
+          // 스크롤 위로 진행
+        showTopBar()
+        
+        
+      } else if lastContentOffset < scrollView.contentOffset.y && scrollView.contentOffset.y > 0 {
+          // 스크롤 아래로 진행
+        hideTopBar()
+        
+        
+      }
+
+      lastContentOffset = scrollView.contentOffset.y
+  }
+  
+  private func hideTopBar() {
+    let safeAreaTopInset = view.safeAreaInsets.top
+    headerVIewTopConstraint.constant = -54 - safeAreaTopInset
+    UIView.animate(withDuration: 0.5, delay: 0) {
+      self.view.layoutIfNeeded()
+    }
+
+  }
+  
+  private func showTopBar() {
+    headerVIewTopConstraint.constant = 0
+    UIView.animate(withDuration: 0.5, delay: 0) {
+      self.view.layoutIfNeeded()
+    }
   }
 }
