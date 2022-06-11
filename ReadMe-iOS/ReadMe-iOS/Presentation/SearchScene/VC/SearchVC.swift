@@ -130,10 +130,8 @@ extension SearchVC {
     
     output.contentList.asSignal().emit { [weak self] content in
       guard let self = self else { return }
-      print("💪 content: \(content)")
       self.contentList = content
-      print("💪 contentList: \(self.contentList)")
-//      self.bookCV.reloadData()
+      
       if self.contentList.isEmpty {
         self.setEmptyViewBeforeSearch()
       } else {
@@ -148,21 +146,8 @@ extension SearchVC {
       .bind {
         self.editEventFinished.onNext(self.searchTextField.text)
         self.makeVibrate(degree: .light)
-//        self.setEmptyViewAfterSearch()
-//        self.dataCount = 2
         self.didSearch = true
-        self.bookCV.reloadData()
       }.disposed(by: self.disposeBag)
-//      .subscribe(onNext: {
-//        // TODO: - 서버 통신
-//        self.editEventFinished.onNext(self.searchTextField.text)
-//        self.makeVibrate(degree: .light)
-////        self.setEmptyViewAfterSearch()
-////        self.dataCount = 2
-//        self.didSearch = true
-//        self.bookCV.reloadData()
-//      })
-//      .disposed(by: disposeBag)
     
     closeButton.press {
       self.dismiss(animated: true)
