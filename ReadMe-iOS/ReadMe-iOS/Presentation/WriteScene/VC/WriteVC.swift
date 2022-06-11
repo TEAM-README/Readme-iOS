@@ -41,6 +41,7 @@ class WriteVC: UIViewController {
   
   private var quote: String?
   private var impression: String?
+  private var backToCancel: Bool = false
   
   var viewModel: WriteViewModel!
   var flowType: FlowType = .firstFlow
@@ -98,15 +99,17 @@ extension WriteVC {
     naviBar.backButton.press {
       switch self.flowType {
       case .firstFlow:
-        self.navigationController?.popViewController(animated: true)
+        self.presentAlertVC()
       case .secondFlow:
         self.flowType = .firstFlow
+        self.setFlow(self.flowType)
       case .thirdFlow:
         self.flowType = .secondFlow
+        self.setFlow(self.flowType)
       case .next:
         self.flowType = .thirdFlow
+        self.setFlow(self.flowType)
       }
-      self.setFlow(self.flowType)
     }
   }
   
@@ -119,6 +122,19 @@ extension WriteVC {
     let data = WriteCheckModel.init(bookCover: bookImgURL ?? "", bookTitle: bookname ?? "", bookAuthor: author ?? "", bookCategory: category ?? "", quote: quote ?? "-", impression: impression ?? "-")
     let writeCheckVC = ModuleFactory.shared.makeWriteCheckVC(writeInfo: data)
     navigationController?.pushViewController(writeCheckVC, animated: true)
+  }
+  
+  private func presentAlertVC() {
+    let alertVC = ModuleFactory.shared.makeAlertVC()
+    alertVC.modalPresentationStyle = .overFullScreen
+    alertVC.modalTransitionStyle = .crossDissolve
+    alertVC.setAlertTitle(title: I18N.ReadmeAlert.title, description: I18N.ReadmeAlert.description)
+    alertVC.setAlertType(.twoAction, action: I18N.ReadmeAlert.cancel, I18N.ReadmeAlert.ok)
+    alertVC.closure = {
+      self.navigationController?.popViewController(animated: true)
+    }
+    
+    present(alertVC, animated: true)
   }
   
   private func setFlow(_ type: FlowType) {
