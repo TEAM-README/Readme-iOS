@@ -12,11 +12,14 @@ final class SearchViewModel: ViewModelType {
   
   private let useCase: SearchUseCase
   private let disposeBag = DisposeBag()
+  private let displayCount = 10
+  private let startNum = 1
+  private let sortType = "sim"
   
   // MARK: - Inputs
   struct Input {
     let viewWillAppearEvent: Observable<Void>
-//    let searchText: Observable<String?>
+    let textEditFinished: Observable<String?>
   }
   
   // MARK: - Outputs
@@ -39,6 +42,24 @@ extension SearchViewModel {
       self.useCase.getSearchRecentInformation()
     })
     .disposed(by: disposeBag)
+    
+//    input.queryText
+//      .filter { $0 != nil }
+//      .filter { $0 != "" }
+//      .subscribe(onNext: { [weak self] queryStr in
+//        guard let self = self else { return }
+//        self.useCase.se
+//        
+//      }).disposed(by: self.disposeBag)
+                 
+    input.textEditFinished
+      .filter { $0 != nil }
+      .filter { $0 != "" }
+      .subscribe(onNext: { [weak self] queryStr in
+        guard let self = self else { return }
+        self.useCase.getSearchResultInformation(query: queryStr!, display: self.displayCount, start: self.startNum, sort: self.sortType)
+      })
+      .disposed(by: self.disposeBag)
     
     return output
   }

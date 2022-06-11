@@ -8,7 +8,8 @@
 import RxSwift
 
 protocol SearchRepository {
-  func getSearchBookInformation() -> Observable<SearchEntity?>
+  func getSearchResult(query: String, display: Int, start: Int, sort: String) -> Observable<SearchEntity?>
+  func getSearchRecentResult() -> Observable<SearchEntity?>
 }
 
 final class DefaultSearchRepository {
@@ -22,7 +23,11 @@ final class DefaultSearchRepository {
 }
 
 extension DefaultSearchRepository: SearchRepository {
-  func getSearchBookInformation() -> Observable<SearchEntity?> {
+  func getSearchResult(query: String, display: Int, start: Int, sort: String) -> Observable<SearchEntity?> {
+    return networkService.getSearchResult(query: query, display: display, start: start, sort: sort)
+  }
+  
+  func getSearchRecentResult() -> Observable<SearchEntity?> {
 //    return networkService.getSearchRecent()
     return makeMockSearchEntity()
   }
@@ -31,18 +36,10 @@ extension DefaultSearchRepository: SearchRepository {
 extension DefaultSearchRepository {
   private func makeMockSearchEntity() -> Observable<SearchEntity?> {
     return .create { observer in
-      let fakeSearchInfo1 = SearchBookEntity.init(imgURL: "https://bookthumb-phinf.pstatic.net/cover/071/526/07152669.jpg?udate=20220203",
-                                                 title: "운명을 바꾸는 부동산 투자 수업 운명을 바꾸는 부동산 투자 수업이지롱가리아아아아하나두울셋",
-                                                 author: "부동산읽어주는남자(정태익) 저")
-      let fakeSearchInfo2 = SearchBookEntity.init(imgURL: "https://bookthumb-phinf.pstatic.net/cover/071/526/07152669.jpg?udate=20220203",
-                                                 title: "부동산투우자 수업이지롱가리아아아아하나두울셋",
-                                                 author: "혜화동 쌍가마 저")
-      let fakeSearchInfo3 = SearchBookEntity.init(imgURL: "https://bookthumb-phinf.pstatic.net/cover/071/526/07152669.jpg?udate=20220203",
-                                                 title: "읭",
-                                                 author: "빈수양")
+      let mockSearchInfo = SearchBookEntity.init(title: "안녕하세욜", link: "-", image: "https://bookthumb-phinf.pstatic.net/cover/071/526/07152669.jpg?udate=20220203", author: "양슁", price: "2000", discount: "10%", publisher: "-", pubdate: "-", isbn: "-", itemDescription: "-")
+      let mockSearchInformation = SearchEntity.init(lastBuildDate: "---", total: 1, start: 1, display: 10, items: [mockSearchInfo])
       
-      let fakeSearchInformation = SearchEntity.init(content: [fakeSearchInfo1, fakeSearchInfo2, fakeSearchInfo3])
-      observer.onNext(fakeSearchInformation)
+      observer.onNext(mockSearchInformation)
       return Disposables.create()
     }
   }

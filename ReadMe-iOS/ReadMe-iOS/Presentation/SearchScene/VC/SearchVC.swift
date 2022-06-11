@@ -15,6 +15,13 @@ class SearchVC: UIViewController {
   
   // MARK: - Vars & Lets Part
   private let disposeBag = DisposeBag()
+  private var didSearch: Bool = false
+  private var dataCount = 10 // 테스트용
+  private var contentList: [SearchBookModel] = []
+  private var editEventFinished = PublishSubject<String?>()
+  var viewModel: SearchViewModel!
+  
+  // MARK: - UI Component Part
   private let naviBar = UIView()
   private let closeButton = UIButton()
   private let titleLabel = UILabel()
@@ -23,12 +30,7 @@ class SearchVC: UIViewController {
   private let beforeSearchEmptyLabel = UILabel()
   private let afterSearchEmptyLabel = UILabel()
   private let collectionViewFlowLayout = UICollectionViewFlowLayout()
-
-  lazy var bookCV = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
-  var viewModel: SearchViewModel!
-  var didSearch: Bool = false
-  var dataCount = 10 // 테스트용
-  var contentList: [SearchBookModel] = []
+  private lazy var bookCV = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
   
   // MARK: - Life Cycle Part
   override func viewDidLoad() {
@@ -121,31 +123,46 @@ extension SearchVC {
     let input = SearchViewModel.Input(
       viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in
         // viewWillAppear 호출 후 실행
-      })
+      }, textEditFinished: editEventFinished)
     
     let output = self.viewModel.transform(from: input,
                                           disposeBag: self.disposeBag)
     
     output.contentList.asSignal().emit { [weak self] content in
       guard let self = self else { return }
+      print("💪 content: \(content)")
       self.contentList = content
-      self.bookCV.reloadData()
+      print("💪 contentList: \(self.contentList)")
+//      self.bookCV.reloadData()
+      if self.contentList.isEmpty {
+        self.setEmptyViewBeforeSearch()
+      } else {
+        self.bookCV.reloadData()
+      }
     }
     .disposed(by: disposeBag)
   }
   
   private func setButtonActions() {
     searchButton.rx.tap
-      .subscribe(onNext: {
-        // TODO: - 서버 통신
-        
+      .bind {
+        self.editEventFinished.onNext(self.searchTextField.text)
         self.makeVibrate(degree: .light)
 //        self.setEmptyViewAfterSearch()
-        self.dataCount = 2
+//        self.dataCount = 2
         self.didSearch = true
         self.bookCV.reloadData()
-      })
-      .disposed(by: disposeBag)
+      }.disposed(by: self.disposeBag)
+//      .subscribe(onNext: {
+//        // TODO: - 서버 통신
+//        self.editEventFinished.onNext(self.searchTextField.text)
+//        self.makeVibrate(degree: .light)
+////        self.setEmptyViewAfterSearch()
+////        self.dataCount = 2
+//        self.didSearch = true
+//        self.bookCV.reloadData()
+//      })
+//      .disposed(by: disposeBag)
     
     closeButton.press {
       self.dismiss(animated: true)
