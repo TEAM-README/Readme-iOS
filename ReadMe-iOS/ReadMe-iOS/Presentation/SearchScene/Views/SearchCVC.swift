@@ -42,21 +42,33 @@ class SearchCVC: UICollectionViewCell, UICollectionViewRegisterable {
 
 // MARK: - setData Part
 extension SearchCVC {
-  func initCell(image: String, title: String, author: String) {
+  func initCell(image: String, title: String, author: String, targetStr: String?) {
     bookCoverImageView.setImage(with: image)
     bookTitleLabel.text = title
     authorLabel.text = author
     
     bookTitleLabel.setTextWithLineHeight(text: title, lineHeightMultiple: 1.23)
+    
+    if let targetStr = targetStr {
+      if title.contains(targetStr) {
+        makeBoldLabel(str: targetStr, label: bookTitleLabel)
+      }
+      
+      if author.contains(targetStr) {
+        makeBoldLabel(str: targetStr, label: authorLabel)
+      }
+    }
   }
 }
 
 // MARK: - UI & Layout Part
 extension SearchCVC {
   private func configureUI() {
+    bookCoverImageView.backgroundColor = .grey00
     bookCoverImageView.contentMode = .scaleAspectFill
+    bookCoverImageView.clipsToBounds = true
     
-    bookTitleLabel.font = .readMeFont(size: 14, type: .semiBold)
+    bookTitleLabel.font = .readMeFont(size: 14, type: .medium)
     bookTitleLabel.textColor = .grey05
     bookTitleLabel.numberOfLines = 2
     
@@ -70,6 +82,10 @@ extension SearchCVC {
     stackView.spacing = 14
     stackView.addArrangedSubview(bookTitleLabel)
     stackView.addArrangedSubview(authorLabel)
+  }
+  
+  private func makeBoldLabel(str: String, label: UILabel) {
+    label.setTargetAttributedText(targetString: str, fontType: .bold, text: label.text, lineHeightMultiple: 1.23)
   }
   
   private func setLayout() {

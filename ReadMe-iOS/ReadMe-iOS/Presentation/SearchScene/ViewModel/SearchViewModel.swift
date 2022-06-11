@@ -24,7 +24,8 @@ final class SearchViewModel: ViewModelType {
   
   // MARK: - Outputs
   struct Output {
-    var contentList = PublishRelay<[SearchBookModel]>()
+    var recentList = PublishRelay<[SearchBookModel]>()
+    var searchList = PublishRelay<[SearchBookModel]>()
   }
   
   init(useCase: SearchUseCase) {
@@ -65,15 +66,21 @@ extension SearchViewModel {
   }
   
   private func bindOutput(output: Output, disposeBag: DisposeBag) {
-    let searchRecentRelay = useCase.searchResultInformation
+    let recentRelay = useCase.searchRecentInformation
+    let resultRelay = useCase.searchResultInformation
     
-    searchRecentRelay.subscribe(onNext: { model in
+    recentRelay.subscribe(onNext: { model in
+      output.recentList.accept(model)
+    })
+    .disposed(by: self.disposeBag)
+    
+    resultRelay.subscribe(onNext: { model in
       var dataModel: [SearchBookModel] = []
       
       for item in model {
         dataModel.append(self.makeNewBookModel(book: item))
       }
-      output.contentList.accept(dataModel)
+      output.searchList.accept(dataModel)
     })
     .disposed(by: self.disposeBag)
   }

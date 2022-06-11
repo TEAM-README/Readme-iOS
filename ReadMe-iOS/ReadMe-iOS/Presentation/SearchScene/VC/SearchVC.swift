@@ -16,8 +16,8 @@ class SearchVC: UIViewController {
   // MARK: - Vars & Lets Part
   private let disposeBag = DisposeBag()
   private var didSearch: Bool = false
-  private var dataCount = 10 // 테스트용
-  private var contentList: [SearchBookModel] = []
+  private var recentList: [SearchBookModel] = []
+  private var resultList: [SearchBookModel] = []
   private var editEventFinished = PublishSubject<String?>()
   var viewModel: SearchViewModel!
   
@@ -128,14 +128,27 @@ extension SearchVC {
     let output = self.viewModel.transform(from: input,
                                           disposeBag: self.disposeBag)
     
-    output.contentList.asSignal().emit { [weak self] content in
+    output.recentList.asSignal().emit { [weak self] content in
       guard let self = self else { return }
-      self.contentList = content
-      
-      if self.contentList.isEmpty {
+      self.recentList = content
+      if self.recentList.isEmpty {
         self.setEmptyViewBeforeSearch()
       } else {
         self.bookCV.reloadData()
+        self.showCollectionView()
+      }
+    }.disposed(by: disposeBag)
+    
+    output.searchList.asSignal().emit { [weak self] content in
+      guard let self = self else { return }
+      self.resultList = content
+      if self.didSearch {
+        if self.resultList.isEmpty {
+          self.setEmptyViewAfterSearch()
+        } else {
+          self.bookCV.reloadData()
+          self.showCollectionView()
+        }
       }
     }
     .disposed(by: disposeBag)
@@ -167,6 +180,12 @@ extension SearchVC {
   private func setRegister() {
     SearchCVC.register(target: bookCV)
     SearchHeaderView.register(target: bookCV, isHeader: true)
+  }
+  
+  private func showCollectionView() {
+    bookCV.isHidden = false
+    afterSearchEmptyLabel.isHidden = true
+    beforeSearchEmptyLabel.isHidden = true
   }
   
   private func setEmptyViewBeforeSearch() {
@@ -201,6 +220,12 @@ extension SearchVC: UICollectionViewDelegate {
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    var contentList: [SearchBookModel] = []
+    if didSearch {
+      contentList = resultList
+    } else {
+      contentList = recentList
+    }
     let content = contentList[indexPath.item]
     let bookInfo = WriteModel.init(bookcover: content.imgURL, bookname: content.title, category: nil, author: content.author)
     let writeVC = ModuleFactory.shared.makeWriteVC(bookInfo: bookInfo)
@@ -220,6 +245,13 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
 
 extension SearchVC: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    var contentList: [SearchBookModel] = []
+    
+    if didSearch {
+      contentList = resultList
+    } else {
+      contentList = recentList
+    }
     return contentList.count
   }
   
@@ -231,9 +263,18 @@ extension SearchVC: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCVC.className, for: indexPath) as? SearchCVC else { return UICollectionViewCell() }
+    var contentList: [SearchBookModel] = []
+    
+    if didSearch {
+      contentList = resultList
+    } else {
+      contentList = recentList
+    }
+    
     cell.initCell(image: contentList[indexPath.item].imgURL,
                   title: contentList[indexPath.item].title,
-                  author: contentList[indexPath.item].author)
+                  author: contentList[indexPath.item].author,
+                  targetStr: self.searchTextField.text ?? nil)
     return cell
   }
   
