@@ -68,8 +68,28 @@ extension SearchViewModel {
     let searchRecentRelay = useCase.searchResultInformation
     
     searchRecentRelay.subscribe(onNext: { model in
-      output.contentList.accept(model)
+      var dataModel: [SearchBookModel] = []
+      
+      for item in model {
+        dataModel.append(self.makeNewBookModel(book: item))
+      }
+      output.contentList.accept(dataModel)
     })
     .disposed(by: self.disposeBag)
+  }
+  
+  private func makeNewBookModel(book: SearchBookModel) -> SearchBookModel {
+    return SearchBookModel.init(imgURL: book.imgURL,
+                                title: removeBoldCharcater(book.title),
+                                author: removeBoldCharcater(book.author))
+  }
+  
+  private func removeBoldCharcater(_ str: String) -> String {
+    var newStr: String = ""
+    newStr = str
+      .replacingOccurrences(of: "<b>", with: "")
+      .replacingOccurrences(of: "</b>", with: "")
+    
+    return newStr
   }
 }
