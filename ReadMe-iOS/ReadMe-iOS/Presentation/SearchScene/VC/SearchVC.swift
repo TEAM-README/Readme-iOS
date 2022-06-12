@@ -11,6 +11,12 @@ import RxCocoa
 import RxRelay
 import SnapKit
 
+enum SearchStateType {
+  case emptyBeforeSearch
+  case emptyAfterSearch
+  case dataAfterSearch
+}
+
 class SearchVC: UIViewController {
   
   // MARK: - Vars & Lets Part
@@ -77,7 +83,8 @@ extension SearchVC {
   }
   
   private func setLayout() {
-    view.addSubviews([naviBar, searchTextField, bookCV])
+    view.addSubviews([naviBar, searchTextField, bookCV,
+                      beforeSearchEmptyLabel, afterSearchEmptyLabel])
     
     naviBar.addSubviews([closeButton, titleLabel])
     
@@ -114,6 +121,15 @@ extension SearchVC {
       make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
       make.top.equalTo(searchTextField.snp.bottom).offset(30)
     }
+    
+    beforeSearchEmptyLabel.snp.makeConstraints { make in
+      make.centerX.equalToSuperview()
+      make.top.equalTo(searchTextField.snp.bottom).offset(185)
+    }
+    
+    afterSearchEmptyLabel.snp.makeConstraints { make in
+      make.center.equalToSuperview()
+    }
   }
 }
 
@@ -131,23 +147,25 @@ extension SearchVC {
     output.recentList.asSignal().emit { [weak self] content in
       guard let self = self else { return }
       self.recentList = content
+      
       if self.recentList.isEmpty {
-        self.setEmptyViewBeforeSearch()
+        self.setStateView(type: .emptyBeforeSearch)
       } else {
         self.bookCV.reloadData()
-        self.showCollectionView()
+        self.setStateView(type: .dataAfterSearch)
       }
     }.disposed(by: disposeBag)
     
     output.searchList.asSignal().emit { [weak self] content in
       guard let self = self else { return }
       self.resultList = content
+      
       if self.didSearch {
         if self.resultList.isEmpty {
-          self.setEmptyViewAfterSearch()
+          self.setStateView(type: .dataAfterSearch)
         } else {
           self.bookCV.reloadData()
-          self.showCollectionView()
+          self.setStateView(type: .dataAfterSearch)
         }
       }
     }
@@ -182,34 +200,20 @@ extension SearchVC {
     SearchHeaderView.register(target: bookCV, isHeader: true)
   }
   
-  private func showCollectionView() {
-    bookCV.isHidden = false
-    afterSearchEmptyLabel.isHidden = true
-    beforeSearchEmptyLabel.isHidden = true
-  }
-  
-  private func setEmptyViewBeforeSearch() {
-    bookCV.isHidden = true
-    afterSearchEmptyLabel.isHidden = true
-    beforeSearchEmptyLabel.isHidden = false
-    
-    view.addSubview(beforeSearchEmptyLabel)
-    
-    beforeSearchEmptyLabel.snp.makeConstraints { make in
-      make.centerX.equalToSuperview()
-      make.top.equalTo(searchTextField.snp.bottom).offset(185)
-    }
-  }
-  
-  private func setEmptyViewAfterSearch() {
-    bookCV.isHidden = true
-    beforeSearchEmptyLabel.isHidden = true
-    afterSearchEmptyLabel.isHidden = false
-    
-    view.addSubview(afterSearchEmptyLabel)
-    
-    afterSearchEmptyLabel.snp.makeConstraints { make in
-      make.center.equalToSuperview()
+  private func setStateView(type: SearchStateType) {
+    switch type {
+    case .emptyBeforeSearch:
+      bookCV.isHidden = true
+      beforeSearchEmptyLabel.isHidden = false
+      afterSearchEmptyLabel.isHidden = true
+    case .emptyAfterSearch:
+      bookCV.isHidden = true
+      beforeSearchEmptyLabel.isHidden = true
+      afterSearchEmptyLabel.isHidden = false
+    case .dataAfterSearch:
+      bookCV.isHidden = false
+      beforeSearchEmptyLabel.isHidden = true
+      afterSearchEmptyLabel.isHidden = true
     }
   }
 }

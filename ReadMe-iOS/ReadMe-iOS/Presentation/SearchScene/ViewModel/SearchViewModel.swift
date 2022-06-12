@@ -12,7 +12,7 @@ final class SearchViewModel: ViewModelType {
   
   private let useCase: SearchUseCase
   private let disposeBag = DisposeBag()
-  private let displayCount = 10
+  private let displayCount = 30
   private let startNum = 1
   private let sortType = "sim"
   

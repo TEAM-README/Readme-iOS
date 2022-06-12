@@ -55,7 +55,7 @@ extension SearchCVC {
       }
       
       if author.contains(targetStr) {
-        makeBoldLabel(str: targetStr, label: authorLabel)
+        makeSemiBoldLabel(str: targetStr, label: authorLabel)
       }
     }
   }
@@ -72,7 +72,7 @@ extension SearchCVC {
     bookTitleLabel.textColor = .grey05
     bookTitleLabel.numberOfLines = 2
     
-    authorLabel.font = UIFont.readMeFont(size: 12)
+    authorLabel.font = UIFont.readMeFont(size: 12, type: .regular)
     authorLabel.textColor = .grey06
     
     bottomLineView.backgroundColor = .grey00
@@ -86,6 +86,10 @@ extension SearchCVC {
   
   private func makeBoldLabel(str: String, label: UILabel) {
     label.setTargetAttributedText(targetString: str, fontType: .bold, text: label.text, lineHeightMultiple: 1.23)
+  }
+  
+  private func makeSemiBoldLabel(str: String, label: UILabel) {
+    label.setTargetAttributedText(targetString: str, fontType: .semiBold, text: label.text, lineHeightMultiple: 1.23)
   }
   
   private func setLayout() {
