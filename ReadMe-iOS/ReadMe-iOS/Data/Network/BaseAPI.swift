@@ -9,46 +9,41 @@ import Moya
 import Alamofire
 
 enum BaseAPI{
-  case sampleAPI(sample : String)
-  case login(provider: String,token : String)
-  case postCheckNicknameDuplicated(nickname: String)
-  case getFeedDetail(idx: Int)
-  case getFeedList(page: Int, category: String)
-  case getNickname
+  // Auth
+  case postSignup(platform: String,socialToken: String,nickname: String)
+  case postSignin(platform: String,socialToken: String)
+  case postSampleSignin
+  case getDuplicatedNicknameState(nickname: String)
+  case deleteUser
   
+  // Feed List
+  case getMyFeedList
+  case getFeedList(filter: String?)
+  case getFeedDetail(idx: Int)
+  case deleteFeed(idx: Int)
+  case postFeedReport(idx: Int)
+  
+  // Feed Write
   case getSearchRecent
-  case write(bookTitle: String, bookAuthor: String, quote: String, impression: String)
+  //FIXME: - Parameter 가 너무 많아서 DTO 모델로 나중에 바꿀 예정
+  case postFeed(categoryName: String,sentence: String, feeling: String, isbn: Int, subIsbn: Int,
+                title: String, author: String, image: String)
+  
 }
 
 extension BaseAPI: TargetType {
-  // MARK: - Base URL & Path
-  /// - Parameters:
-  ///   - base : 각 api case별로 앞에 공통적으로 붙는 주소 부분을 정의합니다.
-  ///   - path : 각 api case별로 뒤에 붙는 개별적인 주소 부분을 정의합니다. (없으면 안적어도 상관 X)
-  ///           bas eURL과  path의 차이점은
-  ///           a  : (고정주소값)/post/popular
-  ///           b  : (고정주소값)/post/new
-  ///
-  ///     a와 b 라는 주소가 있다고 하면은
-  ///     case a,b -> baseURL은 "/post"이고,
-  ///      case a -> path 은 "/popular"
-  ///      case b -> path 는 /new" 입니다.
-  ///
   public var baseURL: URL {
     var base = Config.Network.baseURL
     switch self{
-    case .sampleAPI:
-      base += ""
-    case .login,.postCheckNicknameDuplicated:
-      base += ""
-    case .getFeedDetail,.getFeedList:
-      base += ""
-    case .getSearchRecent:
-      base += ""
-    case .getNickname:
-      base += ""
-    case .write:
-      base += ""
+      case .postSignup,.postSignin,.postSampleSignin,getDuplicatedNicknameState,
+          .deleteUser,.getMyFeedList:
+        base += "/user"
+        
+      case .getFeedList,.getFeedDetail,.deleteFeed,.getSearchRecent,.postFeed:
+        base += "/feed"
+        
+      case .postFeedReport:
+        base += "/report"
     }
     guard let url = URL(string: base) else {
       fatalError("baseURL could not be configured")
@@ -57,31 +52,39 @@ extension BaseAPI: TargetType {
   }
   
   // MARK: - Path
-  /// - note :
-  ///  path에 필요한 parameter를 넣어야 되는 경우,
-  ///  enum을 정의했을때 적은 파라미터가
-  ///  .case이름(let 변수이름):
-  ///  형태로 작성하면 변수를 받아올 수 있습니다.
-  ///
   var path: String {
     switch self{
-    case .sampleAPI:
-      return ""
-    default :
-      return ""
+      case .postSignup:
+        return "/signup"
+      case .postSignin:
+        return "/login"
+      case .postSampleSignin:
+        return "/auth/access-token"
+      case .getDuplicatedNicknameState:
+        return "/nickname"
+      case .getMyFeedList:
+        return "/myFeeds"
+      case .getFeedDetail(let idx),.deleteFeed(let idx),.postFeedReport(let idx):
+        return "/\(idx)"
+      default :
+        return ""
     }
   }
   
   // MARK: - Method
-  /// - note :
-  ///  각 case 별로 get,post,delete,put 인지 정의합니다.
   var method: Moya.Method {
     switch self{
-    case .sampleAPI,.login,.postCheckNicknameDuplicated, .write:
-      return .post
-    default :
-      return .get
-      
+      case .postSignin,
+          .postSignup,
+          .postSampleSignin,
+          .postFeedReport
+        return .post
+      case .deleteUser,
+          .deleteFeed:
+        return .delete
+      default :
+        return .get
+        
     }
   }
   
@@ -100,38 +103,42 @@ extension BaseAPI: TargetType {
   private var bodyParameters: Parameters? {
     var params: Parameters = [:]
     switch self{
-    case .sampleAPI(let email):
-      params["email"] = email
-      params["password"] = "여기에 필요한 Value값 넣기"
-    case .login(let provider,let token):
-      params["provider"] = provider
-      params["token"] = token
-    case .postCheckNicknameDuplicated(let nickname):
-      params["nickname"] = nickname
-    case .write(let booktitle, let bookauthor, let quote, let impression):
-      params["booktitle"] = booktitle
-      params["bookauthor"] = bookauthor
-      params["quote"] = quote
-      params["impression"] = impression
-    default:
-      break
+      case .postSignup(let platform, let socialToken, let nickname):
+        params["platform"] = platform
+        params["socialToken"] = socialToken
+        params["nickname"] = nickname
+        
+      case .postSignin(let platform, let socialToken):
+        params["platform"] = platform
+        params["socialToken"] = socialToken
+        
+      case .postSampleSignin:
+        params["nickname"] = "리드미"
+        
+      case .getDuplicatedNicknameState(let nickname):
+        params["query"] = nickname
+        
+      case .getMyFeedList(let filter):
+        if let filter = filter {
+          params["filters"] = filter
+        }
+        
+      case .postFeed(let categoryName,let sentence,let feeling,
+                     let isbn,let subIsbn,let title,let author,
+                     let image):
+        params["categoryName"] = categoryName
+        params["sentence"] = sentence
+        params["feeling"] = feeling
+        params["isbn"] = isbn
+        params["subIsbn"] = subIsbn
+        params["title"] = title
+        params["author"] = author
+        params["image"] = image
+
+      default:
+        break
     }
     return params
-  }
-  
-  // MARK: - MultiParts
-  
-  /// - note :
-  ///  사진등을 업로드 할때 사용하는 multiparts 부분이라 따로 사용 X
-  ///
-  private var multiparts: [Moya.MultipartFormData] {
-    switch self{
-    case .sampleAPI(_):
-      var multiparts : [Moya.MultipartFormData] = []
-      multiparts.append(.init(provider: .data("".data(using: .utf8) ?? Data()), name: ""))
-      return multiparts
-    default : return []
-    }
   }
   
   /// - note :
@@ -140,11 +147,11 @@ extension BaseAPI: TargetType {
   ///
   private var parameterEncoding : ParameterEncoding{
     switch self {
-    case .sampleAPI:
-      return URLEncoding.init(destination: .queryString, arrayEncoding: .noBrackets, boolEncoding: .literal)
-    default :
-      return JSONEncoding.default
-      
+      case .sampleAPI:
+        return URLEncoding.init(destination: .queryString, arrayEncoding: .noBrackets, boolEncoding: .literal)
+      default :
+        return JSONEncoding.default
+        
     }
   }
   
@@ -154,17 +161,17 @@ extension BaseAPI: TargetType {
   ///
   var task: Task {
     switch self{
-    case .sampleAPI, .login, .write:
-      return .requestParameters(parameters: bodyParameters ?? [:], encoding: parameterEncoding)
-    default:
-      return .requestPlain
-      
+      case .login, .write:
+        return .requestParameters(parameters: bodyParameters ?? [:], encoding: parameterEncoding)
+      default:
+        return .requestPlain
+        
     }
   }
   
   public var headers: [String: String]? {
     if let userToken = UserDefaults.standard.string(forKey: "userToken") {
-      return ["Authorization": userToken,
+      return ["accessToken": userToken,
               "Content-Type": "application/json"]
     } else {
       return ["Content-Type": "application/json"]
