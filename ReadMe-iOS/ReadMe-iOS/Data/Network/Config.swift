@@ -13,5 +13,9 @@ struct Config
     static var baseURL: String {
       return "https://asia-northeast3-wesopt29-328c5.cloudfunctions.net/api/v1"
     }
+    
+    static var searchURL: String {
+      return "https://openapi.naver.com/v1/search/book"
+    }
   }
 }

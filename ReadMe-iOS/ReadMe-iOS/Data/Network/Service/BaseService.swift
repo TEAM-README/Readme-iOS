@@ -60,6 +60,29 @@ class BaseService{
     }
   }
   
+  func naverRequestObjectInRx(_ target: BaseAPI) -> Observable<SearchEntity?>{
+    return Observable<SearchEntity?>.create { observer in
+      provider.rx
+        .request(target)
+        .subscribe { event in
+          switch event {
+            case .success(let value):
+              do {
+                let decoder = JSONDecoder()
+                let body = try decoder.decode(SearchEntity.self, from: value.data)
+                observer.onNext(body)
+                observer.onCompleted()
+              } catch let error {
+                observer.onError(error)
+              }
+            case .failure(let error):
+              observer.onError(error)
+          }
+        }.disposed(by: self.disposeBag)
+      return Disposables.create()
+    }
+  }
+  
   func requestObject<T: Decodable>(_ target: BaseAPI, completion: @escaping (Result<T?, Error>) -> Void) {
     provider.request(target) { response in
  

@@ -15,8 +15,8 @@ enum BaseAPI{
   case getFeedDetail(idx: Int)
   case getFeedList(page: Int, category: String)
   case getNickname
-  
   case getSearchRecent
+  case getSearch(query: String, display: Int, start: Int, sort: String)
   case write(bookTitle: String, bookAuthor: String, quote: String, impression: String)
 }
 
@@ -36,6 +36,8 @@ extension BaseAPI: TargetType {
   ///
   public var baseURL: URL {
     var base = Config.Network.baseURL
+    let search = Config.Network.searchURL
+    
     switch self{
     case .sampleAPI:
       base += ""
@@ -49,6 +51,11 @@ extension BaseAPI: TargetType {
       base += ""
     case .write:
       base += ""
+    case .getSearch:
+      guard let url = URL(string: search) else {
+        fatalError("searchURL could not be configured")
+      }
+      return url
     }
     guard let url = URL(string: base) else {
       fatalError("baseURL could not be configured")
@@ -113,6 +120,11 @@ extension BaseAPI: TargetType {
       params["bookauthor"] = bookauthor
       params["quote"] = quote
       params["impression"] = impression
+    case .getSearch(let query, let display, let start, let sort):
+      params["query"] = query
+      params["display"] = display
+      params["start"] = start
+      params["sort"] = sort
     default:
       break
     }
@@ -140,7 +152,7 @@ extension BaseAPI: TargetType {
   ///
   private var parameterEncoding : ParameterEncoding{
     switch self {
-    case .sampleAPI:
+    case .sampleAPI,.getSearch:
       return URLEncoding.init(destination: .queryString, arrayEncoding: .noBrackets, boolEncoding: .literal)
     default :
       return JSONEncoding.default
@@ -156,6 +168,8 @@ extension BaseAPI: TargetType {
     switch self{
     case .sampleAPI, .login, .write:
       return .requestParameters(parameters: bodyParameters ?? [:], encoding: parameterEncoding)
+    case .getSearch:
+      return .requestParameters(parameters: bodyParameters ?? [:], encoding: NaverParameterEncoding.init())
     default:
       return .requestPlain
       
@@ -163,11 +177,18 @@ extension BaseAPI: TargetType {
   }
   
   public var headers: [String: String]? {
-    if let userToken = UserDefaults.standard.string(forKey: "userToken") {
-      return ["Authorization": userToken,
-              "Content-Type": "application/json"]
-    } else {
-      return ["Content-Type": "application/json"]
+    switch self {
+    case .getSearch:
+      return ["Content-Type": "application/json",
+              "X-Naver-Client-Id": "ZGdnUsGMFrU8gPCdGxyi",
+              "X-Naver-Client-Secret": "oyvfoKifc8"]
+    default:
+      if let userToken = UserDefaults.standard.string(forKey: "userToken") {
+        return ["Authorization": userToken,
+                "Content-Type": "application/json"]
+      } else {
+        return ["Content-Type": "application/json"]
+      }
     }
   }
   
@@ -176,4 +197,24 @@ extension BaseAPI: TargetType {
   }
   
   typealias Response = Codable
+}
+
+
+struct NaverParameterEncoding: ParameterEncoding {
+    func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
+        var urlRequest = try urlRequest.asURLRequest()
+       // your custom encoding logic goes here
+      var newString = ""
+      if var urlString = urlRequest.url?.absoluteString,
+         let query = parameters?.queryParameters{
+        urlString.removeLast()
+        newString = urlString
+        newString += "?"
+        newString += query
+      }
+      
+      urlRequest.url = URL(string: newString)
+    
+        return urlRequest
+    }
 }
