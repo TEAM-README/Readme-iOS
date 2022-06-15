@@ -12,9 +12,6 @@ final class SearchViewModel: ViewModelType {
   
   private let useCase: SearchUseCase
   private let disposeBag = DisposeBag()
-  private let displayCount = 30
-  private let startNum = 1
-  private let sortType = "sim"
   
   // MARK: - Inputs
   struct Input {
@@ -58,7 +55,7 @@ extension SearchViewModel {
       .filter { $0 != "" }
       .subscribe(onNext: { [weak self] queryStr in
         guard let self = self else { return }
-        self.useCase.getSearchResultInformation(query: queryStr!, display: self.displayCount, start: self.startNum, sort: self.sortType)
+        self.useCase.getSearchResultInformation(query: queryStr!)
       })
       .disposed(by: self.disposeBag)
     
@@ -92,11 +89,6 @@ extension SearchViewModel {
   }
   
   private func removeBoldCharcater(_ str: String) -> String {
-    var newStr: String = ""
-    newStr = str
-      .replacingOccurrences(of: "<b>", with: "")
-      .replacingOccurrences(of: "</b>", with: "")
-    
-    return newStr
+    return str.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
   }
 }
