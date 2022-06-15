@@ -9,25 +9,28 @@ import Foundation
 
 // 임시 Entity고 서버 나온 다음에 다시 수정해야 함
 struct FeedListEntity: Codable{
-  let category: [FeedCategory]
-  let pageNum: Int
-  let feedList: [FeedDetailEntity]
+  let filters: [String]
+  let feeds: [FeedDetailEntity]
   
   func toDomain() -> FeedListModel {
-    let feedList = self.feedList.map { entity in
-      return FeedDetailModel.init(idx: entity.idx,
-                                  imgURL: entity.imgURL,
-                                  category: entity.category,
+    let feedList = self.feeds.map { entity in
+      return FeedDetailModel.init(idx: entity.id,
+                                  imgURL: entity.image,
+                                  category: entity.categoryName,
                                   title: entity.title,
                                   author: entity.author,
                                   sentence: entity.sentence,
-                                  comment: entity.comment,
-                                  nickname: entity.nickname,
-                                  date: entity.date)
+                                  comment: entity.feeling,
+                                  nickname: entity.user.nickname,
+                                  date: entity.updatedAt)
     }
     
-    let model = FeedListModel.init(category: self.category,
-                                   pageNum: self.pageNum,
+    let category = filters.map { filter in
+      return FeedCategory.getCategory(filter)
+    }
+    
+    let model = FeedListModel.init(category: category,
+                                   pageNum: 0,
                                    feedList: feedList)
     return model
   }
