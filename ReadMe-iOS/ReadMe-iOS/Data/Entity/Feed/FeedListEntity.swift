@@ -15,14 +15,14 @@ struct FeedListEntity: Codable{
   func toDomain() -> FeedListModel {
     let feedList = self.feeds.map { entity in
       return FeedDetailModel.init(idx: entity.id,
-                                  imgURL: entity.image,
+                                  imgURL: entity.image ?? "",
                                   category: entity.categoryName,
                                   title: entity.title,
-                                  author: entity.author,
+                                  author: entity.author ?? "",
                                   sentence: entity.sentence,
                                   comment: entity.feeling,
                                   nickname: entity.user.nickname,
-                                  date: entity.updatedAt)
+                                  date: entity.createdAt)
     }
     
     let category = filters.map { filter in
@@ -30,6 +30,31 @@ struct FeedListEntity: Codable{
     }
     
     let model = FeedListModel.init(category: category,
+                                   pageNum: 0,
+                                   feedList: feedList)
+    return model
+  }
+}
+
+struct MyFeedListEntity: Codable {
+  let nickname: String
+  let count: Int
+  let feeds: [FeedDetailEntity]
+  
+  func toDomain() -> FeedListModel {
+    let feedList = self.feeds.map { entity in
+      return FeedDetailModel.init(idx: entity.id,
+                                  imgURL: entity.image ?? "",
+                                  category: entity.categoryName,
+                                  title: entity.title,
+                                  author: entity.author ?? "",
+                                  sentence: entity.sentence,
+                                  comment: entity.feeling,
+                                  nickname: entity.user.nickname,
+                                  date: entity.createdAt)
+    }
+    
+    let model = FeedListModel.init(category: [],
                                    pageNum: 0,
                                    feedList: feedList)
     return model

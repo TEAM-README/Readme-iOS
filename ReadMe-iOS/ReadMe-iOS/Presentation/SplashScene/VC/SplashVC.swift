@@ -12,6 +12,7 @@ class SplashVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWNjZXNzVG9rZW4iLCJpZCI6MTQsIm5pY2tuYW1lIjoi66as65Oc66-4IiwiaWF0IjoxNjU1Mjg0MzI1LCJleHAiOjE2NTUyODc5MjV9.xdIfljm4ShKC_1f4wfA6co-XP-TGFtnna2eo6QBumDw", forKey: "authorization")
     delayWithSeconds(1) {
       UIView.animate(withDuration: 1.0, delay: 0) {
         self.spalshIconView.alpha = 0

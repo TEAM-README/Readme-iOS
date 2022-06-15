@@ -13,6 +13,15 @@ protocol WriteServiceType {
 
 extension BaseService: WriteServiceType {
   func postWrite(bookTitle: String, bookAuthor: String, quote: String, impression: String) -> Observable<Bool?> {
-    requestObjectInRx(.write(bookTitle: bookTitle, bookAuthor: bookAuthor, quote: quote, impression: impression))
+    
+    // FIXME: - 수정해야 함 
+    requestObjectInRx(.postFeed(categoryName: "소설",
+                                sentence: quote,
+                                feeling: impression,
+                                isbn: 0,
+                                subIsbn: 0,
+                                title: bookTitle,
+                                author: bookAuthor,
+                                image: ""))
   }
 }

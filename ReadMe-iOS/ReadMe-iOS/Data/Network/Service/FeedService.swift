@@ -11,6 +11,7 @@ import RxSwift
 protocol FeedServiceType {
   func getBookDetailInformation(idx: Int) -> Observable<FeedDetailEntity?>
   func getBookListInformation(page: Int,category:String) -> Observable<FeedListEntity?>
+  func getMyFeedList() -> Observable<MyFeedListEntity?>
 }
 
 extension BaseService: FeedServiceType {
@@ -19,6 +20,10 @@ extension BaseService: FeedServiceType {
   }
   
   func getBookListInformation(page: Int,category:String) -> Observable<FeedListEntity?> {
-    requestObjectInRx(.getFeedList(page: page, category: category))
+    requestObjectInRx(.getFeedList(filter: category))
+  }
+  
+  func getMyFeedList() -> Observable<MyFeedListEntity?> {
+    requestObjectInRx(.getMyFeedList)
   }
 }

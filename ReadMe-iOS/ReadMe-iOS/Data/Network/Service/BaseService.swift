@@ -46,13 +46,17 @@ class BaseService{
             case .success(let value):
               do {
                 let decoder = JSONDecoder()
+                dump(value.data)
                 let body = try decoder.decode(ResponseObject<T>.self, from: value.data)
                 observer.onNext(body.data)
                 observer.onCompleted()
               } catch let error {
+                print("에러")
+                dump(error)
                 observer.onError(error)
               }
             case .failure(let error):
+              dump(error)
               observer.onError(error)
           }
         }.disposed(by: self.disposeBag)

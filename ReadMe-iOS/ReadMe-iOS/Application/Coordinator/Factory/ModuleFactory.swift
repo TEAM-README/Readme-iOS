@@ -108,7 +108,6 @@ final class ModuleFactory: ModuleFactoryProtocol{
     let feedRepository = DefaultFeedListRepository(service: BaseService.default)
     let myPageRepository = DefaultMyPageRepository(service: BaseService.default)
     let useCase = DefaultFeedListUseCase(
-      myPageRepository: myPageRepository,
       feedrepository: feedRepository)
     let viewModel = FeedListViewModel(useCase: useCase,
                                       isMyPage: isMyPage)

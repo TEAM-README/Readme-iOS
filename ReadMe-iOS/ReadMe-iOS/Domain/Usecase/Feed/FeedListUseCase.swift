@@ -10,6 +10,7 @@ import RxRelay
 
 protocol FeedListUseCase {
   func getFeedList(pageNum: Int, category: [FeedCategory])
+  func getMyFeedList()
   func getUserData()
   var feedList: PublishRelay<FeedListModel> { get set }
   var homeScrollToTop: PublishRelay<Void> { get set }
@@ -19,7 +20,6 @@ protocol FeedListUseCase {
 
 final class DefaultFeedListUseCase: UseCaseType{
   
-  private let myPageRepository: MyPageRepository
   private let feedRepository: FeedListRepository
   private let disposeBag = DisposeBag()
   
@@ -28,9 +28,7 @@ final class DefaultFeedListUseCase: UseCaseType{
   var mypageScrollToTop = PublishRelay<Void>()
   var userMyPageData = PublishRelay<MyPageModel>()
   
-  init(myPageRepository: MyPageRepository,
-       feedrepository: FeedListRepository) {
-    self.myPageRepository = myPageRepository
+  init( feedrepository: FeedListRepository) {
     self.feedRepository = feedrepository
     self.addObserver()
   }
@@ -50,12 +48,23 @@ extension DefaultFeedListUseCase: FeedListUseCase {
       }).disposed(by: self.disposeBag)
   }
   
-  func getUserData() {
-    myPageRepository.getUserNickname()
+  func getMyFeedList() {
+    feedRepository.getMyFeedList()
       .filter{ $0 != nil }
       .subscribe(onNext: { [weak self] entity in
         guard let self = self else { return }
-        self.userMyPageData.accept(entity!.toDomain())
+        let model = entity!.toDomain()
+        self.feedList.accept(model)
+      }).disposed(by: self.disposeBag)
+  }
+  
+  func getUserData() {
+    feedRepository.getMyFeedList()
+      .filter{ $0 != nil }
+      .subscribe(onNext: { [weak self] entity in
+        let myPageModel = MyPageModel.init(nickname: entity!.nickname,
+                                           bookCount: entity!.count)
+        self?.userMyPageData.accept(myPageModel)
       }).disposed(by: self.disposeBag)
   }
   

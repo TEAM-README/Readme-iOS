@@ -50,12 +50,6 @@ final class BottomSheetVC: UIViewController {
     super.viewWillAppear(animated)
     showBottomSheet()
   }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    
-    showBottomSheet()
-  }
 }
 
 // MARK: - UI & Layout Part
@@ -90,8 +84,8 @@ extension BottomSheetVC {
         make.height.equalTo(filterHeight)
         make.bottom.equalToSuperview().offset(filterHeight)
       } else {
-        make.height.equalTo(twoActionHeight)
-        make.bottom.equalToSuperview().offset(twoActionHeight)
+        make.height.equalTo(actionHeight)
+        make.bottom.equalToSuperview()
       }
     }
     self.view.layoutIfNeeded()
@@ -144,8 +138,8 @@ extension BottomSheetVC {
         make.height.equalTo(filterHeight)
         make.bottom.equalToSuperview().offset(filterHeight)
       } else {
-        make.height.equalTo(twoActionHeight)
-        make.bottom.equalToSuperview().offset(twoActionHeight)
+        make.height.equalTo(actionHeight)
+        make.bottom.equalToSuperview()
       }
     }
     

@@ -43,8 +43,9 @@ extension FeedListViewModel {
     input.viewWillAppearEvent.subscribe(onNext: { [weak self] in
       guard let self = self else { return }
       output.isMyPageMode.accept(self.isMyPage)
+      self.isMyPage ? self.useCase.getMyFeedList() : self.useCase.getFeedList(pageNum: 0,
+                                                                              category: self.category)
       self.useCase.getUserData()
-      self.useCase.getFeedList(pageNum: self.pageNum, category: self.category)
     }).disposed(by: self.disposeBag)
     
     input.category.subscribe(onNext: { [weak self] category in
@@ -76,7 +77,7 @@ extension FeedListViewModel {
                                                 dataSource: FeedListEmtpyViewData(isMyPage: self.isMyPage)))
       }
 
-      if !self.isMyPage { // 마이페이지가 아니면 카테고리 정보를 불러와야 함.
+      if !self.isMyPage {
         let category = FeedListDataModel(type: .category,
                                          dataSource: FeedCategoryViewModel(category: data.feedListData.category))
         feedDatasource.insert(category, at: 0)

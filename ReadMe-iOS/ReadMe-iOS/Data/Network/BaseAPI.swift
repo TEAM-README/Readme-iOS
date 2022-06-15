@@ -35,7 +35,7 @@ extension BaseAPI: TargetType {
   public var baseURL: URL {
     var base = Config.Network.baseURL
     switch self{
-      case .postSignup,.postSignin,.postSampleSignin,getDuplicatedNicknameState,
+      case .postSignup,.postSignin,.postSampleSignin,.getDuplicatedNicknameState,
           .deleteUser,.getMyFeedList:
         base += "/user"
         
@@ -77,7 +77,7 @@ extension BaseAPI: TargetType {
       case .postSignin,
           .postSignup,
           .postSampleSignin,
-          .postFeedReport
+          .postFeedReport:
         return .post
       case .deleteUser,
           .deleteFeed:
@@ -114,13 +114,12 @@ extension BaseAPI: TargetType {
         
       case .postSampleSignin:
         params["nickname"] = "리드미"
+      
+      case .getFeedList(let filter):
+        params["filters"] = filter
         
       case .getDuplicatedNicknameState(let nickname):
         params["query"] = nickname
-        
-      case .getMyFeedList(let filter):
-        params["filters"] = filter
-        
         
       case .postFeed(let categoryName,let sentence,let feeling,
                      let isbn,let subIsbn,let title,let author,
@@ -146,7 +145,7 @@ extension BaseAPI: TargetType {
   ///
   private var parameterEncoding : ParameterEncoding{
     switch self {
-      case .sampleAPI:
+      case .getFeedList:
         return URLEncoding.init(destination: .queryString, arrayEncoding: .noBrackets, boolEncoding: .literal)
       default :
         return JSONEncoding.default
@@ -160,7 +159,8 @@ extension BaseAPI: TargetType {
   ///
   var task: Task {
     switch self{
-      case .login, .write:
+      case .postSignup,.postSignin,.postSampleSignin,
+          .getDuplicatedNicknameState,.getFeedList,.postFeed:
         return .requestParameters(parameters: bodyParameters ?? [:], encoding: parameterEncoding)
       default:
         return .requestPlain
@@ -169,8 +169,9 @@ extension BaseAPI: TargetType {
   }
   
   public var headers: [String: String]? {
-    if let userToken = UserDefaults.standard.string(forKey: "userToken") {
-      return ["accessToken": userToken,
+    
+    if let userToken = UserDefaults.standard.string(forKey: "authorization") {
+      return ["authorization": userToken,
               "Content-Type": "application/json"]
     } else {
       return ["Content-Type": "application/json"]
