@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol WriteCheckRepository {
-  func postWrite(booktitle: String, bookauthor: String, quote: String, impression: String) -> Observable<Bool?>
+  func postWrite(bookCategory: String, booktitle: String, bookauthor: String,  bookCover: String, quote: String, impression: String, isbn: String, subIsbn: String) -> Observable<Bool?>
 }
 
 final class DefaultWriteCheckRepository {
@@ -22,10 +22,10 @@ final class DefaultWriteCheckRepository {
 }
 
 extension DefaultWriteCheckRepository: WriteCheckRepository {
-  func postWrite(booktitle: String, bookauthor: String, quote: String, impression: String) -> Observable<Bool?> {
+  func postWrite(bookCategory: String, booktitle: String, bookauthor: String,  bookCover: String, quote: String, impression: String, isbn: String, subIsbn: String) -> Observable<Bool?> {
     return .create { observer in
       print("📌 repository")
-      self.networkService.postWrite(bookTitle: booktitle, bookAuthor: bookauthor, quote: quote, impression: impression)
+      self.networkService.postWrite(bookCategory: bookCategory, bookTitle: booktitle, bookAuthor: bookauthor, bookCover: bookCover, quote: quote, impression: impression, isbn: isbn, subIsbn: subIsbn)
         .subscribe(onNext: { entity in
           guard let entity = entity else { return observer.onCompleted() }
           observer.onNext(entity)

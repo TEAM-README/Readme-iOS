@@ -69,13 +69,13 @@ class SplashVC: UIViewController {
   }
   
   private func pushWriteView() {
-    let bookInfo = WriteModel.init(bookcover: "-", bookname: "-", category: "-", author: "-")
+    let bookInfo = WriteModel.init(bookcover: "-", bookname: "-", category: "-", author: "-", isbn: "-")
     let writeVC = ModuleFactory.shared.makeWriteVC(bookInfo: bookInfo)
     navigationController?.pushViewController(writeVC, animated: false)
   }
   
   private func pushWriteCheckView() {
-    let writeInfo = WriteCheckModel.init(bookCover: "-", bookTitle: "-", bookAuthor: "-", bookCategory: "-", quote: "-", impression: "-")
+    let writeInfo = WriteCheckModel.init(bookCover: "-", bookTitle: "-", bookAuthor: "-", bookCategory: "-", quote: "-", impression: "-", isbn: "-", subisbn: "-")
     let writeCheckVC = ModuleFactory.shared.makeWriteCheckVC(writeInfo: writeInfo)
     navigationController?.pushViewController(writeCheckVC, animated: false)
   }

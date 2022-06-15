@@ -55,11 +55,17 @@ class WriteCheckVC: UIViewController {
 // MARK: - Custom Method Part
 
 extension WriteCheckVC {
-  
   private func bindViewModels() {
     let input = WriteCheckViewModel.Input(
       registerButtonClicked: self.registerButton.rx.tap.map({ _ in
-        WriteRequestModel.init(bookCategory: self.categoryLabel.text ?? "", bookTitle: self.bookTitleLabel.text ?? "", bookAuthor: self.bookAuthorLabel.text ?? "", quote: self.quoteTextView.text ?? "", impression: self.impressionTextView.text ?? "")
+        WriteRequestModel.init(bookCategory: self.categoryLabel.text ?? "",
+                               bookTitle: self.bookTitleLabel.text ?? "",
+                               bookAuthor: self.bookAuthorLabel.text ?? "",
+                               bookCover: self.viewModel.data.bookCover ?? "",
+                               quote: self.quoteTextView.text ?? "",
+                               impression: self.impressionTextView.text ?? "",
+                               isbn: self.viewModel.data.isbn,
+                               subisbn: self.viewModel.data.subisbn)
       })
       .asObservable(),
       registerRequestFail: writeRequestFail,
@@ -106,16 +112,6 @@ extension WriteCheckVC {
     bookTitleLabel.text = data.bookTitle
     bookAuthorLabel.text = data.bookAuthor
   }
-  
-//  private func setPreviousData(bookcover: String, category: String, bookname: String, author: String, quote: String, impression: String) {
-//    quoteTextView.text = quote
-//    impressionTextView.text = impression
-//
-//    bookCoverImageView.setImage(with: bookcover)
-//    categoryLabel.text = category
-//    bookTitleLabel.text = bookname
-//    bookAuthorLabel.text = author
-//  }
 }
 
 // MARK: - UI Component Part

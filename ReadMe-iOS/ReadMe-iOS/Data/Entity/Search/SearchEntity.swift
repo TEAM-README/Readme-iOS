@@ -18,7 +18,8 @@ struct SearchEntity: Codable {
     let bookModelList = self.items.map { entity in
       SearchBookModel.init(imgURL: entity.image,
                            title: entity.title,
-                           author: entity.author)
+                           author: entity.author,
+                           isbn: entity.isbn)
     }
     
     return SearchModel(content: bookModelList)

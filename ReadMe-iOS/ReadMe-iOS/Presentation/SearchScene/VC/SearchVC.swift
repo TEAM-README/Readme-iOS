@@ -231,7 +231,7 @@ extension SearchVC: UICollectionViewDelegate {
       contentList = recentList
     }
     let content = contentList[indexPath.item]
-    let bookInfo = WriteModel.init(bookcover: content.imgURL, bookname: content.title, category: nil, author: content.author)
+    let bookInfo = WriteModel.init(bookcover: content.imgURL, bookname: content.title, category: nil, author: content.author, isbn: content.isbn)
     let writeVC = ModuleFactory.shared.makeWriteVC(bookInfo: bookInfo)
     
     navigationController?.pushViewController(writeVC, animated: true)

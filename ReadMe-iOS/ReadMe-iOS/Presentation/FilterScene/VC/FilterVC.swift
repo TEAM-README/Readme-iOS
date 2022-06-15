@@ -157,7 +157,6 @@ extension FilterVC {
       .subscribe(onNext: {
         self.makeVibrate()
         // TODO: - 서버통신..
-        print("📍통신")
         self.buttonDelegate?.dismissButtonTapped(completion: nil)
       })
       .disposed(by: disposeBag)

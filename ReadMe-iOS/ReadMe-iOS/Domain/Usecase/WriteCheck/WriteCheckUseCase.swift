@@ -9,7 +9,7 @@ import RxSwift
 import RxRelay
 
 protocol WriteCheckUseCase {
-  func postWrite(booktitle: String, bookauthor: String, bookcategory: String, quote: String, impression: String)
+  func postWrite(bookcover: String, booktitle: String, bookauthor: String, bookcategory: String, quote: String, impression: String, isbn: String, subisbn: String)
   var writeData: PublishSubject<WriteCheckModel> { get set }
   var writeFail: PublishSubject<Error> { get set }
 }
@@ -28,11 +28,11 @@ final class DefaultWriteCheckUseCase {
 }
 
 extension DefaultWriteCheckUseCase: WriteCheckUseCase {
-  func postWrite(booktitle: String, bookauthor: String, bookcategory: String, quote: String, impression: String) {
-    repository.postWrite(booktitle: booktitle, bookauthor: bookauthor, quote: quote, impression: impression)
+  func postWrite(bookcover: String, booktitle: String, bookauthor: String, bookcategory: String, quote: String, impression: String, isbn: String, subisbn: String) {
+    repository.postWrite(bookCategory: bookcategory, booktitle: booktitle, bookauthor: bookauthor, bookCover: bookcover, quote: quote, impression: impression, isbn: isbn, subIsbn: subisbn)
       .subscribe(onNext: { [weak self] entity in
         guard let self = self else { return }
-        let data = WriteCheckModel(bookCover: nil, bookTitle: booktitle, bookAuthor: bookauthor, bookCategory: bookcategory, quote: quote, impression: impression)
+        let data = WriteCheckModel(bookCover: nil, bookTitle: booktitle, bookAuthor: bookauthor, bookCategory: bookcategory, quote: quote, impression: impression, isbn: isbn, subisbn: subisbn)
         self.writeData.onNext(data)
         print("✏️ useCase - data: \(data)")
       }, onError: { err in

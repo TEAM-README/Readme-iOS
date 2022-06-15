@@ -17,7 +17,7 @@ enum BaseAPI{
   case getNickname
   case getSearchRecent
   case getSearch(query: String, display: Int, start: Int, sort: String)
-  case write(bookTitle: String, bookAuthor: String, quote: String, impression: String)
+  case write(bookCategory: String, bookTitle: String, bookAuthor: String, bookCover: String, quote: String, impression: String, isbn: String, subIsbn: String)
 }
 
 extension BaseAPI: TargetType {
@@ -115,11 +115,15 @@ extension BaseAPI: TargetType {
       params["token"] = token
     case .postCheckNicknameDuplicated(let nickname):
       params["nickname"] = nickname
-    case .write(let booktitle, let bookauthor, let quote, let impression):
-      params["booktitle"] = booktitle
-      params["bookauthor"] = bookauthor
-      params["quote"] = quote
-      params["impression"] = impression
+    case .write(let bookcategory, let booktitle, let bookauthor, let bookcover, let quote, let impression, let isbn, let subIsbn):
+      params["categoryName"] = bookcategory
+      params["sentence"] = quote
+      params["feeling"] = impression
+      params["isbn"] = isbn
+      params["subIsbn"] = subIsbn
+      params["title"] = booktitle
+      params["author"] = bookauthor
+      params["image"] = bookcover
     case .getSearch(let query, let display, let start, let sort):
       params["query"] = query
       params["display"] = display

@@ -85,7 +85,8 @@ extension SearchViewModel {
   private func makeNewBookModel(book: SearchBookModel) -> SearchBookModel {
     return SearchBookModel.init(imgURL: book.imgURL,
                                 title: removeBoldCharcater(book.title),
-                                author: removeBoldCharcater(book.author))
+                                author: removeBoldCharcater(book.author),
+                                isbn: book.isbn)
   }
   
   private func removeBoldCharcater(_ str: String) -> String {
