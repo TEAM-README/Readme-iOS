@@ -55,8 +55,6 @@ extension BaseAPI: TargetType {
       guard let url = URL(string: search) else {
         fatalError("searchURL could not be configured")
       }
-      
-      print("링크 를 \(url)")
       return url
     }
     guard let url = URL(string: base) else {
