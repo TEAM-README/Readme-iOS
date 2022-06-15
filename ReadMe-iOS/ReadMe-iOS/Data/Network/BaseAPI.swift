@@ -18,7 +18,7 @@ enum BaseAPI{
   
   // Feed List
   case getMyFeedList
-  case getFeedList(filter: String?)
+  case getFeedList(filter: String)
   case getFeedDetail(idx: Int)
   case deleteFeed(idx: Int)
   case postFeedReport(idx: Int)
@@ -119,9 +119,8 @@ extension BaseAPI: TargetType {
         params["query"] = nickname
         
       case .getMyFeedList(let filter):
-        if let filter = filter {
-          params["filters"] = filter
-        }
+        params["filters"] = filter
+        
         
       case .postFeed(let categoryName,let sentence,let feeling,
                      let isbn,let subIsbn,let title,let author,
