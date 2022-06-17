@@ -13,19 +13,17 @@ final class WriteCheckViewModel: ViewModelType {
   private let useCase: WriteCheckUseCase
   private let disposeBag = DisposeBag()
   var data: WriteCheckModel
-//  var data: WriteRequestModel
   
   // MARK: - Inputs
   struct Input {
-    let registerButtonClicked: Observable<WriteRequestModel>
+    let registerButtonClicked: Observable<WriteCheckModel>
     let registerRequestFail: Observable<Void>
-    let registerRequestSuccess: Observable<WriteRequestModel>
-//    let data: Observable<WriteRequestModel>
+    let registerRequestSuccess: Observable<WriteCheckModel>
   }
    
   // MARK: - Outputs
   struct Output {
-    var writeRequestStart = PublishRelay<WriteRequestModel>()
+    var writeRequestStart = PublishRelay<WriteCheckModel>()
     var writeRequestSuccess = PublishRelay<Void>()
     var showRegisterFailError = PublishRelay<Void>()
     var showNetworkError = PublishRelay<Void>()
@@ -45,7 +43,6 @@ extension WriteCheckViewModel {
     input.registerButtonClicked
       .subscribe(onNext: { [weak self] result in
         guard let self = self else { return }
-        print("🦋 \(result)")
         self.useCase.postWrite(bookcover: result.bookCover,
                                booktitle: result.bookTitle,
                                bookauthor: result.bookAuthor,
@@ -61,7 +58,6 @@ extension WriteCheckViewModel {
 //    input.registerRequestSuccess
 //      .subscribe(onNext: { [weak self] registerRequest in
 //        guard let self = self else { return }
-//        print("🐌 \(registerRequest)")
 //        self.useCase.postWrite(bookcover: registerRequest.bookCover,
 //                               booktitle: registerRequest.bookTitle,
 //                               bookauthor: registerRequest.bookAuthor,
@@ -74,7 +70,6 @@ extension WriteCheckViewModel {
 //      .disposed(by: self.disposeBag)
     
 //    input.data.subscribe(onNext: { [weak self] data in
-//      print("🐼 \(data)")
 //      guard let self = self else { return }
 //      self.data = data
 //    })

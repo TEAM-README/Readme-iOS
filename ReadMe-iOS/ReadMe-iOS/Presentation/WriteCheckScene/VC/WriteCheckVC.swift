@@ -32,8 +32,7 @@ class WriteCheckVC: UIViewController {
   private var formatter = DateFormatter()
   var viewModel: WriteCheckViewModel!
   var writeRequestFail = PublishSubject<Void>()
-  var writeRequest = PublishSubject<WriteRequestModel>()
-  
+  var writeRequest = PublishSubject<WriteCheckModel>()
   let username: String = "혜화동 꽃가마"
   
   // MARK: - Life Cycle Part
@@ -58,10 +57,10 @@ extension WriteCheckVC {
   private func bindViewModels() {
     let input = WriteCheckViewModel.Input(
       registerButtonClicked: self.registerButton.rx.tap.map({ _ in
-        WriteRequestModel.init(bookCategory: self.categoryLabel.text ?? "",
+        WriteCheckModel.init(bookCategory: self.categoryLabel.text ?? "",
                                bookTitle: self.bookTitleLabel.text ?? "",
                                bookAuthor: self.bookAuthorLabel.text ?? "",
-                               bookCover: self.viewModel.data.bookCover ?? "",
+                               bookCover: self.viewModel.data.bookCover,
                                quote: self.quoteTextView.text ?? "",
                                impression: self.impressionTextView.text ?? "",
                                isbn: self.viewModel.data.isbn,
@@ -97,7 +96,7 @@ extension WriteCheckVC {
     quoteTextView.text = data.quote
     impressionTextView.text = data.impression
     
-    bookCoverImageView.setImage(with: data.bookCover ?? "-")
+    bookCoverImageView.setImage(with: data.bookCover)
     categoryLabel.text = data.bookCategory
     bookTitleLabel.text = data.bookTitle
     bookAuthorLabel.text = data.bookAuthor

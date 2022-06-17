@@ -27,7 +27,6 @@ extension DefaultWriteCheckRepository: WriteCheckRepository {
       self.networkService.postWrite(bookCategory: bookCategory, bookTitle: booktitle, bookAuthor: bookauthor, bookCover: bookCover, quote: quote, impression: impression, isbn: isbn, subIsbn: subIsbn)
         .subscribe(onNext: { entity in
           guard let entity = entity else { return observer.onCompleted() }
-          print("🦆 entity: \(entity)")
           observer.onNext(entity)
         }, onError: { err in
           observer.onError(err)

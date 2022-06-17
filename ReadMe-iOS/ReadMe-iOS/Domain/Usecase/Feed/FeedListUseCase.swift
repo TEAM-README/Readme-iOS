@@ -72,7 +72,7 @@ extension DefaultFeedListUseCase {
     }
     
     addObserverAction(.writeComplete) { noti in
-      if let object = noti.object as? WriteRequestModel {
+      if let object = noti.object as? WriteCheckModel {
         
       }
     }

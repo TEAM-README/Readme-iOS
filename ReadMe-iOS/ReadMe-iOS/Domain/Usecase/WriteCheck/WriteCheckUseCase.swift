@@ -32,7 +32,7 @@ extension DefaultWriteCheckUseCase: WriteCheckUseCase {
     repository.postWrite(bookCategory: bookcategory, booktitle: booktitle, bookauthor: bookauthor, bookCover: bookcover, quote: quote, impression: impression, isbn: isbn, subIsbn: subisbn)
       .subscribe(onNext: { [weak self] entity in
         guard let self = self else { return }
-        let data = WriteCheckModel(bookCover: bookcover, bookTitle: booktitle, bookAuthor: bookauthor, bookCategory: bookcategory, quote: quote, impression: impression, isbn: isbn, subisbn: subisbn)
+        let data = WriteCheckModel(bookCategory: bookcategory, bookTitle: booktitle, bookAuthor: bookauthor, bookCover: bookcover, quote: quote, impression: impression, isbn: isbn, subisbn: subisbn)
         self.writeData.onNext(data)
       }, onError: { err in
         self.writeFail.onNext(err)
