@@ -12,8 +12,8 @@ final class WriteCheckViewModel: ViewModelType {
 
   private let useCase: WriteCheckUseCase
   private let disposeBag = DisposeBag()
-  let data: WriteCheckModel
-//  private var data: WriteRequestModel
+  var data: WriteCheckModel
+//  var data: WriteRequestModel
   
   // MARK: - Inputs
   struct Input {
@@ -41,29 +41,40 @@ extension WriteCheckViewModel {
   func transform(from input: Input, disposeBag: DisposeBag) -> Output {
     let output = Output()
     self.bindOutput(output: output, disposeBag: disposeBag)
-    // input,output 상관관계 작성
     
     input.registerButtonClicked
-      .subscribe(onNext: { result in
-        output.writeRequestStart.accept(result)
+      .subscribe(onNext: { [weak self] result in
+        guard let self = self else { return }
+        print("🦋 \(result)")
+        self.useCase.postWrite(bookcover: result.bookCover,
+                               booktitle: result.bookTitle,
+                               bookauthor: result.bookAuthor,
+                               bookcategory: result.bookCategory,
+                               quote: result.quote,
+                               impression: result.impression,
+                               isbn: result.isbn,
+                               subisbn: result.subisbn)
+//        output.writeRequestStart.accept(result)
       })
       .disposed(by: self.disposeBag)
     
-    input.registerRequestSuccess
-      .subscribe(onNext: { [weak self] registerRequest in
-        guard let self = self else { return }
-        self.useCase.postWrite(bookcover: registerRequest.bookCover,
-                               booktitle: registerRequest.bookTitle,
-                               bookauthor: registerRequest.bookAuthor,
-                               bookcategory: registerRequest.bookCategory,
-                               quote: registerRequest.quote,
-                               impression: registerRequest.impression,
-                               isbn: registerRequest.isbn,
-                               subisbn: registerRequest.subisbn)
-      })
-      .disposed(by: self.disposeBag)
+//    input.registerRequestSuccess
+//      .subscribe(onNext: { [weak self] registerRequest in
+//        guard let self = self else { return }
+//        print("🐌 \(registerRequest)")
+//        self.useCase.postWrite(bookcover: registerRequest.bookCover,
+//                               booktitle: registerRequest.bookTitle,
+//                               bookauthor: registerRequest.bookAuthor,
+//                               bookcategory: registerRequest.bookCategory,
+//                               quote: registerRequest.quote,
+//                               impression: registerRequest.impression,
+//                               isbn: registerRequest.isbn,
+//                               subisbn: registerRequest.subisbn)
+//      })
+//      .disposed(by: self.disposeBag)
     
 //    input.data.subscribe(onNext: { [weak self] data in
+//      print("🐼 \(data)")
 //      guard let self = self else { return }
 //      self.data = data
 //    })

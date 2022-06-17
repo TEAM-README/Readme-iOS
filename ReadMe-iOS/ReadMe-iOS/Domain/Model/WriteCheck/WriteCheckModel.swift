@@ -8,7 +8,7 @@
 import Foundation
 
 struct WriteCheckModel {
-  let bookCover: String?
+  let bookCover: String
   let bookTitle: String
   let bookAuthor: String
   let bookCategory: String

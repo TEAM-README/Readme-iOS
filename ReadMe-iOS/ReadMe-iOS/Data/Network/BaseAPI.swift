@@ -50,7 +50,7 @@ extension BaseAPI: TargetType {
     case .getNickname:
       base += ""
     case .write:
-      base += ""
+      base += "feed"
     case .getSearch:
       guard let url = URL(string: search) else {
         fatalError("searchURL could not be configured")
@@ -187,12 +187,15 @@ extension BaseAPI: TargetType {
               "X-Naver-Client-Id": "ZGdnUsGMFrU8gPCdGxyi",
               "X-Naver-Client-Secret": "oyvfoKifc8"]
     default:
-      if let userToken = UserDefaults.standard.string(forKey: "userToken") {
-        return ["Authorization": userToken,
-                "Content-Type": "application/json"]
-      } else {
-        return ["Content-Type": "application/json"]
-      }
+      // TODO: - 임시 토큰
+//      if let userToken = UserDefaults.standard.string(forKey: "userToken") {
+//        return ["Authorization": userToken,
+//                "Content-Type": "application/json"]
+//      } else {
+//        return ["Content-Type": "application/json"]
+//      }
+      return ["Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWNjZXNzVG9rZW4iLCJpZCI6MTQsIm5pY2tuYW1lIjoi66as65Oc66-4IiwiaWF0IjoxNjU1MTA3MzM3LCJleHAiOjE2NTU3MTIxMzd9.hyIF9hVuBnxMvmXEyo7H0i95MoAtu1NtE0Rh2gH8-YM",
+              "Content-Type": "application/json"]
     }
   }
   

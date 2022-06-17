@@ -73,24 +73,14 @@ extension WriteCheckVC {
     
     let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
     
-    output.writeRequestStart.subscribe(onNext: { [weak self] data in
-//      guard let self = self else { return }
-      print("📏 data: \(data)")
-      // FIXME: - 요청 시작한 경우 임시 화면 전환
+    output.writeRequestSuccess.subscribe(onNext: {[weak self] _ in
       let writeCompleteVC = ModuleFactory.shared.makeWriteCompleteVC()
       self?.navigationController?.pushViewController(writeCompleteVC, animated: true)
     })
     .disposed(by: self.disposeBag)
     
-    output.writeRequestSuccess.subscribe(onNext: {[weak self] result in
-      print("📐 writeRequestSuccess - result : \(result)")
-      // TODO: - 글 작성 성공할 경우 writeComplete로 넘기기
-    })
-    .disposed(by: self.disposeBag)
-    
     output.showRegisterFailError.subscribe(onNext: { _ in
-//      guard let self = self else { return }
-//      let msg = I18N.Login.loginFailMessage
+      self.showNetworkErrorAlert()
       print("📌 writeRequestFailError")
     })
     
