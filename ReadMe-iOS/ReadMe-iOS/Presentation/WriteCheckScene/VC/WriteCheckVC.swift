@@ -66,9 +66,7 @@ extension WriteCheckVC {
                                isbn: self.viewModel.data.isbn,
                                subisbn: self.viewModel.data.subisbn)
       })
-      .asObservable(),
-      registerRequestFail: writeRequestFail,
-      registerRequestSuccess: writeRequest)
+      .asObservable())
     
     let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
     
