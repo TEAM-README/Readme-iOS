@@ -12,4 +12,5 @@ struct WriteModel {
   let bookname: String
   let category: String?
   let author: String
+  let isbn: String
 }

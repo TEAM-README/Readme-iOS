@@ -15,6 +15,7 @@ struct SearchBookModel {
   let imgURL: String
   var title: String
   var author: String
+  let isbn: String
 }
 
 extension SearchBookModel {

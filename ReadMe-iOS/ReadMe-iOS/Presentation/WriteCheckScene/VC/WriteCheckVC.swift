@@ -32,8 +32,7 @@ class WriteCheckVC: UIViewController {
   private var formatter = DateFormatter()
   var viewModel: WriteCheckViewModel!
   var writeRequestFail = PublishSubject<Void>()
-  var writeRequest = PublishSubject<WriteRequestModel>()
-  
+  var writeRequest = PublishSubject<WriteCheckModel>()
   let username: String = "혜화동 꽃가마"
   
   // MARK: - Life Cycle Part
@@ -55,36 +54,30 @@ class WriteCheckVC: UIViewController {
 // MARK: - Custom Method Part
 
 extension WriteCheckVC {
-  
   private func bindViewModels() {
     let input = WriteCheckViewModel.Input(
       registerButtonClicked: self.registerButton.rx.tap.map({ _ in
-        WriteRequestModel.init(bookCategory: self.categoryLabel.text ?? "", bookTitle: self.bookTitleLabel.text ?? "", bookAuthor: self.bookAuthorLabel.text ?? "", quote: self.quoteTextView.text ?? "", impression: self.impressionTextView.text ?? "")
+        WriteCheckModel.init(bookCategory: self.categoryLabel.text ?? "",
+                               bookTitle: self.bookTitleLabel.text ?? "",
+                               bookAuthor: self.bookAuthorLabel.text ?? "",
+                               bookCover: self.viewModel.data.bookCover,
+                               quote: self.quoteTextView.text ?? "",
+                               impression: self.impressionTextView.text ?? "",
+                               isbn: self.viewModel.data.isbn,
+                               subisbn: self.viewModel.data.subisbn)
       })
-      .asObservable(),
-      registerRequestFail: writeRequestFail,
-      registerRequestSuccess: writeRequest)
+      .asObservable())
     
     let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
     
-    output.writeRequestStart.subscribe(onNext: { [weak self] data in
-//      guard let self = self else { return }
-      print("📏 data: \(data)")
-      // FIXME: - 요청 시작한 경우 임시 화면 전환
+    output.writeRequestSuccess.subscribe(onNext: {[weak self] _ in
       let writeCompleteVC = ModuleFactory.shared.makeWriteCompleteVC()
       self?.navigationController?.pushViewController(writeCompleteVC, animated: true)
     })
     .disposed(by: self.disposeBag)
     
-    output.writeRequestSuccess.subscribe(onNext: {[weak self] result in
-      print("📐 writeRequestSuccess - result : \(result)")
-      // TODO: - 글 작성 성공할 경우 writeComplete로 넘기기
-    })
-    .disposed(by: self.disposeBag)
-    
     output.showRegisterFailError.subscribe(onNext: { _ in
-//      guard let self = self else { return }
-//      let msg = I18N.Login.loginFailMessage
+      self.showNetworkErrorAlert()
       print("📌 writeRequestFailError")
     })
     
@@ -101,21 +94,11 @@ extension WriteCheckVC {
     quoteTextView.text = data.quote
     impressionTextView.text = data.impression
     
-    bookCoverImageView.setImage(with: data.bookCover ?? "-")
+    bookCoverImageView.setImage(with: data.bookCover)
     categoryLabel.text = data.bookCategory
     bookTitleLabel.text = data.bookTitle
     bookAuthorLabel.text = data.bookAuthor
   }
-  
-//  private func setPreviousData(bookcover: String, category: String, bookname: String, author: String, quote: String, impression: String) {
-//    quoteTextView.text = quote
-//    impressionTextView.text = impression
-//
-//    bookCoverImageView.setImage(with: bookcover)
-//    categoryLabel.text = category
-//    bookTitleLabel.text = bookname
-//    bookAuthorLabel.text = author
-//  }
 }
 
 // MARK: - UI Component Part

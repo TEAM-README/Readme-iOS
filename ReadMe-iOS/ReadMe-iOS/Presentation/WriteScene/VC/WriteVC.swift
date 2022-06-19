@@ -33,11 +33,11 @@ class WriteVC: UIViewController {
   private let progressBar = ProgressBar()
   private let disposeBag = DisposeBag()
   
-  var username: String = "혜화동 꽃가마"
-  var bookname: String?
-  var bookImgURL: String?
-  var category: String?
-  var author: String?
+  private var username: String = "혜화동 꽃가마"
+  private var bookname: String?
+  private var bookImgURL: String?
+  private var category: String?
+  private var author: String?
   
   private var quote: String?
   private var impression: String?
@@ -119,7 +119,7 @@ extension WriteVC {
   }
   
   private func pushWriteCheckView() {
-    let data = WriteCheckModel.init(bookCover: bookImgURL ?? "", bookTitle: bookname ?? "", bookAuthor: author ?? "", bookCategory: category ?? "", quote: quote ?? "-", impression: impression ?? "-")
+    let data = WriteCheckModel.init(bookCategory: category ?? "", bookTitle: bookname ?? "", bookAuthor: author ?? "", bookCover: bookImgURL ?? "", quote: quote ?? "-", impression: impression ?? "-", isbn: viewModel.separateIsbn()[0], subisbn: viewModel.separateIsbn()[1])
     let writeCheckVC = ModuleFactory.shared.makeWriteCheckVC(writeInfo: data)
     navigationController?.pushViewController(writeCheckVC, animated: true)
   }

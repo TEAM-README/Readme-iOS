@@ -7,6 +7,7 @@
 
 import Foundation
 
-struct WriteCompleteEntity {
-
+struct WriteCompleteEntity: Codable {
+  let id: Int
+  let createdAt: String
 }

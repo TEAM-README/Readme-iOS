@@ -17,7 +17,7 @@ enum BaseAPI{
   case getNickname
   case getSearchRecent
   case getSearch(query: String, display: Int, start: Int, sort: String)
-  case write(bookTitle: String, bookAuthor: String, quote: String, impression: String)
+  case write(bookCategory: String, bookTitle: String, bookAuthor: String, bookCover: String, quote: String, impression: String, isbn: String, subIsbn: String)
 }
 
 extension BaseAPI: TargetType {
@@ -50,7 +50,7 @@ extension BaseAPI: TargetType {
     case .getNickname:
       base += ""
     case .write:
-      base += ""
+      base += "feed"
     case .getSearch:
       guard let url = URL(string: search) else {
         fatalError("searchURL could not be configured")
@@ -115,11 +115,15 @@ extension BaseAPI: TargetType {
       params["token"] = token
     case .postCheckNicknameDuplicated(let nickname):
       params["nickname"] = nickname
-    case .write(let booktitle, let bookauthor, let quote, let impression):
-      params["booktitle"] = booktitle
-      params["bookauthor"] = bookauthor
-      params["quote"] = quote
-      params["impression"] = impression
+    case .write(let bookcategory, let booktitle, let bookauthor, let bookcover, let quote, let impression, let isbn, let subIsbn):
+      params["categoryName"] = bookcategory
+      params["sentence"] = quote
+      params["feeling"] = impression
+      params["isbn"] = isbn
+      params["subIsbn"] = subIsbn
+      params["title"] = booktitle
+      params["author"] = bookauthor
+      params["image"] = bookcover
     case .getSearch(let query, let display, let start, let sort):
       params["query"] = query
       params["display"] = display
@@ -183,12 +187,15 @@ extension BaseAPI: TargetType {
               "X-Naver-Client-Id": "ZGdnUsGMFrU8gPCdGxyi",
               "X-Naver-Client-Secret": "oyvfoKifc8"]
     default:
-      if let userToken = UserDefaults.standard.string(forKey: "userToken") {
-        return ["Authorization": userToken,
-                "Content-Type": "application/json"]
-      } else {
-        return ["Content-Type": "application/json"]
-      }
+      // TODO: - 임시 토큰
+//      if let userToken = UserDefaults.standard.string(forKey: "userToken") {
+//        return ["Authorization": userToken,
+//                "Content-Type": "application/json"]
+//      } else {
+//        return ["Content-Type": "application/json"]
+//      }
+      return ["Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWNjZXNzVG9rZW4iLCJpZCI6MTQsIm5pY2tuYW1lIjoi66as65Oc66-4IiwiaWF0IjoxNjU1MTA3MzM3LCJleHAiOjE2NTU3MTIxMzd9.hyIF9hVuBnxMvmXEyo7H0i95MoAtu1NtE0Rh2gH8-YM",
+              "Content-Type": "application/json"]
     }
   }
   
