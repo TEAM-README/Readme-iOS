@@ -12,7 +12,7 @@ class ProgressBar: XibView {
   @IBOutlet var percentBarTrailingConstraint: NSLayoutConstraint!
   
   func setDefaultPercentage(ratio: CGFloat) {
-    percentBarTrailingConstraint.constant = (1 - ratio * self.frame.width)
+    percentBarTrailingConstraint.constant = (1 - ratio) * self.frame.width
     UIView.animate(withDuration: 0) {
       self.layoutIfNeeded()
     }

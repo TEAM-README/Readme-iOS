@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProgressBar" customModule="ReadMe_iOS" customModuleProvider="target">
             <connections>
-                <outlet property="percentBarTrailingConstraint" destination="ZHS-lj-SY9" id="8Hj-TY-1AS"/>
+                <outlet property="percentBarTrailingConstraint" destination="ZHS-lj-SY9" id="b1E-Nq-r95"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
