@@ -64,10 +64,7 @@ extension WriteCompleteVC {
     subtitleLabel.textColor = .grey04
     subtitleLabel.font = .readMeFont(size: 14)
     subtitleLabel.numberOfLines = 2
-    // FIXME: - 둘 중에 하나만 먹음
-//    subtitleLabel.setTargetAttributedText(targetString: "피드", fontType: .semiBold, color: .grey04)
-//    subtitleLabel.setTargetAttributedText(targetString: "마이페이지", fontType: .semiBold, color: .grey04)
-    subtitleLabel.setTextWithLineHeight(text: subtitleLabel.text, lineHeightMultiple: 1.6)
+    subtitleLabel.setTargetAttrubutedTexts(targetStrings: [I18N.WriteComplete.feed, I18N.WriteComplete.mypage], fontType: .semiBold, text: subtitleLabel.text, lineHeightMultiple: 1.6)
     subtitleLabel.textAlignment = .center
 
     moveButton.title = I18N.WriteComplete.move

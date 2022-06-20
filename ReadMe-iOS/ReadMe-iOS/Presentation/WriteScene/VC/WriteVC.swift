@@ -84,9 +84,13 @@ extension WriteVC {
         case .firstFlow:
           self.flowType = .secondFlow
         case .secondFlow:
-          self.flowType = .thirdFlow
+          if self.secondView.quoteTextView.text != I18N.Write.quotePlaceholder {
+            self.flowType = .thirdFlow
+          }
         case .thirdFlow:
-          self.flowType = .next
+          if self.thirdView.impressionTextView.text != I18N.Write.impressionPlaceholder {
+            self.flowType = .next
+          }
         case .next:
           self.flowType = .next
         }
@@ -337,7 +341,7 @@ extension WriteVC {
   private func configureUI() {
     topBgView.backgroundColor = .grey00
     
-    progressBar.setPercentage(ratio: 0.0)
+    progressBar.setDefaultPercentage(ratio: 0.0)
     
     cheerLabel.font = .readMeFont(size: 14, type: .bold)
     cheerLabel.textColor = .mainBlue
@@ -379,9 +383,10 @@ extension WriteVC {
     }
     
     progressBar.snp.makeConstraints { make in
-      make.leading.trailing.equalToSuperview()
+      make.leading.equalToSuperview()
       make.top.equalTo(topBgView.snp.bottom)
       make.height.equalTo(2)
+      make.width.equalTo(UIScreen.main.bounds.width)
     }
     
     nextButton.snp.makeConstraints { make in
