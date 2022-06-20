@@ -337,7 +337,7 @@ extension WriteVC {
   private func configureUI() {
     topBgView.backgroundColor = .grey00
     
-    progressBar.setPercentage(ratio: 0.0)
+    progressBar.setDefaultPercentage(ratio: 0.0)
     
     cheerLabel.font = .readMeFont(size: 14, type: .bold)
     cheerLabel.textColor = .mainBlue
@@ -379,9 +379,10 @@ extension WriteVC {
     }
     
     progressBar.snp.makeConstraints { make in
-      make.leading.trailing.equalToSuperview()
+      make.leading.equalToSuperview()
       make.top.equalTo(topBgView.snp.bottom)
       make.height.equalTo(2)
+      make.width.equalTo(UIScreen.main.bounds.width)
     }
     
     nextButton.snp.makeConstraints { make in
