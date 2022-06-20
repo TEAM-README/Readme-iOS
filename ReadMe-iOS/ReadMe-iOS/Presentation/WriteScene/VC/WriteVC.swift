@@ -84,9 +84,13 @@ extension WriteVC {
         case .firstFlow:
           self.flowType = .secondFlow
         case .secondFlow:
-          self.flowType = .thirdFlow
+          if self.secondView.quoteTextView.text != I18N.Write.quotePlaceholder {
+            self.flowType = .thirdFlow
+          }
         case .thirdFlow:
-          self.flowType = .next
+          if self.thirdView.impressionTextView.text != I18N.Write.impressionPlaceholder {
+            self.flowType = .next
+          }
         case .next:
           self.flowType = .next
         }
