@@ -9,11 +9,15 @@ import Foundation
 
 struct WriteCheckModel {
   let bookCategory: String
-  let bookTitle: String
-  let bookAuthor: String
-  let bookCover: String
   let quote: String
   let impression: String
+  let book: BookModel
+}
+
+struct BookModel {
   let isbn: String
-  let subisbn: String
+  let subIsbn: String
+  let title: String
+  let author: String
+  let image: String
 }

@@ -8,11 +8,11 @@
 import RxSwift
 
 protocol WriteServiceType {
-  func postWrite(bookCategory: String, bookTitle: String, bookAuthor: String, bookCover: String, quote: String, impression: String, isbn: String, subIsbn: String) -> Observable<WriteCompleteEntity?>
+  func postWrite(bookCategory: String, quote: String, impression: String, book: BookModel) -> Observable<WriteCompleteEntity?>
 }
 
 extension BaseService: WriteServiceType {
-  func postWrite(bookCategory: String, bookTitle: String, bookAuthor: String, bookCover: String, quote: String, impression: String, isbn: String, subIsbn: String) -> Observable<WriteCompleteEntity?> {
-    requestObjectInRx(.write(bookCategory: bookCategory, bookTitle: bookTitle, bookAuthor: bookAuthor, bookCover: bookCover, quote: quote, impression: impression, isbn: isbn, subIsbn: subIsbn))
+  func postWrite(bookCategory: String, quote: String, impression: String, book: BookModel) -> Observable<WriteCompleteEntity?> {
+    requestObjectInRx(.write(bookCategory: bookCategory, quote: quote, impression: impression, book: book))
   }
 }
