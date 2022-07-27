@@ -177,7 +177,7 @@ extension SearchVC {
       .bind {
         self.editEventFinished.onNext(self.searchTextField.text)
         self.makeVibrate(degree: .light)
-        self.didSearch = true
+        if self.searchTextField.hasText { self.didSearch = true }
       }.disposed(by: self.disposeBag)
     
     closeButton.press {

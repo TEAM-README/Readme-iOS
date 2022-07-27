@@ -43,7 +43,7 @@ extension DefaultSearchUseCase: SearchUseCase {
   }
   
   func getSearchRecentInformation() {
-    repository.getSearchRecentResult()
+    repository.getSearchRecent()
       .subscribe(onNext: { [weak self] entity in
         guard let self = self else { return }
         guard let entity = entity else { return }

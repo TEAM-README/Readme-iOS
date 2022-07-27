@@ -46,7 +46,7 @@ extension BaseAPI: TargetType {
     case .getFeedDetail,.getFeedList:
       base += ""
     case .getSearchRecent:
-      base += ""
+      base += "feed/recent"
     case .getNickname:
       base += ""
     case .write:

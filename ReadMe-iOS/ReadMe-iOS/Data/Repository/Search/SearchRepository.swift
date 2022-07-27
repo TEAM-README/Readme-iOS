@@ -9,7 +9,7 @@ import RxSwift
 
 protocol SearchRepository {
   func getSearchResult(query: String, display: Int, start: Int, sort: String) -> Observable<SearchEntity?>
-  func getSearchRecentResult() -> Observable<SearchEntity?>
+  func getSearchRecent() -> Observable<SearchRecentEntity?>
 }
 
 final class DefaultSearchRepository {
@@ -27,12 +27,12 @@ extension DefaultSearchRepository: SearchRepository {
     return networkService.getSearchResult(query: query, display: display, start: start, sort: sort)
   }
   
-  func getSearchRecentResult() -> Observable<SearchEntity?> {
-//    return networkService.getSearchRecent()
-    return makeMockSearchEntity()
+  func getSearchRecent() -> Observable<SearchRecentEntity?> {
+    return networkService.getSearchRecent()
   }
 }
 
+// TODO: - 삭제하기
 extension DefaultSearchRepository {
   private func makeMockSearchEntity() -> Observable<SearchEntity?> {
     return .create { observer in
