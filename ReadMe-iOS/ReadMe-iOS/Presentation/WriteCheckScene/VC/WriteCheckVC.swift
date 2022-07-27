@@ -55,8 +55,8 @@ class WriteCheckVC: UIViewController {
 
 extension WriteCheckVC {
   private func bindViewModels() {
-    // FIXME: - 수정
-    let bookData = BookModel.init(isbn: self.viewModel.data.book.isbn, subIsbn: self.viewModel.data.book.subIsbn, title: self.viewModel.data.book.title, author: self.viewModel.data.book.author, image: self.viewModel.data.book.image)
+    let data = self.viewModel.data.book
+    let bookData = BookModel.init(isbn: data.isbn, subIsbn: data.subIsbn, title: data.title, author: data.author, image: data.image)
     let input = WriteCheckViewModel.Input(
       registerButtonClicked: self.registerButton.rx.tap.map({ _ in
         WriteCheckModel.init(bookCategory: self.categoryLabel.text ?? "",
