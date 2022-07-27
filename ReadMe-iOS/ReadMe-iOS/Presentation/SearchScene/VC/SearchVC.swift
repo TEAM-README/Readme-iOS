@@ -193,6 +193,7 @@ extension SearchVC {
     bookCV.backgroundColor = .clear
     
     collectionViewFlowLayout.scrollDirection = .vertical
+    collectionViewFlowLayout.sectionHeadersPinToVisibleBounds = true
   }
   
   private func setRegister() {
