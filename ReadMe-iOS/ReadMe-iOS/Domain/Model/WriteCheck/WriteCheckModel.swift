@@ -14,7 +14,7 @@ struct WriteCheckModel {
   let book: BookModel
 }
 
-struct BookModel {
+struct BookModel: Codable {
   let isbn: String
   let subIsbn: String
   let title: String
