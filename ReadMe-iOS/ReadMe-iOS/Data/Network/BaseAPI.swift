@@ -17,7 +17,7 @@ enum BaseAPI{
   case getNickname
   case getSearchRecent
   case getSearch(query: String, display: Int, start: Int, sort: String)
-  case write(bookCategory: String, bookTitle: String, bookAuthor: String, bookCover: String, quote: String, impression: String, isbn: String, subIsbn: String)
+  case write(bookCategory: String, quote: String, impression: String, book: BookModel)
 }
 
 extension BaseAPI: TargetType {
@@ -115,15 +115,18 @@ extension BaseAPI: TargetType {
       params["token"] = token
     case .postCheckNicknameDuplicated(let nickname):
       params["nickname"] = nickname
-    case .write(let bookcategory, let booktitle, let bookauthor, let bookcover, let quote, let impression, let isbn, let subIsbn):
+    case .write(let bookcategory, let quote, let impression, let book):
+      let bookParams: [String: Any] = [
+        "isbn": book.isbn,
+        "subIsbn": book.subIsbn,
+        "title": book.title,
+        "author": book.author,
+        "image": book.image
+      ]
       params["categoryName"] = bookcategory
       params["sentence"] = quote
       params["feeling"] = impression
-      params["isbn"] = isbn
-      params["subIsbn"] = subIsbn
-      params["title"] = booktitle
-      params["author"] = bookauthor
-      params["image"] = bookcover
+      params["book"] = bookParams
     case .getSearch(let query, let display, let start, let sort):
       params["query"] = query
       params["display"] = display
@@ -194,7 +197,7 @@ extension BaseAPI: TargetType {
 //      } else {
 //        return ["Content-Type": "application/json"]
 //      }
-      return ["Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWNjZXNzVG9rZW4iLCJpZCI6MTQsIm5pY2tuYW1lIjoi66as65Oc66-4IiwiaWF0IjoxNjU1MTA3MzM3LCJleHAiOjE2NTU3MTIxMzd9.hyIF9hVuBnxMvmXEyo7H0i95MoAtu1NtE0Rh2gH8-YM",
+      return ["Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWNjZXNzVG9rZW4iLCJpZCI6MTQsIm5pY2tuYW1lIjoi66as65Oc66-4IiwiaWF0IjoxNjU4ODUyMjc2LCJleHAiOjE2NjE0NDQyNzZ9.-NI0BlxcIEL2_Q6dKCPujo2T3imOyGBL6DtZZmXQaXc",
               "Content-Type": "application/json"]
     }
   }

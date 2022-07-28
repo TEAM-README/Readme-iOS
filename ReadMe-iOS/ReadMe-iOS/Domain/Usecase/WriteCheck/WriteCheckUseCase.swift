@@ -9,7 +9,7 @@ import RxSwift
 import RxRelay
 
 protocol WriteCheckUseCase {
-  func postWrite(bookcover: String, booktitle: String, bookauthor: String, bookcategory: String, quote: String, impression: String, isbn: String, subisbn: String)
+  func postWrite(category: String, quote: String, impression: String, book: BookModel)
   var writeData: PublishSubject<WriteCheckModel> { get set }
   var writeFail: PublishSubject<Error> { get set }
 }
@@ -28,11 +28,11 @@ final class DefaultWriteCheckUseCase {
 }
 
 extension DefaultWriteCheckUseCase: WriteCheckUseCase {
-  func postWrite(bookcover: String, booktitle: String, bookauthor: String, bookcategory: String, quote: String, impression: String, isbn: String, subisbn: String) {
-    repository.postWrite(bookCategory: bookcategory, booktitle: booktitle, bookauthor: bookauthor, bookCover: bookcover, quote: quote, impression: impression, isbn: isbn, subIsbn: subisbn)
+  func postWrite(category: String, quote: String, impression: String, book: BookModel) {
+    repository.postWrite(bookCategory: category, quote: quote, impression: impression, book: book)
       .subscribe(onNext: { [weak self] entity in
         guard let self = self else { return }
-        let data = WriteCheckModel(bookCategory: bookcategory, bookTitle: booktitle, bookAuthor: bookauthor, bookCover: bookcover, quote: quote, impression: impression, isbn: isbn, subisbn: subisbn)
+        let data = WriteCheckModel(bookCategory: category, quote: quote, impression: impression, book: book)
         self.writeData.onNext(data)
       }, onError: { err in
         self.writeFail.onNext(err)

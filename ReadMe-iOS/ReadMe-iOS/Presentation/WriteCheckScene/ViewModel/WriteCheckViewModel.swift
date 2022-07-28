@@ -40,14 +40,7 @@ extension WriteCheckViewModel {
     input.registerButtonClicked
       .subscribe(onNext: { [weak self] result in
         guard let self = self else { return }
-        self.useCase.postWrite(bookcover: result.bookCover,
-                               booktitle: result.bookTitle,
-                               bookauthor: result.bookAuthor,
-                               bookcategory: result.bookCategory,
-                               quote: result.quote,
-                               impression: result.impression,
-                               isbn: result.isbn,
-                               subisbn: result.subisbn)
+        self.useCase.postWrite(category: result.bookCategory, quote: result.quote, impression: result.impression, book: result.book)
       })
       .disposed(by: self.disposeBag)
     

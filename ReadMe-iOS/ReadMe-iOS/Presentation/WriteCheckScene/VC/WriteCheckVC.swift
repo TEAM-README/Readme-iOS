@@ -55,16 +55,14 @@ class WriteCheckVC: UIViewController {
 
 extension WriteCheckVC {
   private func bindViewModels() {
+    let data = self.viewModel.data.book
+    let bookData = BookModel.init(isbn: data.isbn, subIsbn: data.subIsbn, title: data.title, author: data.author, image: data.image)
     let input = WriteCheckViewModel.Input(
       registerButtonClicked: self.registerButton.rx.tap.map({ _ in
         WriteCheckModel.init(bookCategory: self.categoryLabel.text ?? "",
-                               bookTitle: self.bookTitleLabel.text ?? "",
-                               bookAuthor: self.bookAuthorLabel.text ?? "",
-                               bookCover: self.viewModel.data.bookCover,
                                quote: self.quoteTextView.text ?? "",
                                impression: self.impressionTextView.text ?? "",
-                               isbn: self.viewModel.data.isbn,
-                               subisbn: self.viewModel.data.subisbn)
+                               book: bookData)
       })
       .asObservable())
     
@@ -94,10 +92,10 @@ extension WriteCheckVC {
     quoteTextView.text = data.quote
     impressionTextView.text = data.impression
     
-    bookCoverImageView.setImage(with: data.bookCover)
+    bookCoverImageView.setImage(with: data.book.image)
     categoryLabel.text = data.bookCategory
-    bookTitleLabel.text = data.bookTitle
-    bookAuthorLabel.text = data.bookAuthor
+    bookTitleLabel.text = data.book.title
+    bookAuthorLabel.text = data.book.author
   }
 }
 
