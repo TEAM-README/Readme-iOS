@@ -123,7 +123,7 @@ extension WriteVC {
   }
   
   private func pushWriteCheckView() {
-    let bookData = BookModel.init(isbn: viewModel.separateIsbn()[0], subIsbn: viewModel.separateIsbn()[1], title: bookname ?? "", author: author ?? "", image: bookImgURL ?? "")
+    let bookData = BookModel.init(isbn: viewModel.separateIsbn()[0], subIsbn: viewModel.separateIsbn().count == 1 ? " " : viewModel.separateIsbn()[1], title: bookname ?? " ", author: author ?? " ", image: bookImgURL ?? " ")
     let data = WriteCheckModel.init(bookCategory: category ?? "", quote: quote ?? "-", impression: impression ?? "-", book: bookData)
     let writeCheckVC = ModuleFactory.shared.makeWriteCheckVC(writeInfo: data)
     navigationController?.pushViewController(writeCheckVC, animated: true)

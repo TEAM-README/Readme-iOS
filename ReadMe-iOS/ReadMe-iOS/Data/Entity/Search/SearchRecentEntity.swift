@@ -12,7 +12,7 @@ struct SearchRecentEntity: Codable {
   
   func toDomain() -> SearchModel {
     let bookModelList = self.books.map { entity in
-      SearchBookModel.init(imgURL: entity?.image ?? "", title: entity?.title ?? "", author: entity?.author ?? "", isbn: (entity?.isbn ?? "") + (entity?.subIsbn ?? ""))
+      SearchBookModel.init(imgURL: entity?.image ?? " ", title: entity?.title ?? " ", author: entity?.author ?? " ", isbn: (entity?.isbn ?? " ") + (entity?.subIsbn ?? " "))
     }
     return SearchModel(content: bookModelList)
   }
