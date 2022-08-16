@@ -162,7 +162,7 @@ extension SearchVC {
       
       if self.didSearch {
         if self.resultList.isEmpty {
-          self.setStateView(type: .dataAfterSearch)
+          self.setStateView(type: .emptyAfterSearch)
         } else {
           self.bookCV.reloadData()
           self.setStateView(type: .dataAfterSearch)
