@@ -36,6 +36,9 @@ final class WriteQuoteFlow: UIView {
 
 extension WriteQuoteFlow {
   func setData(bookInfo: WriteModel, category: Category) {
+    if bookInfo.bookcover.starts(with: "http") {
+      bookCoverImageView.backgroundColor = .clear
+    }
     bookCoverImageView.setImage(with: bookInfo.bookcover)
     bookTitleLabel.text = bookInfo.bookname
     categoryLabel.text = category.rawValue
@@ -76,6 +79,9 @@ extension WriteQuoteFlow {
     bookTitleLabel.font = .readMeFont(size: 13, type: .medium)
     bookTitleLabel.textColor = .grey05
     bookTitleLabel.numberOfLines = 2
+    
+    bookCoverImageView.backgroundColor = .grey00
+    bookCoverImageView.contentMode = .scaleAspectFit
     
     bookAuthorLabel.font = .readMeFont(size: 12)
     bookAuthorLabel.textColor = .grey06

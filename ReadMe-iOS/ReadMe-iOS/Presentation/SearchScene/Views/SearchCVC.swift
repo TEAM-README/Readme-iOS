@@ -34,6 +34,7 @@ class SearchCVC: UICollectionViewCell, UICollectionViewRegisterable {
   override func prepareForReuse() {
     super.prepareForReuse()
     
+    bookCoverImageView.backgroundColor = .grey00
     bookCoverImageView.image = UIImage()
     bookTitleLabel.text?.removeAll()
     authorLabel.text?.removeAll()
@@ -43,6 +44,9 @@ class SearchCVC: UICollectionViewCell, UICollectionViewRegisterable {
 // MARK: - setData Part
 extension SearchCVC {
   func initCell(image: String, title: String, author: String, targetStr: String?) {
+    if image.starts(with: "http") {
+      bookCoverImageView.backgroundColor = .clear
+    }
     bookCoverImageView.setImage(with: image)
     bookTitleLabel.text = title
     authorLabel.text = author
@@ -65,7 +69,7 @@ extension SearchCVC {
 extension SearchCVC {
   private func configureUI() {
     bookCoverImageView.backgroundColor = .grey00
-    bookCoverImageView.contentMode = .scaleAspectFill
+    bookCoverImageView.contentMode = .scaleAspectFit
     bookCoverImageView.clipsToBounds = true
     
     bookTitleLabel.font = .readMeFont(size: 14, type: .medium)
