@@ -188,6 +188,7 @@ extension WriteVC {
   private func setFirstFlow() {
     progressBar.setPercentage(ratio: 0.3)
     
+    nextButton.isEnabled = true
     UIView.animate(withDuration: 0.4,
                    delay: 0,
                    options: .curveEaseInOut,
@@ -358,7 +359,6 @@ extension WriteVC {
     describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.33)
     
     nextButton.title = I18N.Button.next
-    nextButton.isEnabled = true
     
     [cheerLabel, describeLabel, secondView, thirdView].forEach { $0.alpha = 0 }
   }
