@@ -205,10 +205,9 @@ extension FeedListVC: FeedCategoryDelegate {
 }
 
 extension FeedListVC: FeedListDelegate {
-  func moreButtonTapped() {
-    let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: self.isMyPage)
+  func moreButtonTapped(nickname: String? = nil, feedId: String? = nil) {
+    let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: self.isMyPage, nickname: nickname ?? "", feedId: feedId ?? "")
     let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .actionSheet)
-    // TODO: - feedId, user.nickname 넘겨줘야됨
     reportVC.buttonDelegate = bottomSheet
     bottomSheet.modalPresentationStyle = .overFullScreen
     bottomSheet.modalTransitionStyle = .crossDissolve
