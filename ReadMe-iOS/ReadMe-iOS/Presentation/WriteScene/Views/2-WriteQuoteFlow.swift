@@ -42,7 +42,7 @@ extension WriteQuoteFlow {
     bookCoverImageView.setImage(with: bookInfo.bookcover)
     bookTitleLabel.text = bookInfo.bookname
     categoryLabel.text = category.rawValue
-    bookAuthorLabel.text = bookInfo.author
+    bookAuthorLabel.text = bookInfo.author.isEmpty || bookInfo.author == " " ? "작자미상" : bookInfo.author
     
     bookTitleLabel.setTextWithLineHeight(text: bookTitleLabel.text, lineHeightMultiple: 1.23)
     bookAuthorLabel.setTextWithLineHeight(text: bookAuthorLabel.text, lineHeightMultiple: 0.83)

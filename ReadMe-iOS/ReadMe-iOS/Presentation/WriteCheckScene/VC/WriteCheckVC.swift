@@ -98,7 +98,7 @@ extension WriteCheckVC {
     bookCoverImageView.setImage(with: data.book.image)
     categoryLabel.text = data.bookCategory
     bookTitleLabel.text = data.book.title
-    bookAuthorLabel.text = data.book.author
+    bookAuthorLabel.text = data.book.author.isEmpty || data.book.author == " " ? "작자미상" : data.book.author
   }
 }
 

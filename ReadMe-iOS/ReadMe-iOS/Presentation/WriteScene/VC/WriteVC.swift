@@ -70,9 +70,10 @@ extension WriteVC {
   private func setSecondFlowData() {
     secondView.setData(bookInfo: viewModel.bookInfo, category: firstView.setSelectedCategory())
     
+    let authorName = viewModel.bookInfo.author
     self.bookname = viewModel.bookInfo.bookname
     self.category = firstView.setSelectedCategory().rawValue
-    self.author = viewModel.bookInfo.author
+    self.author = authorName.isEmpty ? " " : authorName
     self.bookImgURL = viewModel.bookInfo.bookcover
   }
   

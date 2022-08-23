@@ -276,9 +276,10 @@ extension SearchVC: UICollectionViewDataSource {
       contentList = recentList
     }
     
+    let author = contentList[indexPath.item].author
     cell.initCell(image: contentList[indexPath.item].imgURL,
                   title: contentList[indexPath.item].title,
-                  author: contentList[indexPath.item].author,
+                  author: author.isEmpty || author == " " ? "작자미상" : contentList[indexPath.item].author,
                   targetStr: self.searchTextField.text ?? nil)
     return cell
   }
