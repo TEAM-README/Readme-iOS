@@ -92,10 +92,13 @@ extension WriteCheckVC {
     quoteTextView.text = data.quote
     impressionTextView.text = data.impression
     
+    if data.book.image.starts(with: "http") {
+      bookCoverImageView.backgroundColor = .clear
+    }
     bookCoverImageView.setImage(with: data.book.image)
     categoryLabel.text = data.bookCategory
     bookTitleLabel.text = data.book.title
-    bookAuthorLabel.text = data.book.author
+    bookAuthorLabel.text = data.book.author.isEmpty || data.book.author == " " ? "작자미상" : data.book.author
   }
 }
 
@@ -158,6 +161,9 @@ extension WriteCheckVC {
     bookTitleLabel.textColor = .grey05
     bookTitleLabel.setTextWithLineHeight(text: bookTitleLabel.text, lineHeightMultiple: 1.23)
     bookTitleLabel.numberOfLines = 2
+    
+    bookCoverImageView.backgroundColor = .grey00
+    bookCoverImageView.contentMode = .scaleAspectFit
     
     bookAuthorLabel.font = .readMeFont(size: 12)
     bookAuthorLabel.textColor = .grey06
