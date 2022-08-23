@@ -215,6 +215,7 @@ extension WriteVC {
     progressBar.setPercentage(ratio: 0.6)
     
     setSecondFlowData()
+    nextButton.isEnabled = false
     UIView.animate(withDuration: 0.4,
                    delay: 0,
                    options: .curveEaseInOut,
@@ -242,7 +243,7 @@ extension WriteVC {
     progressBar.setPercentage(ratio: 1)
     
     thirdView.setData(bookname: bookname ?? "", sentence: quote ?? "")
-    
+    nextButton.isEnabled = false
     UIView.animate(withDuration: 0.4,
                    delay: 0,
                    options: .curveEaseInOut,
@@ -320,15 +321,19 @@ extension WriteVC: UITextViewDelegate {
       if textView.text == "" {
         textView.text = I18N.Write.quotePlaceholder
         textView.textColor = .grey09
+        self.nextButton.isEnabled = false
       } else {
         self.quote = secondView.quoteTextView.text
+        self.nextButton.isEnabled = true
       }
     case thirdView.impressionTextView:
       if textView.text == "" {
         textView.text = I18N.Write.impressionPlaceholder
         textView.textColor = .grey09
+        self.nextButton.isEnabled = false
       } else {
         self.impression = thirdView.impressionTextView.text
+        self.nextButton.isEnabled = true
       }
     default:
       return
