@@ -197,7 +197,7 @@ extension BaseAPI: TargetType {
 //      } else {
 //        return ["Content-Type": "application/json"]
 //      }
-      return ["Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWNjZXNzVG9rZW4iLCJpZCI6MTQsIm5pY2tuYW1lIjoi66as65Oc66-4IiwiaWF0IjoxNjU4ODUyMjc2LCJleHAiOjE2NjE0NDQyNzZ9.-NI0BlxcIEL2_Q6dKCPujo2T3imOyGBL6DtZZmXQaXc",
+      return ["Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWNjZXNzVG9rZW4iLCJpZCI6MTQsIm5pY2tuYW1lIjoi66as65Oc66-4IiwiaWF0IjoxNjYxODQwNTM1LCJleHAiOjE2NjQ0MzI1MzV9.2axHoShthb1LtdFIPW9W7ah8XFokvAcStjsAe0_Z_Kc",
               "Content-Type": "application/json"]
     }
   }
