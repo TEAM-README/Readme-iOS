@@ -62,11 +62,11 @@ class SplashVC: UIViewController {
     present(filterVC, animated: true)
   }
   
-  private func presentFeedReportView() {
-    let feedReportVC = BottomSheetVC(contentViewController: ModuleFactory.shared.makeFeedReportVC(isMyPage: false), type: .actionSheet)
-    feedReportVC.modalPresentationStyle = .overFullScreen
-    present(feedReportVC, animated: true)
-  }
+//  private func presentFeedReportView() {
+//    let feedReportVC = BottomSheetVC(contentViewController: ModuleFactory.shared.makeFeedReportVC(isMyPage: false), type: .actionSheet)
+//    feedReportVC.modalPresentationStyle = .overFullScreen
+//    present(feedReportVC, animated: true)
+//  }
   
   private func pushWriteView() {
     let bookInfo = WriteModel.init(bookcover: "-", bookname: "-", category: "-", author: "-", isbn: "-")

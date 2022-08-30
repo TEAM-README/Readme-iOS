@@ -40,7 +40,8 @@ final class FeedListContentTVC: UITableViewCell, UITableViewRegisterable {
     
   @IBAction func tapMoreButton(_ sender: Any) {
     self.makeVibrate(degree: .light)
-    self.buttonDelegate?.moreButtonTapped()
+    guard let viewModel = viewModel else { return }
+    self.buttonDelegate?.moreButtonTapped(nickname: viewModel.nickname, feedId: String(viewModel.idx))
   }
 }
 

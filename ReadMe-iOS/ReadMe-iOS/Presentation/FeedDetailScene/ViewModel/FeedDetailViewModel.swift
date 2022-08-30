@@ -13,6 +13,9 @@ final class FeedDetailViewModel: ViewModelType {
   private let useCase: FeedDetailUseCase
   private let feedDetailIdx: Int
   private let disposeBag = DisposeBag()
+  var idx: Int {
+    get { return feedDetailIdx }
+  }
   
   // MARK: - Inputs
   struct Input {

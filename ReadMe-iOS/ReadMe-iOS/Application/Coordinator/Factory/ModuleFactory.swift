@@ -19,7 +19,7 @@ protocol ModuleFactoryProtocol {
   func makeSearchVC() -> SearchVC
   func makeSettingVC() -> SettingVC
   func makeWriteVC(bookInfo: WriteModel) -> WriteVC
-  func makeFeedReportVC(isMyPage: Bool) -> FeedReportVC
+  func makeFeedReportVC(isMyPage: Bool, nickname: String, feedId: String) -> FeedReportVC
 }
 
 final class ModuleFactory: ModuleFactoryProtocol{
@@ -126,10 +126,10 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return filterVC
   }
   
-  func makeFeedReportVC(isMyPage: Bool) -> FeedReportVC {
+  func makeFeedReportVC(isMyPage: Bool, nickname: String, feedId: String) -> FeedReportVC {
     let repository = DefaultFeedReportRepository()
     let useCase = DefaultFeedReportUseCase(repository: repository)
-    let viewModel = FeedReportViewModel(useCase: useCase, isMyPage: isMyPage)
+    let viewModel = FeedReportViewModel(useCase: useCase, isMyPage: isMyPage, userNickName: nickname, feedId: feedId)
     let feedReportVC = FeedReportVC.controllerFromStoryboard(.feedReport)
     feedReportVC.viewModel = viewModel
     return feedReportVC
