@@ -70,9 +70,10 @@ extension WriteVC {
   private func setSecondFlowData() {
     secondView.setData(bookInfo: viewModel.bookInfo, category: firstView.setSelectedCategory())
     
+    let authorName = viewModel.bookInfo.author
     self.bookname = viewModel.bookInfo.bookname
     self.category = firstView.setSelectedCategory().rawValue
-    self.author = viewModel.bookInfo.author
+    self.author = authorName.isEmpty ? " " : authorName
     self.bookImgURL = viewModel.bookInfo.bookcover
   }
   
@@ -188,6 +189,7 @@ extension WriteVC {
   private func setFirstFlow() {
     progressBar.setPercentage(ratio: 0.3)
     
+    nextButton.isEnabled = true
     UIView.animate(withDuration: 0.4,
                    delay: 0,
                    options: .curveEaseInOut,
@@ -215,6 +217,7 @@ extension WriteVC {
     progressBar.setPercentage(ratio: 0.6)
     
     setSecondFlowData()
+    nextButton.isEnabled = self.secondView.quoteTextView.text == I18N.Write.quotePlaceholder ? false : true
     UIView.animate(withDuration: 0.4,
                    delay: 0,
                    options: .curveEaseInOut,
@@ -242,7 +245,7 @@ extension WriteVC {
     progressBar.setPercentage(ratio: 1)
     
     thirdView.setData(bookname: bookname ?? "", sentence: quote ?? "")
-    
+    nextButton.isEnabled = self.thirdView.impressionTextView.text == I18N.Write.impressionPlaceholder ? false : true
     UIView.animate(withDuration: 0.4,
                    delay: 0,
                    options: .curveEaseInOut,
@@ -307,9 +310,8 @@ extension WriteVC: UITextViewDelegate {
         textView.text = ""
       }
     default:
-      return true
+      break
     }
-    
     return true
   }
   
@@ -320,18 +322,22 @@ extension WriteVC: UITextViewDelegate {
       if textView.text == "" {
         textView.text = I18N.Write.quotePlaceholder
         textView.textColor = .grey09
+        self.nextButton.isEnabled = false
       } else {
         self.quote = secondView.quoteTextView.text
+        self.nextButton.isEnabled = true
       }
     case thirdView.impressionTextView:
       if textView.text == "" {
         textView.text = I18N.Write.impressionPlaceholder
         textView.textColor = .grey09
+        self.nextButton.isEnabled = false
       } else {
         self.impression = thirdView.impressionTextView.text
+        self.nextButton.isEnabled = true
       }
     default:
-      return
+      break
     }
   }
 }
@@ -353,7 +359,6 @@ extension WriteVC {
     describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.33)
     
     nextButton.title = I18N.Button.next
-    nextButton.isEnabled = true
     
     [cheerLabel, describeLabel, secondView, thirdView].forEach { $0.alpha = 0 }
   }
