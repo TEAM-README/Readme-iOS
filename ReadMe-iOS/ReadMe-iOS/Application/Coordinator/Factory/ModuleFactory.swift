@@ -123,12 +123,13 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return feedListVC
   }
   
-  func makeFilterVC() -> FilterVC {
+  func makeFilterVC(category: [Category]) -> FilterVC {
     let repository = DefaultFilterRepository(service: BaseService.default)
     let useCase = DefaultFilterUseCase(repository: repository)
     let viewModel = FilterViewModel(useCase: useCase)
     let filterVC = FilterVC.controllerFromStoryboard(.filter)
     filterVC.viewModel = viewModel
+    filterVC.selectedCategory = category
     return filterVC
   }
   

@@ -63,7 +63,7 @@ extension FeedListViewModel {
     let userDataRelay = useCase.userMyPageData
     
     Observable.combineLatest(userDataRelay,feedListRelay) { userData, feedListData -> FeedBundleData in
-      FeedBundleData(myPageData: userData, feedListData: feedListData)
+      return FeedBundleData(myPageData: userData, feedListData: feedListData)
     }.subscribe(onNext: { [weak self] data in
       guard let self = self else { return }
       var feedDatasource: [FeedListDataModel] = []
@@ -78,6 +78,7 @@ extension FeedListViewModel {
       }
 
       if !self.isMyPage {
+        print("123123",data.feedListData.category)
         let category = FeedListDataModel(type: .category,
                                          dataSource: FeedCategoryViewModel(category: data.feedListData.category))
         feedDatasource.insert(category, at: 0)

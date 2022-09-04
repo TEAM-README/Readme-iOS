@@ -25,7 +25,7 @@ struct FeedListEntity: Codable{
                                   date: entity.createdAt)
     }
     
-    let category = filters.map { filter in
+    let category = filters.compactMap { filter in
       return FeedCategory.getCategory(filter)
     }
     

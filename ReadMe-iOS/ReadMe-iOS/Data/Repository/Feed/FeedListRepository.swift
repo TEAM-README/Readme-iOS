@@ -24,7 +24,8 @@ final class DefaultFeedListRepository {
 
 extension DefaultFeedListRepository: FeedListRepository {
   func getFeedList(page: Int, category: String) -> Observable<FeedListEntity?> {
-    return networkService.getBookListInformation(page: page, category: category)
+    print("REPOSITORY",category)
+    return networkService.getBookListInformation(page: page, category: category).debug()
   }
   
   func getMyFeedList() -> Observable<MyFeedListEntity?> {

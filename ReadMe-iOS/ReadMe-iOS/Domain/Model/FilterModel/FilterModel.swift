@@ -29,4 +29,8 @@ enum Category: String, CaseIterable {
   case art = "예술/대중문화"
   case improve = "자기계발"
   case economy = "경제/경영"
+  
+  func toFeedCategory() -> FeedCategory {
+    return FeedCategory.init(rawValue: self.rawValue) ?? .novel
+  }
 }

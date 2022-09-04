@@ -30,7 +30,7 @@ extension DefaultFilterRepository: FilterRepository {
 extension DefaultFilterRepository {
   private func makeMockFilterCategory() -> Observable<FilterModel?> {
     return .create { observer in
-      let fakeCategory = FilterModel.init(category: [Category.economy, Category.magazine, Category.computer])
+      let fakeCategory = FilterModel.init(category: [])
       observer.onNext(fakeCategory)
       return Disposables.create()
     }

@@ -22,6 +22,8 @@ final class FeedListVC: UIViewController {
   private var isMyPage: Bool = false
   private var cachedIndexList: Set<IndexPath> = []
   private var isScrollAnimationRequired = true
+  private var currentCategory: [Category] = []
+  
   var viewModel: FeedListViewModel!
   
   // MARK: - UI Component Part
@@ -159,6 +161,13 @@ extension FeedListVC {
   }
   
   private func addObserver() {
+    addObserverAction(.filterButtonClicked) { noti in
+      if let category = noti.object as? [Category] {
+        print("currentCategory 저장",category)
+        self.currentCategory = category
+      }
+    }
+    
     addObserverAction(.report) { noti in
       guard let nickname = noti.userInfo?["nickname"] as? String else { return }
       guard let feedId = noti.userInfo?["feedId"] as? String else { return }
@@ -195,7 +204,7 @@ extension FeedListVC {
 
 extension FeedListVC: FeedCategoryDelegate {
   func categoryButtonTapped() {
-    let filterVC = ModuleFactory.shared.makeFilterVC()
+    let filterVC = ModuleFactory.shared.makeFilterVC(category: currentCategory)
     let bottomSheet = BottomSheetVC(contentViewController: filterVC)
     filterVC.buttonDelegate = bottomSheet
     bottomSheet.modalPresentationStyle = .overFullScreen

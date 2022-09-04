@@ -33,7 +33,6 @@ extension FilterViewModel {
   func transform(from input: Input, disposeBag: DisposeBag) -> Output {
     let output = Output()
     self.bindOutput(output: output, disposeBag: disposeBag)
-    // input,output 상관관계 작성
     
     input.viewWillAppearEvent.subscribe(onNext: { [weak self] in
       guard let self = self else { return }

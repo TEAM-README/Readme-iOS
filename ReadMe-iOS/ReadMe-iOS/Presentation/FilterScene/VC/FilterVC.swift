@@ -19,20 +19,19 @@ final class FilterVC: UIViewController {
   
   private lazy var collectionViewFlowLayout = LeftAlignedCollectionViewFlowLayout()
   private let disposeBag = DisposeBag()
-  private var selectedCategory: [Category] = []
+  var selectedCategory: [Category] = []
   var buttonDelegate: BottomSheetDelegate?
   var viewModel: FilterViewModel!
   
   private lazy var dataSource = RxCollectionViewSectionedReloadDataSource<CategorySectionModel> (configureCell: { dataSource, collectionView, indexPath, item in
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCVC.className, for: indexPath) as? CategoryCVC else { return UICollectionViewCell() }
     cell.categoryLabel.text = item.rawValue
-    
     if self.selectedCategory.contains(item) {
       cell.changeState(isSelected: true)
     } else {
       cell.changeState(isSelected: false)
+      
     }
-    
     return cell
   })
   
@@ -46,11 +45,10 @@ final class FilterVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.bindViewModels()
     self.configUI()
     self.setLayout()
     self.setCollectionView()
-    self.bindViewModels()
-    self.bindCollectionView()
     self.tapButton()
   }
 }
@@ -116,15 +114,16 @@ extension FilterVC {
       .bind(to: categoryCV.rx.items(dataSource: dataSource))
       .disposed(by: self.disposeBag)
     
+    
     categoryCV.rx
       .modelAndIndexSelected(Category.self)
       .subscribe(onNext: { category, indexpath in
         self.makeVibrate(degree: .light)
         if let cell = self.categoryCV.cellForItem(at: indexpath) as? CategoryCVC {
           if cell.isSelectedCell {
-            self.selectedCategory.append(category)
             cell.changeState(isSelected: false)
           } else {
+            self.selectedCategory.append(category)
             cell.changeState(isSelected: true)
           }
         }
@@ -140,7 +139,7 @@ extension FilterVC {
     
     output.selectedCategory.asSignal().emit { [weak self] category in
       guard let self = self else { return }
-      self.selectedCategory = category
+      self.bindCollectionView()
     }
   }
   
@@ -156,7 +155,8 @@ extension FilterVC {
     applyButton.rx.tap
       .subscribe(onNext: {
         self.makeVibrate()
-        // TODO: - 서버통신..
+        self.postObserverAction(.filterButtonClicked,
+                                object: self.selectedCategory)
         self.buttonDelegate?.dismissButtonTapped(completion: nil)
       })
       .disposed(by: disposeBag)

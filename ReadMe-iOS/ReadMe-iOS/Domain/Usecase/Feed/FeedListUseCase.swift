@@ -38,7 +38,8 @@ extension DefaultFeedListUseCase: FeedListUseCase {
   
   func getFeedList(pageNum: Int, category: [FeedCategory]) {
     // FIXME: - 서버 나오면 카테고리 부분 수정해야함
-    let categoryString = category.isEmpty ? "" : ""
+    print("새로 들어옴",category)
+    let categoryString = category.isEmpty ? "" : makeCategoryString(category)
     feedRepository.getFeedList(page: 0, category: categoryString)
       .filter{ $0 != nil }
       .subscribe(onNext: { [weak self] entity in
@@ -46,6 +47,18 @@ extension DefaultFeedListUseCase: FeedListUseCase {
         let model = entity!.toDomain()
         self.feedList.accept(model)
       }).disposed(by: self.disposeBag)
+  }
+  
+  private func makeCategoryString(_ category: [FeedCategory]) -> String {
+    var result = ""
+    
+    for (index,item) in category.enumerated() {
+      result += item.rawValue
+      if index != category.count - 1 {
+        result += ","
+      }
+    }
+    return result
   }
   
   func getMyFeedList() {
@@ -83,6 +96,15 @@ extension DefaultFeedListUseCase {
     addObserverAction(.writeComplete) { noti in
       if let object = noti.object as? WriteCheckModel {
         
+      }
+    }
+    
+    addObserverAction(.filterButtonClicked) { noti in
+      if let category = noti.object as? [Category] {
+        let filterCategoryList = category.map { category -> FeedCategory in
+          return category.toFeedCategory()
+        }
+        self.getFeedList(pageNum: 0, category: filterCategoryList)
       }
     }
   }

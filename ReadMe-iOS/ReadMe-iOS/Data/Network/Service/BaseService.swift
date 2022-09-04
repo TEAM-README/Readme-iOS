@@ -46,9 +46,7 @@ class BaseService{
             case .success(let value):
               do {
                 let decoder = JSONDecoder()
-                dump(value)
                 let body = try decoder.decode(ResponseObject<T>.self, from: value.data)
-                dump(body)
                 observer.onNext(body.data)
                 observer.onCompleted()
               } catch let error {
