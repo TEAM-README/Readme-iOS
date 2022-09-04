@@ -21,7 +21,6 @@ enum BaseAPI{
   case getMyFeedList
   case getFeedList(filter: String)
   case getFeedDetail(idx: Int)
-  case getFeedList(page: Int, category: String)
   case getNickname
   case getSearchRecent
   case getSearch(query: String, display: Int, start: Int, sort: String)
@@ -39,7 +38,7 @@ extension BaseAPI: TargetType {
       case .postSignin,.postSignup,.getDuplicatedNicknameState,.getMyFeedList:
         base += "user"
     case .getFeedDetail,.getFeedList:
-      base += ""
+      base += "feed"
     case .getSearchRecent:
       base += "feed/recent"
     case .getNickname:
@@ -140,6 +139,9 @@ extension BaseAPI: TargetType {
       params["platform"] = platform
       params["socialToken"] = socialToken
       params["nickname"] = nickname
+        
+      case .getFeedList(let filter):
+        params["filters"] = filter
 
     default:
       break
@@ -153,7 +155,7 @@ extension BaseAPI: TargetType {
   ///
   private var parameterEncoding : ParameterEncoding{
     switch self {
-    case .getSearch,.getDuplicatedNicknameState:
+      case .getSearch,.getDuplicatedNicknameState,.getFeedList:
       return URLEncoding.init(destination: .queryString, arrayEncoding: .noBrackets, boolEncoding: .literal)
     default :
       return JSONEncoding.default
@@ -167,7 +169,7 @@ extension BaseAPI: TargetType {
   ///
   var task: Task {
     switch self{
-      case .postSignin, .write,.postSignup,.getDuplicatedNicknameState:
+      case .postSignin, .write,.postSignup,.getDuplicatedNicknameState,.getFeedList:
       return .requestParameters(parameters: bodyParameters ?? [:], encoding: parameterEncoding)
     case .getSearch:
       return .requestParameters(parameters: bodyParameters ?? [:], encoding: NaverParameterEncoding.init())

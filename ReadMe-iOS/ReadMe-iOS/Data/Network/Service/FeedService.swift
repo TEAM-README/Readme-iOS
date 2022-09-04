@@ -12,6 +12,7 @@ protocol FeedServiceType {
   func getBookDetailInformation(idx: Int) -> Observable<FeedDetailEntity?>
   func getBookListInformation(page: Int,category:String) -> Observable<FeedListEntity?>
   func getMyFeedList() -> Observable<MyFeedListEntity?>
+  func getMyFeedListInAF(completion: @escaping (Result<MyFeedListEntity?,Error>) -> Void)
 }
 
 extension BaseService: FeedServiceType {

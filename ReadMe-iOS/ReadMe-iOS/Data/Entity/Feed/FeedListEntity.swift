@@ -15,10 +15,10 @@ struct FeedListEntity: Codable{
   func toDomain() -> FeedListModel {
     let feedList = self.feeds.map { entity in
       return FeedDetailModel.init(idx: entity.id,
-                                  imgURL: entity.image ?? "",
+                                  imgURL: entity.book.image ?? "" ,
                                   category: entity.categoryName,
-                                  title: entity.title,
-                                  author: entity.author ?? "",
+                                  title: entity.book.title ?? "",
+                                  author: entity.book.author ?? "",
                                   sentence: entity.sentence,
                                   comment: entity.feeling,
                                   nickname: entity.user.nickname,
@@ -44,10 +44,10 @@ struct MyFeedListEntity: Codable {
   func toDomain() -> FeedListModel {
     let feedList = self.feeds.map { entity in
       return FeedDetailModel.init(idx: entity.id,
-                                  imgURL: entity.image ?? "",
+                                  imgURL: entity.book.image ?? "",
                                   category: entity.categoryName,
-                                  title: entity.title,
-                                  author: entity.author ?? "",
+                                  title: entity.book.title ?? "",
+                                  author: entity.book.author ?? "",
                                   sentence: entity.sentence,
                                   comment: entity.feeling,
                                   nickname: entity.user.nickname,
