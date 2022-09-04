@@ -50,7 +50,7 @@ struct I18N {
     static let textfieldPlacehodler = "특수문자는 사용할 수 없습니다"
     static let nicknameDuplicatedErr = "중복된 닉네임입니다."
     static let characterErr = "특수문자를 사용할 수 없습니다."
-    static let byteExceedErr = "닉네임은 20자를 초과할 수 없습니다."
+    static let byteExceedErr = "닉네임은 7자를 초과할 수 없습니다."
     static let availableNickname = "사용 가능한 닉네임입니다."
   }
   
@@ -109,6 +109,8 @@ struct I18N {
     static let title = "등록을 완료했어요"
     static let subtitle = "피드 와 마이페이지 에서\n작성한 감상글을 확인할 수 있어요"
     static let move = "피드 구경하러 가기"
+    static let feed = "피드"
+    static let mypage = "마이페이지"
   }
   
   struct Filter {

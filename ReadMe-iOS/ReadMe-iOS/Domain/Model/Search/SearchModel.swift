@@ -13,6 +13,16 @@ struct SearchModel {
 
 struct SearchBookModel {
   let imgURL: String
-  let title: String
-  let author: String
+  var title: String
+  var author: String
+  let isbn: String
+}
+
+extension SearchBookModel {
+  mutating func removeBoldText() {
+    self.title = self.title.replacingOccurrences(of: "<b>", with: "")
+    self.title = self.title.replacingOccurrences(of: "</b>", with: "")
+    self.author = self.author.replacingOccurrences(of: "<b>", with: "")
+    self.author = self.author.replacingOccurrences(of: "</b>", with: "")
+  }
 }

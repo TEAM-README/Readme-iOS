@@ -15,35 +15,46 @@ enum BaseAPI{
   case postSampleSignin
   case getDuplicatedNicknameState(nickname: String)
   case deleteUser
+
   
   // Feed List
   case getMyFeedList
   case getFeedList(filter: String)
   case getFeedDetail(idx: Int)
+  case getFeedList(page: Int, category: String)
+  case getNickname
+  case getSearchRecent
+  case getSearch(query: String, display: Int, start: Int, sort: String)
+  case write(bookCategory: String, quote: String, impression: String, book: BookModel)
   case deleteFeed(idx: Int)
   case postFeedReport(idx: Int)
-  
-  // Feed Write
-  case getSearchRecent
-  //FIXME: - Parameter 가 너무 많아서 DTO 모델로 나중에 바꿀 예정
-  case postFeed(categoryName: String,sentence: String, feeling: String, isbn: Int, subIsbn: Int,
-                title: String, author: String, image: String)
-  
 }
 
 extension BaseAPI: TargetType {
   public var baseURL: URL {
     var base = Config.Network.baseURL
+    let search = Config.Network.searchURL
+    
     switch self{
-      case .postSignup,.postSignin,.postSampleSignin,.getDuplicatedNicknameState,
-          .deleteUser,.getMyFeedList:
-        base += "/user"
-        
-      case .getFeedList,.getFeedDetail,.deleteFeed,.getSearchRecent,.postFeed:
-        base += "/feed"
-        
-      case .postFeedReport:
-        base += "/report"
+      case .postSignin,.postSignup,.getDuplicatedNicknameState,.getMyFeedList:
+        base += "user"
+    case .getFeedDetail,.getFeedList:
+      base += ""
+    case .getSearchRecent:
+      base += "feed/recent"
+    case .getNickname:
+      base += ""
+    case .write:
+      base += "feed"
+    case .getSearch:
+      guard let url = URL(string: search) else {
+        fatalError("searchURL could not be configured")
+      }
+      return url
+
+    default:
+        base += ""
+
     }
     guard let url = URL(string: base) else {
       fatalError("baseURL could not be configured")
@@ -54,10 +65,10 @@ extension BaseAPI: TargetType {
   // MARK: - Path
   var path: String {
     switch self{
-      case .postSignup:
-        return "/signup"
       case .postSignin:
         return "/login"
+      case .postSignup:
+        return "/signup"
       case .postSampleSignin:
         return "/auth/access-token"
       case .getDuplicatedNicknameState:
@@ -103,38 +114,35 @@ extension BaseAPI: TargetType {
   private var bodyParameters: Parameters? {
     var params: Parameters = [:]
     switch self{
-      case .postSignup(let platform, let socialToken, let nickname):
-        params["platform"] = platform
-        params["socialToken"] = socialToken
-        params["nickname"] = nickname
-        
-      case .postSignin(let platform, let socialToken):
-        params["platform"] = platform
-        params["socialToken"] = socialToken
-        
-      case .postSampleSignin:
-        params["nickname"] = "리드미"
-      
-      case .getFeedList(let filter):
-        params["filters"] = filter
-        
-      case .getDuplicatedNicknameState(let nickname):
-        params["query"] = nickname
-        
-      case .postFeed(let categoryName,let sentence,let feeling,
-                     let isbn,let subIsbn,let title,let author,
-                     let image):
-        params["categoryName"] = categoryName
-        params["sentence"] = sentence
-        params["feeling"] = feeling
-        params["isbn"] = isbn
-        params["subIsbn"] = subIsbn
-        params["title"] = title
-        params["author"] = author
-        params["image"] = image
+    case .postSignin(let provider,let token):
+      params["platform"] = provider
+      params["socialToken"] = token
+    case .getDuplicatedNicknameState(let nickname):
+      params["nickname"] = nickname
+    case .write(let bookcategory, let quote, let impression, let book):
+      let bookParams: [String: Any] = [
+        "isbn": book.isbn,
+        "subIsbn": book.subIsbn,
+        "title": book.title,
+        "author": book.author,
+        "image": book.image
+      ]
+      params["categoryName"] = bookcategory
+      params["sentence"] = quote
+      params["feeling"] = impression
+      params["book"] = bookParams
+    case .getSearch(let query, let display, let start, let sort):
+      params["query"] = query
+      params["display"] = display
+      params["start"] = start
+      params["sort"] = sort
+    case .postSignup(let platform, let socialToken, let nickname):
+      params["platform"] = platform
+      params["socialToken"] = socialToken
+      params["nickname"] = nickname
 
-      default:
-        break
+    default:
+      break
     }
     return params
   }
@@ -145,11 +153,11 @@ extension BaseAPI: TargetType {
   ///
   private var parameterEncoding : ParameterEncoding{
     switch self {
-      case .getFeedList:
-        return URLEncoding.init(destination: .queryString, arrayEncoding: .noBrackets, boolEncoding: .literal)
-      default :
-        return JSONEncoding.default
-        
+    case .getSearch,.getDuplicatedNicknameState:
+      return URLEncoding.init(destination: .queryString, arrayEncoding: .noBrackets, boolEncoding: .literal)
+    default :
+      return JSONEncoding.default
+      
     }
   }
   
@@ -159,22 +167,31 @@ extension BaseAPI: TargetType {
   ///
   var task: Task {
     switch self{
-      case .postSignup,.postSignin,.postSampleSignin,
-          .getDuplicatedNicknameState,.getFeedList,.postFeed:
-        return .requestParameters(parameters: bodyParameters ?? [:], encoding: parameterEncoding)
-      default:
-        return .requestPlain
-        
+      case .postSignin, .write,.postSignup,.getDuplicatedNicknameState:
+      return .requestParameters(parameters: bodyParameters ?? [:], encoding: parameterEncoding)
+    case .getSearch:
+      return .requestParameters(parameters: bodyParameters ?? [:], encoding: NaverParameterEncoding.init())
+    default:
+      return .requestPlain
+      
     }
   }
   
   public var headers: [String: String]? {
-    
-    if let userToken = UserDefaults.standard.string(forKey: "authorization") {
-      return ["authorization": userToken,
-              "Content-Type": "application/json"]
-    } else {
-      return ["Content-Type": "application/json"]
+    switch self {
+    case .getSearch:
+      return ["Content-Type": "application/json",
+              "X-Naver-Client-Id": "ZGdnUsGMFrU8gPCdGxyi",
+              "X-Naver-Client-Secret": "oyvfoKifc8"]
+    default:
+      // TODO: - 임시 토큰
+        if let userToken = UserDefaults.standard.string(forKey:UserDefaultKeyList.Auth.accessToken) {
+        return ["Authorization": userToken,
+                "Content-Type": "application/json"]
+      } else {
+        return ["Content-Type": "application/json"]
+      }
+
     }
   }
   
@@ -183,4 +200,23 @@ extension BaseAPI: TargetType {
   }
   
   typealias Response = Codable
+}
+
+
+struct NaverParameterEncoding: ParameterEncoding {
+    func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
+        var urlRequest = try urlRequest.asURLRequest()
+      var newString = ""
+      if var urlString = urlRequest.url?.absoluteString,
+         let query = parameters?.queryParameters{
+        urlString.removeLast()
+        newString = urlString
+        newString += "?"
+        newString += query
+      }
+      
+      urlRequest.url = URL(string: newString)
+    
+        return urlRequest
+    }
 }

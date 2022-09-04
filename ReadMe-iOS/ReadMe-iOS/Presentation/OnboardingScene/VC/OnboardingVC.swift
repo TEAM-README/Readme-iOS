@@ -158,12 +158,12 @@ private extension OnboardingVC {
         self.contentScrollView.setContentOffset(CGPoint(x: CGFloat(self.pageIndex) * screenWidth, y: 0),
                                                 animated: true)
       }else {
-        self.pushBaseView()
+        self.pushLoginVC()
         UserDefaults.standard.setValue(true, forKey: UserDefaultKeyList.Onboarding.onboardingComplete)
       }
     }
     skipActionButton.press {
-      self.pushBaseView()
+      self.pushLoginVC()
       UserDefaults.standard.setValue(true, forKey: UserDefaultKeyList.Onboarding.onboardingComplete)
     }
   }
@@ -184,10 +184,9 @@ private extension OnboardingVC {
     }
   }
 
-  private func moveLoginVC(){
+  private func pushLoginVC(){
     let loginVC = factory.makeLoginVC()
-    loginVC.modalPresentationStyle = .fullScreen
-    self.present(loginVC, animated: false, completion: nil)
+    navigationController?.pushViewController(loginVC, animated: true)
   }
   
   private func pushBaseView() {

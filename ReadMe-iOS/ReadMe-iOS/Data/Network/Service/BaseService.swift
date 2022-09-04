@@ -46,17 +46,42 @@ class BaseService{
             case .success(let value):
               do {
                 let decoder = JSONDecoder()
-                dump(value.data)
+                dump(value)
                 let body = try decoder.decode(ResponseObject<T>.self, from: value.data)
+                dump(body)
                 observer.onNext(body.data)
                 observer.onCompleted()
               } catch let error {
+                print("ERROR")
                 print("에러")
-                dump(error)
                 observer.onError(error)
               }
             case .failure(let error):
+              print("FAILURE")
               dump(error)
+              observer.onError(error)
+          }
+        }.disposed(by: self.disposeBag)
+      return Disposables.create()
+    }
+  }
+  
+  func naverRequestObjectInRx(_ target: BaseAPI) -> Observable<SearchEntity?>{
+    return Observable<SearchEntity?>.create { observer in
+      provider.rx
+        .request(target)
+        .subscribe { event in
+          switch event {
+            case .success(let value):
+              do {
+                let decoder = JSONDecoder()
+                let body = try decoder.decode(SearchEntity.self, from: value.data)
+                observer.onNext(body)
+                observer.onCompleted()
+              } catch let error {
+                observer.onError(error)
+              }
+            case .failure(let error):
               observer.onError(error)
           }
         }.disposed(by: self.disposeBag)

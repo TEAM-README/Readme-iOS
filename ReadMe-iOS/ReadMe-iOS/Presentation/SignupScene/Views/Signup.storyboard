@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -61,20 +62,41 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="중복확인" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dh0-Pg-VcO">
+                                <rect key="frame" x="326" y="229.5" width="45" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="0kT-4h-2UG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" name="g1"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aw2-ug-Rx8">
+                                <rect key="frame" x="316" y="215" width="65" height="50.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="sqO-ze-brM"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="foA-Xq-Huo" secondAttribute="trailing" constant="28" id="CHr-Ad-SyN"/>
+                            <constraint firstItem="aw2-ug-Rx8" firstAttribute="bottom" secondItem="SjI-au-Nb7" secondAttribute="bottom" id="FsQ-5b-eUy"/>
                             <constraint firstItem="dkX-Wf-LAU" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="80" id="NKc-cc-agF"/>
                             <constraint firstItem="Pdl-eH-FVg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="22" id="Oe9-Pa-xIo"/>
+                            <constraint firstItem="aw2-ug-Rx8" firstAttribute="top" secondItem="SjI-au-Nb7" secondAttribute="top" id="Qim-KC-xXL"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="aw2-ug-Rx8" secondAttribute="trailing" constant="33" id="TA4-R6-5Rn"/>
                             <constraint firstItem="SjI-au-Nb7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="28" id="TNY-oO-YBA"/>
                             <constraint firstItem="dkX-Wf-LAU" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="28" id="UOn-Kb-AvH"/>
                             <constraint firstItem="s7A-OE-MXd" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="Ww6-6A-hFK"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="SjI-au-Nb7" secondAttribute="trailing" constant="28" id="XN8-OX-OCx"/>
+                            <constraint firstItem="dh0-Pg-VcO" firstAttribute="trailing" secondItem="SjI-au-Nb7" secondAttribute="trailing" constant="-15" id="c3F-JJ-cLB"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Pdl-eH-FVg" secondAttribute="trailing" constant="22" id="dkH-6p-51n"/>
                             <constraint firstItem="s7A-OE-MXd" firstAttribute="top" secondItem="SjI-au-Nb7" secondAttribute="bottom" constant="16" id="fWi-kC-UpN"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Pdl-eH-FVg" secondAttribute="bottom" constant="34" id="iVu-L9-S5p"/>
+                            <constraint firstItem="dh0-Pg-VcO" firstAttribute="centerY" secondItem="SjI-au-Nb7" secondAttribute="centerY" id="kbX-mD-eEJ"/>
                             <constraint firstItem="foA-Xq-Huo" firstAttribute="centerY" secondItem="s7A-OE-MXd" secondAttribute="centerY" id="nAx-l7-rce"/>
                             <constraint firstItem="SjI-au-Nb7" firstAttribute="top" secondItem="WQc-5z-ne4" secondAttribute="bottom" constant="38" id="nHs-ru-IPq"/>
                             <constraint firstItem="WQc-5z-ne4" firstAttribute="top" secondItem="dkX-Wf-LAU" secondAttribute="bottom" constant="15" id="nxW-kT-a8G"/>
@@ -84,6 +106,8 @@
                     <connections>
                         <outlet property="completeButton" destination="Pdl-eH-FVg" id="e2x-Ft-q7S"/>
                         <outlet property="completeButtonBottomConstraint" destination="iVu-L9-S5p" id="CCj-ik-Edm"/>
+                        <outlet property="duplicateCheckButton" destination="aw2-ug-Rx8" id="TQq-Kb-WT3"/>
+                        <outlet property="duplicateCheckLabel" destination="dh0-Pg-VcO" id="tdB-bS-jdV"/>
                         <outlet property="nicknameTextField" destination="SjI-au-Nb7" id="Y1Y-XO-ar1"/>
                         <outlet property="stateLabel" destination="s7A-OE-MXd" id="YEl-yo-dgo"/>
                         <outlet property="subtitleLabel" destination="WQc-5z-ne4" id="ijZ-ZO-0lC"/>
@@ -93,10 +117,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="116"/>
+            <point key="canvasLocation" x="131.8840579710145" y="115.84821428571428"/>
         </scene>
     </scenes>
     <resources>
+        <namedColor name="g1">
+            <color red="0.83921568627450982" green="0.85098039215686272" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

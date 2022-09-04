@@ -37,8 +37,8 @@ extension LoginVC: ASAuthorizationControllerDelegate {
           self.loginRequestFail.onNext(.apple)
           break
         }
-        print("🍎 Apple Login 성공",tokenString)
         let authRequestModel = LoginRequestModel(platform: .apple, platformAccessToken: tokenString)
+        print(authRequestModel)
         self.loginRequest.onNext(authRequestModel)
       default:
         break

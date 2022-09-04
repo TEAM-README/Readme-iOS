@@ -4,7 +4,6 @@
 //
 //  Created by 양수빈 on 2022/05/02.
 //
-
 import UIKit
 
 import SnapKit
@@ -22,7 +21,7 @@ final class BottomSheetVC: UIViewController {
   private let dimmerView = UIView()
   private let bottomSheetView = UIView()
   private var bottomSheetViewTopConstraint: NSLayoutConstraint!
-  private var filterHeight: CGFloat = 532
+  private var filterHeight: CGFloat = UIScreen.main.bounds.width * 532 / 390
   private var actionHeight: CGFloat = UIScreen.main.bounds.width * 172 / 390
   private var bottomSheetType: BottomSheetType = .filter
   
@@ -46,8 +45,10 @@ final class BottomSheetVC: UIViewController {
     setLayout()
     setTapGesture()
   }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    
     showBottomSheet()
   }
 }
@@ -71,22 +72,17 @@ extension BottomSheetVC {
   
   private func setLayout() {
     view.addSubviews([dimmerView, bottomSheetView])
-
+    
     dimmerView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
-
+    
     let topConstant = view.safeAreaInsets.bottom + view.safeAreaLayoutGuide.layoutFrame.height
-
+    
     bottomSheetView.snp.makeConstraints { make in
       make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-      if bottomSheetType == .filter {
-        make.height.equalTo(filterHeight)
-        make.bottom.equalToSuperview().offset(filterHeight)
-      } else {
-        make.height.equalTo(actionHeight)
-        make.bottom.equalToSuperview()
-      }
+      make.bottom.equalToSuperview()
+      make.top.equalTo(view.safeAreaLayoutGuide).inset(topConstant)
     }
     self.view.layoutIfNeeded()
     
@@ -105,14 +101,12 @@ extension BottomSheetVC {
     let statusBarHeight: CGFloat = getStatusBarHeight()
     var topConstant = safeAreaHeight - statusBarHeight - filterHeight
     
-    var bottomConstant: CGFloat = 0
-    
     if bottomSheetType == .actionSheet {
       topConstant = safeAreaHeight - statusBarHeight - actionHeight
     }
     
     bottomSheetView.snp.updateConstraints { make in
-      make.bottom.equalToSuperview()
+      make.top.equalTo(view.safeAreaLayoutGuide).inset(topConstant)
     }
     
     UIView.animate(withDuration: 0.25,
@@ -134,18 +128,8 @@ extension BottomSheetVC {
     let bottomPadding = view.safeAreaInsets.bottom
     let topConstant = safeAreaHeight + bottomPadding
     bottomSheetView.snp.updateConstraints { make in
-      if bottomSheetType == .filter {
-        make.height.equalTo(filterHeight)
-        make.bottom.equalToSuperview().offset(filterHeight)
-      } else {
-        make.height.equalTo(actionHeight)
-        make.bottom.equalToSuperview()
-      }
+      make.top.equalTo(view.safeAreaLayoutGuide).inset(topConstant)
     }
-    
-    
-
-    
     
     UIView.animate(withDuration: 0.25,
                    delay: 0,

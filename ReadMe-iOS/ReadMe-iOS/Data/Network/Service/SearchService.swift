@@ -9,11 +9,16 @@ import Foundation
 import RxSwift
 
 protocol SearchServiceType {
-  func getSearchRecent() -> Observable<SearchEntity?>
+  func getSearchResult(query: String, display: Int, start: Int, sort: String) -> Observable<SearchEntity?>
+  func getSearchRecent() -> Observable<SearchRecentEntity?>
 }
 
 extension BaseService: SearchServiceType {
-  func getSearchRecent() -> Observable<SearchEntity?> {
+  func getSearchResult(query: String, display: Int, start: Int, sort: String) -> Observable<SearchEntity?> {
+    return naverRequestObjectInRx(.getSearch(query: query, display: display, start: start, sort: sort))
+  }
+  
+  func getSearchRecent() -> Observable<SearchRecentEntity?> {
     requestObjectInRx(.getSearchRecent)
   }
 }

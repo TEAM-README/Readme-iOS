@@ -34,6 +34,7 @@ class SearchCVC: UICollectionViewCell, UICollectionViewRegisterable {
   override func prepareForReuse() {
     super.prepareForReuse()
     
+    bookCoverImageView.backgroundColor = .grey00
     bookCoverImageView.image = UIImage()
     bookTitleLabel.text?.removeAll()
     authorLabel.text?.removeAll()
@@ -42,25 +43,40 @@ class SearchCVC: UICollectionViewCell, UICollectionViewRegisterable {
 
 // MARK: - setData Part
 extension SearchCVC {
-  func initCell(image: String, title: String, author: String) {
+  func initCell(image: String, title: String, author: String, targetStr: String?) {
+    if image.starts(with: "http") {
+      bookCoverImageView.backgroundColor = .clear
+    }
     bookCoverImageView.setImage(with: image)
     bookTitleLabel.text = title
     authorLabel.text = author
     
     bookTitleLabel.setTextWithLineHeight(text: title, lineHeightMultiple: 1.23)
+    
+    if let targetStr = targetStr {
+      if title.contains(targetStr) {
+        makeBoldLabel(str: targetStr, label: bookTitleLabel)
+      }
+      
+      if author.contains(targetStr) {
+        makeSemiBoldLabel(str: targetStr, label: authorLabel)
+      }
+    }
   }
 }
 
 // MARK: - UI & Layout Part
 extension SearchCVC {
   private func configureUI() {
-    bookCoverImageView.contentMode = .scaleAspectFill
+    bookCoverImageView.backgroundColor = .grey00
+    bookCoverImageView.contentMode = .scaleAspectFit
+    bookCoverImageView.clipsToBounds = true
     
-    bookTitleLabel.font = .readMeFont(size: 14, type: .semiBold)
+    bookTitleLabel.font = .readMeFont(size: 14, type: .medium)
     bookTitleLabel.textColor = .grey05
     bookTitleLabel.numberOfLines = 2
     
-    authorLabel.font = UIFont.readMeFont(size: 12)
+    authorLabel.font = UIFont.readMeFont(size: 12, type: .regular)
     authorLabel.textColor = .grey06
     
     bottomLineView.backgroundColor = .grey00
@@ -70,6 +86,14 @@ extension SearchCVC {
     stackView.spacing = 14
     stackView.addArrangedSubview(bookTitleLabel)
     stackView.addArrangedSubview(authorLabel)
+  }
+  
+  private func makeBoldLabel(str: String, label: UILabel) {
+    label.setTargetAttributedText(targetString: str, fontType: .bold, text: label.text, lineHeightMultiple: 1.23)
+  }
+  
+  private func makeSemiBoldLabel(str: String, label: UILabel) {
+    label.setTargetAttributedText(targetString: str, fontType: .semiBold, text: label.text, lineHeightMultiple: 1.23)
   }
   
   private func setLayout() {

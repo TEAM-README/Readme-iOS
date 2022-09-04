@@ -24,6 +24,7 @@ final class LoginViewModel: ViewModelType {
   struct Output {
     var loginRequestStart = PublishRelay<AuthSignInCase>()
     var loginRequestSuccess = PublishRelay<AuthSignInCase>()
+    var signupRequired = PublishRelay<LoginHistoryData>()
     var showLoginFailError = PublishRelay<AuthSignInCase>()
     var showNetworkError = PublishRelay<Void>()
   }
@@ -60,10 +61,17 @@ extension LoginViewModel {
   
   private func bindOutput(output: Output, disposeBag: DisposeBag) {
     let loginRelay = useCase.loginData
+    let signupRequired = useCase.signupRequired
     let loginError = useCase.loginFail
     
     loginRelay.subscribe(onNext: { loginData in
       output.loginRequestSuccess.accept(loginData.platform)
+    }).disposed(by: self.disposeBag)
+    
+    signupRequired.subscribe(onNext: { loginData in
+      let historyData = LoginHistoryData(platform: loginData.platform.rawValue,
+                                         accesToken: loginData.accessToken)
+      output.signupRequired.accept(historyData)
     }).disposed(by: self.disposeBag)
     
     loginError.subscribe(onNext: { _ in

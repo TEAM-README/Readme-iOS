@@ -11,10 +11,23 @@ import RxCocoa
 import RxRelay
 import SnapKit
 
+enum SearchStateType {
+  case emptyBeforeSearch
+  case emptyAfterSearch
+  case dataAfterSearch
+}
+
 class SearchVC: UIViewController {
   
   // MARK: - Vars & Lets Part
   private let disposeBag = DisposeBag()
+  private var didSearch: Bool = false
+  private var recentList: [SearchBookModel] = []
+  private var resultList: [SearchBookModel] = []
+  private var editEventFinished = PublishSubject<String?>()
+  var viewModel: SearchViewModel!
+  
+  // MARK: - UI Component Part
   private let naviBar = UIView()
   private let closeButton = UIButton()
   private let titleLabel = UILabel()
@@ -23,12 +36,7 @@ class SearchVC: UIViewController {
   private let beforeSearchEmptyLabel = UILabel()
   private let afterSearchEmptyLabel = UILabel()
   private let collectionViewFlowLayout = UICollectionViewFlowLayout()
-
-  lazy var bookCV = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
-  var viewModel: SearchViewModel!
-  var didSearch: Bool = false
-  var dataCount = 10 // 테스트용
-  var contentList: [SearchBookModel] = []
+  private lazy var bookCV = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
   
   // MARK: - Life Cycle Part
   override func viewDidLoad() {
@@ -75,7 +83,8 @@ extension SearchVC {
   }
   
   private func setLayout() {
-    view.addSubviews([naviBar, searchTextField, bookCV])
+    view.addSubviews([naviBar, searchTextField, bookCV,
+                      beforeSearchEmptyLabel, afterSearchEmptyLabel])
     
     naviBar.addSubviews([closeButton, titleLabel])
     
@@ -112,6 +121,15 @@ extension SearchVC {
       make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
       make.top.equalTo(searchTextField.snp.bottom).offset(30)
     }
+    
+    beforeSearchEmptyLabel.snp.makeConstraints { make in
+      make.centerX.equalToSuperview()
+      make.top.equalTo(searchTextField.snp.bottom).offset(185)
+    }
+    
+    afterSearchEmptyLabel.snp.makeConstraints { make in
+      make.center.equalToSuperview()
+    }
   }
 }
 
@@ -121,31 +139,46 @@ extension SearchVC {
     let input = SearchViewModel.Input(
       viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in
         // viewWillAppear 호출 후 실행
-      })
+      }, textEditFinished: editEventFinished)
     
     let output = self.viewModel.transform(from: input,
                                           disposeBag: self.disposeBag)
     
-    output.contentList.asSignal().emit { [weak self] content in
+    output.recentList.asSignal().emit { [weak self] content in
       guard let self = self else { return }
-      self.contentList = content
-      self.bookCV.reloadData()
+      self.recentList = content
+      
+      if self.recentList.isEmpty {
+        self.setStateView(type: .emptyBeforeSearch)
+      } else {
+        self.bookCV.reloadData()
+        self.setStateView(type: .dataAfterSearch)
+      }
+    }.disposed(by: disposeBag)
+    
+    output.searchList.asSignal().emit { [weak self] content in
+      guard let self = self else { return }
+      self.resultList = content
+      
+      if self.didSearch {
+        if self.resultList.isEmpty {
+          self.setStateView(type: .emptyAfterSearch)
+        } else {
+          self.bookCV.reloadData()
+          self.setStateView(type: .dataAfterSearch)
+        }
+      }
     }
     .disposed(by: disposeBag)
   }
   
   private func setButtonActions() {
     searchButton.rx.tap
-      .subscribe(onNext: {
-        // TODO: - 서버 통신
-        
+      .bind {
+        self.editEventFinished.onNext(self.searchTextField.text)
         self.makeVibrate(degree: .light)
-//        self.setEmptyViewAfterSearch()
-        self.dataCount = 2
-        self.didSearch = true
-        self.bookCV.reloadData()
-      })
-      .disposed(by: disposeBag)
+        if self.searchTextField.hasText { self.didSearch = true }
+      }.disposed(by: self.disposeBag)
     
     closeButton.press {
       self.dismiss(animated: true)
@@ -160,6 +193,7 @@ extension SearchVC {
     bookCV.backgroundColor = .clear
     
     collectionViewFlowLayout.scrollDirection = .vertical
+    collectionViewFlowLayout.sectionHeadersPinToVisibleBounds = true
   }
   
   private func setRegister() {
@@ -167,28 +201,20 @@ extension SearchVC {
     SearchHeaderView.register(target: bookCV, isHeader: true)
   }
   
-  private func setEmptyViewBeforeSearch() {
-    bookCV.isHidden = true
-    afterSearchEmptyLabel.isHidden = true
-    beforeSearchEmptyLabel.isHidden = false
-    
-    view.addSubview(beforeSearchEmptyLabel)
-    
-    beforeSearchEmptyLabel.snp.makeConstraints { make in
-      make.centerX.equalToSuperview()
-      make.top.equalTo(searchTextField.snp.bottom).offset(185)
-    }
-  }
-  
-  private func setEmptyViewAfterSearch() {
-    bookCV.isHidden = true
-    beforeSearchEmptyLabel.isHidden = true
-    afterSearchEmptyLabel.isHidden = false
-    
-    view.addSubview(afterSearchEmptyLabel)
-    
-    afterSearchEmptyLabel.snp.makeConstraints { make in
-      make.center.equalToSuperview()
+  private func setStateView(type: SearchStateType) {
+    switch type {
+    case .emptyBeforeSearch:
+      bookCV.isHidden = true
+      beforeSearchEmptyLabel.isHidden = false
+      afterSearchEmptyLabel.isHidden = true
+    case .emptyAfterSearch:
+      bookCV.isHidden = true
+      beforeSearchEmptyLabel.isHidden = true
+      afterSearchEmptyLabel.isHidden = false
+    case .dataAfterSearch:
+      bookCV.isHidden = false
+      beforeSearchEmptyLabel.isHidden = true
+      afterSearchEmptyLabel.isHidden = true
     }
   }
 }
@@ -199,8 +225,14 @@ extension SearchVC: UICollectionViewDelegate {
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    var contentList: [SearchBookModel] = []
+    if didSearch {
+      contentList = resultList
+    } else {
+      contentList = recentList
+    }
     let content = contentList[indexPath.item]
-    let bookInfo = WriteModel.init(bookcover: content.imgURL, bookname: content.title, category: nil, author: content.author)
+    let bookInfo = WriteModel.init(bookcover: content.imgURL, bookname: content.title, category: nil, author: content.author, isbn: content.isbn)
     let writeVC = ModuleFactory.shared.makeWriteVC(bookInfo: bookInfo)
     
     navigationController?.pushViewController(writeVC, animated: true)
@@ -218,6 +250,13 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
 
 extension SearchVC: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    var contentList: [SearchBookModel] = []
+    
+    if didSearch {
+      contentList = resultList
+    } else {
+      contentList = recentList
+    }
     return contentList.count
   }
   
@@ -229,9 +268,19 @@ extension SearchVC: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCVC.className, for: indexPath) as? SearchCVC else { return UICollectionViewCell() }
+    var contentList: [SearchBookModel] = []
+    
+    if didSearch {
+      contentList = resultList
+    } else {
+      contentList = recentList
+    }
+    
+    let author = contentList[indexPath.item].author
     cell.initCell(image: contentList[indexPath.item].imgURL,
                   title: contentList[indexPath.item].title,
-                  author: contentList[indexPath.item].author)
+                  author: author.isEmpty || author == " " ? "작자미상" : contentList[indexPath.item].author,
+                  targetStr: self.searchTextField.text ?? nil)
     return cell
   }
   

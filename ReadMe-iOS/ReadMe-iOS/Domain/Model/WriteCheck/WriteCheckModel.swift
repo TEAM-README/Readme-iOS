@@ -8,20 +8,16 @@
 import Foundation
 
 struct WriteCheckModel {
-//  let success: Bool
-  let bookCover: String?
-  let bookTitle: String
-  let bookAuthor: String
   let bookCategory: String
   let quote: String
   let impression: String
+  let book: BookModel
 }
 
-struct WriteRequestModel {
-  let bookCategory: String
-  let bookTitle: String
-  let bookAuthor: String
-//  let bookCover: String
-  let quote: String
-  let impression: String
+struct BookModel: Codable {
+  let isbn: String
+  let subIsbn: String
+  let title: String
+  let author: String
+  let image: String
 }

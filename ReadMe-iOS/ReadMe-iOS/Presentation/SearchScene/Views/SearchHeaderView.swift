@@ -36,6 +36,7 @@ class SearchHeaderView: UICollectionReusableView, UIICollectionReusableViewRegis
 // MARK: - UI & Layout Part
 extension SearchHeaderView {
   private func configureUI() {
+    self.backgroundColor = .white
     recentLabel.text = I18N.Search.recentRead
     recentLabel.font = UIFont.readMeFont(size: 14, type: .semiBold)
     recentLabel.textColor = UIColor.grey05

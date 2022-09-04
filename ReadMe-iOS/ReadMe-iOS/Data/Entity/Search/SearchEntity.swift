@@ -8,13 +8,16 @@
 import Foundation
 
 struct SearchEntity: Codable {
-  let content: [SearchBookEntity]
+  let lastBuildDate: String
+  let total, start, display: Int
+  let items: [SearchBookEntity]
   
   func toDomain() -> SearchModel {
-    let bookModelList = self.content.map { entity in
-      SearchBookModel.init(imgURL: entity.imgURL,
+    let bookModelList = self.items.map { entity in
+      SearchBookModel.init(imgURL: entity.image,
                            title: entity.title,
-                           author: entity.author)
+                           author: entity.author ?? " ",
+                           isbn: entity.isbn ?? " ")
     }
     
     return SearchModel(content: bookModelList)
@@ -22,7 +25,15 @@ struct SearchEntity: Codable {
 }
 
 struct SearchBookEntity: Codable {
-  let imgURL: String
   let title: String
-  let author: String
+  let link: String
+  let image: String
+  let discount, publisher, pubdate: String
+  let itemDescription: String
+  let author, isbn: String?
+
+  enum CodingKeys: String, CodingKey {
+    case title, link, image, author, discount, publisher, pubdate, isbn
+      case itemDescription = "description"
+  }
 }

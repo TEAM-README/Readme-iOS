@@ -13,6 +13,9 @@ enum NicknameInvalidType {
   case exceedMaxCount
 }
 
-struct SignupModel {
-  
+struct SignupDTO {
+  let nickname: String
+  let platform: String
+  let accessToken: String
 }
+

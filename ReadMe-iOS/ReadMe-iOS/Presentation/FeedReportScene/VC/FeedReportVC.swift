@@ -61,7 +61,7 @@ extension FeedReportVC {
     
     output.reportRequestSuccess.subscribe(onNext: { [weak self] _ in
       self?.buttonDelegate?.dismissButtonTapped(completion: {
-        self?.postObserverAction(.report)
+        self?.postObserverAction(.report, userInfo: ["nickname": self?.viewModel.userNickName ?? "", "feedId": self?.viewModel.feedId ?? ""])
       })
     })
     .disposed(by: self.disposeBag)

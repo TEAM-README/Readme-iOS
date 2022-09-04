@@ -13,6 +13,8 @@ final class FeedReportViewModel: ViewModelType {
   private let useCase: FeedReportUseCase
   private let disposeBag = DisposeBag()
   let isMyPage: Bool
+  let userNickName: String
+  let feedId: String
   
   // MARK: - Inputs
   struct Input {
@@ -25,9 +27,11 @@ final class FeedReportViewModel: ViewModelType {
     let deleteRequestSuccess = PublishRelay<Void>()
   }
   
-  init(useCase: FeedReportUseCase, isMyPage: Bool) {
+  init(useCase: FeedReportUseCase, isMyPage: Bool, userNickName: String, feedId: String) {
     self.useCase = useCase
     self.isMyPage = isMyPage
+    self.userNickName = userNickName
+    self.feedId = feedId
   }
 }
 

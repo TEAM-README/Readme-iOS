@@ -31,6 +31,10 @@ final class WriteViewModel: ViewModelType {
 }
 
 extension WriteViewModel {
+  func separateIsbn() -> Array<String> {
+    return bookInfo.isbn.components(separatedBy: " ")
+  }
+  
   func transform(from input: Input, disposeBag: DisposeBag) -> Output {
     let output = Output()
     

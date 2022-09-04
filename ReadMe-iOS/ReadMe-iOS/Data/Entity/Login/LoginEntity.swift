@@ -8,5 +8,18 @@
 import Foundation
 
 struct LoginEntity: Codable {
-  let accessToken,refreshToken : String
+    let isNewUser: Bool
+    let user: LoginUserData?
+    let accessToken: String?
+}
+
+// MARK: - User
+struct LoginUserData: Codable {
+    let id: Int
+    let nickname: String
+}
+
+struct LoginHistoryData: Codable{
+  let platform: String
+  let accesToken: String
 }

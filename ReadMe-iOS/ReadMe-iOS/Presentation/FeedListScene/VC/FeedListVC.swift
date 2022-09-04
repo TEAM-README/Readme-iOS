@@ -159,7 +159,10 @@ extension FeedListVC {
   }
   
   private func addObserver() {
-    addObserverAction(.report) { _ in
+    addObserverAction(.report) { noti in
+      guard let nickname = noti.userInfo?["nickname"] as? String else { return }
+      guard let feedId = noti.userInfo?["feedId"] as? String else { return }
+      
       if MFMailComposeViewController.canSendMail() {
         let mailComposeVC = MFMailComposeViewController()
         mailComposeVC.mailComposeDelegate = self
@@ -167,12 +170,14 @@ extension FeedListVC {
         mailComposeVC.setToRecipients(["Readme.team.sopterm@gmail.com"])
         mailComposeVC.setSubject("리드미 유저 신고")
         mailComposeVC.setMessageBody("""
-
-        1. 신고 유형 사유 (상업적 광고 및 판매, 음란물/불건전한 대화, 욕설 및 비하, 도배, 부적절한 프로필 이미지, 기타 사유) :
-        2. 신고할 유저 닉네임 :
-
-        신고하신 사항은 리드미팀이 신속하게 처리하겠습니다.
-        감사합니다:)
+        
+        🚨신고 유형 사유가 무엇인가요?
+         ex) 상업적 광고 및 판매, 음란물/불건전한 대화, 욕설 비하, 도배, 부적절한 내용, 기타사유 등
+        신고하신 사항은 리드미팀이 신속하게 처리하겠습니다. 감사합니다
+        ----------------------------------------------------------------------
+        ❗️이곳은 수정하지 말아주세요❗️
+        신고할 유저의 닉네임 : \(nickname)
+        신고할 게시글의 id : \(feedId)
         """,
                                      isHTML: false)
 
@@ -200,8 +205,8 @@ extension FeedListVC: FeedCategoryDelegate {
 }
 
 extension FeedListVC: FeedListDelegate {
-  func moreButtonTapped() {
-    let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: self.isMyPage)
+  func moreButtonTapped(nickname: String? = nil, feedId: String? = nil) {
+    let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: self.isMyPage, nickname: nickname ?? "", feedId: feedId ?? "")
     let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .actionSheet)
     reportVC.buttonDelegate = bottomSheet
     bottomSheet.modalPresentationStyle = .overFullScreen

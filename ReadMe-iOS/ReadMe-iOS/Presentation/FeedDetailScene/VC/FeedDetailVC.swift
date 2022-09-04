@@ -115,14 +115,15 @@ extension FeedDetailVC {
   
   private func bindButtonAction() {
     detailButton.press {
-      self.moreButtonTapped()
+      self.moreButtonTapped(nickname: self.nicknameLabel.text ?? "", feedId: String(self.viewModel.idx))
     }
   }
   
-  private func moreButtonTapped() {
+  private func moreButtonTapped(nickname: String? = nil, feedId: String? = nil) {
     print("CLI")
-    let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: false)
+    let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: false, nickname: nickname ?? "", feedId: feedId ?? "")
     let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .actionSheet)
+    reportVC.buttonDelegate = bottomSheet
     bottomSheet.modalPresentationStyle = .overFullScreen
     bottomSheet.modalTransitionStyle = .crossDissolve
     present(bottomSheet, animated: true)

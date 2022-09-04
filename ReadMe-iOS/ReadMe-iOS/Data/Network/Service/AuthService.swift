@@ -9,7 +9,8 @@ import RxSwift
 
 protocol AuthServiceType {
   func login(provider: String, token: String) -> Observable<LoginEntity?>
-  func checkNicknameDuplicated(nickname: String) -> Observable<Bool?>
+  func checkNicknameDuplicated(nickname: String) -> Observable<SignupNicknameEntity?>
+  func signup(provider: String, token: String, nickname: String) -> Observable<SignupEntity?>
 }
 
 extension BaseService: AuthServiceType {
@@ -17,7 +18,11 @@ extension BaseService: AuthServiceType {
     requestObjectInRx(.postSignin(platform: provider, socialToken: token))
   }
   
-  func checkNicknameDuplicated(nickname: String) -> Observable<Bool?> {
+  func checkNicknameDuplicated(nickname: String) -> Observable<SignupNicknameEntity?> {
     requestObjectInRx(.getDuplicatedNicknameState(nickname: nickname))
+  }
+  
+  func signup(provider: String, token: String, nickname: String) -> Observable<SignupEntity?> {
+    requestObjectInRx(.postSignup(platform: provider, socialToken: token, nickname: nickname))
   }
 }

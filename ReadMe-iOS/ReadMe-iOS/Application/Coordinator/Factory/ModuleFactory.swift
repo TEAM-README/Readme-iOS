@@ -8,9 +8,10 @@
 import Foundation
 
 protocol ModuleFactoryProtocol {
+  func makeSplashNC() -> SplashNC
   func makeOnboardingVC() -> OnboardingVC
   func makeLoginVC() -> LoginVC
-  func makeSignupVC() -> SignupVC
+  func makeSignupVC(loginData: LoginHistoryData) -> SignupVC
   func makeBaseVC() -> BaseVC
   func makeHomeVC() -> HomeVC
   func makeFeedDetailVC(idx: Int) -> FeedDetailVC
@@ -19,12 +20,17 @@ protocol ModuleFactoryProtocol {
   func makeSearchVC() -> SearchVC
   func makeSettingVC() -> SettingVC
   func makeWriteVC(bookInfo: WriteModel) -> WriteVC
-  func makeFeedReportVC(isMyPage: Bool) -> FeedReportVC
+  func makeFeedReportVC(isMyPage: Bool, nickname: String, feedId: String) -> FeedReportVC
 }
 
 final class ModuleFactory: ModuleFactoryProtocol{
   static let shared = ModuleFactory()
   private init() { }
+  
+  func makeSplashNC() -> SplashNC {
+    let splashNC = SplashNC.controllerFromStoryboard(.splash)
+    return splashNC
+  }
   
   func makeOnboardingVC() -> OnboardingVC {
     let onboardingVC = OnboardingVC.controllerFromStoryboard(.onboarding)
@@ -40,13 +46,14 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return loginVC
   }
   
-  func makeSignupVC() -> SignupVC {
+  func makeSignupVC(loginData: LoginHistoryData) -> SignupVC {
     let repository = DefaultSignupRepository(service: BaseService.default)
     let useCase = DefaultSignupUseCase(repository: repository)
     let viewModel = SignupViewModel(useCase: useCase)
-    let loginVC = SignupVC.controllerFromStoryboard(.signup)
-    loginVC.viewModel = viewModel
-    return loginVC
+    let signupVC = SignupVC.controllerFromStoryboard(.signup)
+    signupVC.viewModel = viewModel
+    signupVC.loginData = loginData
+    return signupVC
   }
   
   func makeSearchVC() -> SearchVC {
@@ -125,10 +132,10 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return filterVC
   }
   
-  func makeFeedReportVC(isMyPage: Bool) -> FeedReportVC {
+  func makeFeedReportVC(isMyPage: Bool, nickname: String, feedId: String) -> FeedReportVC {
     let repository = DefaultFeedReportRepository()
     let useCase = DefaultFeedReportUseCase(repository: repository)
-    let viewModel = FeedReportViewModel(useCase: useCase, isMyPage: isMyPage)
+    let viewModel = FeedReportViewModel(useCase: useCase, isMyPage: isMyPage, userNickName: nickname, feedId: feedId)
     let feedReportVC = FeedReportVC.controllerFromStoryboard(.feedReport)
     feedReportVC.viewModel = viewModel
     return feedReportVC

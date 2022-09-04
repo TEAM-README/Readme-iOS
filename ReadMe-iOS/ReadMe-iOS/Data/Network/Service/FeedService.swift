@@ -26,4 +26,8 @@ extension BaseService: FeedServiceType {
   func getMyFeedList() -> Observable<MyFeedListEntity?> {
     requestObjectInRx(.getMyFeedList)
   }
+  
+  func getMyFeedListInAF(completion: @escaping (Result<MyFeedListEntity?,Error>) -> Void) {
+    requestObject(.getMyFeedList, completion: completion)
+  }
 }

@@ -91,7 +91,17 @@ extension LoginVC {
     }).disposed(by: self.disposeBag)
     
     output.loginRequestSuccess.subscribe(onNext: { [weak self] platform in
-      // 이후 성공했을 시에 넘기기
+      print("왜 이거?",UserDefaults.standard.string(forKey: UserDefaultKeyList.Auth.userID))
+      print("왜 이거?",UserDefaults.standard.string(forKey: UserDefaultKeyList.Auth.accessToken))
+
+      let baseVC = ModuleFactory.shared.makeBaseVC()
+      self?.navigationController?.pushViewController(baseVC, animated: false)
+    }).disposed(by: self.disposeBag)
+
+    output.signupRequired.subscribe(onNext: { [weak self] loginData in
+      print("회원가입 필요",loginData)
+      let signupVC = ModuleFactory.shared.makeSignupVC(loginData: loginData)
+      self?.navigationController?.pushViewController(signupVC, animated: true)
     }).disposed(by: self.disposeBag)
     
     output.showLoginFailError.subscribe(onNext: { [weak self] platform in

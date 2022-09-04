@@ -33,14 +33,15 @@ class WriteVC: UIViewController {
   private let progressBar = ProgressBar()
   private let disposeBag = DisposeBag()
   
-  var username: String = "혜화동 꽃가마"
-  var bookname: String?
-  var bookImgURL: String?
-  var category: String?
-  var author: String?
+  private var username: String = "혜화동 꽃가마"
+  private var bookname: String?
+  private var bookImgURL: String?
+  private var category: String?
+  private var author: String?
   
   private var quote: String?
   private var impression: String?
+  private var backToCancel: Bool = false
   
   var viewModel: WriteViewModel!
   var flowType: FlowType = .firstFlow
@@ -69,9 +70,10 @@ extension WriteVC {
   private func setSecondFlowData() {
     secondView.setData(bookInfo: viewModel.bookInfo, category: firstView.setSelectedCategory())
     
+    let authorName = viewModel.bookInfo.author
     self.bookname = viewModel.bookInfo.bookname
     self.category = firstView.setSelectedCategory().rawValue
-    self.author = viewModel.bookInfo.author
+    self.author = authorName.isEmpty ? " " : authorName
     self.bookImgURL = viewModel.bookInfo.bookcover
   }
   
@@ -83,9 +85,13 @@ extension WriteVC {
         case .firstFlow:
           self.flowType = .secondFlow
         case .secondFlow:
-          self.flowType = .thirdFlow
+          if self.secondView.quoteTextView.text != I18N.Write.quotePlaceholder {
+            self.flowType = .thirdFlow
+          }
         case .thirdFlow:
-          self.flowType = .next
+          if self.thirdView.impressionTextView.text != I18N.Write.impressionPlaceholder {
+            self.flowType = .next
+          }
         case .next:
           self.flowType = .next
         }
@@ -98,15 +104,17 @@ extension WriteVC {
     naviBar.backButton.press {
       switch self.flowType {
       case .firstFlow:
-        self.navigationController?.popViewController(animated: true)
+        self.presentAlertVC()
       case .secondFlow:
         self.flowType = .firstFlow
+        self.setFlow(self.flowType)
       case .thirdFlow:
         self.flowType = .secondFlow
+        self.setFlow(self.flowType)
       case .next:
         self.flowType = .thirdFlow
+        self.setFlow(self.flowType)
       }
-      self.setFlow(self.flowType)
     }
   }
   
@@ -116,9 +124,23 @@ extension WriteVC {
   }
   
   private func pushWriteCheckView() {
-    let data = WriteCheckModel.init(bookCover: bookImgURL ?? "", bookTitle: bookname ?? "", bookAuthor: author ?? "", bookCategory: category ?? "", quote: quote ?? "-", impression: impression ?? "-")
+    let bookData = BookModel.init(isbn: viewModel.separateIsbn()[0], subIsbn: viewModel.separateIsbn().count == 1 ? " " : viewModel.separateIsbn()[1], title: bookname ?? " ", author: author ?? " ", image: bookImgURL ?? " ")
+    let data = WriteCheckModel.init(bookCategory: category ?? "", quote: quote ?? "-", impression: impression ?? "-", book: bookData)
     let writeCheckVC = ModuleFactory.shared.makeWriteCheckVC(writeInfo: data)
     navigationController?.pushViewController(writeCheckVC, animated: true)
+  }
+  
+  private func presentAlertVC() {
+    let alertVC = ModuleFactory.shared.makeAlertVC()
+    alertVC.modalPresentationStyle = .overFullScreen
+    alertVC.modalTransitionStyle = .crossDissolve
+    alertVC.setAlertTitle(title: I18N.ReadmeAlert.title, description: I18N.ReadmeAlert.description)
+    alertVC.setAlertType(.twoAction, action: I18N.ReadmeAlert.cancel, I18N.ReadmeAlert.ok)
+    alertVC.closure = {
+      self.navigationController?.popViewController(animated: true)
+    }
+    
+    present(alertVC, animated: true)
   }
   
   private func setFlow(_ type: FlowType) {
@@ -167,6 +189,7 @@ extension WriteVC {
   private func setFirstFlow() {
     progressBar.setPercentage(ratio: 0.3)
     
+    nextButton.isEnabled = true
     UIView.animate(withDuration: 0.4,
                    delay: 0,
                    options: .curveEaseInOut,
@@ -194,6 +217,7 @@ extension WriteVC {
     progressBar.setPercentage(ratio: 0.6)
     
     setSecondFlowData()
+    nextButton.isEnabled = self.secondView.quoteTextView.text == I18N.Write.quotePlaceholder ? false : true
     UIView.animate(withDuration: 0.4,
                    delay: 0,
                    options: .curveEaseInOut,
@@ -221,7 +245,7 @@ extension WriteVC {
     progressBar.setPercentage(ratio: 1)
     
     thirdView.setData(bookname: bookname ?? "", sentence: quote ?? "")
-    
+    nextButton.isEnabled = self.thirdView.impressionTextView.text == I18N.Write.impressionPlaceholder ? false : true
     UIView.animate(withDuration: 0.4,
                    delay: 0,
                    options: .curveEaseInOut,
@@ -286,9 +310,8 @@ extension WriteVC: UITextViewDelegate {
         textView.text = ""
       }
     default:
-      return true
+      break
     }
-    
     return true
   }
   
@@ -299,18 +322,22 @@ extension WriteVC: UITextViewDelegate {
       if textView.text == "" {
         textView.text = I18N.Write.quotePlaceholder
         textView.textColor = .grey09
+        self.nextButton.isEnabled = false
       } else {
         self.quote = secondView.quoteTextView.text
+        self.nextButton.isEnabled = true
       }
     case thirdView.impressionTextView:
       if textView.text == "" {
         textView.text = I18N.Write.impressionPlaceholder
         textView.textColor = .grey09
+        self.nextButton.isEnabled = false
       } else {
         self.impression = thirdView.impressionTextView.text
+        self.nextButton.isEnabled = true
       }
     default:
-      return
+      break
     }
   }
 }
@@ -321,7 +348,7 @@ extension WriteVC {
   private func configureUI() {
     topBgView.backgroundColor = .grey00
     
-    progressBar.setPercentage(ratio: 0.0)
+    progressBar.setDefaultPercentage(ratio: 0.0)
     
     cheerLabel.font = .readMeFont(size: 14, type: .bold)
     cheerLabel.textColor = .mainBlue
@@ -332,7 +359,6 @@ extension WriteVC {
     describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.33)
     
     nextButton.title = I18N.Button.next
-    nextButton.isEnabled = true
     
     [cheerLabel, describeLabel, secondView, thirdView].forEach { $0.alpha = 0 }
   }
@@ -363,9 +389,10 @@ extension WriteVC {
     }
     
     progressBar.snp.makeConstraints { make in
-      make.leading.trailing.equalToSuperview()
+      make.leading.equalToSuperview()
       make.top.equalTo(topBgView.snp.bottom)
       make.height.equalTo(2)
+      make.width.equalTo(UIScreen.main.bounds.width)
     }
     
     nextButton.snp.makeConstraints { make in

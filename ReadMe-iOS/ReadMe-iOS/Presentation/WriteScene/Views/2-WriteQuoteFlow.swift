@@ -36,10 +36,13 @@ final class WriteQuoteFlow: UIView {
 
 extension WriteQuoteFlow {
   func setData(bookInfo: WriteModel, category: Category) {
+    if bookInfo.bookcover.starts(with: "http") {
+      bookCoverImageView.backgroundColor = .clear
+    }
     bookCoverImageView.setImage(with: bookInfo.bookcover)
     bookTitleLabel.text = bookInfo.bookname
     categoryLabel.text = category.rawValue
-    bookAuthorLabel.text = bookInfo.author
+    bookAuthorLabel.text = bookInfo.author.isEmpty || bookInfo.author == " " ? "작자미상" : bookInfo.author
     
     bookTitleLabel.setTextWithLineHeight(text: bookTitleLabel.text, lineHeightMultiple: 1.23)
     bookAuthorLabel.setTextWithLineHeight(text: bookAuthorLabel.text, lineHeightMultiple: 0.83)
@@ -76,6 +79,9 @@ extension WriteQuoteFlow {
     bookTitleLabel.font = .readMeFont(size: 13, type: .medium)
     bookTitleLabel.textColor = .grey05
     bookTitleLabel.numberOfLines = 2
+    
+    bookCoverImageView.backgroundColor = .grey00
+    bookCoverImageView.contentMode = .scaleAspectFit
     
     bookAuthorLabel.font = .readMeFont(size: 12)
     bookAuthorLabel.textColor = .grey06

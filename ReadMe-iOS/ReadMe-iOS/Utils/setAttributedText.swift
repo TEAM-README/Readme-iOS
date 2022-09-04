@@ -33,4 +33,26 @@ extension UILabel {
     self.attributedText = attributedString
     
   }
+  
+  func setTargetAttrubutedTexts(targetStrings : [String], fontType: ReadmeFontType, color: UIColor? = nil, text: String? = nil, lineHeightMultiple: CGFloat? = nil) {
+    
+    let fontSize = self.font.pointSize
+    let font = UIFont.readMeFont(size: fontSize, type: fontType)
+    let fullText = self.text ?? ""
+    let attributedString = NSMutableAttributedString(string: fullText)
+    
+    if let text = text {
+      let style = NSMutableParagraphStyle()
+      style.lineHeightMultiple = lineHeightMultiple ?? 0
+      
+      attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: style, range: (text as NSString).range(of: text))
+    }
+    
+    for i in 0...targetStrings.count-1 {
+      let range = (fullText as NSString).range(of: targetStrings[i])
+      attributedString.addAttribute(.font, value: font, range: range)
+    }
+    
+    self.attributedText = attributedString
+  }
 }
