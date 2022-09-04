@@ -44,6 +44,7 @@ extension DefaultSignupUseCase: SignupUseCase {
   func checkNicknameDuplicated(nickname: String) {
     repository.postNicknameInValidCheck(nickname: nickname)
       .filter{ $0 != nil }
+
       .subscribe(onNext: { [weak self] duplicated in
       guard let self = self else { return }
         print("USECASE 에서 중복 체크해줌")

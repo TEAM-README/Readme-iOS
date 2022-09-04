@@ -72,11 +72,7 @@ extension SignupViewModel {
     duplicatedStateRelay.subscribe(onNext: { hasError in
       if hasError {
         output.nicknameInvalid.accept(.nicknameDuplicated)
-        print("duplicatedStateRelay")
-
       }else {
-        print("duplicatedStateRelay에서 정상")
-
         output.nicknameValid.accept(())
       }
 
@@ -84,13 +80,10 @@ extension SignupViewModel {
     
     currentNicknameState.subscribe(onNext: { invalidState in
       guard let invalidState = invalidState else {
-        print("일반 닉네임 체크에서 정상")
-
         output.nicknameValid.accept(())
         return
       }
       
-      print("일반 닉네임 체크 에러)")
       output.nicknameInvalid.accept(invalidState)
     }).disposed(by: self.disposeBag)
 
