@@ -8,6 +8,10 @@
 import Foundation
 
 struct FeedDetailEntity: Codable {
+  let feed: FeedDetailDataModel
+}
+
+struct FeedDetailDataModel: Codable {
   let id: Int
   let categoryName, sentence, feeling: String
   let reportedCount: Int

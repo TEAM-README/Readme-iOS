@@ -11,6 +11,8 @@ protocol AuthServiceType {
   func login(provider: String, token: String) -> Observable<LoginEntity?>
   func checkNicknameDuplicated(nickname: String) -> Observable<SignupNicknameEntity?>
   func signup(provider: String, token: String, nickname: String) -> Observable<SignupEntity?>
+  func deleteUserWithdraw(completion: @escaping (Result<Bool?,Error>) -> Void)
+  
 }
 
 extension BaseService: AuthServiceType {
@@ -24,5 +26,9 @@ extension BaseService: AuthServiceType {
   
   func signup(provider: String, token: String, nickname: String) -> Observable<SignupEntity?> {
     requestObjectInRx(.postSignup(platform: provider, socialToken: token, nickname: nickname))
+  }
+  
+  func deleteUserWithdraw(completion: @escaping (Result<Bool?,Error>) -> Void) {
+    requestObject(.deleteUser, completion: completion)
   }
 }

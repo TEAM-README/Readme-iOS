@@ -46,6 +46,7 @@ extension FeedDetailViewModel {
     self.bindOutput(output: output, disposeBag: disposeBag)
     input.viewWillAppearEvent.subscribe(onNext: { [weak self] in
       guard let self = self else { return }
+      print("???")
       self.useCase.getBookDetailInformation(idx: self.feedDetailIdx)
     }).disposed(by: self.disposeBag)
     

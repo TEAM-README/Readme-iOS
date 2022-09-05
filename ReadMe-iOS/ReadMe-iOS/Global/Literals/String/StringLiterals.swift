@@ -84,6 +84,7 @@ struct I18N {
     static let contact = "문의하기"
     static let agreement = "약관 보기"
     static let logout = "로그아웃"
+    static let withdraw = "회원 탈퇴"
   }
   
   struct Write {

@@ -33,7 +33,7 @@ class WriteVC: UIViewController {
   private let progressBar = ProgressBar()
   private let disposeBag = DisposeBag()
   
-  private var username: String = "혜화동 꽃가마"
+  private var username: String = UserDefaults.standard.string(forKey: UserDefaultKeyList.Auth.userNickname) ?? "리드미"
   private var bookname: String?
   private var bookImgURL: String?
   private var category: String?

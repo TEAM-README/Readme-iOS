@@ -63,6 +63,8 @@ extension DefaultSignupUseCase: SignupUseCase {
         UserDefaults.standard.setValue(data.accessToken, forKeyPath: UserDefaultKeyList.Auth.userToken)
         UserDefaults.standard.setValue(entity!.accessToken, forKeyPath: UserDefaultKeyList.Auth.accessToken)
         UserDefaults.standard.setValue(entity!.user.id, forKeyPath: UserDefaultKeyList.Auth.userID)
+        UserDefaults.standard.setValue(entity!.user.nickname, forKeyPath: UserDefaultKeyList.Auth.userNickname)
+        
         self.signupState.accept(true)
       }).disposed(by: self.disposeBag)
   }

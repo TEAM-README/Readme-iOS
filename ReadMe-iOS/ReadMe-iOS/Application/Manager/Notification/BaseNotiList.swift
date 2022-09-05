@@ -12,7 +12,7 @@ enum BaseNotiList : String{
   case mypageButtonClicked
   case moveFeedDetail
   case moveSettingView
-  case logout
+  case moveLoginVC
   case report
   case writeComplete
   case filterButtonClicked

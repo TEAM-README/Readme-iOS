@@ -32,6 +32,7 @@ class LoginVC: UIViewController {
     self.startLogoAnimation()
     self.configureLabelUI()
     self.bindViewModels()
+    self.removeViewController(BaseVC.self)
   }
 }
 
@@ -71,6 +72,12 @@ extension LoginVC {
 }
 
 extension LoginVC {
+  func removeViewController(_ controller: UIViewController.Type) {
+    if let viewController = self.navigationController?.viewControllers.first(where: { $0.isKind(of: controller.self) }) {
+          viewController.removeFromParent()
+      }
+  }
+  
   private func bindViewModels() {
     let input = LoginViewModel.Input(
       loginButtonClicked:Observable.merge(
@@ -91,8 +98,6 @@ extension LoginVC {
     }).disposed(by: self.disposeBag)
     
     output.loginRequestSuccess.subscribe(onNext: { [weak self] platform in
-      print("왜 이거?",UserDefaults.standard.string(forKey: UserDefaultKeyList.Auth.userID))
-      print("왜 이거?",UserDefaults.standard.string(forKey: UserDefaultKeyList.Auth.accessToken))
 
       let baseVC = ModuleFactory.shared.makeBaseVC()
       self?.navigationController?.pushViewController(baseVC, animated: false)

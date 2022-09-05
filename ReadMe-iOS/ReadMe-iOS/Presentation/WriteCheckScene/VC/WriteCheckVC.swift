@@ -33,7 +33,7 @@ class WriteCheckVC: UIViewController {
   var viewModel: WriteCheckViewModel!
   var writeRequestFail = PublishSubject<Void>()
   var writeRequest = PublishSubject<WriteCheckModel>()
-  let username: String = "혜화동 꽃가마"
+  let username: String = UserDefaults.standard.string(forKey: UserDefaultKeyList.Auth.userNickname) ?? "리드미"
   
   // MARK: - Life Cycle Part
   

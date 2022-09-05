@@ -43,7 +43,9 @@ class BaseService{
         .request(target)
         .subscribe { event in
           switch event {
+              
             case .success(let value):
+              dump(value)
               do {
                 let decoder = JSONDecoder()
                 let body = try decoder.decode(ResponseObject<T>.self, from: value.data)

@@ -179,14 +179,18 @@ extension FeedListVC {
         mailComposeVC.setToRecipients(["Readme.team.sopterm@gmail.com"])
         mailComposeVC.setSubject("리드미 유저 신고")
         mailComposeVC.setMessageBody("""
+        ❗️이곳은 수정하지 말아주세요❗️
+        신고할 유저의 닉네임 : \(nickname)
+        신고할 게시글의 id : \(feedId)
         
         🚨신고 유형 사유가 무엇인가요?
          ex) 상업적 광고 및 판매, 음란물/불건전한 대화, 욕설 비하, 도배, 부적절한 내용, 기타사유 등
         신고하신 사항은 리드미팀이 신속하게 처리하겠습니다. 감사합니다
+        
+        
+      
+        
         ----------------------------------------------------------------------
-        ❗️이곳은 수정하지 말아주세요❗️
-        신고할 유저의 닉네임 : \(nickname)
-        신고할 게시글의 id : \(feedId)
         """,
                                      isHTML: false)
 
@@ -248,16 +252,12 @@ extension FeedListVC: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         switch result {
         case .cancelled:
-            controller.dismiss(animated: true) { print("mailComposeController - cancelled.")}
-        case .saved:
-            controller.dismiss(animated: true) { print("mailComposeController - saved.")}
+            controller.dismiss(animated: true) { self.makeAlert(message: "신고가 취소되었습니다.") }
         case .sent:
-            controller.dismiss(animated: true) {
-                print("📍 mailComposeController - sent.")
-            }
+            controller.dismiss(animated: true) {  self.makeAlert(message: "신고가 접수되었습니다.") }
         case .failed:
-            controller.dismiss(animated: true) { print("mailComposeController - filed.")}
-        @unknown default:
+            controller.dismiss(animated: true) { self.makeAlert(message: "네트워크 상태를 확인해주세요.")}
+        default:
             return
         }
     }

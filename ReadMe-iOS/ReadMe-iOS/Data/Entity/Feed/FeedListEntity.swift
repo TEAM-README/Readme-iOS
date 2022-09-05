@@ -10,7 +10,7 @@ import Foundation
 // 임시 Entity고 서버 나온 다음에 다시 수정해야 함
 struct FeedListEntity: Codable{
   let filters: [String]
-  let feeds: [FeedDetailEntity]
+  let feeds: [FeedDetailDataModel]
   
   func toDomain() -> FeedListModel {
     let feedList = self.feeds.map { entity in
@@ -39,7 +39,7 @@ struct FeedListEntity: Codable{
 struct MyFeedListEntity: Codable {
   let nickname: String
   let count: Int
-  let feeds: [FeedDetailEntity]
+  let feeds: [FeedDetailDataModel]
   
   func toDomain() -> FeedListModel {
     let feedList = self.feeds.map { entity in

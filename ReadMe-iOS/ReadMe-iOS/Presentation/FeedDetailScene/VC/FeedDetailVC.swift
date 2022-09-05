@@ -55,7 +55,6 @@ extension FeedDetailVC {
   private func bindViewModels() {
 
     let input = FeedDetailViewModel.Input(
-
       viewWillAppearEvent:
         self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in })
     let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)

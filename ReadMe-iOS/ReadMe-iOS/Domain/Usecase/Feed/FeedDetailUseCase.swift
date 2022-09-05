@@ -29,8 +29,10 @@ extension DefaultFeedDetailUseCase: FeedDetailUseCase {
     repository.getBookDetailInformation(idx: idx)
       .filter{ $0 != nil }
       .subscribe(onNext: { [weak self] entity in
+        print("DETAIL ENTITY")
+        dump(entity)
         guard let self = self else { return }
-        let model = entity!.toDomain()
+        let model = entity!.feed.toDomain()
         self.bookDetailInformation.accept(model)
       }).disposed(by: self.disposeBag)
   }

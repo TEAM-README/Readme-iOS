@@ -43,9 +43,8 @@ extension DefaultLoginUseCase: LoginUseCase {
         UserDefaults.standard.setValue(token, forKeyPath: UserDefaultKeyList.Auth.userToken)
         UserDefaults.standard.setValue(accessToken, forKeyPath: UserDefaultKeyList.Auth.accessToken)
         UserDefaults.standard.setValue(entity!.user!.id, forKeyPath: UserDefaultKeyList.Auth.userID)
-        print("====== 로그인 성공 ======")
-        print(entity!.accessToken)
-        print(entity!.user)
+        UserDefaults.standard.setValue(entity!.user!.nickname, forKeyPath: UserDefaultKeyList.Auth.userNickname)
+
         self.loginData.onNext(data)
       },onError: { err in
         self.loginFail.onNext(err)

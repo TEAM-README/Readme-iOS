@@ -43,6 +43,8 @@ extension BaseAPI: TargetType {
       base += "feed/recent"
     case .getNickname:
       base += ""
+      case .deleteUser:
+        base += "user"
     case .write:
       base += "feed"
     case .getSearch:
