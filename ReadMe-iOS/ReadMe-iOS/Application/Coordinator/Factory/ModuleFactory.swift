@@ -120,6 +120,7 @@ final class ModuleFactory: ModuleFactoryProtocol{
                                       isMyPage: isMyPage)
     let feedListVC =  FeedListVC.controllerFromStoryboard(.feedList)
     feedListVC.viewModel = viewModel
+    feedListVC.isMyPage = isMyPage
     return feedListVC
   }
   

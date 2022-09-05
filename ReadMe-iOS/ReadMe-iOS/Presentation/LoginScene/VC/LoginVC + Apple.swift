@@ -38,7 +38,6 @@ extension LoginVC: ASAuthorizationControllerDelegate {
           break
         }
         let authRequestModel = LoginRequestModel(platform: .apple, platformAccessToken: tokenString)
-        print(authRequestModel)
         self.loginRequest.onNext(authRequestModel)
       default:
         break

@@ -68,12 +68,12 @@ extension UIView {
   }
   
   @objc func dismissKeyBoard(){
-    self.view.endEditing(true)
+    self.endEditing(true)
   }
   
   public func addTapGesture(){
     let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard))
-    self.view.addGestureRecognizer(tap)
+    self.addGestureRecognizer(tap)
   }
   
 }

@@ -23,7 +23,6 @@ final class DefaultFeedRepository {
 
 extension DefaultFeedRepository: FeedRepository {
   func getBookDetailInformation(idx: Int) -> Observable<FeedDetailEntity?> {
-    print("불러오긴 함?")
     return networkService.getBookDetailInformation(idx: idx)
   }
 }

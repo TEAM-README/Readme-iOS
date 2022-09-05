@@ -36,7 +36,6 @@ extension LoginVC {
       return
     }
 
-    print("🍫KAKAO LOGIN 성공",token)
     let authRequestModel = LoginRequestModel(platform: .kakao, platformAccessToken: token)
     self.loginRequest.onNext(authRequestModel)
   }

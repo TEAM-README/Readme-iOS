@@ -42,6 +42,7 @@ class FeedDetailVC: UIViewController {
     self.configureUI()
     self.bindViewModels()
     self.bindButtonAction()
+    self.addObserver()
   }
   
   @IBAction func backButtonClicked(_ sender: Any) {
@@ -61,8 +62,8 @@ extension FeedDetailVC {
 
     output.thumnailURL.asSignal().emit { [weak self] imgURL in
       guard let self = self else { return }
-      if imgURL.isEmpty {
-        self.bookCoverImageView.image = UIImage(named: "emtpy_book")
+      if imgURL.isEmpty || imgURL == " "{
+        self.bookCoverImageView.image = UIImage(named: "empty_book")
       } else {
         self.bookCoverImageView.setImage(with: imgURL)
       }
@@ -114,6 +115,15 @@ extension FeedDetailVC {
       self.dateLabel.text = date
     }.disposed(by: self.disposeBag)
     self.view.layoutIfNeeded()
+    
+    output.bookLoadFail.asSignal().emit { [weak self] in
+      guard let self = self else { return }
+      self.makeAlert(message: "존재하지 않는 게시글입니다.")
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        self.navigationController?.popViewController(animated: true)
+      }
+    }.disposed(by: self.disposeBag)
+    
   }
   
   private func bindButtonAction() {
@@ -123,13 +133,24 @@ extension FeedDetailVC {
   }
   
   private func moreButtonTapped(nickname: String? = nil, feedId: String? = nil) {
-    print("CLI")
-    let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: false, nickname: nickname ?? "", feedId: feedId ?? "")
+    let userNickname = UserDefaults.standard.string(forKey: UserDefaultKeyList.Auth.userNickname)
+    let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: userNickname == nickname, nickname: nickname ?? "", feedId: feedId ?? "")
     let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .actionSheet)
     reportVC.buttonDelegate = bottomSheet
     bottomSheet.modalPresentationStyle = .overFullScreen
     bottomSheet.modalTransitionStyle = .crossDissolve
     present(bottomSheet, animated: true)
+  }
+  
+
+  
+  private func addObserver() {
+    addObserverAction(.deleteFeed) { _ in
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        self.navigationController?.popViewController(animated: true)
+      }
+      self.makeAlert(title: "알림", message: "삭제가 완료되었습니다.")
+    }
   }
 
 }

@@ -25,7 +25,7 @@ enum BaseAPI{
   case getSearchRecent
   case getSearch(query: String, display: Int, start: Int, sort: String)
   case write(bookCategory: String, quote: String, impression: String, book: BookModel)
-  case deleteFeed(idx: Int)
+  case deleteFeed(idx: String)
   case postFeedReport(idx: Int)
 }
 
@@ -45,7 +45,7 @@ extension BaseAPI: TargetType {
       base += ""
       case .deleteUser:
         base += "user"
-    case .write:
+      case .write,.deleteFeed:
       base += "feed"
     case .getSearch:
       guard let url = URL(string: search) else {
@@ -76,7 +76,9 @@ extension BaseAPI: TargetType {
         return "/nickname"
       case .getMyFeedList:
         return "/myFeeds"
-      case .getFeedDetail(let idx),.deleteFeed(let idx),.postFeedReport(let idx):
+      case .getFeedDetail(let idx),.postFeedReport(let idx):
+        return "/\(idx)"
+      case .deleteFeed(let idx):
         return "/\(idx)"
       default :
         return ""

@@ -19,10 +19,11 @@ final class FeedListVC: UIViewController {
   private let disposeBag = DisposeBag()
   private let refreshControl = UIRefreshControl()
   private var category = PublishSubject<[FeedCategory]>()
-  private var isMyPage: Bool = false
+  private var refreshEvent = PublishSubject<Bool>()
   private var cachedIndexList: Set<IndexPath> = []
   private var isScrollAnimationRequired = true
   private var currentCategory: [Category] = []
+  var isMyPage: Bool = false
   
   var viewModel: FeedListViewModel!
   
@@ -74,9 +75,9 @@ extension FeedListVC {
   
   @objc func refresh() {
     delayWithSeconds(1.0) {
+      self.refreshEvent.onNext(self.isMyPage)
       self.cachedIndexList.removeAll()
       self.isScrollAnimationRequired = true
-      self.feedListTV.reloadData()
       self.refreshControl.endRefreshing()
     }
   }
@@ -84,7 +85,9 @@ extension FeedListVC {
   private func bindViewModels() {
     let input = FeedListViewModel.Input(
       viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:))).map { _ in },
-      category: category)
+      refreshEvent: refreshEvent.asObservable(),
+      category: category
+  )
     let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
     
     output.isMyPageMode.asSignal()
@@ -131,6 +134,10 @@ extension FeedListVC {
             
           case .content :
             let contentData = item.dataSource as! FeedListContentViewModel
+            if contentData.isMyPage {
+            } else {
+
+            }
             guard let contentCell = tableView.dequeueReusableCell(withIdentifier: FeedListContentTVC.className) as? FeedListContentTVC else { return UITableViewCell() }
 
             contentCell.viewModel = contentData
@@ -149,6 +156,8 @@ extension FeedListVC {
       }.disposed(by: self.disposeBag)
   }
   
+
+  
   private func bindTableView() {
     feedListTV.rx.modelAndIndexSelected(FeedListDataModel.self)
       .subscribe(onNext: { [weak self] (model,index) in
@@ -163,9 +172,29 @@ extension FeedListVC {
   private func addObserver() {
     addObserverAction(.filterButtonClicked) { noti in
       if let category = noti.object as? [Category] {
-        print("currentCategory 저장",category)
         self.currentCategory = category
       }
+    }
+
+    
+    if isMyPage {
+      addObserverAction(.deleteFeedForMyPage) { _ in
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) {
+          self.refreshEvent.onNext(true)
+        }
+      }
+    } else {
+      addObserverAction(.deleteFeed) { noti in
+        self.deleteAction(noti)
+      }
+    }
+
+    
+    addObserverAction(.writeComplete) { _ in
+      if self.feedListTV.contentOffset.y > 0 {
+        self.feedListTV.scrollToTop()
+      }
+      self.refreshEvent.onNext(self.isMyPage)
     }
     
     addObserverAction(.report) { noti in
@@ -203,6 +232,19 @@ extension FeedListVC {
       }
     }
   }
+  
+  private func deleteAction(_ noti: Notification) {
+    if let idx = noti.object as? String {
+      self.makeAlert(title: "알림", message: "피드를 삭제하시겠습니까?", cancelButtonNeeded: true) { _ in
+        BaseService.default.deleteFeed(idx: idx) { result in
+          self.makeAlert(message: "삭제가 완료되었습니다.")
+          self.refreshEvent.onNext(false)
+          self.cachedIndexList.removeAll()
+          self.isScrollAnimationRequired = true
+        }
+      }
+    }
+  }
 }
 
 extension FeedListVC: FeedCategoryDelegate {
@@ -218,7 +260,8 @@ extension FeedListVC: FeedCategoryDelegate {
 
 extension FeedListVC: FeedListDelegate {
   func moreButtonTapped(nickname: String? = nil, feedId: String? = nil) {
-    let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: self.isMyPage, nickname: nickname ?? "", feedId: feedId ?? "")
+    let userNickname = UserDefaults.standard.string(forKey: UserDefaultKeyList.Auth.userNickname)
+    let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: userNickname == nickname, nickname: nickname ?? "", feedId: feedId ?? "")
     let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .actionSheet)
     reportVC.buttonDelegate = bottomSheet
     bottomSheet.modalPresentationStyle = .overFullScreen

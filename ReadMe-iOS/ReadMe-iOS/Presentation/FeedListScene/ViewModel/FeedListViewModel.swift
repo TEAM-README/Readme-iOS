@@ -11,7 +11,7 @@ import RxRelay
 final class FeedListViewModel: ViewModelType {
 
   private var pageNum: Int = 0
-  private let isMyPage: Bool
+  private var isMyPage: Bool = false
   private var category: [FeedCategory] = []
   private let useCase: FeedListUseCase
   private let disposeBag = DisposeBag()
@@ -19,6 +19,7 @@ final class FeedListViewModel: ViewModelType {
   // MARK: - Inputs
   struct Input {
     let viewWillAppearEvent: Observable<Void>
+    let refreshEvent: Observable<Bool>
     let category: Observable<[FeedCategory]>
   }
   
@@ -41,10 +42,20 @@ extension FeedListViewModel {
     let output = Output()
     self.bindOutput(output: output, disposeBag: disposeBag)
     input.viewWillAppearEvent
-      .take(1)
       .subscribe(onNext: { [weak self] in
       guard let self = self else { return }
       output.isMyPageMode.accept(self.isMyPage)
+      self.isMyPage ? self.useCase.getMyFeedList() : self.useCase.getFeedList(pageNum: 0,
+                                                                              category: self.category)
+      self.useCase.getUserData()
+    }).disposed(by: self.disposeBag)
+    
+    input.refreshEvent
+      .subscribe(onNext: { [weak self] state in
+      guard let self = self else { return }
+        self.isMyPage = state
+        state ? self.useCase.getMyFeedList() : self.useCase.getFeedList(pageNum: 0,
+                                                                        category: self.category)
       self.isMyPage ? self.useCase.getMyFeedList() : self.useCase.getFeedList(pageNum: 0,
                                                                               category: self.category)
       self.useCase.getUserData()
@@ -80,7 +91,6 @@ extension FeedListViewModel {
       }
 
       if !self.isMyPage {
-        print("123123",data.feedListData.category)
         let category = FeedListDataModel(type: .category,
                                          dataSource: FeedCategoryViewModel(category: data.feedListData.category))
         feedDatasource.insert(category, at: 0)
@@ -166,7 +176,8 @@ extension FeedListViewModel {
     }else{
       let timeArray = articleDate.components(separatedBy: " ")
       let dateArray = timeArray[0].components(separatedBy: "-")
-      message = dateArray[1] + "월 " + dateArray[2] + "일"
+      let date = String(dateArray[2].split(separator: "T").first!)
+      message = dateArray[1] + "월 " + date + "일"
     }
     
     return message

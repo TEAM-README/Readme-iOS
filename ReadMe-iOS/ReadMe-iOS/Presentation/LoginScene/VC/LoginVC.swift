@@ -104,7 +104,6 @@ extension LoginVC {
     }).disposed(by: self.disposeBag)
 
     output.signupRequired.subscribe(onNext: { [weak self] loginData in
-      print("회원가입 필요",loginData)
       let signupVC = ModuleFactory.shared.makeSignupVC(loginData: loginData)
       self?.navigationController?.pushViewController(signupVC, animated: true)
     }).disposed(by: self.disposeBag)

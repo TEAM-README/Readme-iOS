@@ -13,6 +13,7 @@ protocol FeedServiceType {
   func getBookListInformation(page: Int,category:String) -> Observable<FeedListEntity?>
   func getMyFeedList() -> Observable<MyFeedListEntity?>
   func getMyFeedListInAF(completion: @escaping (Result<MyFeedListEntity?,Error>) -> Void)
+  func deleteFeed(idx: String,completion: @escaping (Result<Bool?,Error>) -> Void)
 }
 
 extension BaseService: FeedServiceType {
@@ -31,4 +32,9 @@ extension BaseService: FeedServiceType {
   func getMyFeedListInAF(completion: @escaping (Result<MyFeedListEntity?,Error>) -> Void) {
     requestObject(.getMyFeedList, completion: completion)
   }
+  
+  func deleteFeed(idx: String,completion: @escaping (Result<Bool?,Error>) -> Void) {
+    requestObject(.deleteFeed(idx: idx), completion: completion)
+  }
+
 }

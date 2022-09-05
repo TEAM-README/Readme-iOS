@@ -32,6 +32,7 @@ final class FeedDetailViewModel: ViewModelType {
     var comment = PublishRelay<FeedTextViewModel>()
     var nickname = PublishRelay<String>()
     var date = PublishRelay<String>()
+    var bookLoadFail = PublishRelay<Void>()
   }
   
   init(useCase: FeedDetailUseCase,idx: Int) {
@@ -46,7 +47,6 @@ extension FeedDetailViewModel {
     self.bindOutput(output: output, disposeBag: disposeBag)
     input.viewWillAppearEvent.subscribe(onNext: { [weak self] in
       guard let self = self else { return }
-      print("???")
       self.useCase.getBookDetailInformation(idx: self.feedDetailIdx)
     }).disposed(by: self.disposeBag)
     
@@ -55,6 +55,11 @@ extension FeedDetailViewModel {
   
   private func bindOutput(output: Output, disposeBag: DisposeBag) {
     let feedDetailRelay = useCase.bookDetailInformation
+    let failRelay = useCase.bookLoadFail
+    
+    failRelay.subscribe(onNext: { [weak self] in
+      output.bookLoadFail.accept(())
+    }).disposed(by: self.disposeBag)
     
     feedDetailRelay.subscribe(onNext: { [weak self] model in
       guard let self = self else { return }

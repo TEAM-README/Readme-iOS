@@ -76,7 +76,6 @@ extension WriteCheckVC {
     
     output.showRegisterFailError.subscribe(onNext: { _ in
       self.showNetworkErrorAlert()
-      print("📌 writeRequestFailError")
     })
     
     output.showNetworkError.subscribe(onNext: { [weak self] in

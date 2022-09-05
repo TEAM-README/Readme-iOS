@@ -84,7 +84,6 @@ extension BaseVC: MainTabbarDelegate{
 extension BaseVC {
   
   func addObserver() {
-    print("ADD OBSERVER")
     addObserverAction(.moveFeedDetail) { noti in
       guard let idx = noti.object as? Int else { return }
       let detailVC = ModuleFactory.shared.makeFeedDetailVC(idx: idx)
@@ -103,7 +102,6 @@ extension BaseVC {
   }
   
   private func removeObserver() {
-    print("remove observer")
     removeObserverAction(.moveFeedDetail)
     removeObserverAction(.moveSettingView)
     removeObserverAction(.moveLoginVC)

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "img_ book.png",
+      "filename" : "empty_book.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "img_ book@2x.png",
+      "filename" : "empty_book@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "img_ book@3x.png",
+      "filename" : "empty_book@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

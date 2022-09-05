@@ -38,7 +38,6 @@ extension DefaultFeedListUseCase: FeedListUseCase {
   
   func getFeedList(pageNum: Int, category: [FeedCategory]) {
     // FIXME: - 서버 나오면 카테고리 부분 수정해야함
-    print("새로 들어옴",category)
     let categoryString = category.isEmpty ? "" : makeCategoryString(category)
     feedRepository.getFeedList(page: 0, category: categoryString)
       .filter{ $0 != nil }

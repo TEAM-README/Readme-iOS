@@ -67,7 +67,11 @@ extension FeedReportVC {
     .disposed(by: self.disposeBag)
     
     output.deleteRequestSuccess.subscribe(onNext: { [weak self] _ in
-      self?.buttonDelegate?.dismissButtonTapped(completion: nil)
+
+      self?.buttonDelegate?.dismissButtonTapped(completion: {
+        self?.postObserverAction(.deleteFeed,object: self?.viewModel.feedId ?? "")
+        self?.postObserverAction(.deleteFeedForMyPage,object: self?.viewModel.feedId ?? "")
+      })
     })
     .disposed(by: self.disposeBag)
   }
