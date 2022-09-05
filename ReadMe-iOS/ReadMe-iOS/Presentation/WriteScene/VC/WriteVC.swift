@@ -56,6 +56,7 @@ class WriteVC: UIViewController {
     setButtonActions()
     bindViewModels()
     configureUI()
+    addObserver()
     setFlow(self.flowType)
   }
   
@@ -68,11 +69,12 @@ class WriteVC: UIViewController {
 
 extension WriteVC {
   private func setSecondFlowData() {
-    secondView.setData(bookInfo: viewModel.bookInfo, category: firstView.setSelectedCategory())
+    guard let category = firstView.setSelectedCategory() else { return }
+    secondView.setData(bookInfo: viewModel.bookInfo, category: category)
     
     let authorName = viewModel.bookInfo.author
     self.bookname = viewModel.bookInfo.bookname
-    self.category = firstView.setSelectedCategory().rawValue
+    self.category = category.rawValue
     self.author = authorName.isEmpty ? " " : authorName
     self.bookImgURL = viewModel.bookInfo.bookcover
   }
@@ -121,6 +123,12 @@ extension WriteVC {
   private func setDelegate() {
     secondView.quoteTextView.delegate = self
     thirdView.impressionTextView.delegate = self
+  }
+  
+  private func addObserver() {
+    addObserverAction(.writeCategorySelected) { _ in
+      self.nextButton.isEnabled = true
+    }
   }
   
   private func pushWriteCheckView() {
@@ -187,9 +195,10 @@ extension WriteVC {
   }
   
   private func setFirstFlow() {
+    
     progressBar.setPercentage(ratio: 0.3)
     
-    nextButton.isEnabled = true
+    nextButton.isEnabled = false
     UIView.animate(withDuration: 0.4,
                    delay: 0,
                    options: .curveEaseInOut,
@@ -211,6 +220,7 @@ extension WriteVC {
         
       }, completion: nil)
     })
+    
   }
   
   private func setSecondFlow() {
@@ -359,6 +369,7 @@ extension WriteVC {
     describeLabel.setTextWithLineHeight(text: I18N.Write.startDescribe, lineHeightMultiple: 1.33)
     
     nextButton.title = I18N.Button.next
+    nextButton.isEnabled = false
     
     [cheerLabel, describeLabel, secondView, thirdView].forEach { $0.alpha = 0 }
   }

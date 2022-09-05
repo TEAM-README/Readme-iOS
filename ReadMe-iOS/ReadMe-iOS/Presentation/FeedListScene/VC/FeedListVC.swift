@@ -83,7 +83,7 @@ extension FeedListVC {
   
   private func bindViewModels() {
     let input = FeedListViewModel.Input(
-      viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in },
+      viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:))).map { _ in },
       category: category)
     let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
     
@@ -185,10 +185,9 @@ extension FeedListVC {
         
         🚨신고 유형 사유가 무엇인가요?
          ex) 상업적 광고 및 판매, 음란물/불건전한 대화, 욕설 비하, 도배, 부적절한 내용, 기타사유 등
-        신고하신 사항은 리드미팀이 신속하게 처리하겠습니다. 감사합니다
+        신고하신 사항은 리드미팀이 신속하게 처리하겠습니다. 감사합니다.
         
         
-      
         
         ----------------------------------------------------------------------
         """,

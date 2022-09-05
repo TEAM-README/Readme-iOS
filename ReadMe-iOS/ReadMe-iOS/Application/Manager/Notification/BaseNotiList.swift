@@ -16,6 +16,7 @@ enum BaseNotiList : String{
   case report
   case writeComplete
   case filterButtonClicked
+  case writeCategorySelected
   
   static func makeNotiName(list : BaseNotiList) -> NSNotification.Name{
     return Notification.Name(String(describing: list))

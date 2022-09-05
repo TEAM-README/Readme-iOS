@@ -33,7 +33,13 @@ final class WriteCategoryFlow: UIView {
   })
   
   lazy var categoryCV = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
-  var selectedCategory: Category?
+  var selectedCategory: Category? {
+    didSet{
+      if selectedCategory != nil {
+        postObserverAction(.writeCategorySelected)
+      }
+    }
+  }
   
   // MARK: - Life Cycles
   override init(frame: CGRect) {
@@ -92,11 +98,11 @@ extension WriteCategoryFlow {
       .disposed(by: disposeBag)
   }
   
-  func setSelectedCategory() -> Category {
+  func setSelectedCategory() -> Category? {
     if let category = self.selectedCategory {
       return category
     }
-    return Category.improve
+    return nil
   }
   
   private func setLayout() {

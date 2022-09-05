@@ -40,7 +40,9 @@ extension FeedListViewModel {
   func transform(from input: Input, disposeBag: DisposeBag) -> Output {
     let output = Output()
     self.bindOutput(output: output, disposeBag: disposeBag)
-    input.viewWillAppearEvent.subscribe(onNext: { [weak self] in
+    input.viewWillAppearEvent
+      .take(1)
+      .subscribe(onNext: { [weak self] in
       guard let self = self else { return }
       output.isMyPageMode.accept(self.isMyPage)
       self.isMyPage ? self.useCase.getMyFeedList() : self.useCase.getFeedList(pageNum: 0,

@@ -89,7 +89,8 @@ extension BaseAPI: TargetType {
       case .postSignin,
           .postSignup,
           .postSampleSignin,
-          .postFeedReport:
+          .postFeedReport,
+          .write:
         return .post
       case .deleteUser,
           .deleteFeed:

@@ -61,7 +61,11 @@ extension FeedDetailVC {
 
     output.thumnailURL.asSignal().emit { [weak self] imgURL in
       guard let self = self else { return }
-      self.bookCoverImageView.setImage(with: imgURL)
+      if imgURL.isEmpty {
+        self.bookCoverImageView.image = UIImage(named: "emtpy_book")
+      } else {
+        self.bookCoverImageView.setImage(with: imgURL)
+      }
     }.disposed(by: self.disposeBag)
     
     output.categoryName.asSignal().emit { [weak self] category in
