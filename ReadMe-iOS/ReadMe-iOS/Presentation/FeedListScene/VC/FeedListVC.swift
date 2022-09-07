@@ -20,7 +20,7 @@ final class FeedListVC: UIViewController {
   private let refreshControl = UIRefreshControl()
   private var category = PublishSubject<[FeedCategory]>()
   private var refreshEvent = PublishSubject<Bool>()
-  private var cachedIndexList: Set<IndexPath> = []
+  private var cachedIndexList: Set<Int> = []
   private var isScrollAnimationRequired = true
   private var currentCategory: [Category] = []
   var isMyPage: Bool = false
@@ -134,10 +134,6 @@ extension FeedListVC {
             
           case .content :
             let contentData = item.dataSource as! FeedListContentViewModel
-            if contentData.isMyPage {
-            } else {
-
-            }
             guard let contentCell = tableView.dequeueReusableCell(withIdentifier: FeedListContentTVC.className) as? FeedListContentTVC else { return UITableViewCell() }
 
             contentCell.viewModel = contentData
@@ -234,6 +230,7 @@ extension FeedListVC {
   }
   
   private func deleteAction(_ noti: Notification) {
+    print("DELETE ACTION IN FEEDLISTVC")
     if let idx = noti.object as? String {
       self.makeAlert(title: "알림", message: "피드를 삭제하시겠습니까?", cancelButtonNeeded: true) { _ in
         BaseService.default.deleteFeed(idx: idx) { result in
@@ -271,21 +268,25 @@ extension FeedListVC: FeedListDelegate {
 }
 
 extension FeedListVC: UITableViewDelegate {
+  
+  func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    cachedIndexList.insert(indexPath.row)
+  }
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    
-    if let lastIndexPath = tableView.indexPathsForVisibleRows?.first{
+    let lastIndexPath = indexPath
       guard lastIndexPath.row != 0 else {return}
+      guard cell.className != FeedListEmptyTVC.className else { return }
+
       guard isScrollAnimationRequired else { return }
-      guard !cachedIndexList.contains(lastIndexPath) else {return}
-      cachedIndexList.insert(lastIndexPath)
+      guard !cachedIndexList.contains(lastIndexPath.row) else {return}
+      cachedIndexList.insert(lastIndexPath.row)
 
         if lastIndexPath.row <= indexPath.row{
           cell.frame.origin.x = -cell.frame.width
-          UIView.animate(withDuration: 1.3, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.allowUserInteraction,.curveEaseOut], animations: {
+          UIView.animate(withDuration: 1.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.allowUserInteraction,.curveEaseOut], animations: {
               cell.frame.origin.x = 0
           }, completion: nil)
         }
-    }
 
   }
 }
