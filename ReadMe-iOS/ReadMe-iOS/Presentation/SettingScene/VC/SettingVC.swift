@@ -54,8 +54,6 @@ extension SettingVC {
     
     withdrawLabel.text = I18N.Setting.withdraw
     withdrawLabel.textColor = .logoutRed
-    
-    
   }
   
   private func setButtonActions() {

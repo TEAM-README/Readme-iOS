@@ -146,10 +146,12 @@ extension FeedDetailVC {
   
   private func addObserver() {
     addObserverAction(.deleteFeed) { _ in
-      DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+//              self.makeAlert(message: "삭제가 완료되었습니다.")
         self.navigationController?.popViewController(animated: true)
-      }
-      self.makeAlert(title: "알림", message: "삭제가 완료되었습니다.")
+        }
+
+
     }
   }
 
