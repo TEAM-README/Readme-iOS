@@ -129,6 +129,7 @@ extension BottomSheetVC {
     let topConstant = safeAreaHeight + bottomPadding
     bottomSheetView.snp.updateConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide).inset(topConstant)
+      make.bottom.equalToSuperview().offset(topConstant)
     }
     
     UIView.animate(withDuration: 0.25,

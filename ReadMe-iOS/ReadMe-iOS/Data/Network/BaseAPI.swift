@@ -9,53 +9,53 @@ import Moya
 import Alamofire
 
 enum BaseAPI{
-  case sampleAPI(sample : String)
-  case login(provider: String,token : String)
-  case postCheckNicknameDuplicated(nickname: String)
+  // Auth
+  case postSignup(platform: String,socialToken: String,nickname: String)
+  case postSignin(platform: String,socialToken: String)
+  case postSampleSignin
+  case getDuplicatedNicknameState(nickname: String)
+  case deleteUser
+
+  
+  // Feed List
+  case getMyFeedList
+  case getFeedList(filter: String)
   case getFeedDetail(idx: Int)
-  case getFeedList(page: Int, category: String)
   case getNickname
   case getSearchRecent
   case getSearch(query: String, display: Int, start: Int, sort: String)
   case write(bookCategory: String, quote: String, impression: String, book: BookModel)
+  case deleteFeed(idx: String)
+  case postFeedReport(idx: Int)
 }
 
 extension BaseAPI: TargetType {
-  // MARK: - Base URL & Path
-  /// - Parameters:
-  ///   - base : 각 api case별로 앞에 공통적으로 붙는 주소 부분을 정의합니다.
-  ///   - path : 각 api case별로 뒤에 붙는 개별적인 주소 부분을 정의합니다. (없으면 안적어도 상관 X)
-  ///           bas eURL과  path의 차이점은
-  ///           a  : (고정주소값)/post/popular
-  ///           b  : (고정주소값)/post/new
-  ///
-  ///     a와 b 라는 주소가 있다고 하면은
-  ///     case a,b -> baseURL은 "/post"이고,
-  ///      case a -> path 은 "/popular"
-  ///      case b -> path 는 /new" 입니다.
-  ///
   public var baseURL: URL {
     var base = Config.Network.baseURL
     let search = Config.Network.searchURL
     
     switch self{
-    case .sampleAPI:
-      base += ""
-    case .login,.postCheckNicknameDuplicated:
-      base += ""
+      case .postSignin,.postSignup,.getDuplicatedNicknameState,.getMyFeedList:
+        base += "user"
     case .getFeedDetail,.getFeedList:
-      base += ""
+      base += "feed"
     case .getSearchRecent:
       base += "feed/recent"
     case .getNickname:
       base += ""
-    case .write:
+      case .deleteUser:
+        base += "user"
+      case .write,.deleteFeed:
       base += "feed"
     case .getSearch:
       guard let url = URL(string: search) else {
         fatalError("searchURL could not be configured")
       }
       return url
+
+    default:
+        base += ""
+
     }
     guard let url = URL(string: base) else {
       fatalError("baseURL could not be configured")
@@ -64,31 +64,42 @@ extension BaseAPI: TargetType {
   }
   
   // MARK: - Path
-  /// - note :
-  ///  path에 필요한 parameter를 넣어야 되는 경우,
-  ///  enum을 정의했을때 적은 파라미터가
-  ///  .case이름(let 변수이름):
-  ///  형태로 작성하면 변수를 받아올 수 있습니다.
-  ///
   var path: String {
     switch self{
-    case .sampleAPI:
-      return ""
-    default :
-      return ""
+      case .postSignin:
+        return "/login"
+      case .postSignup:
+        return "/signup"
+      case .postSampleSignin:
+        return "/auth/access-token"
+      case .getDuplicatedNicknameState:
+        return "/nickname"
+      case .getMyFeedList:
+        return "/myFeeds"
+      case .getFeedDetail(let idx),.postFeedReport(let idx):
+        return "/\(idx)"
+      case .deleteFeed(let idx):
+        return "/\(idx)"
+      default :
+        return ""
     }
   }
   
   // MARK: - Method
-  /// - note :
-  ///  각 case 별로 get,post,delete,put 인지 정의합니다.
   var method: Moya.Method {
     switch self{
-    case .sampleAPI,.login,.postCheckNicknameDuplicated, .write:
-      return .post
-    default :
-      return .get
-      
+      case .postSignin,
+          .postSignup,
+          .postSampleSignin,
+          .postFeedReport,
+          .write:
+        return .post
+      case .deleteUser,
+          .deleteFeed:
+        return .delete
+      default :
+        return .get
+        
     }
   }
   
@@ -107,13 +118,10 @@ extension BaseAPI: TargetType {
   private var bodyParameters: Parameters? {
     var params: Parameters = [:]
     switch self{
-    case .sampleAPI(let email):
-      params["email"] = email
-      params["password"] = "여기에 필요한 Value값 넣기"
-    case .login(let provider,let token):
-      params["provider"] = provider
-      params["token"] = token
-    case .postCheckNicknameDuplicated(let nickname):
+    case .postSignin(let provider,let token):
+      params["platform"] = provider
+      params["socialToken"] = token
+    case .getDuplicatedNicknameState(let nickname):
       params["nickname"] = nickname
     case .write(let bookcategory, let quote, let impression, let book):
       let bookParams: [String: Any] = [
@@ -132,25 +140,18 @@ extension BaseAPI: TargetType {
       params["display"] = display
       params["start"] = start
       params["sort"] = sort
+    case .postSignup(let platform, let socialToken, let nickname):
+      params["platform"] = platform
+      params["socialToken"] = socialToken
+      params["nickname"] = nickname
+        
+      case .getFeedList(let filter):
+        params["filters"] = filter
+
     default:
       break
     }
     return params
-  }
-  
-  // MARK: - MultiParts
-  
-  /// - note :
-  ///  사진등을 업로드 할때 사용하는 multiparts 부분이라 따로 사용 X
-  ///
-  private var multiparts: [Moya.MultipartFormData] {
-    switch self{
-    case .sampleAPI(_):
-      var multiparts : [Moya.MultipartFormData] = []
-      multiparts.append(.init(provider: .data("".data(using: .utf8) ?? Data()), name: ""))
-      return multiparts
-    default : return []
-    }
   }
   
   /// - note :
@@ -159,7 +160,7 @@ extension BaseAPI: TargetType {
   ///
   private var parameterEncoding : ParameterEncoding{
     switch self {
-    case .sampleAPI,.getSearch:
+      case .getSearch,.getDuplicatedNicknameState,.getFeedList:
       return URLEncoding.init(destination: .queryString, arrayEncoding: .noBrackets, boolEncoding: .literal)
     default :
       return JSONEncoding.default
@@ -173,7 +174,7 @@ extension BaseAPI: TargetType {
   ///
   var task: Task {
     switch self{
-    case .sampleAPI, .login, .write:
+      case .postSignin, .write,.postSignup,.getDuplicatedNicknameState,.getFeedList:
       return .requestParameters(parameters: bodyParameters ?? [:], encoding: parameterEncoding)
     case .getSearch:
       return .requestParameters(parameters: bodyParameters ?? [:], encoding: NaverParameterEncoding.init())
@@ -191,14 +192,13 @@ extension BaseAPI: TargetType {
               "X-Naver-Client-Secret": "oyvfoKifc8"]
     default:
       // TODO: - 임시 토큰
-//      if let userToken = UserDefaults.standard.string(forKey: "userToken") {
-//        return ["Authorization": userToken,
-//                "Content-Type": "application/json"]
-//      } else {
-//        return ["Content-Type": "application/json"]
-//      }
-      return ["Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWNjZXNzVG9rZW4iLCJpZCI6MTQsIm5pY2tuYW1lIjoi66as65Oc66-4IiwiaWF0IjoxNjYxODQwNTM1LCJleHAiOjE2NjQ0MzI1MzV9.2axHoShthb1LtdFIPW9W7ah8XFokvAcStjsAe0_Z_Kc",
-              "Content-Type": "application/json"]
+        if let userToken = UserDefaults.standard.string(forKey:UserDefaultKeyList.Auth.accessToken) {
+        return ["Authorization": userToken,
+                "Content-Type": "application/json"]
+      } else {
+        return ["Content-Type": "application/json"]
+      }
+
     }
   }
   
@@ -213,7 +213,6 @@ extension BaseAPI: TargetType {
 struct NaverParameterEncoding: ParameterEncoding {
     func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
         var urlRequest = try urlRequest.asURLRequest()
-       // your custom encoding logic goes here
       var newString = ""
       if var urlString = urlRequest.url?.absoluteString,
          let query = parameters?.queryParameters{

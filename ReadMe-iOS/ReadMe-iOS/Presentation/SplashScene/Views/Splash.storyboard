@@ -40,10 +40,10 @@
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="109.82142857142857"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--SplashNC-->
         <scene sceneID="3hD-F9-lYo">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="gnd-Nd-Nbj" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SplashNC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="gnd-Nd-Nbj" customClass="SplashNC" customModule="ReadMe_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9eu-hc-TAx">

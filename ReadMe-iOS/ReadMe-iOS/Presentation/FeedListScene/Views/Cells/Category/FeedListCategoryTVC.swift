@@ -69,12 +69,18 @@ extension FeedListCategoryTVC {
   
   private func makeCategoryBoldString(category: [FeedCategory]) -> String {
     var targetString: String = ""
+    
     for (index,item) in category.enumerated() {
-      if index > 0 { targetString = ", " + targetString }
+      if index >= 2 { break }
       targetString += item.rawValue
+      if index != category.count - 1{
+        targetString += ","
+      }
     }
+    
     if category.count > 2 {
-      targetString += "외 \(category.count-2)개"
+      targetString = String(targetString.dropLast())
+      targetString += " 외 \(category.count - 2)개"
     }
     return targetString
   }

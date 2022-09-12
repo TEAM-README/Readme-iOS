@@ -19,9 +19,12 @@ final class FeedListVC: UIViewController {
   private let disposeBag = DisposeBag()
   private let refreshControl = UIRefreshControl()
   private var category = PublishSubject<[FeedCategory]>()
-  private var isMyPage: Bool = false
-  private var cachedIndexList: Set<IndexPath> = []
+  private var refreshEvent = PublishSubject<Bool>()
+  private var cachedIndexList: Set<Int> = []
   private var isScrollAnimationRequired = true
+  private var currentCategory: [Category] = []
+  var isMyPage: Bool = false
+  
   var viewModel: FeedListViewModel!
   
   // MARK: - UI Component Part
@@ -72,17 +75,19 @@ extension FeedListVC {
   
   @objc func refresh() {
     delayWithSeconds(1.0) {
+      self.refreshEvent.onNext(self.isMyPage)
       self.cachedIndexList.removeAll()
       self.isScrollAnimationRequired = true
-      self.feedListTV.reloadData()
       self.refreshControl.endRefreshing()
     }
   }
   
   private func bindViewModels() {
     let input = FeedListViewModel.Input(
-      viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in },
-      category: category)
+      viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:))).map { _ in },
+      refreshEvent: refreshEvent.asObservable(),
+      category: category
+  )
     let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
     
     output.isMyPageMode.asSignal()
@@ -147,6 +152,8 @@ extension FeedListVC {
       }.disposed(by: self.disposeBag)
   }
   
+
+  
   private func bindTableView() {
     feedListTV.rx.modelAndIndexSelected(FeedListDataModel.self)
       .subscribe(onNext: { [weak self] (model,index) in
@@ -159,6 +166,33 @@ extension FeedListVC {
   }
   
   private func addObserver() {
+    addObserverAction(.filterButtonClicked) { noti in
+      if let category = noti.object as? [Category] {
+        self.currentCategory = category
+      }
+    }
+
+    
+    if isMyPage {
+      addObserverAction(.deleteFeedForMyPage) { _ in
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) {
+          self.refreshEvent.onNext(true)
+        }
+      }
+    } else {
+      addObserverAction(.deleteFeed) { noti in
+        self.deleteAction(noti)
+      }
+    }
+
+    
+    addObserverAction(.writeComplete) { _ in
+      if self.feedListTV.contentOffset.y > 0 {
+        self.feedListTV.scrollToTop()
+      }
+      self.refreshEvent.onNext(self.isMyPage)
+    }
+    
     addObserverAction(.report) { noti in
       guard let nickname = noti.userInfo?["nickname"] as? String else { return }
       guard let feedId = noti.userInfo?["feedId"] as? String else { return }
@@ -170,14 +204,17 @@ extension FeedListVC {
         mailComposeVC.setToRecipients(["Readme.team.sopterm@gmail.com"])
         mailComposeVC.setSubject("리드미 유저 신고")
         mailComposeVC.setMessageBody("""
-        
-        🚨신고 유형 사유가 무엇인가요?
-         ex) 상업적 광고 및 판매, 음란물/불건전한 대화, 욕설 비하, 도배, 부적절한 내용, 기타사유 등
-        신고하신 사항은 리드미팀이 신속하게 처리하겠습니다. 감사합니다
-        ----------------------------------------------------------------------
         ❗️이곳은 수정하지 말아주세요❗️
         신고할 유저의 닉네임 : \(nickname)
         신고할 게시글의 id : \(feedId)
+        
+        🚨신고 유형 사유가 무엇인가요?
+         ex) 상업적 광고 및 판매, 음란물/불건전한 대화, 욕설 비하, 도배, 부적절한 내용, 기타사유 등
+        신고하신 사항은 리드미팀이 신속하게 처리하겠습니다. 감사합니다.
+        
+        
+        
+        ----------------------------------------------------------------------
         """,
                                      isHTML: false)
 
@@ -191,11 +228,25 @@ extension FeedListVC {
       }
     }
   }
+  
+  private func deleteAction(_ noti: Notification) {
+    print("DELETE ACTION IN FEEDLISTVC")
+    if let idx = noti.object as? String {
+      self.makeAlert(title: "알림", message: "피드를 삭제하시겠습니까?", cancelButtonNeeded: true) { _ in
+        BaseService.default.deleteFeed(idx: idx) { result in
+          self.makeAlert(message: "삭제가 완료되었습니다.")
+          self.refreshEvent.onNext(false)
+          self.cachedIndexList.removeAll()
+          self.isScrollAnimationRequired = true
+        }
+      }
+    }
+  }
 }
 
 extension FeedListVC: FeedCategoryDelegate {
   func categoryButtonTapped() {
-    let filterVC = ModuleFactory.shared.makeFilterVC()
+    let filterVC = ModuleFactory.shared.makeFilterVC(category: currentCategory)
     let bottomSheet = BottomSheetVC(contentViewController: filterVC)
     filterVC.buttonDelegate = bottomSheet
     bottomSheet.modalPresentationStyle = .overFullScreen
@@ -206,7 +257,8 @@ extension FeedListVC: FeedCategoryDelegate {
 
 extension FeedListVC: FeedListDelegate {
   func moreButtonTapped(nickname: String? = nil, feedId: String? = nil) {
-    let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: self.isMyPage, nickname: nickname ?? "", feedId: feedId ?? "")
+    let userNickname = UserDefaults.standard.string(forKey: UserDefaultKeyList.Auth.userNickname)
+    let reportVC = ModuleFactory.shared.makeFeedReportVC(isMyPage: userNickname == nickname, nickname: nickname ?? "", feedId: feedId ?? "")
     let bottomSheet = BottomSheetVC(contentViewController: reportVC, type: .actionSheet)
     reportVC.buttonDelegate = bottomSheet
     bottomSheet.modalPresentationStyle = .overFullScreen
@@ -216,21 +268,25 @@ extension FeedListVC: FeedListDelegate {
 }
 
 extension FeedListVC: UITableViewDelegate {
+  
+  func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    cachedIndexList.insert(indexPath.row)
+  }
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    
-    if let lastIndexPath = tableView.indexPathsForVisibleRows?.first{
+    let lastIndexPath = indexPath
       guard lastIndexPath.row != 0 else {return}
+      guard cell.className != FeedListEmptyTVC.className else { return }
+
       guard isScrollAnimationRequired else { return }
-      guard !cachedIndexList.contains(lastIndexPath) else {return}
-      cachedIndexList.insert(lastIndexPath)
+      guard !cachedIndexList.contains(lastIndexPath.row) else {return}
+      cachedIndexList.insert(lastIndexPath.row)
 
         if lastIndexPath.row <= indexPath.row{
           cell.frame.origin.x = -cell.frame.width
-          UIView.animate(withDuration: 1.3, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.allowUserInteraction,.curveEaseOut], animations: {
+          UIView.animate(withDuration: 1.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.allowUserInteraction,.curveEaseOut], animations: {
               cell.frame.origin.x = 0
           }, completion: nil)
         }
-    }
 
   }
 }
@@ -239,16 +295,12 @@ extension FeedListVC: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         switch result {
         case .cancelled:
-            controller.dismiss(animated: true) { print("mailComposeController - cancelled.")}
-        case .saved:
-            controller.dismiss(animated: true) { print("mailComposeController - saved.")}
+            controller.dismiss(animated: true) { self.makeAlert(message: "신고가 취소되었습니다.") }
         case .sent:
-            controller.dismiss(animated: true) {
-                print("📍 mailComposeController - sent.")
-            }
+            controller.dismiss(animated: true) {  self.makeAlert(message: "신고가 접수되었습니다.") }
         case .failed:
-            controller.dismiss(animated: true) { print("mailComposeController - filed.")}
-        @unknown default:
+            controller.dismiss(animated: true) { self.makeAlert(message: "네트워크 상태를 확인해주세요.")}
+        default:
             return
         }
     }

@@ -8,8 +8,8 @@
 import Foundation
 
 enum AuthSignInCase: String {
-  case kakao
-  case apple
+  case kakao = "KAKAO"
+  case apple = "APPLE"
   
   func getKoreanName() -> String{
     switch self{

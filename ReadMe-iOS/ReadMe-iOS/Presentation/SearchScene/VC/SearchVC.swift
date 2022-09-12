@@ -298,6 +298,10 @@ extension SearchVC: UICollectionViewDataSource {
 
 extension SearchVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    self.editEventFinished.onNext(self.searchTextField.text)
+    self.makeVibrate(degree: .light)
+    if self.searchTextField.hasText { self.didSearch = true }
     self.view.endEditing(true)
+    return true
   }
 }

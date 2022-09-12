@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class SplashVC: UIViewController {
   @IBOutlet weak var spalshIconView: UIImageView!
@@ -14,9 +15,11 @@ class SplashVC: UIViewController {
     super.viewDidLoad()
     delayWithSeconds(1) {
       UIView.animate(withDuration: 1.0, delay: 0) {
-        self.spalshIconView.alpha = 0
+        if !self.checkOnboardingState() {
+          self.spalshIconView.alpha = 0
+        }
       } completion: { _ in
-        self.checkOnboardingState() ? self.pushBaseView() : self.pushOnboardingView()
+        self.processSplashState()
       }
     }
   }
@@ -26,20 +29,30 @@ class SplashVC: UIViewController {
     return state
   }
   
+  private func processSplashState() {
+    if !checkOnboardingState() {
+      self.pushOnboardingView()
+    } else {
+      checkLoginState { state in
+        switch(state) {
+          case .tokenValid    : self.pushBaseView()
+          case .tokenMissed   : self.pushLoginView()
+          case .tokenInvalid  :
+            self.postLogin { loginState in
+              loginState ? self.pushBaseView() : self.pushLoginView()
+            }
+        }
+      }
+    }
+  }
+  
+  
+  
   private func pushLoginView() {
     let loginVC = ModuleFactory.shared.makeLoginVC()
     navigationController?.pushViewController(loginVC, animated: false)
   }
   
-  private func pushSignupView() {
-    let signupVC = ModuleFactory.shared.makeSignupVC()
-    navigationController?.pushViewController(signupVC, animated: false)
-  }
-  
-  private func pushFeedDetailView() {
-    let feedDetailVC = ModuleFactory.shared.makeFeedDetailVC(idx: 0)
-    navigationController?.pushViewController(feedDetailVC, animated: false)
-  }
   
   private func pushSearchView() {
     let searchVC = ModuleFactory.shared.makeSearchVC()
@@ -48,58 +61,54 @@ class SplashVC: UIViewController {
   
   private func pushBaseView() {
     let baseVC = ModuleFactory.shared.makeBaseVC()
-    navigationController?.pushViewController(baseVC, animated: false)
-  }
-  
-  private func pushFeedListView() {
-    let feedListVC = ModuleFactory.shared.makeFeedListVC(isMyPage: false)
-    navigationController?.pushViewController(feedListVC, animated: false)
-  }
-  
-  private func pushFilterView() {
-    let filterVC = BottomSheetVC(contentViewController: ModuleFactory.shared.makeFilterVC())
-    filterVC.modalPresentationStyle = .overFullScreen
-    present(filterVC, animated: true)
-  }
-  
-//  private func presentFeedReportView() {
-//    let feedReportVC = BottomSheetVC(contentViewController: ModuleFactory.shared.makeFeedReportVC(isMyPage: false), type: .actionSheet)
-//    feedReportVC.modalPresentationStyle = .overFullScreen
-//    present(feedReportVC, animated: true)
-//  }
-  
-  private func pushWriteView() {
-    let bookInfo = WriteModel.init(bookcover: "-", bookname: "-", category: "-", author: "-", isbn: "-")
-    let writeVC = ModuleFactory.shared.makeWriteVC(bookInfo: bookInfo)
-    navigationController?.pushViewController(writeVC, animated: false)
-  }
-  
-//  private func pushWriteCheckView() {
-//    let writeInfo = WriteCheckModel.init(bookCategory: "-", quote: "-", impression: "-", book: "-")
-//    let writeCheckVC = ModuleFactory.shared.makeWriteCheckVC(writeInfo: writeInfo)
-//    navigationController?.pushViewController(writeCheckVC, animated: false)
-//  }
-  
-  private func pushWriteCompleteView() {
-    let writeCompleteVC = ModuleFactory.shared.makeWriteCompleteVC()
-    navigationController?.pushViewController(writeCompleteVC, animated: false)
+    navigationController?.pushViewController(baseVC, animated: true)
   }
   
   private func pushOnboardingView() {
     let onboardingVC = ModuleFactory.shared.makeOnboardingVC()
-    navigationController?.pushViewController(onboardingVC, animated: false)
+    navigationController?.pushViewController(onboardingVC, animated: true)
+  }
+}
+
+extension SplashVC {
+  private func checkLoginState(completion: @escaping ((LoginTokenState) -> Void)) {
+
+    if (UserDefaults.standard.string(forKey: UserDefaultKeyList.Auth.provider) != nil) &&
+      (UserDefaults.standard.string(forKey: UserDefaultKeyList.Auth.userToken) != nil) &&
+      (UserDefaults.standard.string(forKey: UserDefaultKeyList.Auth.accessToken) != nil){
+      
+      BaseService.default.getMyFeedListInAF { result in
+        result.success { _ in
+          completion(.tokenValid)
+        }.catch { _ in
+          completion(.tokenInvalid)
+        }
+      }
+
+    } else {
+      completion(.tokenMissed)
+    }
   }
   
-  private func presentAlertVC() {
-    let alertVC = ModuleFactory.shared.makeAlertVC()
-    alertVC.modalPresentationStyle = .fullScreen
-    alertVC.modalTransitionStyle = .crossDissolve
-    alertVC.setAlertTitle(title: I18N.ReadmeAlert.title, description: I18N.ReadmeAlert.description)
-    alertVC.setAlertType(.twoAction, action: I18N.ReadmeAlert.cancel, I18N.ReadmeAlert.ok)
-    alertVC.closure = {
-      self.pushSearchView()
-    }
+  private func postLogin(completion: @escaping ((Bool) -> Void)) {
+    let userToken = UserDefaults.standard.string(forKey: UserDefaultKeyList.Auth.userToken)!
+    let provider = UserDefaults.standard.string(forKey: UserDefaultKeyList.Auth.provider)!
     
-    present(alertVC, animated: true)
+    BaseService.default.login(provider: provider, token: userToken)
+      .subscribe(onNext: { [weak self] loginEntity in
+        guard let loginEntity = loginEntity else { return }
+        UserDefaults.standard.setValue(loginEntity.user!.id, forKey: UserDefaultKeyList.Auth.userID)
+        UserDefaults.standard.setValue(loginEntity.accessToken, forKey: UserDefaultKeyList.Auth.accessToken)
+        completion(true)
+      },onError: { _ in
+        completion(false)
+      }).disposed(by: DisposeBag())
   }
+}
+
+
+enum LoginTokenState {
+  case tokenValid
+  case tokenInvalid
+  case tokenMissed
 }

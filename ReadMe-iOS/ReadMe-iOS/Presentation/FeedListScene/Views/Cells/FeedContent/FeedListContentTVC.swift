@@ -30,6 +30,7 @@ final class FeedListContentTVC: UITableViewCell, UITableViewRegisterable {
   @IBOutlet weak var nicknameLabel: UILabel!
   @IBOutlet weak var dateLabel: UILabel!
   
+  @IBOutlet weak var titleLabelWidthConstraint: NSLayoutConstraint!
   @IBOutlet weak var sentenceHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var commentHeightConstraint: NSLayoutConstraint!
   
@@ -95,5 +96,16 @@ extension FeedListContentTVC {
     commentTextView.font = viewModel.commentTextViewModel.textFont
     commentHeightConstraint.constant = viewModel.commentTextViewModel.textViewHeight
     commentTextView.sizeToFit()
+    
+    let categoryMockLabel = UILabel()
+    categoryMockLabel.font = UIFont.readMeFont(size: 14, type: .regular)
+    categoryMockLabel.text = viewModel.category
+    categoryMockLabel.sizeToFit()
+    let categoryLabelWidth = categoryMockLabel.frame.width
+    
+    let titleLabelWidth = screenWidth - (32 + categoryLabelWidth + 12 + 38)
+    titleLabelWidthConstraint.constant = titleLabelWidth
+    
+
   }
 }

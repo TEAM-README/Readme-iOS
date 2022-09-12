@@ -32,6 +32,7 @@ class LoginVC: UIViewController {
     self.startLogoAnimation()
     self.configureLabelUI()
     self.bindViewModels()
+    self.removeViewController(BaseVC.self)
   }
 }
 
@@ -71,6 +72,12 @@ extension LoginVC {
 }
 
 extension LoginVC {
+  func removeViewController(_ controller: UIViewController.Type) {
+    if let viewController = self.navigationController?.viewControllers.first(where: { $0.isKind(of: controller.self) }) {
+          viewController.removeFromParent()
+      }
+  }
+  
   private func bindViewModels() {
     let input = LoginViewModel.Input(
       loginButtonClicked:Observable.merge(
@@ -91,7 +98,14 @@ extension LoginVC {
     }).disposed(by: self.disposeBag)
     
     output.loginRequestSuccess.subscribe(onNext: { [weak self] platform in
-      // 이후 성공했을 시에 넘기기
+
+      let baseVC = ModuleFactory.shared.makeBaseVC()
+      self?.navigationController?.pushViewController(baseVC, animated: false)
+    }).disposed(by: self.disposeBag)
+
+    output.signupRequired.subscribe(onNext: { [weak self] loginData in
+      let signupVC = ModuleFactory.shared.makeSignupVC(loginData: loginData)
+      self?.navigationController?.pushViewController(signupVC, animated: true)
     }).disposed(by: self.disposeBag)
     
     output.showLoginFailError.subscribe(onNext: { [weak self] platform in

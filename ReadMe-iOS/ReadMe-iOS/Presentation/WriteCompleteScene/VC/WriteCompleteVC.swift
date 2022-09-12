@@ -42,7 +42,9 @@ extension WriteCompleteVC {
     moveButton.rx.tap
       .subscribe(onNext: {
         self.makeVibrate(degree: .light)
-        self.dismiss(animated: true)
+        self.dismiss(animated: true) {
+          self.postObserverAction(.writeComplete)
+        }
       })
       .disposed(by: disposeBag)
   }

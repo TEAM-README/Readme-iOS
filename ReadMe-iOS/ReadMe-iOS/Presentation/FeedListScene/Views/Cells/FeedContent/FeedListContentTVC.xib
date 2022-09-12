@@ -20,7 +20,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="378" height="1097"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vy-kw-dIc">
-                        <rect key="frame" x="32" y="36" width="42" height="14.5"/>
+                        <rect key="frame" x="32" y="36" width="41.5" height="14.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14.5" id="r1e-bK-9Se"/>
                         </constraints>
@@ -29,8 +29,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="942-c6-JoU">
-                        <rect key="frame" x="86" y="36" width="42" height="14.5"/>
+                        <rect key="frame" x="85.5" y="36" width="42" height="14.5"/>
                         <constraints>
+                            <constraint firstAttribute="width" constant="42" id="473-sv-3TN"/>
                             <constraint firstAttribute="height" constant="14.5" id="bp8-7y-mgy"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -140,6 +141,7 @@
                 <outlet property="sentenceHeightConstraint" destination="Fxf-2x-aqV" id="yLb-dI-HWd"/>
                 <outlet property="sentenceTextView" destination="gpB-ia-5rA" id="rEQ-Qj-UJW"/>
                 <outlet property="titleLabel" destination="942-c6-JoU" id="zaF-QP-iUa"/>
+                <outlet property="titleLabelWidthConstraint" destination="473-sv-3TN" id="q7V-mP-n5H"/>
             </connections>
             <point key="canvasLocation" x="188.40579710144928" y="343.86160714285711"/>
         </tableViewCell>

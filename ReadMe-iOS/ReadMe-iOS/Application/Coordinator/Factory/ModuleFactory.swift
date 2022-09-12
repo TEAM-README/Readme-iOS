@@ -8,9 +8,10 @@
 import Foundation
 
 protocol ModuleFactoryProtocol {
+  func makeSplashNC() -> SplashNC
   func makeOnboardingVC() -> OnboardingVC
   func makeLoginVC() -> LoginVC
-  func makeSignupVC() -> SignupVC
+  func makeSignupVC(loginData: LoginHistoryData) -> SignupVC
   func makeBaseVC() -> BaseVC
   func makeHomeVC() -> HomeVC
   func makeFeedDetailVC(idx: Int) -> FeedDetailVC
@@ -26,6 +27,11 @@ final class ModuleFactory: ModuleFactoryProtocol{
   static let shared = ModuleFactory()
   private init() { }
   
+  func makeSplashNC() -> SplashNC {
+    let splashNC = SplashNC.controllerFromStoryboard(.splash)
+    return splashNC
+  }
+  
   func makeOnboardingVC() -> OnboardingVC {
     let onboardingVC = OnboardingVC.controllerFromStoryboard(.onboarding)
     return onboardingVC
@@ -40,13 +46,14 @@ final class ModuleFactory: ModuleFactoryProtocol{
     return loginVC
   }
   
-  func makeSignupVC() -> SignupVC {
+  func makeSignupVC(loginData: LoginHistoryData) -> SignupVC {
     let repository = DefaultSignupRepository(service: BaseService.default)
     let useCase = DefaultSignupUseCase(repository: repository)
     let viewModel = SignupViewModel(useCase: useCase)
-    let loginVC = SignupVC.controllerFromStoryboard(.signup)
-    loginVC.viewModel = viewModel
-    return loginVC
+    let signupVC = SignupVC.controllerFromStoryboard(.signup)
+    signupVC.viewModel = viewModel
+    signupVC.loginData = loginData
+    return signupVC
   }
   
   func makeSearchVC() -> SearchVC {
@@ -108,21 +115,22 @@ final class ModuleFactory: ModuleFactoryProtocol{
     let feedRepository = DefaultFeedListRepository(service: BaseService.default)
     let myPageRepository = DefaultMyPageRepository(service: BaseService.default)
     let useCase = DefaultFeedListUseCase(
-      myPageRepository: myPageRepository,
       feedrepository: feedRepository)
     let viewModel = FeedListViewModel(useCase: useCase,
                                       isMyPage: isMyPage)
     let feedListVC =  FeedListVC.controllerFromStoryboard(.feedList)
     feedListVC.viewModel = viewModel
+    feedListVC.isMyPage = isMyPage
     return feedListVC
   }
   
-  func makeFilterVC() -> FilterVC {
+  func makeFilterVC(category: [Category]) -> FilterVC {
     let repository = DefaultFilterRepository(service: BaseService.default)
     let useCase = DefaultFilterUseCase(repository: repository)
     let viewModel = FilterViewModel(useCase: useCase)
     let filterVC = FilterVC.controllerFromStoryboard(.filter)
     filterVC.viewModel = viewModel
+    filterVC.selectedCategory = category
     return filterVC
   }
   

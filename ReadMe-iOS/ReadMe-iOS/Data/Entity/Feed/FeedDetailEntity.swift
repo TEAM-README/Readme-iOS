@@ -8,25 +8,37 @@
 import Foundation
 
 struct FeedDetailEntity: Codable {
-  let idx: Int
-  let imgURL: String
-  let category: String
-  let title: String
-  let author: String
-  let sentence: String
-  let comment: String
-  let nickname: String
-  let date: String
+  let feed: FeedDetailDataModel
+}
+
+struct FeedDetailDataModel: Codable {
+  let id: Int
+  let categoryName, sentence, feeling: String
+  let reportedCount: Int
+  let createdAt: String
+  let isDeleted: Bool
+  let book: Book
+  let user: User
   
   func toDomain() -> FeedDetailModel {
-    FeedDetailModel.init(idx:self.idx,
-                         imgURL: self.imgURL,
-                         category: self.category,
-                         title: self.title,
-                         author: self.author,
+    FeedDetailModel.init(idx:self.id,
+                         imgURL: self.book.image ?? "",
+                         category: self.categoryName,
+                         title: self.book.title ?? "",
+                         author: self.book.author ?? "",
                          sentence: self.sentence,
-                         comment: self.comment,
-                         nickname: self.nickname,
-                         date: self.date)
+                         comment: self.feeling,
+                         nickname: self.user.nickname,
+                         date: self.createdAt)
   }
+}
+
+struct Book: Codable {
+    let isbn, subIsbn, title, author: String?
+    let image: String?
+}
+
+struct User: Codable {
+    let id: Int
+    let nickname: String
 }

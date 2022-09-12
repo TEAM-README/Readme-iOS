@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D81B20BFD4B898D634BAFD0 /* Pods_ReadMe_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 893A028F11E470966C8D7097 /* Pods_ReadMe_iOS.framework */; };
 		2B0CFB3F2809D856007F3145 /* addSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0CFB3E2809D856007F3145 /* addSubviews.swift */; };
 		2B0CFB422809DFD5007F3145 /* SearchCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0CFB412809DFD4007F3145 /* SearchCVC.swift */; };
 		2B47704E2891103700958D89 /* SearchRecentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B47704D2891103700958D89 /* SearchRecentEntity.swift */; };
@@ -72,6 +71,7 @@
 		2BFE0C042812E92400DF6F4C /* WriteCompleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFE0BFE2812E92400DF6F4C /* WriteCompleteViewModel.swift */; };
 		2BFE0C052812E92400DF6F4C /* WriteCompleteEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFE0BFF2812E92400DF6F4C /* WriteCompleteEntity.swift */; };
 		2BFE0C0E2812E9B300DF6F4C /* WriteComplete.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BFE0C0D2812E9B300DF6F4C /* WriteComplete.storyboard */; };
+		DB3328E7D5165362E082ADD1 /* Pods_ReadMe_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188A0753E2656EFF1E45FDD8 /* Pods_ReadMe_iOS.framework */; };
 		FD01F06F2807F8E7002F80D2 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD01F06E2807F8E7002F80D2 /* Pretendard-Bold.otf */; };
 		FD01F0712808062E002F80D2 /* shakeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01F0702808062E002F80D2 /* shakeAction.swift */; };
 		FD01F07428082237002F80D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD01F07328082237002F80D2 /* Main.storyboard */; };
@@ -108,6 +108,7 @@
 		FD2937C5280E60E7003B4685 /* FeedListCategoryTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD2937C3280E60E7003B4685 /* FeedListCategoryTVC.xib */; };
 		FD2937C8280E6100003B4685 /* FeedListCategoryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2937C6280E6100003B4685 /* FeedListCategoryTVC.swift */; };
 		FD2937C9280E6100003B4685 /* FeedListContentTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD2937C7280E6100003B4685 /* FeedListContentTVC.xib */; };
+		FD3119C528C47D5A00B72979 /* SplashNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3119C428C47D5A00B72979 /* SplashNC.swift */; };
 		FD400E702828AD96000CA548 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD400E6F2828AD96000CA548 /* ProgressBar.swift */; };
 		FD7BA8F7282A43C800399959 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD7BA8F6282A43C800399959 /* Onboarding.storyboard */; };
 		FD7BA8F9282A452700399959 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7BA8F8282A452700399959 /* OnboardingVC.swift */; };
@@ -217,6 +218,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		188A0753E2656EFF1E45FDD8 /* Pods_ReadMe_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadMe_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2842B499B765DA8D12F8A868 /* Pods-ReadMe-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		2B0CFB3E2809D856007F3145 /* addSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addSubviews.swift; sourceTree = "<group>"; };
 		2B0CFB412809DFD4007F3145 /* SearchCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCVC.swift; sourceTree = "<group>"; };
 		2B47704D2891103700958D89 /* SearchRecentEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecentEntity.swift; sourceTree = "<group>"; };
@@ -281,9 +284,7 @@
 		2BFE0BFE2812E92400DF6F4C /* WriteCompleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCompleteViewModel.swift; sourceTree = "<group>"; };
 		2BFE0BFF2812E92400DF6F4C /* WriteCompleteEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCompleteEntity.swift; sourceTree = "<group>"; };
 		2BFE0C0D2812E9B300DF6F4C /* WriteComplete.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WriteComplete.storyboard; sourceTree = "<group>"; };
-		47915226E9B56538C326162E /* Pods-ReadMe-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		893A028F11E470966C8D7097 /* Pods_ReadMe_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadMe_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E69CCAD3467CF7B0BFE2CA60 /* Pods-ReadMe-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.release.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		3ECBDA39F262E8E19CED511F /* Pods-ReadMe-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadMe-iOS.release.xcconfig"; path = "Target Support Files/Pods-ReadMe-iOS/Pods-ReadMe-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		FD01F06E2807F8E7002F80D2 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		FD01F0702808062E002F80D2 /* shakeAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shakeAction.swift; sourceTree = "<group>"; };
 		FD01F07328082237002F80D2 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -319,6 +320,7 @@
 		FD2937C3280E60E7003B4685 /* FeedListCategoryTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedListCategoryTVC.xib; sourceTree = "<group>"; };
 		FD2937C6280E6100003B4685 /* FeedListCategoryTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListCategoryTVC.swift; sourceTree = "<group>"; };
 		FD2937C7280E6100003B4685 /* FeedListContentTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedListContentTVC.xib; sourceTree = "<group>"; };
+		FD3119C428C47D5A00B72979 /* SplashNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashNC.swift; sourceTree = "<group>"; };
 		FD400E6F2828AD96000CA548 /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		FD7BA8F6282A43C800399959 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		FD7BA8F8282A452700399959 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
@@ -437,7 +439,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D81B20BFD4B898D634BAFD0 /* Pods_ReadMe_iOS.framework in Frameworks */,
+				DB3328E7D5165362E082ADD1 /* Pods_ReadMe_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -863,16 +865,16 @@
 		96BEEFE36BD7FC57BABEEC21 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				47915226E9B56538C326162E /* Pods-ReadMe-iOS.debug.xcconfig */,
-				E69CCAD3467CF7B0BFE2CA60 /* Pods-ReadMe-iOS.release.xcconfig */,
+				2842B499B765DA8D12F8A868 /* Pods-ReadMe-iOS.debug.xcconfig */,
+				3ECBDA39F262E8E19CED511F /* Pods-ReadMe-iOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		A61CB229C4D89D8AD06D820D /* Frameworks */ = {
+		E56AF2E04DABC93334640CDA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				893A028F11E470966C8D7097 /* Pods_ReadMe_iOS.framework */,
+				188A0753E2656EFF1E45FDD8 /* Pods_ReadMe_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1205,6 +1207,7 @@
 			isa = PBXGroup;
 			children = (
 				FD99D5812806FDC900BB7FDA /* SplashVC.swift */,
+				FD3119C428C47D5A00B72979 /* SplashNC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1293,8 +1296,8 @@
 				FDD9D24727F9CB270024DFB2 /* ReadMe-iOS */,
 				FDD9D24627F9CB270024DFB2 /* Products */,
 				96BEEFE36BD7FC57BABEEC21 /* Pods */,
-				A61CB229C4D89D8AD06D820D /* Frameworks */,
 				FD400E6C2828AC90000CA548 /* Recovered References */,
+				E56AF2E04DABC93334640CDA /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -1896,11 +1899,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FDD9D25927F9CB290024DFB2 /* Build configuration list for PBXNativeTarget "ReadMe-iOS" */;
 			buildPhases = (
-				4DEB88C76EB7B498B1B227BA /* [CP] Check Pods Manifest.lock */,
+				117786F2F0B1354894CF6C9B /* [CP] Check Pods Manifest.lock */,
 				FDD9D24127F9CB270024DFB2 /* Sources */,
 				FDD9D24227F9CB270024DFB2 /* Frameworks */,
 				FDD9D24327F9CB270024DFB2 /* Resources */,
-				9505E01E8A50DD67AF6E6C4A /* [CP] Embed Pods Frameworks */,
+				4BE2A48BAA8FA7781DB7272A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1993,7 +1996,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4DEB88C76EB7B498B1B227BA /* [CP] Check Pods Manifest.lock */ = {
+		117786F2F0B1354894CF6C9B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2015,7 +2018,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9505E01E8A50DD67AF6E6C4A /* [CP] Embed Pods Frameworks */ = {
+		4BE2A48BAA8FA7781DB7272A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2117,6 +2120,7 @@
 				FD99D59928073C4900BB7FDA /* SignupModel.swift in Sources */,
 				FD9304AE2826BA39002441C0 /* FeedListEmptyTVC.swift in Sources */,
 				2B0CFB3F2809D856007F3145 /* addSubviews.swift in Sources */,
+				FD3119C528C47D5A00B72979 /* SplashNC.swift in Sources */,
 				FDD9D2D027F9E2240024DFB2 /* BaseService.swift in Sources */,
 				FDD9D29927F9DFAF0024DFB2 /* makeAlert.swift in Sources */,
 				FDD9D27927F9DF5E0024DFB2 /* makeVibrate.swift in Sources */,
@@ -2342,13 +2346,13 @@
 		};
 		FDD9D25A27F9CB290024DFB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 47915226E9B56538C326162E /* Pods-ReadMe-iOS.debug.xcconfig */;
+			baseConfigurationReference = 2842B499B765DA8D12F8A868 /* Pods-ReadMe-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "ReadMe-iOS/ReadMe-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2022050902;
+				CURRENT_PROJECT_VERSION = 2022090701;
 				DEVELOPMENT_TEAM = L9D5M5DM3Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ReadMe-iOS/Info.plist";
@@ -2365,7 +2369,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sopkathon.release;
+				PRODUCT_BUNDLE_IDENTIFIER = com.readme.release;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -2375,13 +2379,13 @@
 		};
 		FDD9D25B27F9CB290024DFB2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E69CCAD3467CF7B0BFE2CA60 /* Pods-ReadMe-iOS.release.xcconfig */;
+			baseConfigurationReference = 3ECBDA39F262E8E19CED511F /* Pods-ReadMe-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "ReadMe-iOS/ReadMe-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2022050902;
+				CURRENT_PROJECT_VERSION = 2022090701;
 				DEVELOPMENT_TEAM = L9D5M5DM3Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ReadMe-iOS/Info.plist";
@@ -2398,7 +2402,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sopkathon.release;
+				PRODUCT_BUNDLE_IDENTIFIER = com.readme.release;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

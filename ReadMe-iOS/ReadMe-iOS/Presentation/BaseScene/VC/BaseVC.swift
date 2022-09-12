@@ -82,6 +82,7 @@ extension BaseVC: MainTabbarDelegate{
 }
 
 extension BaseVC {
+  
   func addObserver() {
     addObserverAction(.moveFeedDetail) { noti in
       guard let idx = noti.object as? Int else { return }
@@ -94,10 +95,16 @@ extension BaseVC {
       self.navigationController?.pushViewController(settingVC, animated: true)
     }
     
-    addObserverAction(.logout) { _ in
+    addObserverAction(.moveLoginVC) { _ in
       let loginVC = ModuleFactory.shared.makeLoginVC()
       self.navigationController?.pushViewController(loginVC, animated: true)
     }
+  }
+  
+  private func removeObserver() {
+    removeObserverAction(.moveFeedDetail)
+    removeObserverAction(.moveSettingView)
+    removeObserverAction(.moveLoginVC)
   }
 }
 

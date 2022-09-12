@@ -11,7 +11,7 @@ import RxRelay
 final class FeedListViewModel: ViewModelType {
 
   private var pageNum: Int = 0
-  private let isMyPage: Bool
+  private var isMyPage: Bool = false
   private var category: [FeedCategory] = []
   private let useCase: FeedListUseCase
   private let disposeBag = DisposeBag()
@@ -19,6 +19,7 @@ final class FeedListViewModel: ViewModelType {
   // MARK: - Inputs
   struct Input {
     let viewWillAppearEvent: Observable<Void>
+    let refreshEvent: Observable<Bool>
     let category: Observable<[FeedCategory]>
   }
   
@@ -40,11 +41,24 @@ extension FeedListViewModel {
   func transform(from input: Input, disposeBag: DisposeBag) -> Output {
     let output = Output()
     self.bindOutput(output: output, disposeBag: disposeBag)
-    input.viewWillAppearEvent.subscribe(onNext: { [weak self] in
+    input.viewWillAppearEvent
+      .subscribe(onNext: { [weak self] in
       guard let self = self else { return }
       output.isMyPageMode.accept(self.isMyPage)
+      self.isMyPage ? self.useCase.getMyFeedList() : self.useCase.getFeedList(pageNum: 0,
+                                                                              category: self.category)
       self.useCase.getUserData()
-      self.useCase.getFeedList(pageNum: self.pageNum, category: self.category)
+    }).disposed(by: self.disposeBag)
+    
+    input.refreshEvent
+      .subscribe(onNext: { [weak self] state in
+      guard let self = self else { return }
+        self.isMyPage = state
+        state ? self.useCase.getMyFeedList() : self.useCase.getFeedList(pageNum: 0,
+                                                                        category: self.category)
+      self.isMyPage ? self.useCase.getMyFeedList() : self.useCase.getFeedList(pageNum: 0,
+                                                                              category: self.category)
+      self.useCase.getUserData()
     }).disposed(by: self.disposeBag)
     
     input.category.subscribe(onNext: { [weak self] category in
@@ -62,7 +76,7 @@ extension FeedListViewModel {
     let userDataRelay = useCase.userMyPageData
     
     Observable.combineLatest(userDataRelay,feedListRelay) { userData, feedListData -> FeedBundleData in
-      FeedBundleData(myPageData: userData, feedListData: feedListData)
+      return FeedBundleData(myPageData: userData, feedListData: feedListData)
     }.subscribe(onNext: { [weak self] data in
       guard let self = self else { return }
       var feedDatasource: [FeedListDataModel] = []
@@ -76,7 +90,7 @@ extension FeedListViewModel {
                                                 dataSource: FeedListEmtpyViewData(isMyPage: self.isMyPage)))
       }
 
-      if !self.isMyPage { // 마이페이지가 아니면 카테고리 정보를 불러와야 함.
+      if !self.isMyPage {
         let category = FeedListDataModel(type: .category,
                                          dataSource: FeedCategoryViewModel(category: data.feedListData.category))
         feedDatasource.insert(category, at: 0)
@@ -117,11 +131,58 @@ extension FeedListViewModel {
                                     commentTextViewModel: makeTextViewModel(type: .comment,
                                                                              text: detailModel.comment),
                                     nickname: detailModel.nickname,
-                                    date: detailModel.date,
+                                    date: makeDateText(detailModel.date),
       isMyPage: isMyPage)
     }
     return contents
   }
+  
+  private func makeDateText(_ date: String) -> String {
+    
+    let minute = 60
+    let hour = minute * 60
+    let day = hour * 24
+    let week = day * 7
+    
+    var message : String = ""
+    
+    let UTCDate = Date()
+    let formatter = DateFormatter()
+    formatter.timeZone = TimeZone(secondsFromGMT: 32400)
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    let defaultTimeZoneStr = formatter.string(from: UTCDate)
+    
+    let format = DateFormatter()
+    format.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    format.locale = Locale(identifier: "ko_KR")
+    
+    guard let tempDate = format.date(from: date) else {return ""}
+    let krTime = format.date(from: defaultTimeZoneStr)
+    
+    let articleDate = format.string(from: tempDate)
+    var useTime = Int(krTime!.timeIntervalSince(tempDate))
+    useTime = useTime - 32400
+    
+    if useTime < minute {
+      message = "방금 전"
+    }else if useTime < hour {
+      message = String(useTime/minute) + "분 전"
+    }else if useTime < day {
+      message = String(useTime/hour) + "시간 전"
+    }else if useTime < week {
+      message = String(useTime/day) + "일 전"
+    }else if useTime < week * 4 {
+      message = String(useTime/week) + "주 전"
+    }else{
+      let timeArray = articleDate.components(separatedBy: " ")
+      let dateArray = timeArray[0].components(separatedBy: "-")
+      let date = String(dateArray[2].split(separator: "T").first!)
+      message = dateArray[1] + "월 " + date + "일"
+    }
+    
+    return message
+  }
+
   
   private func makeTextViewModel(type : FeedListTextType, text: String) -> FeedTextViewModel{
     let font: UIFont

@@ -11,6 +11,8 @@ import RxRelay
 protocol FeedDetailUseCase {
   func getBookDetailInformation(idx: Int)
   var bookDetailInformation: PublishRelay<FeedDetailModel> { get set }
+  var bookLoadFail: PublishRelay<Void> { get set }
+
 }
 
 final class DefaultFeedDetailUseCase {
@@ -18,6 +20,7 @@ final class DefaultFeedDetailUseCase {
   private let repository: FeedRepository
   private let disposeBag = DisposeBag()
   var bookDetailInformation = PublishRelay<FeedDetailModel>()
+  var bookLoadFail = PublishRelay<Void>()
   
   init(repository: FeedRepository) {
     self.repository = repository
@@ -30,8 +33,10 @@ extension DefaultFeedDetailUseCase: FeedDetailUseCase {
       .filter{ $0 != nil }
       .subscribe(onNext: { [weak self] entity in
         guard let self = self else { return }
-        let model = entity!.toDomain()
+        let model = entity!.feed.toDomain()
         self.bookDetailInformation.accept(model)
+      },onError: { _ in
+        self.bookLoadFail.accept(())
       }).disposed(by: self.disposeBag)
   }
 }

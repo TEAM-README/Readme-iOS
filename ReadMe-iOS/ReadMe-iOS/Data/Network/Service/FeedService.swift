@@ -11,6 +11,9 @@ import RxSwift
 protocol FeedServiceType {
   func getBookDetailInformation(idx: Int) -> Observable<FeedDetailEntity?>
   func getBookListInformation(page: Int,category:String) -> Observable<FeedListEntity?>
+  func getMyFeedList() -> Observable<MyFeedListEntity?>
+  func getMyFeedListInAF(completion: @escaping (Result<MyFeedListEntity?,Error>) -> Void)
+  func deleteFeed(idx: String,completion: @escaping (Result<Bool?,Error>) -> Void)
 }
 
 extension BaseService: FeedServiceType {
@@ -19,6 +22,19 @@ extension BaseService: FeedServiceType {
   }
   
   func getBookListInformation(page: Int,category:String) -> Observable<FeedListEntity?> {
-    requestObjectInRx(.getFeedList(page: page, category: category))
+    requestObjectInRx(.getFeedList(filter: category))
   }
+  
+  func getMyFeedList() -> Observable<MyFeedListEntity?> {
+    requestObjectInRx(.getMyFeedList)
+  }
+  
+  func getMyFeedListInAF(completion: @escaping (Result<MyFeedListEntity?,Error>) -> Void) {
+    requestObject(.getMyFeedList, completion: completion)
+  }
+  
+  func deleteFeed(idx: String,completion: @escaping (Result<Bool?,Error>) -> Void) {
+    requestObject(.deleteFeed(idx: idx), completion: completion)
+  }
+
 }

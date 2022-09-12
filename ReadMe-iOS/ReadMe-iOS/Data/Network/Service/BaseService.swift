@@ -43,16 +43,22 @@ class BaseService{
         .request(target)
         .subscribe { event in
           switch event {
+              
             case .success(let value):
+              dump(value)
               do {
                 let decoder = JSONDecoder()
                 let body = try decoder.decode(ResponseObject<T>.self, from: value.data)
                 observer.onNext(body.data)
                 observer.onCompleted()
               } catch let error {
+                print("ERROR")
+                print("에러")
                 observer.onError(error)
               }
             case .failure(let error):
+              print("FAILURE")
+              dump(error)
               observer.onError(error)
           }
         }.disposed(by: self.disposeBag)
@@ -85,7 +91,6 @@ class BaseService{
   
   func requestObject<T: Decodable>(_ target: BaseAPI, completion: @escaping (Result<T?, Error>) -> Void) {
     provider.request(target) { response in
- 
       switch response {
         case .success(let value):
           do {

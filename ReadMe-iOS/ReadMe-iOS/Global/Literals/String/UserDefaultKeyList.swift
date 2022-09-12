@@ -15,5 +15,8 @@ struct UserDefaultKeyList{
   struct Auth {
     static let provider = "loginProvider"
     static let userToken = "userToken"
+    static let userID = "userID"
+    static let accessToken = "accessToken"
+    static let userNickname = "userNickname"
   }
 }

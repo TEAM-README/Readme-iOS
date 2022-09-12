@@ -11,9 +11,11 @@ import RxSwift
 class SignupVC: UIViewController {
   // MARK: - Vars & Lets Part
   private let disposeBag = DisposeBag()
-  private let maxNicknameLength = 20
+  private let maxNicknameLength = 7
   private var editEventFinished = PublishSubject<String?>()
+  private var completeButtonClicked = PublishSubject<SignupDTO>()
   var viewModel: SignupViewModel!
+  var loginData: LoginHistoryData!
 
   // MARK: - UI Component Part
   @IBOutlet weak var titleLabel: UILabel!
@@ -23,6 +25,8 @@ class SignupVC: UIViewController {
   @IBOutlet weak var textCountLabel: UILabel!
   @IBOutlet weak var completeButton: BottomButton!
   
+  @IBOutlet weak var duplicateCheckLabel: UILabel!
+  @IBOutlet weak var duplicateCheckButton: UIButton!
   @IBOutlet weak var completeButtonBottomConstraint: NSLayoutConstraint!
   // MARK: - Life Cycle Part
   override func viewDidLoad() {
@@ -47,12 +51,17 @@ extension SignupVC {
       nicknameText: nicknameTextField.rx.text
         .distinctUntilChanged()
         .asObservable(),
-      textEditFinished: editEventFinished)
+      duplicateCheckClicked: editEventFinished,
+      completeButtonClicked: completeButtonClicked
+      )
     let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
     
     output.nicknameInvalid.asSignal()
       .emit(onNext: { [weak self] invalidType in
         guard let self = self else { return }
+        self.completeButton.isEnabled = false
+        self.duplicateCheckButton.isEnabled = false
+        self.duplicateCheckLabel.textColor = UIColor.grey01
         self.setNicknameInvalidState(errorType: invalidType)
       })
       .disposed(by: self.disposeBag)
@@ -60,7 +69,10 @@ extension SignupVC {
     output.nicknameValid.asSignal()
       .emit(onNext: { [weak self]  in
         guard let self = self else { return }
+        self.duplicateCheckButton.isEnabled = true
         self.setNicknameValidState()
+        self.stateLabel.text?.removeAll()
+        self.completeButton.isEnabled = false
       })
       .disposed(by: self.disposeBag)
     
@@ -71,13 +83,53 @@ extension SignupVC {
       })
       .disposed(by: self.disposeBag)
     
+    output.nicknameDuplicatedCheckButtonState
+      .subscribe(onNext: { [weak self] state in
+        guard let self = self else { return }
+        self.duplicateCheckLabel.textColor = state ? UIColor.grey01 : UIColor.mainBlue
+        self.duplicateCheckButton.isEnabled = state
+      }).disposed(by: self.disposeBag)
+    
+    output.signupComplete
+      .subscribe(onNext: { [weak self] state in
+        guard let self = self else { return }
+        if state {
+          self.goToBaseVC()
+        } else {
+          self.makeAlert(message: "네트워크 상태를 확인해주세요.")
+        }
+      }).disposed(by: self.disposeBag)
+    
+    output.nicknameNotDuplicated
+      .subscribe(onNext: { [weak self] in
+        self?.duplicateCheckLabel.textColor = UIColor.grey01
+        self?.duplicateCheckButton.isEnabled = false
+        self?.setNicknameValidState()
+        self?.completeButton.isEnabled = true
+
+        
+      }).disposed(by: self.disposeBag)
   }
   
   private func configureButtonAction() {
     completeButton.rx.tap
       .bind{
-        self.editEventFinished.onNext(self.nicknameTextField.text)
+        self.makeVibrate()
+        let signupData = SignupDTO(nickname: self.nicknameTextField.text!,
+                                   platform: self.loginData.platform,
+                                   accessToken: self.loginData.accesToken)
+        self.completeButtonClicked.onNext(signupData)
       }.disposed(by: self.disposeBag)
+    
+    duplicateCheckButton.press {
+      self.makeVibrate()
+      self.editEventFinished.onNext(self.nicknameTextField.text)
+    }
+  }
+  
+  private func goToBaseVC() {
+    let baseVC = ModuleFactory.shared.makeBaseVC()
+    self.navigationController?.pushViewController(baseVC, animated: false)
   }
 }
 
@@ -110,6 +162,9 @@ extension SignupVC {
     completeButton.title = I18N.Component.startButton
     completeButton.isEnabled = false
     
+    duplicateCheckLabel.textColor = UIColor.grey01
+    duplicateCheckButton.isEnabled = false
+    
   }
   
   private func setNicknameValidState() {
@@ -117,12 +172,14 @@ extension SignupVC {
     stateLabel.text = I18N.Signup.availableNickname
     stateLabel.textColor = UIColor.mainBlue
     textCountLabel.textColor = .grey02
-    completeButton.isEnabled = true
   }
   
   private func setNicknameInvalidState(errorType: NicknameInvalidType) {
     makeVibrate(degree: .light)
+    duplicateCheckLabel.shake()
     nicknameTextField.shake()
+    duplicateCheckLabel.textColor = UIColor.grey01
+    duplicateCheckButton.isEnabled = false
     nicknameTextField.layer.borderColor = UIColor.alertRed.cgColor
     stateLabel.textColor = UIColor.alertRed
     switch(errorType) {
@@ -181,7 +238,6 @@ extension SignupVC {
     let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
     let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
     completeButtonBottomConstraint.constant = 34
-    editEventFinished.onNext(nicknameTextField.text)
     UIView.animate(withDuration: duration, delay: 0, options: .init(rawValue: curve)) {
       self.view.layoutIfNeeded()
     }

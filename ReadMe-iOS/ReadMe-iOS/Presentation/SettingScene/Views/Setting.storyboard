@@ -53,19 +53,19 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="1OF-NW-QaN">
-                                <rect key="frame" x="0.0" y="110" width="414" height="188"/>
+                                <rect key="frame" x="0.0" y="110" width="414" height="256"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pdJ-kJ-dJ8">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="61"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="문의하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7St-KL-99K">
-                                                <rect key="frame" x="32" y="20.5" width="55.5" height="19"/>
+                                                <rect key="frame" x="32" y="21" width="55.5" height="19"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATo-70-2CY">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="61"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                             </button>
                                         </subviews>
@@ -80,14 +80,14 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDX-lM-97v">
-                                        <rect key="frame" x="0.0" y="64" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="65" width="414" height="61"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xnl-8B-ufK">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="61"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="약관 보기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqE-3i-TF2">
-                                                <rect key="frame" x="32" y="20.5" width="60" height="19"/>
+                                                <rect key="frame" x="32" y="21" width="60" height="19"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -104,14 +104,14 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uZ9-St-gT4">
-                                        <rect key="frame" x="0.0" y="128" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="130" width="414" height="61"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Xp-PV-Q4c">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="61"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="문의하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6a-ug-eTV">
-                                                <rect key="frame" x="32" y="20.5" width="55.5" height="19"/>
+                                                <rect key="frame" x="32" y="21" width="55.5" height="19"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -127,9 +127,33 @@
                                             <constraint firstItem="p6a-ug-eTV" firstAttribute="centerY" secondItem="uZ9-St-gT4" secondAttribute="centerY" id="ovA-kI-pWN"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DJV-qd-Yac">
+                                        <rect key="frame" x="0.0" y="195" width="414" height="61"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVk-f2-bFl">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="61"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="탈퇴하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NaI-fc-uee">
+                                                <rect key="frame" x="32" y="21" width="55.5" height="19"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="EVk-f2-bFl" secondAttribute="bottom" id="3JL-RW-nZ7"/>
+                                            <constraint firstItem="EVk-f2-bFl" firstAttribute="top" secondItem="DJV-qd-Yac" secondAttribute="top" id="8Pk-LR-his"/>
+                                            <constraint firstAttribute="trailing" secondItem="EVk-f2-bFl" secondAttribute="trailing" id="AJ7-Pg-Wcf"/>
+                                            <constraint firstItem="NaI-fc-uee" firstAttribute="centerY" secondItem="DJV-qd-Yac" secondAttribute="centerY" id="DWi-Ze-jiE"/>
+                                            <constraint firstItem="EVk-f2-bFl" firstAttribute="leading" secondItem="DJV-qd-Yac" secondAttribute="leading" id="hXr-yb-x8O"/>
+                                            <constraint firstItem="NaI-fc-uee" firstAttribute="leading" secondItem="DJV-qd-Yac" secondAttribute="leading" constant="32" id="ibI-Ms-sKJ"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="188" id="Or0-Mh-vYq"/>
+                                    <constraint firstAttribute="height" constant="256" id="Or0-Mh-vYq"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -154,6 +178,8 @@
                         <outlet property="logoutLabel" destination="p6a-ug-eTV" id="yAj-PH-MZc"/>
                         <outlet property="settingHeaderTopConstraint" destination="qXD-bj-nSX" id="Wev-h2-Lhk"/>
                         <outlet property="titleLabel" destination="J9g-iH-GjZ" id="v2d-at-WTS"/>
+                        <outlet property="withdrawButton" destination="EVk-f2-bFl" id="eX7-3r-7Wk"/>
+                        <outlet property="withdrawLabel" destination="NaI-fc-uee" id="3t5-ra-zWM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -63,6 +63,7 @@ extension WriteImpressionFlow {
     impressionTextView.setTextWithLineHeight(text: impressionTextView.text, lineHeightMultiple: 1.33)
     impressionTextView.font = .readMeFont(size: 15)
     impressionTextView.textColor = .grey09
+    addToolBar(textView: impressionTextView)
     
     impressionTextView.layer.borderColor = UIColor.grey00.cgColor
     impressionTextView.layer.borderWidth = 1

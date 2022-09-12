@@ -9,20 +9,26 @@ import RxSwift
 
 protocol AuthServiceType {
   func login(provider: String, token: String) -> Observable<LoginEntity?>
-  func checkNicknameDuplicated(nickname: String) -> Observable<Bool?>
-  func getUserNickname() -> Observable<MyPageEntity?>
+  func checkNicknameDuplicated(nickname: String) -> Observable<SignupNicknameEntity?>
+  func signup(provider: String, token: String, nickname: String) -> Observable<SignupEntity?>
+  func deleteUserWithdraw(completion: @escaping (Result<Bool?,Error>) -> Void)
+  
 }
 
 extension BaseService: AuthServiceType {
   func login(provider: String, token: String) -> Observable<LoginEntity?> {
-    requestObjectInRx(.login(provider: provider, token: token))
+    requestObjectInRx(.postSignin(platform: provider, socialToken: token))
   }
   
-  func checkNicknameDuplicated(nickname: String) -> Observable<Bool?> {
-    requestObjectInRx(.postCheckNicknameDuplicated(nickname: nickname))
+  func checkNicknameDuplicated(nickname: String) -> Observable<SignupNicknameEntity?> {
+    requestObjectInRx(.getDuplicatedNicknameState(nickname: nickname))
   }
   
-  func getUserNickname() -> Observable<MyPageEntity?> {
-    requestObjectInRx(.getNickname)
+  func signup(provider: String, token: String, nickname: String) -> Observable<SignupEntity?> {
+    requestObjectInRx(.postSignup(platform: provider, socialToken: token, nickname: nickname))
+  }
+  
+  func deleteUserWithdraw(completion: @escaping (Result<Bool?,Error>) -> Void) {
+    requestObject(.deleteUser, completion: completion)
   }
 }

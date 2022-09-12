@@ -32,6 +32,7 @@ final class FeedDetailViewModel: ViewModelType {
     var comment = PublishRelay<FeedTextViewModel>()
     var nickname = PublishRelay<String>()
     var date = PublishRelay<String>()
+    var bookLoadFail = PublishRelay<Void>()
   }
   
   init(useCase: FeedDetailUseCase,idx: Int) {
@@ -54,6 +55,11 @@ extension FeedDetailViewModel {
   
   private func bindOutput(output: Output, disposeBag: DisposeBag) {
     let feedDetailRelay = useCase.bookDetailInformation
+    let failRelay = useCase.bookLoadFail
+    
+    failRelay.subscribe(onNext: { [weak self] in
+      output.bookLoadFail.accept(())
+    }).disposed(by: self.disposeBag)
     
     feedDetailRelay.subscribe(onNext: { [weak self] model in
       guard let self = self else { return }
@@ -64,7 +70,7 @@ extension FeedDetailViewModel {
       output.sentence.accept(self.makeTextViewModel(type: .sentence, text: model.sentence))
       output.comment.accept(self.makeTextViewModel(type: .comment, text: model.comment))
       output.nickname.accept(model.nickname)
-      output.date.accept(model.date)
+      output.date.accept(self.makeDateText(model.date))
     }).disposed(by: self.disposeBag)
   }
 }
@@ -111,6 +117,51 @@ extension FeedDetailViewModel {
     mockTextView.font = font
     let estimatedSize = mockTextView.sizeThatFits(newSize)
     return estimatedSize.height
+  }
+  
+  private func makeDateText(_ date: String) -> String {
+    
+    let minute = 60
+    let hour = minute * 60
+    let day = hour * 24
+    let week = day * 7
+    
+    var message : String = ""
+    
+    let UTCDate = Date()
+    let formatter = DateFormatter()
+    formatter.timeZone = TimeZone(secondsFromGMT: 32400)
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    let defaultTimeZoneStr = formatter.string(from: UTCDate)
+    
+    let format = DateFormatter()
+    format.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    format.locale = Locale(identifier: "ko_KR")
+    
+    guard let tempDate = format.date(from: date) else {return ""}
+    let krTime = format.date(from: defaultTimeZoneStr)
+    
+    let articleDate = format.string(from: tempDate)
+    var useTime = Int(krTime!.timeIntervalSince(tempDate))
+    useTime = useTime - 32400
+    
+    if useTime < minute {
+      message = "방금 전"
+    }else if useTime < hour {
+      message = String(useTime/minute) + "분 전"
+    }else if useTime < day {
+      message = String(useTime/hour) + "시간 전"
+    }else if useTime < week {
+      message = String(useTime/day) + "일 전"
+    }else if useTime < week * 4 {
+      message = String(useTime/week) + "주 전"
+    }else{
+      let timeArray = articleDate.components(separatedBy: " ")
+      let dateArray = timeArray[0].components(separatedBy: "-")
+      message = dateArray[1] + "월 " + dateArray[2] + "일"
+    }
+    
+    return message
   }
 }
 
