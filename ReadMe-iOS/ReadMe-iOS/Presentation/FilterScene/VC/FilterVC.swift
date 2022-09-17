@@ -121,6 +121,7 @@ extension FilterVC {
         self.makeVibrate(degree: .light)
         if let cell = self.categoryCV.cellForItem(at: indexpath) as? CategoryCVC {
           if cell.isSelectedCell {
+            self.selectedCategory = self.selectedCategory.filter { $0 != category }
             cell.changeState(isSelected: false)
           } else {
             self.selectedCategory.append(category)
