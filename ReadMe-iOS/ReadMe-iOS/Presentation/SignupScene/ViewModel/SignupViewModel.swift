@@ -83,9 +83,9 @@ extension SignupViewModel {
       else { return .none }
     }
     
-    duplicatedStateRelay.subscribe(onNext: { hasError in
+    duplicatedStateRelay.subscribe(onNext: { available in
       output.nicknameDuplicatedCheckButtonState.accept(false)
-      if hasError {
+      if !available {
         output.nicknameInvalid.accept(.nicknameDuplicated)
       }else {
         output.nicknameNotDuplicated.accept(())

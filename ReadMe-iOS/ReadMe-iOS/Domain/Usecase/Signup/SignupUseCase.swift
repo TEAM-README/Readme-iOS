@@ -47,10 +47,11 @@ extension DefaultSignupUseCase: SignupUseCase {
   func checkNicknameDuplicated(nickname: String) {
     repository.postNicknameInValidCheck(nickname: nickname)
       .filter{ $0 != nil }
-
       .subscribe(onNext: { [weak self] duplicated in
       guard let self = self else { return }
+        
         self.nicknameDuplicated.onNext(duplicated!.available)
+        self.nicknameDuplicated.onNext(false)
     }).disposed(by: self.disposeBag)
   }
   

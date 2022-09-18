@@ -188,7 +188,7 @@ extension SignupVC {
         textCountLabel.textColor = .grey02
       case .nicknameDuplicated:
         stateLabel.text = I18N.Signup.nicknameDuplicatedErr
-        textCountLabel.textColor = .grey02
+        textCountLabel.textColor = .alertRed
       case .exceedMaxCount:
         stateLabel.text = I18N.Signup.byteExceedErr
         textCountLabel.textColor = .alertRed

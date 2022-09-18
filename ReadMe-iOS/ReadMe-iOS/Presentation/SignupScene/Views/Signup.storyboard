@@ -97,10 +97,10 @@
                             <constraint firstItem="s7A-OE-MXd" firstAttribute="top" secondItem="SjI-au-Nb7" secondAttribute="bottom" constant="16" id="fWi-kC-UpN"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Pdl-eH-FVg" secondAttribute="bottom" constant="34" id="iVu-L9-S5p"/>
                             <constraint firstItem="dh0-Pg-VcO" firstAttribute="centerY" secondItem="SjI-au-Nb7" secondAttribute="centerY" id="kbX-mD-eEJ"/>
-                            <constraint firstItem="foA-Xq-Huo" firstAttribute="centerY" secondItem="s7A-OE-MXd" secondAttribute="centerY" id="nAx-l7-rce"/>
                             <constraint firstItem="SjI-au-Nb7" firstAttribute="top" secondItem="WQc-5z-ne4" secondAttribute="bottom" constant="38" id="nHs-ru-IPq"/>
                             <constraint firstItem="WQc-5z-ne4" firstAttribute="top" secondItem="dkX-Wf-LAU" secondAttribute="bottom" constant="15" id="nxW-kT-a8G"/>
                             <constraint firstItem="WQc-5z-ne4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="28" id="sU2-KE-EN7"/>
+                            <constraint firstItem="foA-Xq-Huo" firstAttribute="top" secondItem="SjI-au-Nb7" secondAttribute="bottom" constant="16" id="t2D-RM-g3l"/>
                         </constraints>
                     </view>
                     <connections>
