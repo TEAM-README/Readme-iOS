@@ -49,9 +49,7 @@ extension DefaultSignupUseCase: SignupUseCase {
       .filter{ $0 != nil }
       .subscribe(onNext: { [weak self] duplicated in
       guard let self = self else { return }
-        
-        self.nicknameDuplicated.onNext(duplicated!.available)
-        self.nicknameDuplicated.onNext(false)
+        self.nicknameDuplicated.onNext(!duplicated!.available)
     }).disposed(by: self.disposeBag)
   }
   
