@@ -57,3 +57,15 @@ final class TabbarView: XibView{
     mypageIcon.viewModel = TabbarIconViewModel(type: .mypage, clicked: currentTab == .mypage)
   }
 }
+
+extension TabbarView {
+	public func moveHomeTab() {
+		makeVibrate()
+		if currentTab != .home{
+			delegate?.tabbarClicked(.home)
+			currentTab = .home
+		} else {
+			postObserverAction(.homeButtonClicked)
+		}
+	}
+}

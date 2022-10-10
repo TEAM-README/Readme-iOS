@@ -122,7 +122,7 @@ extension BaseAPI: TargetType {
       params["platform"] = provider
       params["socialToken"] = token
     case .getDuplicatedNicknameState(let nickname):
-      params["nickname"] = nickname
+      params["query"] = nickname
     case .write(let bookcategory, let quote, let impression, let book):
       let bookParams: [String: Any] = [
         "isbn": book.isbn,
@@ -145,7 +145,7 @@ extension BaseAPI: TargetType {
       params["socialToken"] = socialToken
       params["nickname"] = nickname
         
-      case .getFeedList(let filter):
+    case .getFeedList(let filter):
         params["filters"] = filter
 
     default:
@@ -158,13 +158,12 @@ extension BaseAPI: TargetType {
   ///  query문을 사용하는 경우 URLEncoding 을 사용해야 합니다
   ///  나머지는 그냥 전부 다 default 처리.
   ///
-  private var parameterEncoding : ParameterEncoding{
+  private var parameterEncoding : ParameterEncoding {
     switch self {
       case .getSearch,.getDuplicatedNicknameState,.getFeedList:
       return URLEncoding.init(destination: .queryString, arrayEncoding: .noBrackets, boolEncoding: .literal)
     default :
       return JSONEncoding.default
-      
     }
   }
   

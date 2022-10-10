@@ -11,8 +11,11 @@ struct Config
 {
   enum Network {
     static var baseURL: String {
-//      return "https://asia-northeast3-wesopt29-328c5.cloudfunctions.net/api/v1"
-      return "http://13.125.248.16:3000/"
+#if DEBUG
+      return "http://43.200.32.8:3000/"
+#else
+      return "http://43.200.32.8:3001/"
+#endif
     }
     
     static var searchURL: String {

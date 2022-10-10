@@ -99,6 +99,10 @@ extension BaseVC {
       let loginVC = ModuleFactory.shared.makeLoginVC()
       self.navigationController?.pushViewController(loginVC, animated: true)
     }
+    
+    addObserverAction(.writeComplete) { _ in
+      self.tabbar.moveHomeTab()
+    }
   }
   
   private func removeObserver() {
