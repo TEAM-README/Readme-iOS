@@ -12,7 +12,7 @@ struct Config
   enum Network {
     static var baseURL: String {
 #if DEBUG
-      return "http://43.200.32.8:3000/"
+      return "http://43.200.32.8:3001/"
 #else
       return "http://43.200.32.8:3001/"
 #endif

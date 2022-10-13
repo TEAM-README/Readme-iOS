@@ -17,6 +17,10 @@ enum SearchStateType {
   case dataAfterSearch
 }
 
+enum Section: CaseIterable {
+  case main
+}
+
 class SearchVC: UIViewController {
   
   // MARK: - Vars & Lets Part
@@ -37,6 +41,7 @@ class SearchVC: UIViewController {
   private let afterSearchEmptyLabel = UILabel()
   private let collectionViewFlowLayout = UICollectionViewFlowLayout()
   private lazy var bookCV = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+  private var diffableDataSource: UICollectionViewDiffableDataSource<Section ,SearchBookModel>!
   
   // MARK: - Life Cycle Part
   override func viewDidLoad() {
@@ -151,7 +156,8 @@ extension SearchVC {
       if self.recentList.isEmpty {
         self.setStateView(type: .emptyBeforeSearch)
       } else {
-        self.bookCV.reloadData()
+//        self.bookCV.reloadData()
+        self.setResultBookData(false)
         self.setStateView(type: .dataAfterSearch)
       }
     }.disposed(by: disposeBag)
@@ -164,7 +170,9 @@ extension SearchVC {
         if self.resultList.isEmpty {
           self.setStateView(type: .emptyAfterSearch)
         } else {
-          self.bookCV.reloadData()
+//          self.bookCV.reloadData()
+//          self.setResultBookData()
+          self.setResultBookData(true)
           self.setStateView(type: .dataAfterSearch)
         }
       }
@@ -186,14 +194,47 @@ extension SearchVC {
   }
   
   private func setCollectionView() {
+    self.diffableDataSource = UICollectionViewDiffableDataSource<Section, SearchBookModel>(collectionView: self.bookCV) {(_ UICollectionView, IndexPath, _ SearchBookModel) -> UICollectionViewCell? in
+      guard let cell = self.bookCV.dequeueReusableCell(withReuseIdentifier: SearchCVC.className, for: IndexPath) as? SearchCVC else { return UICollectionViewCell() }
+      
+      var contentList: [SearchBookModel] = []
+      
+      if self.didSearch {
+        contentList = self.resultList
+      } else {
+        contentList = self.recentList
+      }
+      
+      let author = contentList[IndexPath.item].author
+      cell.initCell(image: contentList[IndexPath.item].imgURL,
+                    title: contentList[IndexPath.item].title,
+                    author: author.isEmpty || author == " " ? "작자미상" : contentList[IndexPath.item].author,
+                    targetStr: self.searchTextField.text ?? nil)
+      return cell
+    }
+    
+    self.diffableDataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+      guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SearchHeaderView.className, for: indexPath) as? SearchHeaderView else { return UICollectionReusableView() }
+      return header
+    }
+    
     bookCV.delegate = self
-    bookCV.dataSource = self
+    bookCV.dataSource = self.diffableDataSource
     
     bookCV.showsVerticalScrollIndicator = false
     bookCV.backgroundColor = .clear
     
     collectionViewFlowLayout.scrollDirection = .vertical
     collectionViewFlowLayout.sectionHeadersPinToVisibleBounds = true
+  }
+  
+  private func setResultBookData(_ isResultList: Bool) {
+    var snapshot = NSDiffableDataSourceSnapshot<Section, SearchBookModel>()
+    snapshot.appendSections([.main])
+    isResultList ? snapshot.appendItems(resultList) : snapshot.appendItems(recentList)
+//    snapshot.appendItems(resultList)
+    
+    self.diffableDataSource.apply(snapshot, animatingDifferences: true)
   }
   
   private func setRegister() {
@@ -248,53 +289,53 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
   }
 }
 
-extension SearchVC: UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    var contentList: [SearchBookModel] = []
-    
-    if didSearch {
-      contentList = resultList
-    } else {
-      contentList = recentList
-    }
-    return contentList.count
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SearchHeaderView.className, for: indexPath) as? SearchHeaderView else { return UICollectionReusableView() }
-    
-    return header
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCVC.className, for: indexPath) as? SearchCVC else { return UICollectionViewCell() }
-    var contentList: [SearchBookModel] = []
-    
-    if didSearch {
-      contentList = resultList
-    } else {
-      contentList = recentList
-    }
-    
-    let author = contentList[indexPath.item].author
-    cell.initCell(image: contentList[indexPath.item].imgURL,
-                  title: contentList[indexPath.item].title,
-                  author: author.isEmpty || author == " " ? "작자미상" : contentList[indexPath.item].author,
-                  targetStr: self.searchTextField.text ?? nil)
-    return cell
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-    if didSearch {
-      return .zero
-    } else {
-      let width = UIScreen.main.bounds.width
-      let height = 30.0
-      
-      return CGSize(width: width, height: height)
-    }
-  }
-}
+//extension SearchVC: UICollectionViewDataSource {
+//  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//    var contentList: [SearchBookModel] = []
+//
+//    if didSearch {
+//      contentList = resultList
+//    } else {
+//      contentList = recentList
+//    }
+//    return contentList.count
+//  }
+//
+//  func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//    guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SearchHeaderView.className, for: indexPath) as? SearchHeaderView else { return UICollectionReusableView() }
+//
+//    return header
+//  }
+//
+//  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCVC.className, for: indexPath) as? SearchCVC else { return UICollectionViewCell() }
+//    var contentList: [SearchBookModel] = []
+//
+//    if didSearch {
+//      contentList = resultList
+//    } else {
+//      contentList = recentList
+//    }
+//
+//    let author = contentList[indexPath.item].author
+//    cell.initCell(image: contentList[indexPath.item].imgURL,
+//                  title: contentList[indexPath.item].title,
+//                  author: author.isEmpty || author == " " ? "작자미상" : contentList[indexPath.item].author,
+//                  targetStr: self.searchTextField.text ?? nil)
+//    return cell
+//  }
+//
+//  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//    if didSearch {
+//      return .zero
+//    } else {
+//      let width = UIScreen.main.bounds.width
+//      let height = 30.0
+//
+//      return CGSize(width: width, height: height)
+//    }
+//  }
+//}
 
 extension SearchVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {

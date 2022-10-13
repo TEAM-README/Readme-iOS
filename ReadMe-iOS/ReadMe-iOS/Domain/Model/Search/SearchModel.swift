@@ -11,7 +11,7 @@ struct SearchModel {
   let content: [SearchBookModel]
 }
 
-struct SearchBookModel {
+struct SearchBookModel: Hashable {
   let imgURL: String
   var title: String
   var author: String
