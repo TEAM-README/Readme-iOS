@@ -28,7 +28,8 @@ class SearchVC: UIViewController {
   private var didSearch: Bool = false
   private var recentList: [SearchBookModel] = []
   private var resultList: [SearchBookModel] = []
-  private var editEventFinished = PublishSubject<String?>()
+//  private var editEventFinished = PublishSubject<String?>()
+  private var textChanged = PublishSubject<String?>()
   var viewModel: SearchViewModel!
   
   // MARK: - UI Component Part
@@ -144,7 +145,8 @@ extension SearchVC {
     let input = SearchViewModel.Input(
       viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in
         // viewWillAppear 호출 후 실행
-      }, textEditFinished: editEventFinished)
+      }, textChanged: textChanged)
+//      textEditFinished: editEventFinished)
     
     let output = self.viewModel.transform(from: input,
                                           disposeBag: self.disposeBag)
@@ -157,7 +159,7 @@ extension SearchVC {
         self.setStateView(type: .emptyBeforeSearch)
       } else {
 //        self.bookCV.reloadData()
-        self.setResultBookData(false)
+        self.setBookData(false)
         self.setStateView(type: .dataAfterSearch)
       }
     }.disposed(by: disposeBag)
@@ -172,7 +174,7 @@ extension SearchVC {
         } else {
 //          self.bookCV.reloadData()
 //          self.setResultBookData()
-          self.setResultBookData(true)
+          self.setBookData(true)
           self.setStateView(type: .dataAfterSearch)
         }
       }
@@ -181,12 +183,26 @@ extension SearchVC {
   }
   
   private func setButtonActions() {
-    searchButton.rx.tap
-      .bind {
-        self.editEventFinished.onNext(self.searchTextField.text)
-        self.makeVibrate(degree: .light)
-        if self.searchTextField.hasText { self.didSearch = true }
-      }.disposed(by: self.disposeBag)
+//    searchButton.rx.tap
+//      .bind {
+//        self.editEventFinished.onNext(self.searchTextField.text)
+//        self.makeVibrate(degree: .light)
+//        if self.searchTextField.hasText { self.didSearch = true }
+//      }.disposed(by: self.disposeBag)
+    
+    searchTextField.rx.text
+      .orEmpty
+      .distinctUntilChanged()
+      .subscribe(onNext: { str in
+        self.textChanged.onNext(str)
+        self.didSearch = str.isEmpty ? false : true
+        if str.isEmpty {
+          self.setBookData(false)
+          self.setStateView(type: .emptyBeforeSearch)
+        }
+//        self.didSearch = true
+      })
+      .disposed(by: self.disposeBag)
     
     closeButton.press {
       self.dismiss(animated: true)
@@ -228,7 +244,7 @@ extension SearchVC {
     collectionViewFlowLayout.sectionHeadersPinToVisibleBounds = true
   }
   
-  private func setResultBookData(_ isResultList: Bool) {
+  private func setBookData(_ isResultList: Bool) {
     var snapshot = NSDiffableDataSourceSnapshot<Section, SearchBookModel>()
     snapshot.appendSections([.main])
     isResultList ? snapshot.appendItems(resultList) : snapshot.appendItems(recentList)
@@ -339,9 +355,13 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
 
 extension SearchVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    self.editEventFinished.onNext(self.searchTextField.text)
+//    self.editEventFinished.onNext(self.searchTextField.text)
     self.makeVibrate(degree: .light)
-    if self.searchTextField.hasText { self.didSearch = true }
+//    if self.searchTextField.hasText { self.didSearch = true }
+    self.didSearch = self.searchTextField.hasText ? true : false
+    if !self.searchTextField.hasText {
+      
+    }
     self.view.endEditing(true)
     return true
   }

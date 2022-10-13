@@ -16,7 +16,8 @@ final class SearchViewModel: ViewModelType {
   // MARK: - Inputs
   struct Input {
     let viewWillAppearEvent: Observable<Void>
-    let textEditFinished: Observable<String?>
+//    let textEditFinished: Observable<String?>
+    let textChanged: Observable<String?>
   }
   
   // MARK: - Outputs
@@ -50,7 +51,16 @@ extension SearchViewModel {
 //        
 //      }).disposed(by: self.disposeBag)
                  
-    input.textEditFinished
+//    input.textEditFinished
+//      .filter { $0 != nil }
+//      .filter { $0 != "" }
+//      .subscribe(onNext: { [weak self] queryStr in
+//        guard let self = self else { return }
+//        self.useCase.getSearchResultInformation(query: queryStr!)
+//      })
+//      .disposed(by: self.disposeBag)
+    
+    input.textChanged
       .filter { $0 != nil }
       .filter { $0 != "" }
       .subscribe(onNext: { [weak self] queryStr in
